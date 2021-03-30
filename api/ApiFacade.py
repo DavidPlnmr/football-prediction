@@ -4,7 +4,7 @@
 import requests
 from dotenv import load_dotenv
 import os
-load_dotenv()
+
     
 class ApiFacade:
     def __init__(self, api_key):
@@ -36,6 +36,7 @@ class ApiFacade:
         pass
         
 
+load_dotenv()
 myFacade = ApiFacade(os.getenv("API_KEY"))
 
 #Head To Head
