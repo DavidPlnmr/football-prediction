@@ -18,8 +18,9 @@ class ApiFacade:
         response = requests.get(f'https://apiv2.apifootball.com/?APIkey={self.api_key}&{request_params}')
 
         if response.status_code == 200: # Code 200 = OK. Healthy connection
-            logging.info("Requested to the API with the params: " + request_params)
-            return json.loads(response.content.decode('utf-8')) # decode to get the content in string
+            obj = json.loads(response.content.decode('utf-8'))
+            logging.info(f"Request to the API with the params: {request_params}")
+            return obj # decode to get the content in string
         else:
             logging.error("Happened during the request to the API")
             raise Exception("Could not connect to the API")
@@ -50,3 +51,7 @@ class ApiFacade:
     def getTeams(self, league_id):
         endpoint_action = "get_teams"
         return self.__getAction(f'action={endpoint_action}&league_id={league_id}')
+    
+    def getStatsFromMatch(self, match_id):
+        endpoint_action = "get_statistics"
+        return self.__getAction(f'action={endpoint_action}&match_id={match_id}')

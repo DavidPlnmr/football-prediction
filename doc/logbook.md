@@ -60,7 +60,85 @@ Entretien avec M. Schmid :
 
 Méthode `getAction` passe en privé. 
 
-Soucis avec la librairie de log pour l'écriture de log de l'application.
+Soucis avec la librairie de log pour l'écriture des log d'info de l'application.
+
+15h
 
 Après discussion avec M. Garcia, ce dernier m'a expliqué que généralement les librairies de logging contiennent des niveaux et ces derniers sont utilisés pour le filtrage des logs.
 
+#### Recap de la journée
+
+Travail fait :
+
+* Design pattern -> bien implémenté mais test de toutes les méthodes
+
+* Ajout de dotenv pour éviter de stocker la clé de l'API dans un fichier et qu'elle soit publiée sur GitHub
+* Logging fait 
+
+Chose à faire impérativement : 
+
+* Gérer un cas ou le retour de l'API est vide ou donne une erreur -> Comme une clé invalide par exemple
+* NE PAS OUBLIER DE COMMUNIQUER AVEC L'ÉQUIPE DE L'API POUR LEUR MONTRER L'AVANCEMENT DU TRAVAIL APRES LES JOURS DE STAGES
+
+### 31.03.2021
+
+__/ ! \\ A NOTER QUE__ 
+
+* Lorsque l'API envoie une erreur -> c'est un dico
+* Lorsqu'elle envoie une réponse normale -> c'est une liste
+
+9h
+
+Début de la doc du rapport de stage : Introduction
+
+9h40
+
+Réflexion sur l'architecture du projet et sur le diagramme de classe
+
+Discussion avec M. Schmid sur la réflexion de l'architecture du projet et du diagramme de classe, ce qui en est sorti :
+
+* Mieux d'avoir un dossier pour chaque "fonctionnalité" (voir l'image correspondant) que d'avoir un dossier "lib" ou "all"
+* Choix de l'insertion des statistiques dans la classe "Team" correct
+  * "Team" n'est plus une classe mais une structure qui contient uniquement des données
+  * Une classe "TeamManager" sera présente pour faire le lien entre "ApiFacade", la DB et la classe "Team". Elle aura des méthodes pour pouvoir créer des équipes, appeler l'API pour récupérer des équipes, etc.
+  * La classe "TeamManager" sera contenu dans Main.
+    * Pour l'élaboration des prédiction, lors de la création de la prédiction, on passera en paramètres, les équipes ainsi que le résultat de la requête H2H
+* La méthode pour déterminer qui gagne lors d'une rencontre sera privé et contenu dans la classe Prédiction
+
+![architecture](./img/architecture.jpg)
+
+ ![diagClass](./img/diagClassRemake.jpg)
+
+![reflexions](./img/reflexions.jpg)
+
+11h
+
+Suite de la rédaction du rapport : Logging, Dotenv, Facade
+
+11h34
+
+Information : Ne pas oublier de faire le MLD de la BDD
+
+12h40
+
+Fin de la rédaction sur ce qui a été fait le 30.03.2021
+
+13h15
+
+MLD de la base de données que nous allons utiliser pour stocker les prédictions faites
+
+Discussion sur le MLD avec M. Schmid pour être sur d'être sur la bonne voie au niveau de l'implémentation et de l'utilisation de la base de données
+
+![mld_bdd](./img/mld_bdd.jpg)
+
+J'avais pensé faire deux tables en me basant sur la page d'accueil prévu. Après la discussion avec M. Schmid, il s'avère qu'il est préférable de faire une seule table pour pouvoir stocker les prédictions hypothétiques.
+
+![mld_bdd](./img/mld_bdd_v2.png)
+
+14h30
+
+Création de la base de données et importation du script pour la table -> Moteur : InnoDB, utf8_general_ci
+
+15h30
+
+Création de l'utilisateur et export du script + base

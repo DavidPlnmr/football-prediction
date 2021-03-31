@@ -1,0 +1,72 @@
+30-Mar-21 15:42:00 - INFO - Correctly found the log file
+30-Mar-21 15:42:32 - INFO - Correctly found the log file
+30-Mar-21 15:42:47 - INFO - Correctly found the log file
+30-Mar-21 15:42:47 - INFO - Requested to the API with the params: action=get_leagues
+30-Mar-21 15:42:48 - INFO - Requested to the API with the params: action=get_events&from=2021-03-30&to=2021-04-02
+30-Mar-21 15:42:48 - INFO - Requested to the API with the params: action=get_teams&league_id=148
+30-Mar-21 15:45:59 - INFO - Correctly found the log file
+30-Mar-21 15:45:59 - INFO - Requested to the API with the params: action=get_leagues
+30-Mar-21 15:46:00 - INFO - Requested to the API with the params: action=get_events&from=2021-03-30&to=2021-04-02
+30-Mar-21 15:46:26 - INFO - Correctly found the log file
+30-Mar-21 15:46:26 - INFO - Requested to the API with the params: action=get_leagues
+30-Mar-21 15:46:27 - INFO - Requested to the API with the params: action=get_events&from=2021-03-30&to=2021-04-02
+30-Mar-21 15:46:27 - INFO - Requested to the API with the params: action=get_teams&league_id=148
+30-Mar-21 15:46:44 - INFO - Correctly found the log file
+30-Mar-21 15:46:45 - INFO - Requested to the API with the params: action=get_leagues
+30-Mar-21 15:46:45 - INFO - Requested to the API with the params: action=get_events&from=2021-03-30&to=2021-04-02
+30-Mar-21 15:46:46 - INFO - Requested to the API with the params: action=get_teams&league_id=148
+30-Mar-21 15:46:48 - INFO - Correctly found the log file
+30-Mar-21 15:46:49 - INFO - Requested to the API with the params: action=get_leagues
+30-Mar-21 15:46:49 - INFO - Requested to the API with the params: action=get_events&from=2021-03-30&to=2021-04-02
+30-Mar-21 15:47:16 - INFO - Correctly found the log file
+30-Mar-21 15:47:17 - INFO - Requested to the API with the params: action=get_events&from=2021-03-30&to=2021-04-02
+30-Mar-21 15:47:38 - INFO - Correctly found the log file
+30-Mar-21 15:47:39 - INFO - Requested to the API with the params: action=get_teams&league_id=148
+30-Mar-21 15:47:48 - INFO - Correctly found the log file
+30-Mar-21 15:47:49 - INFO - Requested to the API with the params: action=get_teams&league_id=148
+30-Mar-21 15:49:13 - INFO - Correctly found the log file
+30-Mar-21 15:49:16 - INFO - Requested to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Arsenal
+30-Mar-21 15:49:20 - INFO - Correctly found the log file
+30-Mar-21 15:49:23 - INFO - Requested to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Arsenal
+30-Mar-21 15:50:07 - INFO - Correctly found the log file
+30-Mar-21 15:50:14 - INFO - Correctly found the log file
+30-Mar-21 15:50:17 - INFO - Requested to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Arsenal
+30-Mar-21 15:51:18 - INFO - Correctly found the log file
+30-Mar-21 15:51:21 - INFO - Requested to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Arsenal
+30-Mar-21 15:51:44 - INFO - Correctly found the log file
+30-Mar-21 15:51:57 - INFO - Correctly found the log file
+30-Mar-21 15:52:02 - INFO - Correctly found the log file
+30-Mar-21 15:52:05 - INFO - Requested to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Arsenal
+31-Mar-21 08:16:29 - INFO - Correctly found the log file
+31-Mar-21 08:16:32 - INFO - Requested to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Arsenal
+31-Mar-21 08:16:56 - INFO - Correctly found the log file
+31-Mar-21 08:16:59 - INFO - Requested to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Arsenal
+31-Mar-21 08:17:03 - INFO - Correctly found the log file
+31-Mar-21 08:17:06 - INFO - Requested to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Arsenal
+31-Mar-21 08:17:30 - INFO - Correctly found the log file
+31-Mar-21 08:17:33 - INFO - Requested to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Arsenal
+31-Mar-21 08:17:41 - INFO - Correctly found the log file
+31-Mar-21 08:17:45 - INFO - Requested to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Arsenal
+31-Mar-21 08:30:13 - INFO - Correctly found the log file
+31-Mar-21 08:30:14 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Arsenal
+31-Mar-21 08:35:22 - INFO - Correctly found the log file
+31-Mar-21 08:35:35 - INFO - Correctly found the log file
+31-Mar-21 08:35:52 - INFO - Correctly found the log file
+31-Mar-21 08:36:04 - INFO - Correctly found the log file
+31-Mar-21 08:37:02 - INFO - Correctly found the log file
+31-Mar-21 08:37:02 - INFO - Request to the API with the params: action=get_countries
+31-Mar-21 08:37:27 - INFO - Correctly found the log file
+31-Mar-21 08:40:01 - INFO - Correctly found the log file
+31-Mar-21 08:40:01 - INFO - Request to the API with the params: action=get_countries
+31-Mar-21 08:40:09 - INFO - Correctly found the log file
+31-Mar-21 08:40:10 - INFO - Request to the API with the params: action=get_countries
+31-Mar-21 08:42:00 - INFO - Correctly found the log file
+31-Mar-21 08:43:18 - INFO - Correctly found the log file
+31-Mar-21 08:43:36 - INFO - Correctly found the log file
+31-Mar-21 08:43:36 - INFO - Request to the API with the params: action=get_countries
+31-Mar-21 08:45:02 - INFO - Correctly found the log file
+31-Mar-21 08:45:02 - INFO - Request to the API with the params: action=get_countries
+31-Mar-21 08:45:11 - INFO - Correctly found the log file
+31-Mar-21 08:45:11 - INFO - Request to the API with the params: action=get_countries
+31-Mar-21 08:46:06 - INFO - Correctly found the log file
+31-Mar-21 08:58:38 - INFO - Correctly found the log file
