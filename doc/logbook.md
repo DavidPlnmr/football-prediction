@@ -66,7 +66,7 @@ Soucis avec la librairie de log pour l'écriture des log d'info de l'application
 
 Après discussion avec M. Garcia, ce dernier m'a expliqué que généralement les librairies de logging contiennent des niveaux et ces derniers sont utilisés pour le filtrage des logs.
 
-#### Recap de la journée
+#### Récap de la journée
 
 Travail fait :
 
@@ -135,6 +135,8 @@ J'avais pensé faire deux tables en me basant sur la page d'accueil prévu. Apr�
 
 ![mld_bdd](./img/mld_bdd_v2.png)
 
+CORRECTION : champ "real_match" inutile, car si "api_match_id" existe -> le match est officiel
+
 14h30
 
 Création de la base de données et importation du script pour la table -> Moteur : InnoDB, utf8_general_ci
@@ -142,3 +144,27 @@ Création de la base de données et importation du script pour la table -> Moteu
 15h30
 
 Création de l'utilisateur et export du script + base
+
+#### Récap de la journée
+
+Travail fait :
+
+* Création du MLD, script SQL pour la base de données
+* Rédaction du rapport de stage : Intro + Tout ce qui a été fait jour 1
+* Choix de l'architecture du projet
+
+Chose à faire ou à noter :
+
+* Quand l'API envoie une 404 -> c'est une 200 pour la librairie requests mais il faut gérer ce cas correctement
+* Quand l'API envoie cette erreur, c'est un dico
+* Quand l'API envoie une réponse normale, c'est une liste ou un objet.
+* Se rappeler de changer le README
+  * Préciser qu'il faut importer la DB
+
+* Classe "TeamManager" gèrera la création des équipes et fera la relation avec la DB et API
+* Faire le script pour la communication avec la DB
+  * SELECT
+  * INSERT
+  * UPDATE
+* Stocker le résultat de la requête H2H dans Prediction pour éviter une répétition lors des appels
+* Ne pas oublier de communiquer avec l'équipe de l'API sur l'avancement du projet

@@ -1,6 +1,6 @@
-CREATE DATABASE `soccerPronostic` CHARACTER SET utf8 COLLATE utf8_general_ci; /*!40100 DEFAULT CHARACTER SET utf8 */;
+#CREATE DATABASE `soccerPronostic` CHARACTER SET utf8 COLLATE utf8_general_ci; /*!40100 DEFAULT CHARACTER SET utf8 */;
 
-USE `soccerPronostic`
+#USE `soccerPronostic`;
 
 CREATE TABLE `prediction` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -13,6 +13,5 @@ CREATE TABLE `prediction` (
   `def_score_hometeam` int(11) NOT NULL,
   `off_score_awayteam` int(11) NOT NULL,
   `def_score_awayteam` int(11) NOT NULL,
-  `real_match` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
