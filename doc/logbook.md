@@ -46,3 +46,21 @@ Et ce à quoi ressemble la méthode `getCountries()`. Cela permet de réduire co
 
 Ajout de la librairie `dotenv` au projet. Cela permet d'apporter une certaine sécurité sur la clé de mon API. Surtout lorsque l'on ne peut pas la réinitialiser.
 
+12h40
+
+Entretien avec M. Schmid :
+
+* La classe Facade est globalement bien
+  * Retourner un objet ou un tableau à la sortie de la requête et non une string
+  * Sortir une exception si le `status_code` n'est pas égal à 200
+    * Si exception -> try catch plus tard __/ ! \\__
+* Faire des logs pour les appels à l'API pour avoir une traçabilité sur ce qui est fait.
+
+14h
+
+Méthode `getAction` passe en privé. 
+
+Soucis avec la librairie de log pour l'écriture de log de l'application.
+
+Après discussion avec M. Garcia, ce dernier m'a expliqué que généralement les librairies de logging contiennent des niveaux et ces derniers sont utilisés pour le filtrage des logs.
+
