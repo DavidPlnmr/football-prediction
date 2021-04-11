@@ -70,3 +70,5 @@
 31-Mar-21 08:45:11 - INFO - Request to the API with the params: action=get_countries
 31-Mar-21 08:46:06 - INFO - Correctly found the log file
 31-Mar-21 08:58:38 - INFO - Correctly found the log file
+11-Apr-21 19:33:39 - INFO - Correctly found the log file
+11-Apr-21 19:33:40 - INFO - Request to the API with the params: action=get_countries

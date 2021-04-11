@@ -1,6 +1,6 @@
-#CREATE DATABASE `soccerPronostic` CHARACTER SET utf8 COLLATE utf8_general_ci; /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE `soccerPronostic` CHARACTER SET utf8 COLLATE utf8_general_ci; /*!40100 DEFAULT CHARACTER SET utf8 */;
 
-#USE `soccerPronostic`;
+USE `soccerPronostic`;
 
 CREATE TABLE `prediction` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
