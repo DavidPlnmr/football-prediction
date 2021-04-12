@@ -72,3 +72,31 @@
 31-Mar-21 08:58:38 - INFO - Correctly found the log file
 11-Apr-21 19:33:39 - INFO - Correctly found the log file
 11-Apr-21 19:33:40 - INFO - Request to the API with the params: action=get_countries
+12-Apr-21 10:35:04 - INFO - Connector to the DB correctly made
+12-Apr-21 10:35:16 - INFO - Connector to the DB correctly made
+12-Apr-21 10:36:39 - INFO - Connector to the DB correctly made
+12-Apr-21 10:37:05 - INFO - Connector to the DB correctly made
+12-Apr-21 10:38:29 - INFO - Connector to the DB correctly made
+12-Apr-21 10:42:37 - INFO - Connector to the DB correctly made
+12-Apr-21 10:57:42 - INFO - Connector to the DB correctly made
+12-Apr-21 10:58:53 - INFO - Connector to the DB correctly made
+12-Apr-21 11:02:08 - INFO - Connector to the DB correctly made
+12-Apr-21 11:02:08 - INFO - Inserted in the DB with params : Home, NULL, Tottenham, Manchester United, 2000, 1000, 2010, 1500
+12-Apr-21 11:19:31 - INFO - Connector to the DB correctly made
+12-Apr-21 11:19:31 - INFO - Inserted in the DB with params : Home, NULL, Burnley, Manchester City, 2010, 1120, 2810, 1800
+12-Apr-21 12:33:29 - INFO - Connector to the DB correctly made
+12-Apr-21 12:33:29 - INFO - Inserted in the DB with params : Draw, NULL, Arsenal, Leeds United, 2010, 1120, 2810, 1800
+12-Apr-21 12:34:58 - INFO - Connector to the DB correctly made
+12-Apr-21 12:34:58 - INFO - Inserted in the DB with params : Draw, NULL, Arsenal, Leeds United, 2010, 1120, 2810, 1800
+12-Apr-21 12:40:39 - INFO - Connector to the DB correctly made
+12-Apr-21 12:40:39 - INFO - Inserted in the DB with params : Draw, NULL, Arsenal, Leeds United, 2010, 1120, 2810, 1800
+12-Apr-21 12:48:37 - INFO - Connector to the DB correctly made
+12-Apr-21 12:48:37 - INFO - Inserted in the DB with params : Draw, NULL, Arsenal, Leeds United, 2010, 1120, 2810, 1800
+12-Apr-21 13:31:05 - INFO - Connector to the DB correctly made
+12-Apr-21 13:40:23 - INFO - Connector to the DB correctly made
+12-Apr-21 13:41:30 - INFO - Connector to the DB correctly made
+12-Apr-21 13:41:30 - INFO - Deleted row with id = 6
+12-Apr-21 15:45:38 - INFO - Connector to the DB correctly made
+12-Apr-21 15:46:02 - INFO - Connector to the DB correctly made
+12-Apr-21 15:46:33 - INFO - Correctly found the log file
+12-Apr-21 15:46:33 - INFO - Request to the API with the params: action=get_countries

@@ -1,7 +1,4 @@
 #!/usr/bin/python3
-# Use : python3 ApiFacade.py | jq
-#   jq is a pretty printer for json format in the terminal. Make sure to not print anything but json
-#   sudo apt install jq
 import requests
 import os
 import json
@@ -9,12 +6,18 @@ from dotenv import load_dotenv
 import logging
 
 class ApiFacade:
+    """
+    Facade to call the endpoints of the API
+    """
     def __init__(self, api_key):
         self.api_key = api_key
         logging.basicConfig(filename='../log/app.log', filemode='a', format='%(asctime)s - %(levelname)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.INFO)
         logging.info("Correctly found the log file")
         
     def __getAction(self, request_params):
+        """
+        Private method to call any endpoint of the API
+        """
         response = requests.get(f'https://apiv2.apifootball.com/?APIkey={self.api_key}&{request_params}')
 
         if response.status_code == 200: # Code 200 = OK. Healthy connection
@@ -28,6 +31,9 @@ class ApiFacade:
         #TODO : Manage other status code -> Exception
         
     def getH2H(self, first_team_name, second_team_name):
+        """
+        Get the last results of each teams and the last results of each matchs between them both
+        """
         endpoint_action = "get_H2H"
         return self.__getAction(f'action={endpoint_action}&firstTeam={first_team_name}&secondTeam={second_team_name}')
     

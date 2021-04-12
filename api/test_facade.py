@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+# Use : python3 test_facade.py | jq
+#   jq is a pretty printer for json format in the terminal. Make sure to not print anything but json
+#   sudo apt install jq
 from api_facade import ApiFacade
 from dotenv import load_dotenv
 from datetime import datetime

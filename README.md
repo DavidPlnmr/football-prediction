@@ -27,5 +27,5 @@ pip3 install requests
 ### `Dotenv`
 Make sure to have `python-dotenv` installed. Then, you'll need to make a copy of the `.env.example` file and name it `.env` and put your own credentials in the environment variable `API_KEY`. You can get your own key at this link : https://apifootball.com
 
-### Database
+### `Database`
 The app uses a database. You can find the structure of the DB in the "sql" repository. Don't forget to change the `.env` file with the correct username and password to connect to your DB.

@@ -1,3 +1,5 @@
+
+
 # Journal de bord
 
 Ce journal de bord a pour but de permettre de simplifier la rédaction du rapport final de stage de technicien. Le stage de technicien est un POC (proof of concept) du travail de diplôme de technicien. Il contiendra toutes les réflexions, les éléments techniques liés à votre travail, résumés des rencontres avec des enseignants, élèves, etc.
@@ -168,3 +170,43 @@ Chose à faire ou à noter :
   * UPDATE
 * Stocker le résultat de la requête H2H dans Prediction pour éviter une répétition lors des appels
 * Ne pas oublier de communiquer avec l'équipe de l'API sur l'avancement du projet
+
+### 12.04.2021
+
+Chose à faire aujourd'hui :
+
+* Gérer les potentielles erreurs de l'API
+* Faire le script de la DB pour les requêtes
+* Compléter le rapport avec ce qui a été fait le 31.03.2021
+
+7h30 Rédaction du rapport
+
+8h Implémentation de la classe pour gérer la base de données
+
+Pour la connexion à la base de données, il faut le driver pour pouvoir le faire en python donc : 
+
+```bash
+pip3 install mysql-connector-python
+```
+
+9h Discussion avec M. Garcia pour discuter d'une situation qui n'a rien à voir avec le stage
+
+9h30 Reprise de l'implémentation de la gestion de la base de données
+
+Erreur de connexion à la base de données. La connexion se fait correctement avec l'utilisateur créé depuis le terminal mais le script me retourne une erreur. (`mysql.connector.errors.ProgrammingError: 1045 (28000): Access denied for user 'davidplnmr'@'localhost' (using password: NO)`)
+
+Pourtant, je donne bien le mot de passe et le nom d'utilisateur
+
+Oubli de ma part d'ajouter la ligne qui permet de charger le fichier d'environnement :( -> :)
+
+12h40
+
+Après passage de M. Schmid, rappel du rôle du provider (anciennement appelé "TeamManager"). Il permettra de gérer l'interaction avec la base de données et les requêtes pour l'API.
+
+13h50 Fin de l'implémentation de la classe pour la gestion de la base de données
+
+Mise à jour du schéma de la base de données
+
+![mld](./img/mld_bdd_v3.png)
+
+15h Rédaction du rapport sur ce qui a été fait du côté de la base de données
