@@ -29,3 +29,6 @@ Make sure to have `python-dotenv` installed. Then, you'll need to make a copy of
 
 ### `Database`
 The app uses a database. You can find the structure of the DB in the "sql" repository. Don't forget to change the `.env` file with the correct username and password to connect to your DB.
+
+## Thanks
+I really want to thank the team behind [APIFootball](https://apifootball.com) who generously elevated my plan for the period of this work.
