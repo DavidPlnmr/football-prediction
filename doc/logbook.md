@@ -210,3 +210,18 @@ Mise à jour du schéma de la base de données
 ![mld](./img/mld_bdd_v3.png)
 
 15h Rédaction du rapport sur ce qui a été fait du côté de la base de données
+
+16h30 Envoi du GitHub à l'équipe qui gère APIFootball
+
+#### Récap de la journée
+
+* Fin de l'implémentation de la classe DbManager
+* Actuellement à 7500/9000 charactères sur le rapport
+* Rapport pas entièrement rédigé au niveau du DbManager mais quand même bien avancé
+
+Ce qu'il faut faire demain :
+
+* Rapport stage
+  * Description de l'architecture du projet (architecture des fichiers / base de données MLD)
+  * Explication du code de la classe DbManager
+* Gérer les potentielles erreurs sur les requêtes de l'API
