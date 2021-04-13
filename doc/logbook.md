@@ -225,3 +225,16 @@ Ce qu'il faut faire demain :
   * Description de l'architecture du projet (architecture des fichiers / base de données MLD)
   * Explication du code de la classe DbManager
 * Gérer les potentielles erreurs sur les requêtes de l'API
+
+### 13.04.2021
+7h30 Ajout de select pour récupérer des enregistrements selon le nom de l'équipe (peu importe si l'équipe est dans "Home" ou "Away") + Récupération de prédiction selon api_match_id
+
+8h15 Mise à jour du rapport partie "BDD"
+
+9h15 Redaction rapport sur l'architecture du projet 
+
+12h40 Gestion des erreurs pour l'appel à l'API
+
+Si on envoie une mauvais clé d'API, on reçoit une erreur 200 du côté de la lib "request" mais c'est une 404 de la part de l'api. Le type de cette erreur 404 est un dictionnaire. Cependant l'API retourne des objets ou des listes.
+
+13h50 Gestion des erreurs provenant de l'API réglé -> Peaufinement du rapport en parlant de cette gestion d'erreur

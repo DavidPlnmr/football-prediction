@@ -100,3 +100,59 @@
 12-Apr-21 15:46:02 - INFO - Connector to the DB correctly made
 12-Apr-21 15:46:33 - INFO - Correctly found the log file
 12-Apr-21 15:46:33 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 08:03:02 - INFO - Connector to the DB correctly made
+13-Apr-21 08:03:54 - INFO - Connector to the DB correctly made
+13-Apr-21 08:03:54 - INFO - Inserted in the DB with params : Home, NULL, Tottenham, Burnley, 1900, 1800, 2202, 1000
+13-Apr-21 08:04:25 - INFO - Connector to the DB correctly made
+13-Apr-21 08:05:18 - INFO - Connector to the DB correctly made
+13-Apr-21 08:05:23 - INFO - Connector to the DB correctly made
+13-Apr-21 08:05:31 - INFO - Connector to the DB correctly made
+13-Apr-21 08:06:34 - INFO - Connector to the DB correctly made
+13-Apr-21 08:06:42 - INFO - Connector to the DB correctly made
+13-Apr-21 08:07:39 - INFO - Connector to the DB correctly made
+13-Apr-21 08:07:41 - INFO - Connector to the DB correctly made
+13-Apr-21 08:16:14 - INFO - Connector to the DB correctly made
+13-Apr-21 08:16:14 - INFO - Inserted in the DB with params : Home, 201908, Tottenham, Burnley, 1900, 1800, 2202, 1000
+13-Apr-21 08:16:41 - INFO - Connector to the DB correctly made
+13-Apr-21 08:16:56 - INFO - Connector to the DB correctly made
+13-Apr-21 08:17:31 - INFO - Connector to the DB correctly made
+13-Apr-21 08:18:33 - INFO - Connector to the DB correctly made
+13-Apr-21 13:36:40 - INFO - Correctly found the log file
+13-Apr-21 13:36:40 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:36:51 - INFO - Correctly found the log file
+13-Apr-21 13:36:52 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:37:38 - INFO - Correctly found the log file
+13-Apr-21 13:37:38 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:38:01 - INFO - Correctly found the log file
+13-Apr-21 13:38:01 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:38:14 - INFO - Correctly found the log file
+13-Apr-21 13:38:14 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:38:24 - INFO - Correctly found the log file
+13-Apr-21 13:38:50 - INFO - Correctly found the log file
+13-Apr-21 13:40:29 - INFO - Correctly found the log file
+13-Apr-21 13:40:30 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:43:54 - INFO - Correctly found the log file
+13-Apr-21 13:43:54 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:44:01 - INFO - Correctly found the log file
+13-Apr-21 13:44:01 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:44:39 - INFO - Correctly found the log file
+13-Apr-21 13:44:48 - INFO - Correctly found the log file
+13-Apr-21 13:44:48 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:45:35 - INFO - Correctly found the log file
+13-Apr-21 13:45:35 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:45:44 - INFO - Correctly found the log file
+13-Apr-21 13:45:44 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:47:48 - INFO - Correctly found the log file
+13-Apr-21 13:47:49 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:47:52 - INFO - Correctly found the log file
+13-Apr-21 13:48:20 - INFO - Correctly found the log file
+13-Apr-21 13:48:20 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:49:03 - INFO - Correctly found the log file
+13-Apr-21 13:49:04 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:49:23 - INFO - Correctly found the log file
+13-Apr-21 13:49:24 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:49:30 - INFO - Correctly found the log file
+13-Apr-21 13:50:02 - INFO - Correctly found the log file
+13-Apr-21 13:50:03 - ERROR - Error 404 returned from the API with message : Authentification failed!
+13-Apr-21 13:51:12 - INFO - Correctly found the log file
+13-Apr-21 13:51:12 - ERROR - Error 404 returned from the API with message : Authentification failed!

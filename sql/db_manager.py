@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-import os
 import mysql.connector
-from dotenv import load_dotenv
 import logging
 
 class DbManager:
@@ -18,21 +16,28 @@ class DbManager:
         
         logging.info("Connector to the DB correctly made")
         
-    def query(self):
+    def getAll(self):
         """
-        Make a query in the specified table
+        Get all the rows in the table
         """
-        return self.own_query("SELECT * FROM prediction")
+        return self.__query("SELECT * FROM prediction")
     
+    def getPredictionWithSpecificTeams(self, first_team, second_team):
+        return self.__query(f"""SELECT * FROM prediction p 
+                          WHERE (hometeam_name="{first_team}" OR awayteam_name="{first_team}") 
+                          AND (hometeam_name="{second_team}" OR awayteam_name="{second_team}");""")
     
-    def own_query(self, your_query):
+    def getPredictionWithApiId(self, api_match_id):
+        return self.__query(f"""SELECT * FROM prediction p WHERE api_match_id={api_match_id};""")
+    
+    def __query(self, your_query):
         """
         Make your own query in the specified table. Make sure to only give a SELECT statement, otherwise your query won't work.
         """
         self.__cursor.execute(your_query)
         return self.__cursor.fetchall()
     
-    def insert(self, prediction, hometeam, awayteam, off_score_hometeam, def_score_hometeam, off_score_awayteam, def_score_awayteam, api_match_id="NULL"):
+    def insert(self, prediction, home_team, away_team, off_score_home_team, def_score_home_team, off_score_away_team, def_score_away_team, api_match_id="NULL"):
         """
         Insert in the database with the parameters given.
         """
@@ -45,10 +50,10 @@ class DbManager:
                             `def_score_hometeam`,
                             `off_score_awayteam`,
                             `def_score_awayteam`)
-                            VALUES ( "{prediction}", {api_match_id},  "{hometeam}", "{awayteam}", {off_score_hometeam}, {def_score_hometeam}, {off_score_awayteam}, {def_score_hometeam});""")
+                            VALUES ( "{prediction}", {api_match_id},  "{home_team}", "{away_team}", {off_score_home_team}, {def_score_home_team}, {off_score_away_team}, {def_score_home_team});""")
         
         self.__db.commit() # Save the changes
-        logging.info(f"Inserted in the DB with params : {prediction}, {api_match_id}, {hometeam}, {awayteam}, {off_score_hometeam}, {def_score_hometeam}, {off_score_awayteam}, {def_score_awayteam}")
+        logging.info(f"Inserted in the DB with params : {prediction}, {api_match_id}, {home_team}, {away_team}, {off_score_home_team}, {def_score_home_team}, {off_score_away_team}, {def_score_away_team}")
         return True
     
     def delete_at(self, id):
