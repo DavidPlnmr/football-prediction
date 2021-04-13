@@ -238,3 +238,41 @@ Ce qu'il faut faire demain :
 Si on envoie une mauvais clé d'API, on reçoit une erreur 200 du côté de la lib "request" mais c'est une 404 de la part de l'api. Le type de cette erreur 404 est un dictionnaire. Cependant l'API retourne des objets ou des listes.
 
 13h50 Gestion des erreurs provenant de l'API réglé -> Peaufinement du rapport en parlant de cette gestion d'erreur
+
+14h45 Début de l'élaboration du provider qui va sous traiter toutes les demandes de la classe Prediction.
+
+Permettre de récupérer toutes les statistiques d'une équipe sous forme de tableau
+
+Bloqué sur l'importation de module
+
+16h
+
+Après discussion avec Florian Burgener pour savoir si il est possible d'importer un module depuis un autre dossier :
+
+* Impossible d'importer ce module de manière simple
+  * Il est tout de même possible mais il faut trifouiller pour pouvoir y arriver
+    * La plus value ne sera pas énorme, mais voir si on part là dessus ou pas
+
+Communication avec M. Schmid est nécessaire pour voir ce qu'il y a à faire
+
+Résumé du problème :
+
+![soucisImportModule](./img/soucisImportModule.jpg)
+
+Est-ce que je dois revoir entièrement l'arborescence de mon application? Est-ce que je change uniquement l'emplacement de mon provider?
+
+Pas encore de réponse à ça
+
+Après discussion et recherche de solutions avec M. Schmid. Il faut faire un dossier qui contiendra à la racine provider et la classe prediction et dans ce dossier on aura le dossier api et sql
+
+#### Recap de la journée
+
+* Gestion des erreurs API fait
+* Ajout de SELECT statement dans DbManager
+* Rédaction du rapport sur DbManager et gestion erreur API
+
+#### A faire demain 
+
+* Changer l'arborescence des fichiers
+* Changer la partie du rapport qui parle de l'architecture de l'application
+* Commencer enfin le code du provider
