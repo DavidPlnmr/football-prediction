@@ -31,7 +31,7 @@ class ApiFacade:
                 return obj # decode to get the content in string
         else:
             # Error from the library
-            logging.error("Happened during the request to the API")
+            logging.error(f"Happened during the request to the API with error : {response.status_code}")
             raise Exception("Could not connect to the API.")
         
     def getH2H(self, first_team_name, second_team_name):

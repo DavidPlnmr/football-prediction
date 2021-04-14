@@ -675,3 +675,34 @@
 14-Apr-21 15:14:16 - INFO - Request to the API with the params: action=get_statistics&match_id=411338
 14-Apr-21 15:14:16 - INFO - Request to the API with the params: action=get_statistics&match_id=411410
 14-Apr-21 15:14:16 - INFO - Request to the API with the params: action=get_statistics&match_id=458234
+14-Apr-21 16:33:53 - INFO - Correctly found the log file
+14-Apr-21 16:33:53 - INFO - Connector to the DB correctly made
+14-Apr-21 16:33:55 - ERROR - Happened during the request to the API
+14-Apr-21 16:38:57 - INFO - Correctly found the log file
+14-Apr-21 16:38:57 - INFO - Connector to the DB correctly made
+14-Apr-21 16:39:11 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 16:39:11 - ERROR - Happened during the request to the API
+14-Apr-21 16:39:59 - INFO - Correctly found the log file
+14-Apr-21 16:39:59 - INFO - Connector to the DB correctly made
+14-Apr-21 16:40:05 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 16:40:24 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 16:40:27 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 16:40:31 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 16:40:34 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 16:40:40 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 16:40:48 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 16:40:50 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 16:40:51 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 16:40:53 - INFO - Request to the API with the params: action=get_statistics&match_id=482191
+14-Apr-21 16:40:56 - INFO - Request to the API with the params: action=get_statistics&match_id=411479
+14-Apr-21 16:41:06 - INFO - Request to the API with the params: action=get_statistics&match_id=482190
+14-Apr-21 16:41:08 - INFO - Request to the API with the params: action=get_statistics&match_id=411469
+14-Apr-21 16:41:15 - INFO - Request to the API with the params: action=get_statistics&match_id=479351
+14-Apr-21 16:41:15 - INFO - Request to the API with the params: action=get_statistics&match_id=456965
+14-Apr-21 16:41:17 - INFO - Request to the API with the params: action=get_statistics&match_id=411451
+14-Apr-21 16:41:18 - INFO - Request to the API with the params: action=get_statistics&match_id=411440
+14-Apr-21 16:41:19 - INFO - Request to the API with the params: action=get_statistics&match_id=411461
+14-Apr-21 16:41:20 - INFO - Request to the API with the params: action=get_statistics&match_id=411427
+14-Apr-21 16:41:22 - INFO - Request to the API with the params: action=get_statistics&match_id=411478
+14-Apr-21 16:41:22 - INFO - Request to the API with the params: action=get_statistics&match_id=411475
+14-Apr-21 16:42:30 - ERROR - Happened during the request to the API
