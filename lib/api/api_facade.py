@@ -11,7 +11,7 @@ class ApiFacade:
     """
     def __init__(self, api_key):
         self.api_key = api_key
-        logging.basicConfig(filename='../log/app.log', filemode='a', format='%(asctime)s - %(levelname)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.INFO)
+        logging.basicConfig(filename='./log/app.log', filemode='a', format='%(asctime)s - %(levelname)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.INFO)
         logging.info("Correctly found the log file")
         
     def __getAction(self, request_params):

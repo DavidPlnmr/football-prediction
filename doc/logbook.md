@@ -276,3 +276,60 @@ Après discussion et recherche de solutions avec M. Schmid. Il faut faire un dos
 * Changer l'arborescence des fichiers
 * Changer la partie du rapport qui parle de l'architecture de l'application
 * Commencer enfin le code du provider
+
+### 14.04.2021
+
+Choses à faire pour aujourd'hui :
+
+* Changer l'arborescence de fichiers du projet [DONE]
+  * Tester l'importation des modules [DONE]
+* Modifier le rapport par rapport à l'arborescence de fichier [DONE]
+* Commencer à coder le provider [DONE]
+* Tester la connexion au serveur qui m'a été donné par le tuteur [DONE]
+
+7h30 Changement de l'arborescence + test de l'importation des modules dans le provider
+
+8h00 L'importation de modules fonctionne. En parler dans le rapport et expliquer le soucis avec l'importation
+
+8h30 Fin de la rédaction de la modification de l'architecture du projet.
+
+![provider](./img/schemaProvider.jpg)
+
+9h Début de la fonction `getAllStatsFromTeams()`
+
+9h40 Ok gros problème. Tout les matchs n'ont pas toutes les statistiques qu'il me faut pour faire une prédiction
+
+Si toutes les statistiques dont on a besoin ne sont pas là, on ne prend pas ce match pour établir la prédiction? Cela peut fausser le résultat de la prédiction :/
+
+Création d'une constante contenant toutes les statistiques nécessaires à avoir sur un match. Si une de ces stats manque, on ne prend pas le match en compte pour la prédiction.
+
+Actuellement à la recherche d'une méthode qui me permet de vérifier que tout le tableau est dans un autre tableau peu importe l'ordre
+
+Après aide de Jonathan et Lorenzo on a trouvé une solution
+
+12h40 Reprise du travail et de la récupération des statistiques pour chacun des matchs
+
+13h15 Récupération effectuée pour les statistiques de chaque match en confrontation pure entre les équipes chaque équipe
+
+15h Fin de la récupération des statistiques pour chaque match entre les équipes
+
+Début de la rédaction de cette activité
+
+![providerv2](./img/schemaProviderV2.jpg)
+
+Schéma du provider en version numérique pour l'insérer dans le rapport
+
+#### Recap de la journée 
+
+* Changement léger de l'architecture du projet
+* Test de connexion au serveur donné par le tuteur de stage
+* Rédaction du rapport
+* Implémentation du traitement + récupération des statistiques pour chaque match
+
+Choses à faire demain :
+
+* Bilan personnel du stage
+  * compétences sociales
+* Conclusion
+  * Synthèse du stage
+  * Remerciements

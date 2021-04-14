@@ -1,0 +1,677 @@
+30-Mar-21 15:42:00 - INFO - Correctly found the log file
+30-Mar-21 15:42:32 - INFO - Correctly found the log file
+30-Mar-21 15:42:47 - INFO - Correctly found the log file
+30-Mar-21 15:42:47 - INFO - Requested to the API with the params: action=get_leagues
+30-Mar-21 15:42:48 - INFO - Requested to the API with the params: action=get_events&from=2021-03-30&to=2021-04-02
+30-Mar-21 15:42:48 - INFO - Requested to the API with the params: action=get_teams&league_id=148
+30-Mar-21 15:45:59 - INFO - Correctly found the log file
+30-Mar-21 15:45:59 - INFO - Requested to the API with the params: action=get_leagues
+30-Mar-21 15:46:00 - INFO - Requested to the API with the params: action=get_events&from=2021-03-30&to=2021-04-02
+30-Mar-21 15:46:26 - INFO - Correctly found the log file
+30-Mar-21 15:46:26 - INFO - Requested to the API with the params: action=get_leagues
+30-Mar-21 15:46:27 - INFO - Requested to the API with the params: action=get_events&from=2021-03-30&to=2021-04-02
+30-Mar-21 15:46:27 - INFO - Requested to the API with the params: action=get_teams&league_id=148
+30-Mar-21 15:46:44 - INFO - Correctly found the log file
+30-Mar-21 15:46:45 - INFO - Requested to the API with the params: action=get_leagues
+30-Mar-21 15:46:45 - INFO - Requested to the API with the params: action=get_events&from=2021-03-30&to=2021-04-02
+30-Mar-21 15:46:46 - INFO - Requested to the API with the params: action=get_teams&league_id=148
+30-Mar-21 15:46:48 - INFO - Correctly found the log file
+30-Mar-21 15:46:49 - INFO - Requested to the API with the params: action=get_leagues
+30-Mar-21 15:46:49 - INFO - Requested to the API with the params: action=get_events&from=2021-03-30&to=2021-04-02
+30-Mar-21 15:47:16 - INFO - Correctly found the log file
+30-Mar-21 15:47:17 - INFO - Requested to the API with the params: action=get_events&from=2021-03-30&to=2021-04-02
+30-Mar-21 15:47:38 - INFO - Correctly found the log file
+30-Mar-21 15:47:39 - INFO - Requested to the API with the params: action=get_teams&league_id=148
+30-Mar-21 15:47:48 - INFO - Correctly found the log file
+30-Mar-21 15:47:49 - INFO - Requested to the API with the params: action=get_teams&league_id=148
+30-Mar-21 15:49:13 - INFO - Correctly found the log file
+30-Mar-21 15:49:16 - INFO - Requested to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Arsenal
+30-Mar-21 15:49:20 - INFO - Correctly found the log file
+30-Mar-21 15:49:23 - INFO - Requested to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Arsenal
+30-Mar-21 15:50:07 - INFO - Correctly found the log file
+30-Mar-21 15:50:14 - INFO - Correctly found the log file
+30-Mar-21 15:50:17 - INFO - Requested to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Arsenal
+30-Mar-21 15:51:18 - INFO - Correctly found the log file
+30-Mar-21 15:51:21 - INFO - Requested to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Arsenal
+30-Mar-21 15:51:44 - INFO - Correctly found the log file
+30-Mar-21 15:51:57 - INFO - Correctly found the log file
+30-Mar-21 15:52:02 - INFO - Correctly found the log file
+30-Mar-21 15:52:05 - INFO - Requested to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Arsenal
+31-Mar-21 08:16:29 - INFO - Correctly found the log file
+31-Mar-21 08:16:32 - INFO - Requested to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Arsenal
+31-Mar-21 08:16:56 - INFO - Correctly found the log file
+31-Mar-21 08:16:59 - INFO - Requested to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Arsenal
+31-Mar-21 08:17:03 - INFO - Correctly found the log file
+31-Mar-21 08:17:06 - INFO - Requested to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Arsenal
+31-Mar-21 08:17:30 - INFO - Correctly found the log file
+31-Mar-21 08:17:33 - INFO - Requested to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Arsenal
+31-Mar-21 08:17:41 - INFO - Correctly found the log file
+31-Mar-21 08:17:45 - INFO - Requested to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Arsenal
+31-Mar-21 08:30:13 - INFO - Correctly found the log file
+31-Mar-21 08:30:14 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Arsenal
+31-Mar-21 08:35:22 - INFO - Correctly found the log file
+31-Mar-21 08:35:35 - INFO - Correctly found the log file
+31-Mar-21 08:35:52 - INFO - Correctly found the log file
+31-Mar-21 08:36:04 - INFO - Correctly found the log file
+31-Mar-21 08:37:02 - INFO - Correctly found the log file
+31-Mar-21 08:37:02 - INFO - Request to the API with the params: action=get_countries
+31-Mar-21 08:37:27 - INFO - Correctly found the log file
+31-Mar-21 08:40:01 - INFO - Correctly found the log file
+31-Mar-21 08:40:01 - INFO - Request to the API with the params: action=get_countries
+31-Mar-21 08:40:09 - INFO - Correctly found the log file
+31-Mar-21 08:40:10 - INFO - Request to the API with the params: action=get_countries
+31-Mar-21 08:42:00 - INFO - Correctly found the log file
+31-Mar-21 08:43:18 - INFO - Correctly found the log file
+31-Mar-21 08:43:36 - INFO - Correctly found the log file
+31-Mar-21 08:43:36 - INFO - Request to the API with the params: action=get_countries
+31-Mar-21 08:45:02 - INFO - Correctly found the log file
+31-Mar-21 08:45:02 - INFO - Request to the API with the params: action=get_countries
+31-Mar-21 08:45:11 - INFO - Correctly found the log file
+31-Mar-21 08:45:11 - INFO - Request to the API with the params: action=get_countries
+31-Mar-21 08:46:06 - INFO - Correctly found the log file
+31-Mar-21 08:58:38 - INFO - Correctly found the log file
+11-Apr-21 19:33:39 - INFO - Correctly found the log file
+11-Apr-21 19:33:40 - INFO - Request to the API with the params: action=get_countries
+12-Apr-21 10:35:04 - INFO - Connector to the DB correctly made
+12-Apr-21 10:35:16 - INFO - Connector to the DB correctly made
+12-Apr-21 10:36:39 - INFO - Connector to the DB correctly made
+12-Apr-21 10:37:05 - INFO - Connector to the DB correctly made
+12-Apr-21 10:38:29 - INFO - Connector to the DB correctly made
+12-Apr-21 10:42:37 - INFO - Connector to the DB correctly made
+12-Apr-21 10:57:42 - INFO - Connector to the DB correctly made
+12-Apr-21 10:58:53 - INFO - Connector to the DB correctly made
+12-Apr-21 11:02:08 - INFO - Connector to the DB correctly made
+12-Apr-21 11:02:08 - INFO - Inserted in the DB with params : Home, NULL, Tottenham, Manchester United, 2000, 1000, 2010, 1500
+12-Apr-21 11:19:31 - INFO - Connector to the DB correctly made
+12-Apr-21 11:19:31 - INFO - Inserted in the DB with params : Home, NULL, Burnley, Manchester City, 2010, 1120, 2810, 1800
+12-Apr-21 12:33:29 - INFO - Connector to the DB correctly made
+12-Apr-21 12:33:29 - INFO - Inserted in the DB with params : Draw, NULL, Arsenal, Leeds United, 2010, 1120, 2810, 1800
+12-Apr-21 12:34:58 - INFO - Connector to the DB correctly made
+12-Apr-21 12:34:58 - INFO - Inserted in the DB with params : Draw, NULL, Arsenal, Leeds United, 2010, 1120, 2810, 1800
+12-Apr-21 12:40:39 - INFO - Connector to the DB correctly made
+12-Apr-21 12:40:39 - INFO - Inserted in the DB with params : Draw, NULL, Arsenal, Leeds United, 2010, 1120, 2810, 1800
+12-Apr-21 12:48:37 - INFO - Connector to the DB correctly made
+12-Apr-21 12:48:37 - INFO - Inserted in the DB with params : Draw, NULL, Arsenal, Leeds United, 2010, 1120, 2810, 1800
+12-Apr-21 13:31:05 - INFO - Connector to the DB correctly made
+12-Apr-21 13:40:23 - INFO - Connector to the DB correctly made
+12-Apr-21 13:41:30 - INFO - Connector to the DB correctly made
+12-Apr-21 13:41:30 - INFO - Deleted row with id = 6
+12-Apr-21 15:45:38 - INFO - Connector to the DB correctly made
+12-Apr-21 15:46:02 - INFO - Connector to the DB correctly made
+12-Apr-21 15:46:33 - INFO - Correctly found the log file
+12-Apr-21 15:46:33 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 08:03:02 - INFO - Connector to the DB correctly made
+13-Apr-21 08:03:54 - INFO - Connector to the DB correctly made
+13-Apr-21 08:03:54 - INFO - Inserted in the DB with params : Home, NULL, Tottenham, Burnley, 1900, 1800, 2202, 1000
+13-Apr-21 08:04:25 - INFO - Connector to the DB correctly made
+13-Apr-21 08:05:18 - INFO - Connector to the DB correctly made
+13-Apr-21 08:05:23 - INFO - Connector to the DB correctly made
+13-Apr-21 08:05:31 - INFO - Connector to the DB correctly made
+13-Apr-21 08:06:34 - INFO - Connector to the DB correctly made
+13-Apr-21 08:06:42 - INFO - Connector to the DB correctly made
+13-Apr-21 08:07:39 - INFO - Connector to the DB correctly made
+13-Apr-21 08:07:41 - INFO - Connector to the DB correctly made
+13-Apr-21 08:16:14 - INFO - Connector to the DB correctly made
+13-Apr-21 08:16:14 - INFO - Inserted in the DB with params : Home, 201908, Tottenham, Burnley, 1900, 1800, 2202, 1000
+13-Apr-21 08:16:41 - INFO - Connector to the DB correctly made
+13-Apr-21 08:16:56 - INFO - Connector to the DB correctly made
+13-Apr-21 08:17:31 - INFO - Connector to the DB correctly made
+13-Apr-21 08:18:33 - INFO - Connector to the DB correctly made
+13-Apr-21 13:36:40 - INFO - Correctly found the log file
+13-Apr-21 13:36:40 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:36:51 - INFO - Correctly found the log file
+13-Apr-21 13:36:52 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:37:38 - INFO - Correctly found the log file
+13-Apr-21 13:37:38 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:38:01 - INFO - Correctly found the log file
+13-Apr-21 13:38:01 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:38:14 - INFO - Correctly found the log file
+13-Apr-21 13:38:14 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:38:24 - INFO - Correctly found the log file
+13-Apr-21 13:38:50 - INFO - Correctly found the log file
+13-Apr-21 13:40:29 - INFO - Correctly found the log file
+13-Apr-21 13:40:30 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:43:54 - INFO - Correctly found the log file
+13-Apr-21 13:43:54 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:44:01 - INFO - Correctly found the log file
+13-Apr-21 13:44:01 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:44:39 - INFO - Correctly found the log file
+13-Apr-21 13:44:48 - INFO - Correctly found the log file
+13-Apr-21 13:44:48 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:45:35 - INFO - Correctly found the log file
+13-Apr-21 13:45:35 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:45:44 - INFO - Correctly found the log file
+13-Apr-21 13:45:44 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:47:48 - INFO - Correctly found the log file
+13-Apr-21 13:47:49 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:47:52 - INFO - Correctly found the log file
+13-Apr-21 13:48:20 - INFO - Correctly found the log file
+13-Apr-21 13:48:20 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:49:03 - INFO - Correctly found the log file
+13-Apr-21 13:49:04 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:49:23 - INFO - Correctly found the log file
+13-Apr-21 13:49:24 - INFO - Request to the API with the params: action=get_countries
+13-Apr-21 13:49:30 - INFO - Correctly found the log file
+13-Apr-21 13:50:02 - INFO - Correctly found the log file
+13-Apr-21 13:50:03 - ERROR - Error 404 returned from the API with message : Authentification failed!
+13-Apr-21 13:51:12 - INFO - Correctly found the log file
+13-Apr-21 13:51:12 - ERROR - Error 404 returned from the API with message : Authentification failed!
+14-Apr-21 08:16:17 - INFO - Correctly found the log file
+14-Apr-21 08:17:47 - INFO - Connector to the DB correctly made
+14-Apr-21 08:18:09 - INFO - Correctly found the log file
+14-Apr-21 08:51:34 - INFO - Correctly found the log file
+14-Apr-21 08:51:34 - INFO - Correctly found the log file
+14-Apr-21 08:51:50 - INFO - Correctly found the log file
+14-Apr-21 08:51:50 - INFO - Correctly found the log file
+14-Apr-21 08:51:54 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 08:52:04 - INFO - Correctly found the log file
+14-Apr-21 08:52:04 - INFO - Correctly found the log file
+14-Apr-21 08:52:08 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 08:52:17 - INFO - Correctly found the log file
+14-Apr-21 08:52:17 - INFO - Correctly found the log file
+14-Apr-21 08:52:21 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 09:04:47 - INFO - Correctly found the log file
+14-Apr-21 09:04:55 - INFO - Correctly found the log file
+14-Apr-21 09:05:23 - INFO - Correctly found the log file
+14-Apr-21 09:05:47 - INFO - Correctly found the log file
+14-Apr-21 09:06:05 - INFO - Correctly found the log file
+14-Apr-21 09:06:05 - INFO - Connector to the DB correctly made
+14-Apr-21 09:06:19 - INFO - Correctly found the log file
+14-Apr-21 09:06:19 - INFO - Connector to the DB correctly made
+14-Apr-21 09:06:22 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 09:27:06 - INFO - Correctly found the log file
+14-Apr-21 09:27:07 - ERROR - Error 404 returned from the API with message : Authentification failed!
+14-Apr-21 09:27:17 - INFO - Correctly found the log file
+14-Apr-21 09:27:17 - INFO - Request to the API with the params: action=get_statistics&match_id=24562
+14-Apr-21 09:28:15 - INFO - Correctly found the log file
+14-Apr-21 09:28:16 - INFO - Request to the API with the params: action=get_statistics&match_id=24562
+14-Apr-21 09:28:23 - INFO - Correctly found the log file
+14-Apr-21 09:28:23 - INFO - Request to the API with the params: action=get_statistics&match_id=24562
+14-Apr-21 09:28:34 - INFO - Correctly found the log file
+14-Apr-21 09:28:34 - INFO - Request to the API with the params: action=get_statistics&match_id=24562
+14-Apr-21 09:28:45 - INFO - Correctly found the log file
+14-Apr-21 09:28:46 - INFO - Request to the API with the params: action=get_statistics&match_id=24562
+14-Apr-21 09:34:01 - INFO - Correctly found the log file
+14-Apr-21 09:34:01 - INFO - Connector to the DB correctly made
+14-Apr-21 09:34:05 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 09:34:15 - INFO - Correctly found the log file
+14-Apr-21 09:34:15 - INFO - Connector to the DB correctly made
+14-Apr-21 09:34:19 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 09:34:19 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 09:34:19 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 09:34:19 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 09:34:19 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 09:34:20 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 09:34:20 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 09:34:20 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 09:34:20 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 10:29:49 - INFO - Correctly found the log file
+14-Apr-21 10:29:49 - INFO - Connector to the DB correctly made
+14-Apr-21 10:29:52 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 10:29:52 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 10:29:52 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 10:29:53 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 10:29:53 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 10:29:53 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 10:29:53 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 10:29:53 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 10:29:53 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 10:43:09 - INFO - Correctly found the log file
+14-Apr-21 10:43:09 - INFO - Connector to the DB correctly made
+14-Apr-21 10:43:12 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 10:43:12 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 10:43:12 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 10:43:13 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 10:43:13 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 10:43:13 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 10:43:13 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 10:43:13 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 10:43:14 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 10:46:20 - INFO - Correctly found the log file
+14-Apr-21 10:46:20 - INFO - Connector to the DB correctly made
+14-Apr-21 10:46:23 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 10:46:23 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 10:48:38 - INFO - Correctly found the log file
+14-Apr-21 10:48:38 - INFO - Connector to the DB correctly made
+14-Apr-21 10:48:42 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 10:48:42 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 10:48:42 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 10:48:42 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 10:48:43 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 10:48:43 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 10:48:43 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 10:48:43 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 10:48:43 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 10:51:23 - INFO - Correctly found the log file
+14-Apr-21 10:51:23 - INFO - Connector to the DB correctly made
+14-Apr-21 10:51:27 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 10:51:27 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 10:51:27 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 10:51:27 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 10:51:27 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 10:51:28 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 10:51:28 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 10:51:28 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 10:51:28 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 10:57:27 - INFO - Correctly found the log file
+14-Apr-21 10:57:27 - INFO - Connector to the DB correctly made
+14-Apr-21 10:57:30 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 10:57:31 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 10:57:50 - INFO - Correctly found the log file
+14-Apr-21 10:57:50 - INFO - Connector to the DB correctly made
+14-Apr-21 10:57:54 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 10:57:54 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 11:09:27 - INFO - Correctly found the log file
+14-Apr-21 11:09:27 - INFO - Connector to the DB correctly made
+14-Apr-21 11:09:31 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 11:09:31 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 11:09:31 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 11:09:32 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 11:09:32 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 11:09:32 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 11:09:32 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 11:09:32 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 11:09:33 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 11:09:46 - INFO - Correctly found the log file
+14-Apr-21 11:09:46 - INFO - Connector to the DB correctly made
+14-Apr-21 11:09:49 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 11:09:50 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 11:09:50 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 11:09:50 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 11:09:50 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 11:09:50 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 11:09:50 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 11:09:51 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 11:09:51 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 11:10:02 - INFO - Correctly found the log file
+14-Apr-21 11:10:02 - INFO - Connector to the DB correctly made
+14-Apr-21 11:10:07 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 11:10:07 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 11:10:07 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 11:10:07 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 11:10:07 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 11:10:08 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 11:10:08 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 11:10:08 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 11:10:08 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 11:10:17 - INFO - Correctly found the log file
+14-Apr-21 11:10:17 - INFO - Connector to the DB correctly made
+14-Apr-21 11:10:22 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 11:10:22 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 11:10:34 - INFO - Correctly found the log file
+14-Apr-21 11:10:34 - INFO - Connector to the DB correctly made
+14-Apr-21 11:10:37 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 11:10:37 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 11:10:38 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 11:10:38 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 11:10:38 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 11:10:38 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 11:10:38 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 11:10:38 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 11:10:39 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 11:11:48 - INFO - Correctly found the log file
+14-Apr-21 11:11:48 - INFO - Connector to the DB correctly made
+14-Apr-21 11:11:51 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 11:11:51 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 11:11:52 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 11:11:52 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 11:11:52 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 11:11:52 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 11:11:52 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 11:11:53 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 11:11:53 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 11:12:08 - INFO - Correctly found the log file
+14-Apr-21 11:12:08 - INFO - Connector to the DB correctly made
+14-Apr-21 11:12:12 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 11:12:12 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 11:13:06 - INFO - Correctly found the log file
+14-Apr-21 11:13:06 - INFO - Connector to the DB correctly made
+14-Apr-21 11:13:12 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 11:13:12 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 11:13:12 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 11:13:12 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 11:13:12 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 11:13:12 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 11:13:13 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 11:13:13 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 11:13:13 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 11:25:13 - INFO - Correctly found the log file
+14-Apr-21 11:25:13 - INFO - Connector to the DB correctly made
+14-Apr-21 11:25:16 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 11:25:16 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 11:25:27 - INFO - Correctly found the log file
+14-Apr-21 11:25:27 - INFO - Connector to the DB correctly made
+14-Apr-21 11:25:30 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 11:25:31 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 11:25:31 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 11:25:31 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 11:25:31 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 11:25:31 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 11:25:31 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 11:25:32 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 11:25:32 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 11:27:45 - INFO - Correctly found the log file
+14-Apr-21 11:27:45 - INFO - Connector to the DB correctly made
+14-Apr-21 11:27:49 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 11:27:49 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 11:27:49 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 11:27:49 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 11:27:50 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 11:27:50 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 11:27:50 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 11:27:50 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 11:27:50 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 11:33:17 - INFO - Correctly found the log file
+14-Apr-21 11:33:17 - INFO - Connector to the DB correctly made
+14-Apr-21 11:33:21 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 11:33:21 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 11:33:47 - INFO - Correctly found the log file
+14-Apr-21 11:33:47 - INFO - Connector to the DB correctly made
+14-Apr-21 11:33:51 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 11:33:51 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 11:34:19 - INFO - Correctly found the log file
+14-Apr-21 11:34:19 - INFO - Connector to the DB correctly made
+14-Apr-21 11:34:23 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 11:34:23 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 11:34:23 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 11:34:23 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 11:34:24 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 11:34:24 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 11:34:24 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 11:34:24 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 11:34:24 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 11:35:50 - INFO - Correctly found the log file
+14-Apr-21 11:35:50 - INFO - Connector to the DB correctly made
+14-Apr-21 11:35:53 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 11:35:53 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 11:35:53 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 11:35:53 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 11:35:54 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 11:35:54 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 11:35:54 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 11:35:54 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 11:35:54 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 11:36:24 - INFO - Correctly found the log file
+14-Apr-21 11:36:24 - INFO - Connector to the DB correctly made
+14-Apr-21 11:36:27 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 11:36:27 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 11:36:27 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 11:36:28 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 11:36:28 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 11:36:28 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 11:36:28 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 11:36:28 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 11:36:29 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 11:37:43 - INFO - Correctly found the log file
+14-Apr-21 11:37:43 - INFO - Connector to the DB correctly made
+14-Apr-21 11:37:46 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 11:37:46 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 11:37:46 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 11:37:47 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 11:37:47 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 11:37:47 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 11:37:47 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 11:37:47 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 11:37:48 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 11:38:03 - INFO - Correctly found the log file
+14-Apr-21 11:38:03 - INFO - Connector to the DB correctly made
+14-Apr-21 11:38:09 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 11:38:09 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 11:38:10 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 11:38:10 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 11:38:10 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 11:38:10 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 11:38:10 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 11:38:11 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 11:38:11 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 12:44:49 - INFO - Correctly found the log file
+14-Apr-21 12:44:49 - INFO - Connector to the DB correctly made
+14-Apr-21 12:44:53 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 12:44:53 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 12:44:53 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 12:44:53 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 12:44:54 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 12:44:54 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 12:44:54 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 12:44:54 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 12:44:54 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 12:45:11 - INFO - Correctly found the log file
+14-Apr-21 12:45:11 - INFO - Connector to the DB correctly made
+14-Apr-21 12:45:15 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 12:45:15 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 12:45:15 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 12:45:16 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 12:45:16 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 12:45:16 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 12:45:16 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 12:45:16 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 12:45:16 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 12:45:34 - INFO - Correctly found the log file
+14-Apr-21 12:45:34 - INFO - Connector to the DB correctly made
+14-Apr-21 12:45:37 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 12:45:37 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 12:46:58 - INFO - Correctly found the log file
+14-Apr-21 12:46:58 - INFO - Connector to the DB correctly made
+14-Apr-21 12:47:01 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 12:47:02 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 12:47:02 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 12:47:02 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 12:47:02 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 12:47:02 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 12:47:11 - INFO - Correctly found the log file
+14-Apr-21 12:47:11 - INFO - Connector to the DB correctly made
+14-Apr-21 12:47:14 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 12:47:15 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 12:47:15 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 12:47:15 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 12:47:15 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 12:47:15 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 12:47:16 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 12:47:16 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 12:47:16 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 13:04:16 - INFO - Correctly found the log file
+14-Apr-21 13:04:16 - INFO - Connector to the DB correctly made
+14-Apr-21 13:04:19 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 13:04:19 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 13:04:19 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 13:04:20 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 13:04:20 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 13:04:20 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 13:04:20 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 13:04:20 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 13:04:20 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 13:10:38 - INFO - Correctly found the log file
+14-Apr-21 13:10:38 - INFO - Connector to the DB correctly made
+14-Apr-21 13:10:42 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 13:10:58 - INFO - Correctly found the log file
+14-Apr-21 13:10:58 - INFO - Connector to the DB correctly made
+14-Apr-21 13:11:01 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 14:05:53 - INFO - Correctly found the log file
+14-Apr-21 14:05:53 - INFO - Connector to the DB correctly made
+14-Apr-21 14:05:56 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 14:07:07 - INFO - Correctly found the log file
+14-Apr-21 14:07:07 - INFO - Connector to the DB correctly made
+14-Apr-21 14:12:28 - INFO - Correctly found the log file
+14-Apr-21 14:12:28 - INFO - Connector to the DB correctly made
+14-Apr-21 14:12:31 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 14:12:31 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 14:13:23 - INFO - Correctly found the log file
+14-Apr-21 14:13:23 - INFO - Connector to the DB correctly made
+14-Apr-21 14:13:26 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 14:13:26 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 14:14:37 - INFO - Correctly found the log file
+14-Apr-21 14:14:37 - INFO - Connector to the DB correctly made
+14-Apr-21 14:14:40 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 14:14:41 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 14:14:57 - INFO - Correctly found the log file
+14-Apr-21 14:14:57 - INFO - Connector to the DB correctly made
+14-Apr-21 14:15:00 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 14:15:00 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 14:16:05 - INFO - Correctly found the log file
+14-Apr-21 14:16:05 - INFO - Connector to the DB correctly made
+14-Apr-21 14:16:10 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 14:16:50 - INFO - Correctly found the log file
+14-Apr-21 14:16:50 - INFO - Connector to the DB correctly made
+14-Apr-21 14:16:53 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 14:16:53 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 14:17:33 - INFO - Correctly found the log file
+14-Apr-21 14:17:33 - INFO - Connector to the DB correctly made
+14-Apr-21 14:17:37 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 14:17:37 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 14:17:47 - INFO - Correctly found the log file
+14-Apr-21 14:17:47 - INFO - Connector to the DB correctly made
+14-Apr-21 14:17:50 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 14:17:51 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 14:17:51 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 14:17:51 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 14:17:51 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 14:17:51 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 14:17:52 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 14:17:52 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 14:17:52 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 14:19:30 - INFO - Correctly found the log file
+14-Apr-21 14:19:30 - INFO - Connector to the DB correctly made
+14-Apr-21 14:19:33 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 14:19:33 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 14:19:33 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 14:19:33 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 14:19:34 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 14:19:34 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 14:19:34 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 14:19:34 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 14:19:34 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 14:19:35 - INFO - Request to the API with the params: action=get_statistics&match_id=482191
+14-Apr-21 14:19:35 - INFO - Request to the API with the params: action=get_statistics&match_id=411479
+14-Apr-21 14:19:35 - INFO - Request to the API with the params: action=get_statistics&match_id=482190
+14-Apr-21 14:19:35 - INFO - Request to the API with the params: action=get_statistics&match_id=411469
+14-Apr-21 14:19:36 - INFO - Request to the API with the params: action=get_statistics&match_id=479351
+14-Apr-21 14:19:36 - INFO - Request to the API with the params: action=get_statistics&match_id=456965
+14-Apr-21 14:19:36 - INFO - Request to the API with the params: action=get_statistics&match_id=411451
+14-Apr-21 14:19:36 - INFO - Request to the API with the params: action=get_statistics&match_id=411440
+14-Apr-21 14:19:36 - INFO - Request to the API with the params: action=get_statistics&match_id=411461
+14-Apr-21 14:19:37 - INFO - Request to the API with the params: action=get_statistics&match_id=411427
+14-Apr-21 14:19:37 - INFO - Request to the API with the params: action=get_statistics&match_id=411478
+14-Apr-21 14:19:37 - INFO - Request to the API with the params: action=get_statistics&match_id=411475
+14-Apr-21 14:19:37 - INFO - Request to the API with the params: action=get_statistics&match_id=411449
+14-Apr-21 14:19:37 - INFO - Request to the API with the params: action=get_statistics&match_id=411439
+14-Apr-21 14:19:37 - INFO - Request to the API with the params: action=get_statistics&match_id=411458
+14-Apr-21 14:19:38 - INFO - Request to the API with the params: action=get_statistics&match_id=411435
+14-Apr-21 14:19:38 - INFO - Request to the API with the params: action=get_statistics&match_id=411420
+14-Apr-21 14:19:38 - INFO - Request to the API with the params: action=get_statistics&match_id=411338
+14-Apr-21 14:19:38 - INFO - Request to the API with the params: action=get_statistics&match_id=411410
+14-Apr-21 14:19:38 - INFO - Request to the API with the params: action=get_statistics&match_id=458234
+14-Apr-21 14:45:05 - INFO - Correctly found the log file
+14-Apr-21 14:45:05 - INFO - Connector to the DB correctly made
+14-Apr-21 14:45:15 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 14:45:15 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 14:45:15 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 14:45:15 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 14:45:15 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 14:45:16 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 14:45:16 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 14:45:16 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 14:45:16 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 14:45:16 - INFO - Request to the API with the params: action=get_statistics&match_id=482191
+14-Apr-21 14:45:17 - INFO - Request to the API with the params: action=get_statistics&match_id=411479
+14-Apr-21 14:45:17 - INFO - Request to the API with the params: action=get_statistics&match_id=482190
+14-Apr-21 14:45:17 - INFO - Request to the API with the params: action=get_statistics&match_id=411469
+14-Apr-21 14:45:17 - INFO - Request to the API with the params: action=get_statistics&match_id=479351
+14-Apr-21 14:45:17 - INFO - Request to the API with the params: action=get_statistics&match_id=456965
+14-Apr-21 14:45:18 - INFO - Request to the API with the params: action=get_statistics&match_id=411451
+14-Apr-21 14:45:18 - INFO - Request to the API with the params: action=get_statistics&match_id=411440
+14-Apr-21 14:45:18 - INFO - Request to the API with the params: action=get_statistics&match_id=411461
+14-Apr-21 14:45:19 - INFO - Request to the API with the params: action=get_statistics&match_id=411427
+14-Apr-21 14:45:19 - INFO - Request to the API with the params: action=get_statistics&match_id=411478
+14-Apr-21 14:47:24 - INFO - Correctly found the log file
+14-Apr-21 14:47:24 - INFO - Connector to the DB correctly made
+14-Apr-21 14:47:27 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 14:47:27 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 14:47:27 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 14:47:28 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 14:47:28 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 14:47:28 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 14:47:28 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 14:47:28 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 14:47:28 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 14:47:29 - INFO - Request to the API with the params: action=get_statistics&match_id=482191
+14-Apr-21 14:47:29 - INFO - Request to the API with the params: action=get_statistics&match_id=411479
+14-Apr-21 14:47:29 - INFO - Request to the API with the params: action=get_statistics&match_id=482190
+14-Apr-21 14:47:29 - INFO - Request to the API with the params: action=get_statistics&match_id=411469
+14-Apr-21 14:47:29 - INFO - Request to the API with the params: action=get_statistics&match_id=479351
+14-Apr-21 14:47:30 - INFO - Request to the API with the params: action=get_statistics&match_id=456965
+14-Apr-21 14:47:30 - INFO - Request to the API with the params: action=get_statistics&match_id=411451
+14-Apr-21 14:47:30 - INFO - Request to the API with the params: action=get_statistics&match_id=411440
+14-Apr-21 14:47:30 - INFO - Request to the API with the params: action=get_statistics&match_id=411461
+14-Apr-21 14:47:30 - INFO - Request to the API with the params: action=get_statistics&match_id=411427
+14-Apr-21 14:47:32 - INFO - Request to the API with the params: action=get_statistics&match_id=411478
+14-Apr-21 14:47:32 - INFO - Request to the API with the params: action=get_statistics&match_id=411475
+14-Apr-21 14:47:32 - INFO - Request to the API with the params: action=get_statistics&match_id=411449
+14-Apr-21 14:47:32 - INFO - Request to the API with the params: action=get_statistics&match_id=411439
+14-Apr-21 14:47:32 - INFO - Request to the API with the params: action=get_statistics&match_id=411458
+14-Apr-21 14:47:33 - INFO - Request to the API with the params: action=get_statistics&match_id=411435
+14-Apr-21 14:47:33 - INFO - Request to the API with the params: action=get_statistics&match_id=411420
+14-Apr-21 14:47:33 - INFO - Request to the API with the params: action=get_statistics&match_id=411338
+14-Apr-21 14:47:33 - INFO - Request to the API with the params: action=get_statistics&match_id=411410
+14-Apr-21 14:47:33 - INFO - Request to the API with the params: action=get_statistics&match_id=458234
+14-Apr-21 14:47:46 - INFO - Correctly found the log file
+14-Apr-21 14:47:46 - INFO - Connector to the DB correctly made
+14-Apr-21 14:47:49 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 14:47:49 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 14:47:50 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 14:47:50 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 14:47:50 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 14:47:50 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 14:47:50 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 14:47:51 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 14:47:51 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 14:47:51 - INFO - Request to the API with the params: action=get_statistics&match_id=482191
+14-Apr-21 14:47:51 - INFO - Request to the API with the params: action=get_statistics&match_id=411479
+14-Apr-21 14:47:51 - INFO - Request to the API with the params: action=get_statistics&match_id=482190
+14-Apr-21 14:47:52 - INFO - Request to the API with the params: action=get_statistics&match_id=411469
+14-Apr-21 14:47:52 - INFO - Request to the API with the params: action=get_statistics&match_id=479351
+14-Apr-21 14:47:52 - INFO - Request to the API with the params: action=get_statistics&match_id=456965
+14-Apr-21 14:47:52 - INFO - Request to the API with the params: action=get_statistics&match_id=411451
+14-Apr-21 14:47:52 - INFO - Request to the API with the params: action=get_statistics&match_id=411440
+14-Apr-21 14:47:53 - INFO - Request to the API with the params: action=get_statistics&match_id=411461
+14-Apr-21 14:47:53 - INFO - Request to the API with the params: action=get_statistics&match_id=411427
+14-Apr-21 14:47:53 - INFO - Request to the API with the params: action=get_statistics&match_id=411478
+14-Apr-21 14:47:53 - INFO - Request to the API with the params: action=get_statistics&match_id=411475
+14-Apr-21 14:47:53 - INFO - Request to the API with the params: action=get_statistics&match_id=411449
+14-Apr-21 14:47:54 - INFO - Request to the API with the params: action=get_statistics&match_id=411439
+14-Apr-21 14:47:54 - INFO - Request to the API with the params: action=get_statistics&match_id=411458
+14-Apr-21 14:47:54 - INFO - Request to the API with the params: action=get_statistics&match_id=411435
+14-Apr-21 14:47:54 - INFO - Request to the API with the params: action=get_statistics&match_id=411420
+14-Apr-21 14:47:54 - INFO - Request to the API with the params: action=get_statistics&match_id=411338
+14-Apr-21 14:47:55 - INFO - Request to the API with the params: action=get_statistics&match_id=411410
+14-Apr-21 14:47:55 - INFO - Request to the API with the params: action=get_statistics&match_id=458234
+14-Apr-21 15:14:06 - INFO - Correctly found the log file
+14-Apr-21 15:14:06 - INFO - Connector to the DB correctly made
+14-Apr-21 15:14:10 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Chelsea&secondTeam=Burnley
+14-Apr-21 15:14:10 - INFO - Request to the API with the params: action=get_statistics&match_id=411379
+14-Apr-21 15:14:10 - INFO - Request to the API with the params: action=get_statistics&match_id=411238
+14-Apr-21 15:14:11 - INFO - Request to the API with the params: action=get_statistics&match_id=273313
+14-Apr-21 15:14:11 - INFO - Request to the API with the params: action=get_statistics&match_id=224516
+14-Apr-21 15:14:11 - INFO - Request to the API with the params: action=get_statistics&match_id=203798
+14-Apr-21 15:14:11 - INFO - Request to the API with the params: action=get_statistics&match_id=144671
+14-Apr-21 15:14:12 - INFO - Request to the API with the params: action=get_statistics&match_id=83072
+14-Apr-21 15:14:12 - INFO - Request to the API with the params: action=get_statistics&match_id=13366
+14-Apr-21 15:14:12 - INFO - Request to the API with the params: action=get_statistics&match_id=482191
+14-Apr-21 15:14:12 - INFO - Request to the API with the params: action=get_statistics&match_id=411479
+14-Apr-21 15:14:13 - INFO - Request to the API with the params: action=get_statistics&match_id=482190
+14-Apr-21 15:14:13 - INFO - Request to the API with the params: action=get_statistics&match_id=411469
+14-Apr-21 15:14:13 - INFO - Request to the API with the params: action=get_statistics&match_id=479351
+14-Apr-21 15:14:13 - INFO - Request to the API with the params: action=get_statistics&match_id=456965
+14-Apr-21 15:14:13 - INFO - Request to the API with the params: action=get_statistics&match_id=411451
+14-Apr-21 15:14:14 - INFO - Request to the API with the params: action=get_statistics&match_id=411440
+14-Apr-21 15:14:14 - INFO - Request to the API with the params: action=get_statistics&match_id=411461
+14-Apr-21 15:14:14 - INFO - Request to the API with the params: action=get_statistics&match_id=411427
+14-Apr-21 15:14:14 - INFO - Request to the API with the params: action=get_statistics&match_id=411478
+14-Apr-21 15:14:14 - INFO - Request to the API with the params: action=get_statistics&match_id=411475
+14-Apr-21 15:14:15 - INFO - Request to the API with the params: action=get_statistics&match_id=411449
+14-Apr-21 15:14:15 - INFO - Request to the API with the params: action=get_statistics&match_id=411439
+14-Apr-21 15:14:15 - INFO - Request to the API with the params: action=get_statistics&match_id=411458
+14-Apr-21 15:14:15 - INFO - Request to the API with the params: action=get_statistics&match_id=411435
+14-Apr-21 15:14:16 - INFO - Request to the API with the params: action=get_statistics&match_id=411420
+14-Apr-21 15:14:16 - INFO - Request to the API with the params: action=get_statistics&match_id=411338
+14-Apr-21 15:14:16 - INFO - Request to the API with the params: action=get_statistics&match_id=411410
+14-Apr-21 15:14:16 - INFO - Request to the API with the params: action=get_statistics&match_id=458234

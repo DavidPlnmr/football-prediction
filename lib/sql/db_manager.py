@@ -10,7 +10,7 @@ class DbManager:
         """
         Method to initialize the class
         """
-        logging.basicConfig(filename='../log/app.log', filemode='a', format='%(asctime)s - %(levelname)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.INFO)
+        logging.basicConfig(filename='./log/app.log', filemode='a', format='%(asctime)s - %(levelname)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.INFO)
         self.__db = mysql.connector.connect(host=hostname, user=username, password=pwd, database="soccerPronostic")
         self.__cursor = self.__db.cursor(dictionary=True) # Used to have a dictionary for each row
         
@@ -22,10 +22,10 @@ class DbManager:
         """
         return self.__query("SELECT * FROM prediction")
     
-    def getPredictionWithSpecificTeams(self, first_team, second_team):
+    def getPredictionWithSpecificTeams(self, first_team_name, second_team_name):
         return self.__query(f"""SELECT * FROM prediction p 
-                          WHERE (hometeam_name="{first_team}" OR awayteam_name="{first_team}") 
-                          AND (hometeam_name="{second_team}" OR awayteam_name="{second_team}");""")
+                          WHERE (hometeam_name="{first_team_name}" OR awayteam_name="{first_team_name}") 
+                          AND (hometeam_name="{second_team_name}" OR awayteam_name="{second_team_name}");""")
     
     def getPredictionWithApiId(self, api_match_id):
         return self.__query(f"""SELECT * FROM prediction p WHERE api_match_id={api_match_id};""")
@@ -37,7 +37,7 @@ class DbManager:
         self.__cursor.execute(your_query)
         return self.__cursor.fetchall()
     
-    def insert(self, prediction, home_team, away_team, off_score_home_team, def_score_home_team, off_score_away_team, def_score_away_team, api_match_id="NULL"):
+    def insert(self, prediction, home_team_name, away_team_name, off_score_home_team, def_score_home_team, off_score_away_team, def_score_away_team, api_match_id="NULL"):
         """
         Insert in the database with the parameters given.
         """
@@ -50,7 +50,7 @@ class DbManager:
                             `def_score_hometeam`,
                             `off_score_awayteam`,
                             `def_score_awayteam`)
-                            VALUES ( "{prediction}", {api_match_id},  "{home_team}", "{away_team}", {off_score_home_team}, {def_score_home_team}, {off_score_away_team}, {def_score_home_team});""")
+                            VALUES ( "{prediction}", {api_match_id},  "{home_team_name}", "{away_team_name}", {off_score_home_team}, {def_score_home_team}, {off_score_away_team}, {def_score_home_team});""")
         
         self.__db.commit() # Save the changes
         logging.info(f"Inserted in the DB with params : {prediction}, {api_match_id}, {home_team}, {away_team}, {off_score_home_team}, {def_score_home_team}, {off_score_away_team}, {def_score_away_team}")

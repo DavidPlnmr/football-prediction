@@ -9,15 +9,15 @@ import os
 
 load_dotenv()
 
-myFacade = ApiFacade(os.getenv("wAPI_KEY"))
+myFacade = ApiFacade(os.getenv("API_KEY"))
 
 #Head To Head
 '''response = myFacade.getH2H("Chelsea", "Arsenal")
 print(response)'''
 
 # Countries
-response = myFacade.getCountries()
-#print(response)
+'''response = myFacade.getCountries()
+print(response)'''
 
 # Competitions
 '''response = myFacade.getCompetitions()
@@ -34,3 +34,7 @@ print(response)'''
 # Teams
 '''response = myFacade.getTeams(148)
 print(response)'''
+
+# Statistic from match
+response = myFacade.getStatsFromMatch(24562)
+print(response['24562']['statistics'][0])
