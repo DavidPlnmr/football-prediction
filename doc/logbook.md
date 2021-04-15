@@ -333,3 +333,19 @@ Choses à faire demain :
 * Conclusion
   * Synthèse du stage
   * Remerciements
+
+### 15.04.2021
+
+9h Bilan personnel
+
+10h	Conclusion
+
+11h	Correction orthographique 
+
+12h40 Début du PowerPoint
+
+14h15 Fin du PowerPoint
+
+14h15 On continue à bosser sur le provider
+
+15h La classe Prediction n'a plus besoin du Provider, maintenant il faut faire les méthodes pour le fichier principal du projet. Donc une méthode `getUpcomingMatches()`

@@ -84,3 +84,7 @@ class PredictionProvider:
             return True
         else:
             return False
+        
+    def getUpcomingMatches(self):
+        # Get the upcoming matches from DATE to DATE
+        pass
