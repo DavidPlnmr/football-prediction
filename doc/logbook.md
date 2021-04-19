@@ -349,3 +349,28 @@ Choses à faire demain :
 14h15 On continue à bosser sur le provider
 
 15h La classe Prediction n'a plus besoin du Provider, maintenant il faut faire les méthodes pour le fichier principal du projet. Donc une méthode `getUpcomingMatches()`
+
+### 19.04.2021
+
+8h Provider ajout de la sauvegarde dans la base de données et rename du projet en "football-prediction"
+
+9h Début de la classe Prediction
+
+Passage de M. Schmid cette après-midi pour parler du stage dans sa globalité (points à améliorer, etc.)
+
+Quelques questions :
+
+* Oral à améliorer...
+* Logbook ok?
+* Rapport ok?
+  * LaTeX ou MD into readthedoc?
+
+9h30 Compute_heat_moment --> calculer la forme du moment de l'équipe sur les 5 derniers matchs
+
+Forme du match faite. Test de potentielle erreur -> exception
+
+throw exception si aucun resultat dans les matchs récent
+
+![algoHeatOfMoment](./img/algoHeatOfMoment.jpg)
+
+La on arrive dans le sujet assez compliqué, c'est là ou il va falloir établir une pondération correct pour chaque statistique

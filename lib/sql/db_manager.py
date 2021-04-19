@@ -53,7 +53,7 @@ class DbManager:
                             VALUES ( "{prediction}", {api_match_id},  "{home_team_name}", "{away_team_name}", {off_score_home_team}, {def_score_home_team}, {off_score_away_team}, {def_score_home_team});""")
         
         self.__db.commit() # Save the changes
-        logging.info(f"Inserted in the DB with params : {prediction}, {api_match_id}, {home_team}, {away_team}, {off_score_home_team}, {def_score_home_team}, {off_score_away_team}, {def_score_away_team}")
+        logging.info(f"Inserted in the DB with params : {prediction}, {api_match_id}, {home_team_name}, {away_team_name}, {off_score_home_team}, {def_score_home_team}, {off_score_away_team}, {def_score_away_team}")
         return True
     
     def delete_at(self, id):
