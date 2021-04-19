@@ -374,3 +374,16 @@ throw exception si aucun resultat dans les matchs récent
 ![algoHeatOfMoment](./img/algoHeatOfMoment.jpg)
 
 La on arrive dans le sujet assez compliqué, c'est là ou il va falloir établir une pondération correct pour chaque statistique
+
+13h Review du stage. Tout est bon sauf l'oral ou il va falloir se préparer plus et faire des oraux à blanc supplémentaires.
+
+13h15 Début de rédaction du rapport
+
+14h35 Réflexion sur l'importance de chacune des statistiques : 
+
+La statistique "Tirs bloqués" est la statistique du côté de l'équipe qui a tiré et non de l'équipe qui a bloqué. On ne peut pas l'utiliser pour le score défensif
+
+![classementStat](./img/classementStats.jpg)
+
+![explicationOrdreStatDefense](./img/explicationOrdreDefensif.jpg)
+
