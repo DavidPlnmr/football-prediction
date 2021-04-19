@@ -387,3 +387,14 @@ La statistique "Tirs bloqués" est la statistique du côté de l'équipe qui a t
 
 ![explicationOrdreStatDefense](./img/explicationOrdreDefensif.jpg)
 
+#### Recap de la journée
+
+* Heat of the moment done
+* Classement des stats fait
+* Avancement sur le rapport
+
+Ce qu'il faut faire demain :
+
+* Un trello (et le partager au prof)
+* Avancer dans le rapport
+* Commencer à développer la méthode `compute_off_score()`
