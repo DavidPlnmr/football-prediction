@@ -1,17 +1,34 @@
-CREATE DATABASE `soccerPronostic` CHARACTER SET utf8 COLLATE utf8_general_ci; /*!40100 DEFAULT CHARACTER SET utf8 */;
-
-USE `soccerPronostic`;
-
 CREATE TABLE `prediction` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `prediction` varchar(255) NOT NULL,
-  `api_match_id` int(11) DEFAULT NULL,
-  `hometeam_name` varchar(255) NOT NULL,
-  `awayteam_name` varchar(255) NOT NULL,
-  `off_score_hometeam` int(11) NOT NULL,
-  `def_score_hometeam` int(11) NOT NULL,
-  `off_score_awayteam` int(11) NOT NULL,
-  `def_score_awayteam` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `created_at` timestamp,
+  `prediction` varchar(255),
+  `api_match_id` int,
+  `home_team_name` varchar(255),
+  `away_team_name` varchar(255),
+  `off_score_home_team` int,
+  `def_score_home_team` int,
+  `off_score_away_team` int,
+  `def_score_away_team` int
+);
+
+CREATE TABLE `match` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `date` date,
+  `time` time,
+  `league_id` int,
+  `league_name` varchar(255),
+  `home_team_name` varchar(255),
+  `away_team_name` varchar(255),
+  `home_team_score` int,
+  `away_team_score` int
+);
+
+CREATE TABLE `statistic` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `type` varchar(255),
+  `home` varchar(255),
+  `away` varchar(255),
+  `id_match` int
+);
+
+ALTER TABLE `statistics` ADD FOREIGN KEY (`id_match`) REFERENCES `match` (`id`);

@@ -9,9 +9,9 @@ class ApiFacade:
     """
     Facade to call the endpoints of the API.
     """
-    def __init__(self, api_key):
+    def __init__(self, api_key, log_path):
         self.api_key = api_key
-        logging.basicConfig(filename='./log/app.log', filemode='a', format='%(asctime)s - %(levelname)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.INFO)
+        logging.basicConfig(filename=log_path, filemode='a', format='%(asctime)s - %(levelname)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.INFO)
         logging.info("Correctly found the log file")
         
     def __getAction(self, request_params):
@@ -41,13 +41,15 @@ class ApiFacade:
         endpoint_action = "get_H2H"
         return self.__getAction(f'action={endpoint_action}&firstTeam={first_team_name}&secondTeam={second_team_name}')
     
-    def getMatchesInInterval(self, from_date, to_date):
+    def getMatchesInInterval(self, from_date, to_date, league_id=""):
         """
         Get the matches in an interval of two dates
         """
         #The format of the must be yyyy-mm--dd
         endpoint_action = "get_events"
-        return self.__getAction(f'action={endpoint_action}&from={from_date}&to={to_date}')
+        params = f'action={endpoint_action}&from={from_date}&to={to_date}'
+        params += f"&league_id={league_id}" if (type(league_id) == int) else ''
+        return self.__getAction(params)
     
     def getCountries(self):
         """

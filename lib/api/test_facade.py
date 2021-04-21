@@ -9,7 +9,7 @@ import os
 
 load_dotenv()
 
-myFacade = ApiFacade(os.getenv("API_KEY"))
+myFacade = ApiFacade(os.getenv("API_KEY"), '../log/app.log')
 
 #Head To Head
 '''response = myFacade.getH2H("Chelsea", "Arsenal")
@@ -28,7 +28,7 @@ print(response)'''
 print(response)'''
 
 # Upcoming matches
-'''response = myFacade.getUpcomingMatches("2021-03-30", "2021-04-02")
+'''response = myFacade.getMatchesInInterval("2018-04-01", "2020-04-01", 148)
 print(response)'''
 
 # Teams
@@ -36,5 +36,5 @@ print(response)'''
 print(response)'''
 
 # Statistic from match
-response = myFacade.getStatsFromMatch(24562)
-print(response['24562']['statistics'][0])
+'''response = myFacade.getStatsFromMatch(24562)
+print(response['24562']['statistics'][0])'''
