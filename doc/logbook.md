@@ -728,3 +728,13 @@ J'ai mis toutes les pondérations. Maintenant comment déterminer avec ce score 
 14h35 Idée provenant de M. Schmid -> pour le score défensif prendre aussi le nombre d'attaques de l'équipe adverse. Mais comment j'agis sur la pondération avec ça? ça serait des malus sur le score défensif
 
 Autre idée de Monsieur Schmid, avoir plus tard un sorte de script qui joue avec les pondérations des statistiques pour pouvoir avoir le meilleur résultat possible.
+
+#### Recap de la journée
+
+* Etablissement des scores fait
+* Rédaction du rapport : Techno utilisés 
+
+Chose à faire demain / à noter :
+
+* Faire le script de test `test_many_prediction.py`
+* Potentiellement voir pour stocker le nombre d'attaques dangereuses des équipes adverses dans le score défensif
