@@ -14,7 +14,7 @@ class ApiFacade:
         logging.basicConfig(filename=log_path, filemode='a', format='%(asctime)s - %(levelname)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.INFO)
         logging.info("Correctly found the log file")
         
-    def __getAction(self, request_params):
+    def __get_action(self, request_params):
         """
         Private method to call any endpoint of the API
         """
@@ -34,14 +34,14 @@ class ApiFacade:
             logging.error(f"Happened during the request to the API with error : {response.status_code}")
             raise Exception("Could not connect to the API.")
         
-    def getH2H(self, first_team_name, second_team_name):
+    def get_H2H(self, first_team_name, second_team_name):
         """
         Get the last results of each teams and the last results of each matchs between them both
         """
         endpoint_action = "get_H2H"
-        return self.__getAction(f'action={endpoint_action}&firstTeam={first_team_name}&secondTeam={second_team_name}')
+        return self.__get_action(f'action={endpoint_action}&firstTeam={first_team_name}&secondTeam={second_team_name}')
     
-    def getMatchesInInterval(self, from_date, to_date, league_id=""):
+    def get_matches_in_interval(self, from_date, to_date, league_id=""):
         """
         Get the matches in an interval of two dates
         """
@@ -49,39 +49,34 @@ class ApiFacade:
         endpoint_action = "get_events"
         params = f'action={endpoint_action}&from={from_date}&to={to_date}'
         params += f"&league_id={league_id}" if (type(league_id) == int) else ''
-        return self.__getAction(params)
+        return self.__get_action(params)
     
-    def getCountries(self):
+    def get_countries(self):
         """
         Get countries available in the API
         """
         endpoint_action = "get_countries"
-        return self.__getAction(f'action={endpoint_action}')
+        return self.__get_action(f'action={endpoint_action}')
     
-    def getCompetitions(self, country_id):
+    def get_competitions(self, country_id = ""):
         """
         Get competitions in a specific country
         """
         endpoint_action = "get_leagues"
-        return self.__getAction(f'action={endpoint_action}&country_id={country_id}')
+        if type(country_id)==int:
+            endpoint_action+=f"&country_id={country_id}"
+        return self.__get_action(f'action={endpoint_action}')
     
-    def getCompetitions(self):
-        """
-        Get all the competitions available with your plan
-        """
-        endpoint_action = "get_leagues"
-        return self.__getAction(f'action={endpoint_action}')
-    
-    def getTeams(self, league_id):
+    def get_teams(self, league_id):
         """
         Get all the teams in the specified league_id
         """
         endpoint_action = "get_teams"
-        return self.__getAction(f'action={endpoint_action}&league_id={league_id}')
+        return self.__get_action(f'action={endpoint_action}&league_id={league_id}')
     
-    def getStatsFromMatch(self, match_id):
+    def get_stats_from_match(self, match_id):
         """
         Get the statistics of a specific match
         """
         endpoint_action = "get_statistics"
-        return self.__getAction(f'action={endpoint_action}&match_id={match_id}')
+        return self.__get_action(f'action={endpoint_action}&match_id={match_id}')

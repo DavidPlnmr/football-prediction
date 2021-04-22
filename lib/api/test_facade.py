@@ -12,29 +12,29 @@ load_dotenv()
 myFacade = ApiFacade(os.getenv("API_KEY"), '../log/app.log')
 
 #Head To Head
-'''response = myFacade.getH2H("Chelsea", "Arsenal")
-print(response)'''
+response = myFacade.get_H2H("Chelsea", "Arsenal")
+print(response)
 
 # Countries
-'''response = myFacade.getCountries()
-print(response)'''
+response = myFacade.get_countries()
+print(response)
 
 # Competitions
-'''response = myFacade.getCompetitions()
-print(response)'''
+response = myFacade.get_competitions(124)
+print(response)
 
 # Competitions without param
-'''response = myFacade.getCompetitions()
-print(response)'''
+response = myFacade.get_competitions()
+print(response)
 
 # Upcoming matches
-'''response = myFacade.getMatchesInInterval("2018-04-01", "2020-04-01", 148)
-print(response)'''
+response = myFacade.get_matches_in_interval("2018-04-01", "2020-04-01", 148)
+print(response)
 
 # Teams
-'''response = myFacade.getTeams(148)
-print(response)'''
+response = myFacade.get_teams(148)
+print(response)
 
 # Statistic from match
-'''response = myFacade.getStatsFromMatch(24562)
-print(response['24562']['statistics'][0])'''
+response = myFacade.get_stats_from_match(24562)
+print(response['24562']['statistics'][0])

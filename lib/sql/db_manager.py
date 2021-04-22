@@ -16,21 +16,21 @@ class DbManager:
         
         logging.info("Connector to the DB correctly made")
         
-    def getAllPredictions(self):
+    def get_all_predictions(self):
         """
         Get all the rows in the table
         """
         return self.__query("SELECT * FROM prediction")
     
-    def getPredictionWithSpecificTeams(self, first_team_name, second_team_name):
+    def get_prediction_with_specific_teams(self, first_team_name, second_team_name):
         return self.__query(f"""SELECT * FROM prediction p 
                           WHERE (home_team_name="{first_team_name}" OR away_team_name="{first_team_name}") 
                           AND (home_team_name="{second_team_name}" OR away_team_name="{second_team_name}");""")
     
-    def getPredictionWithApiId(self, api_match_id):
+    def get_prediction_with_api_id(self, api_match_id):
         return self.__query(f"""SELECT * FROM prediction p WHERE api_match_id={api_match_id};""")
     
-    def getMatchesWithSpecificTeams(self, first_team_name, second_team_name, date=""):
+    def get_matches_with_specific_teams(self, first_team_name, second_team_name, date=""):
         """
         Get matches with specific teams [before the date specified in params if it is specified]
         """
@@ -44,14 +44,18 @@ class DbManager:
         
         return self.__query(query)
     
-    def getStatsOfMatchesWithSpecificTeams(self, first_team_name, second_team_name, date=""):
+    def get_stats_of_matches_with_specific_teams(self, first_team_name, second_team_name, date=""):
         """
         This method search all the games of each of the teams and returns the statistics of each match [before the date specified in param if it specified]
         """
         query = f"""SELECT s.`type`, s.home, s.away, s.id_match
                                 FROM footballPrediction.statistic s 
                                 INNER JOIN footballPrediction.`match` m ON s.id_match  = m.id 
-                                WHERE m.home_team_name="{first_team_name}" OR m.away_team_name="{first_team_name}" OR m.home_team_name="{second_team_name}" OR m.away_team_name="{second_team_name}" AND m.`date` < "2019-09-19" """
+                                WHERE m.home_team_name="{first_team_name}" 
+                                OR m.away_team_name="{first_team_name}" 
+                                OR m.home_team_name="{second_team_name}" 
+                                OR m.away_team_name="{second_team_name}"
+                                AND m.`date` < "2019-09-19" """
         
         if len(date)>0:
             query += f'AND m.`date` < "{date}"'
@@ -67,7 +71,7 @@ class DbManager:
         self.__cursor.execute(your_query)
         return self.__cursor.fetchall()
     
-    def insertPrediction(self, prediction, home_team_name, away_team_name, off_score_home_team, def_score_home_team, off_score_away_team, def_score_away_team, api_match_id="NULL"):
+    def insert_prediction(self, prediction, home_team_name, away_team_name, off_score_home_team, def_score_home_team, off_score_away_team, def_score_away_team, api_match_id="NULL"):
         """
         Insert a prediction in the database with the parameters given.
         """
@@ -95,7 +99,7 @@ class DbManager:
         logging.info(f"Deleted row with id = {id}")
         return True
     
-    def insertMatchWithStats(self, match_id, match_date, match_time, league_id, league_name, home_team_name, away_team_name, home_team_score, away_team_score, stats_array):
+    def insert_match_with_stats(self, match_id, match_date, match_time, league_id, league_name, home_team_name, away_team_name, home_team_score, away_team_score, stats_array):
         """
         Insert a match with its stats in the database with the parameters given.
         """

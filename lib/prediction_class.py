@@ -1,21 +1,54 @@
 #!/usr/bin/python3
 from provider import Provider
 import constants
-import re
 
 class Prediction:
     """
     Class to make a prediction on a match between two football teams
     """
     def __init__(self, home_team, away_team):
-        self.home_team = home_team
-        self.away_team = away_team
+        self.home_team_result = TeamResult(home_team)
+        self.away_team_result = TeamResult(away_team)
+
         self.provider = Provider()
-        self.results = self.provider.getAllStatsFromTeamsDB(self.home_team, self.away_team, "2018-08-10")
-        self.home_heat_of_moment = self.__compute_heat_moment(self.home_team, self.results["firstTeam_lastResults"])
-        self.away_heat_of_moment = self.__compute_heat_moment(self.away_team, self.results["secondTeam_lastResults"])
-        self.__compute_off_score(self.home_team)
-        self.__compute_off_score(self.away_team)
+        
+        self.results = self.provider.get_all_stats_from_teams_db(home_team, away_team, "2018-08-10")
+        
+        self.home_team_result.heat_of_moment = self.__compute_heat_moment(home_team, self.results["firstTeam_lastResults"])
+        self.away_team_result.heat_of_moment = self.__compute_heat_moment(away_team, self.results["secondTeam_lastResults"])
+        
+        self.__insert_data_team_result(self.home_team_result, "firstTeam_lastResults")
+        self.__insert_data_team_result(self.away_team_result, "secondTeam_lastResults")
+        
+        self.__insert_data_team_result(self.home_team_result, "firstTeam_VS_secondTeam")
+        self.__insert_data_team_result(self.away_team_result, "firstTeam_VS_secondTeam")
+    
+    def define_winner(self):
+        home_team_final_score = self.__compute_off_score(self.home_team_result)
+        away_team_final_score = self.__compute_off_score(self.away_team_result)
+        
+        home_team_final_score += self.__compute_def_score(self.home_team_result)
+        away_team_final_score += self.__compute_def_score(self.away_team_result)
+        
+        home_team_final_score += self.__compute_heat_moment_score(self.home_team_result)
+        away_team_final_score += self.__compute_heat_moment_score(self.away_team_result)
+        
+        print(f"{self.get_home_team_name()} Final Score : {home_team_final_score}")
+        print(f"{self.get_away_team_name()} Final Score : {away_team_final_score}")
+        
+        pass
+        
+    def get_home_team_name(self):
+        return self.home_team_result.team_name
+        pass
+    
+    def get_away_team_name(self):
+        return self.away_team_result.team_name
+        pass
+        
+    def __compute_heat_moment_score(self, team_result):
+        return team_result.average_points_per_game()*constants.WEIGHT_HEAT_OF_MOMENT
+        pass
         
     def __compute_heat_moment(self, team_name, last_results):
         """
@@ -32,37 +65,44 @@ class Prediction:
                 else:
                     heat_of_moment += 'L' if result > 0 else 'W' # W for Win, L for Lose
         return heat_of_moment
-        pass
+        pass       
     
-    def __compute_off_score(self, team_name):
-        team_result = TeamResult(team_name)
-        if team_name == self.home_team:    
-            self.__insertDataTeamResult(team_result, "firstTeam_lastResults")
-        else:
-            self.__insertDataTeamResult(team_result, "secondTeam_lastResults")
+    def __compute_off_score(self, team_result):
         
-        self.__insertDataTeamResult(team_result, "firstTeam_VS_secondTeam")
+        score = 0
         
-        print (f"{team_name}")
-        print ("===================")
-        print (f"Nombre de matchs joués : {team_result.games_count}")
-        print (f"Moyenne de but par match : {team_result.average_goal_per_game()}")
-        print (f"Moyenne de tir par match : {team_result.average_goal_attempts_per_game()}")
-        print (f"Moyenne de tir cadrés par match : {team_result.average_shots_on_goal_per_game()}")
-        print (f"Moyenne d'arrêts du gardien par match : {team_result.average_goalkeeper_saves_per_game()}")
-        print (f"Moyenne de fautes par match : {team_result.average_fouls_per_game()}")
-        print (f"Moyenne de cartons jaunes par match : {team_result.average_yellow_cards_per_game()}")
-        print (f"Moyenne de tacles par match : {team_result.average_tackles_per_game()}")
-        print (f"Moyenne d'attaques par match : {team_result.average_attacks_per_game()}")
-        print (f"Moyenne d'attaques dangereuses par match : {team_result.average_dangerous_attacks_per_game()}")
+        score += team_result.average_goal_scored_per_game()*constants.WEIGHT_GOALS
+        score += team_result.average_dangerous_attacks_per_game()*constants.WEIGHT_DANGEROUS_ATTACKS
+        score += team_result.average_shots_on_goal_per_game()*constants.WEIGHT_SHOTS_ON_GOAL
+        score += team_result.average_attacks_per_game()*constants.WEIGHT_ATTACKS
+        score += team_result.average_goal_attempts_per_game()*constants.WEIGHT_GOAL_ATTEMPTS
+        score += team_result.average_ball_possession_per_game()*constants.WEIGHT_BALL_POSSESSION
+
+        return score
         pass
 
+    def __compute_def_score(self, team_result):
+        
+        score = 0
+        #Bonus
+        score += team_result.average_tackles_per_game()*constants.WEIGHT_TACKLES
+        score += team_result.average_goalkeeper_saves_per_game()*constants.WEIGHT_GOALKEEPER_SAVES
+        
+        #Malus
+        score -= team_result.average_goal_conceded_per_game()*constants.WEIGHT_GOALS
+        score -= team_result.average_fouls_per_game()*constants.WEIGHT_FOULS
+        score -= team_result.average_yellow_cards_per_game()*constants.WEIGHT_YELLOW_CARDS
+        
+        return score
+        pass
 
-    def __insertDataTeamResult(self, team_result_obj, last_results):
+    def __insert_data_team_result(self, team_result_obj, last_results):
         for match in self.results[last_results]:
                 team_result_obj.games_count += 1
                 
-                team_result_obj.goals_count += int(match["home_team_score"]) if team_result_obj.team_name == match["home_team"] else int(match["away_team_score"])
+                team_result_obj.goals_scored_count += int(match["home_team_score"]) if team_result_obj.team_name == match["home_team"] else int(match["away_team_score"])
+                # This line is the reverse of the top one
+                team_result_obj.goals_conceded_count += int(match["home_team_score"]) if team_result_obj.team_name != match["home_team"] else int(match["away_team_score"])
                 
                 #These 2 lines are here to remove the "%" char of the Ball Possession Stat
                 match["Ball Possession"]["home"] = match["Ball Possession"]["home"].replace('%', '')
@@ -89,8 +129,10 @@ class Prediction:
 class TeamResult:
     def __init__(self, team_name):
         self.team_name = team_name
+        self.heat_of_moment = ""
         self.games_count = 0
-        self.goals_count = 0
+        self.goals_scored_count = 0
+        self.goals_conceded_count = 0
         self.ball_possession = 0
         self.goal_attempts = 0
         self.shots_on_goal = 0
@@ -101,8 +143,11 @@ class TeamResult:
         self.attacks = 0
         self.dangerous_attacks = 0
         
-    def average_goal_per_game(self):
-        return self.goals_count/self.games_count
+    def average_goal_scored_per_game(self):
+        return self.goals_scored_count/self.games_count
+    
+    def average_goal_conceded_per_game(self):
+        return self.goals_conceded_count/self.games_count
     
     def average_ball_possession_per_game(self):
         return self.ball_possession/self.games_count
@@ -129,4 +174,18 @@ class TeamResult:
         return self.attacks/self.games_count
     
     def average_dangerous_attacks_per_game(self):
-        return self.dangerous_attacks/self.games_count        
+        return self.dangerous_attacks/self.games_count  
+    
+    def average_points_per_game(self):
+        """
+        Make an average of the points won per game with the heat of the moment
+        """
+        result = 0
+        for char in self.heat_of_moment:
+            if char=='W':
+                result+=constants.POINTS_FOR_A_WIN
+            elif char=='D':
+                result+=constants.POINTS_FOR_A_DRAW
+            elif char=='L':
+                result+=constants.POINTS_FOR_A_LOSE
+        return result/self.games_count

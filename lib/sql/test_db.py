@@ -6,20 +6,17 @@ from dotenv import load_dotenv
 load_dotenv()
 db = DbManager(os.getenv("DB_HOST"), os.getenv("DB_USER"), os.getenv("DB_PASSWORD"), '../log/app.log')
 
-#db.delete(6) # Delete at a specific id
+#db.delete_at(6) # Delete at a specific id
 
-#db.insertPrediction("Home", "Tottenham", "Burnley", 1900, 1800, 2202, 1000) # Insert row in the table
+#db.insert_prediction("Home", "Tottenham", "Burnley", 1900, 1800, 2202, 1000) # Insert row in the table
 
-#print (db.getAllPredictions()) # Get all the predictions
+#print (db.get_all_predictions()) # Get all the predictions
 
-#print(db.getPredictionWithSpecificTeams("Tottenham", "Burnley")) # Returns prediction with 2 specific teams
+#print(db.get_prediction_with_specific_teams("Tottenham", "Burnley")) # Returns prediction with 2 specific teams
 
-#print (db.getPredictionWithApiId(201908))
+#print (db.get_prediction_with_api_id(201908))
 
-
-
-#print(db.getStatsOfMatchesWithSpecificTeams("Chelsea", "Burnley", "2018-08-10"))
-response = db.getMatchesWithSpecificTeams("Chelsea", "Burnley", "2018-08-10")
+response = db.get_matches_with_specific_teams("Chelsea", "Burnley", "2018-08-10")
 for match in response:
       print(match["date"])
       
@@ -111,4 +108,4 @@ for match in response:
       }
     ]
 
-db.insertMatchWithStats(273385, "2020-03-09", "21:00", 148, "Premier League", "Leicester", "Aston Villa", 4,0, stats)"""
+db.insert_match_with_stats(273385, "2020-03-09", "21:00", 148, "Premier League", "Leicester", "Aston Villa", 4,0, stats)"""

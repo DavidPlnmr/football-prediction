@@ -685,3 +685,42 @@ WHERE (m.home_team_name="Chelsea" OR m.away_team_name="Chelsea" OR m.home_team_n
 * Transformation des données de la base dans le même format que ceux de l'API
   * Comme les requêtes et la manière des requêtes sur les deux sources de données sont différentes, il y a de la "duplication" de code. Les colonnes n'ont pas le même nom que l'API
 * Rapport --> Organisation
+
+Choses à faire :
+
+* Commencer à élaborer les prédictions
+
+### 22.04.2021
+
+8h Comme je fais une moyenne des stats par match, j'ai des nombres à virgules. Je vais donc changer le type des off_score et def_score dans la base de données
+
+Les moyennes sont des nombres à virgules, pour avoir une meilleure précision (je comptes utiliser des pondération), je stockes les scores avec les virgules
+
+Maintenant, il faut faire la pondération.
+
+Pour l'instant je me suis basé sur la suite de Fibonacci. C'est la méthode qui est utilisé pour le poker planning dans la méthodologie Agile. 
+
+Quelques petits trucs à noter qui sont important :
+
+La pondération des buts marqués doit être la même que celle des buts encaissés -> Peu importe ou le but est marqué c'est la même valeur dans un match de football
+
+La réflexion sur l'ordre des statistiques offensives est facilement réalisée
+
+Maintenant, la partie un peu plus tricky est celle pour le score défensif. 
+Certaines statistiques vont intéragir avec le score comme des malus (par exemple : cartons jaunes ou fautes). Et ces cartons jaunes et fautes sont en relation direct avec les tacles. En effet, les tacles s'ils sont bien exécuté, n'implique pas de fautes donc pas de cartons.
+
+Observez le schéma ci-dessous pour mieux comprendre
+
+![schemaExplicationScoreDef](./img/schemaExplicationScoreDef.jpg)
+
+J'ai essayé de faire un schéma suffisamment clair pour expliquer ma réflexion. J'ai ensuite fait des calculs pour expliciter mes propos :
+
+![schemaExplicationScoreDef](./img/schemaCalculScoreDef.jpg)
+
+Il faut aussi comptabiliser l'importance d'un victoire pour la prédiction. Pour ça on va aussi faire une moyenne des points obtenus par match (3pts pour une victoire, 1 pt pour une égalité et 0 pts pour une défaite)
+
+Comme une victoire a plus d'importance quant au niveau de l'équipe j'ai décidé d'appliquer la pondération après le 8 (qui est la valeur pour les buts) dans la suite de Fibonacci : 13 --> à savoir que la valeur maximale sera de 3 donc avec la pondération --> 39
+
+J'ai mis toutes les pondérations. Maintenant comment déterminer avec ce score final qui est le vainqueur?
+
+12h40 Rédaction du rapport
