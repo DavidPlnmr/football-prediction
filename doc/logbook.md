@@ -398,3 +398,290 @@ Ce qu'il faut faire demain :
 * Un trello (et le partager au prof)
 * Avancer dans le rapport
 * Commencer à développer la méthode `compute_off_score()`
+
+### 20.04.2021
+
+8h Début de la création du Trello ensuite on va commencer à coder
+
+Le Trello, en plus du logbook, permet à quelqu'un de reprendre mon travail et de savoir ou j'en suis dans mon projet (les tâches faites ce qu'il me manque à faire etc.)
+
+9h On code le calcul du score offensif
+
+Pour le calcul du score, Suite de Fibonacci? 1,2,3,4,5,6,..?
+
+Est-ce que c'est plus simple de faire une moyenne de chaque stat et ensuite appliquer la pondération?
+
+On part sur la moyenne de chaque stat, c'est plus logique et ça affaiblit moins l'équipe qui a moins de match
+
+Les équipes ont les mêmes stats, car je prend tout les tableaux des statistiques. 
+
+Correction de ce soucis
+
+Création d'une classe TeamResult qui va être utilisé dans Prediction
+
+Après discussion avec M. Garcia, il m'a expliqué explicitement la question qu'il a posé lors du stage pour qui était :
+
+Est-ce que c'est possible de récupérer les résultats d'une compétition entière en 2019 et de prédire le résultat d'un match en 2020 (qui c'est réellement passé) pour pouvoir tester les prédictions? 
+
+Effectivement, ça serait utile pour pouvoir tester l'application de manière efficace
+
+12h Début de la méthode insertion de matchs dans la base avec les stats qu'il faut
+
+12h40 M. Schmid vient valider l'idée de M. Garcia
+
+Comment j'insère dans la base de données les match provenant de l'API maintenant?
+
+J'insère du 1er janvier 2016 au 31 décembre 2020 en Premier League ( id=148 )
+
+Erreur d'insertion dans la base
+
+```bash
+SQL Error [1064] [42000]: (conn=75) You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'match (			`id`, ...
+```
+
+```SQL
+INSERT INTO match (			`id`, 
+                            `match_date`, 
+                            `match_time`, 
+                            `league_id`, 
+                            `league_name`, 
+                            `hometeam_name`,
+                            `awayteam_name`,
+                            `hometeam_score`,
+                            `awayteam_score`)
+                            VALUES ( 273385,  STR_TO_DATE("2020-03-09", "%Y-%m-%d"), "21:00", 148, "Premier League", "Leicester", "Aston Villa", 4, 0);
+```
+
+Avec la requête SQL suivante
+
+Il s'avère que "match" est un mot sql reservé (MATCH AGAINST). Oubli de ma part
+
+Insertion dans la base de données faite avec le script `loadDataInDb`
+
+Query pour récupérer tout les matchs de deux et les statistiques de chacun de ces matchs
+
+```sql
+SELECT m.id, m.date, m.time, m.hometeam_name, m.awayteam_name, s.`type`, IF (s.`type`="Ball Possession", s.home , NULL) as ball_possession_home,IF (s.`type`="Ball Possession", s.away , NULL) as ball_possession_away
+FROM `match` m 
+LEFT JOIN `statistic` s 
+ON m.id = s.id_match
+WHERE (m.hometeam_name="Wolves" OR m.awayteam_name="Wolves") AND (m.hometeam_name="Chelsea" OR m.awayteam_name="Chelsea");
+```
+
+Je veux que la requête me retourne chaque match avec comme attribut la statistique de l'équipe à l'extérieur (pour un type de stat) et à domicile
+
+| id     | date       | time     | hometeam_name | awayteam_name | ...  | ball_possession_home | ball_possession_away | goal_attempts_home | goal_attempts_away | ...  |
+| ------ | ---------- | -------- | ------------- | ------------- | ---- | -------------------- | -------------------- | ------------------ | ------------------ | ---- |
+| 158541 | 2018-12-05 | 20:45:00 | Wolves        | Chelsea       |      | 29%                  | 71%                  | 25                 | 12                 | ...  |
+
+Exemple juste au dessus
+
+Autrement je peux faire deux requêtes. Une qui récupère tout les matchs et une qui récupère toutes les statistiques pour chaque match
+
+#### Recap de la journée 
+
+* Changement de structure de la base de données pour pouvoir tester efficacement les prédictions
+* Trello fait
+* Choix de faire une moyenne par match pour chaque
+  * Classe TeamResult qui stocker les résultats des équipes
+* Insertion de données dans la table "match"
+
+Choses à faire demain :
+
+* La requête qui me permet de récup toutes les stats par match
+  * Autrement faire ça en deux requêtes
+    * Ou potentiellement en trois (firstTeam_VS_secondTeam, firstTeam_lastResults, secondTeam_lastResults)
+  * Si la requête est fait -> faire la méthode dans le provider pour mettre les données dans le bon format
+* Continuer dans le rapport
+
+### 21.04.2021
+
+8h Vu la requête que je veux (qui m'a l'air impossible à faire)
+
+```sql
+SELECT m.id, m.date, m.time, m.hometeam_name, m.awayteam_name
+FROM `match` m
+WHERE (m.hometeam_name="Wolves" OR m.awayteam_name="Wolves") AND m.`date` < "2019-09-19";
+```
+
+Last results from a team before a date (pour me permettre de faire la calibration des prédictions)
+
+```sql
+SELECT m.id, m.date, m.time, m.hometeam_name, m.awayteam_name
+FROM `match` m
+WHERE (m.hometeam_name="Wolves" OR m.awayteam_name="Wolves") AND (m.hometeam_name="Chelsea" OR m.awayteam_name="Chelsea") AND m.`date` < "2019-09-19";
+```
+
+Récupère les derniers résultats entre les deux équipes.
+
+Je vais faire 3 requêtes au total pour récupérer les résultats précédents des équipes. Pour simplifier la transition dans le format suivant 
+
+```json
+[
+	{
+	  "firstTeam_VS_secondTeam": [
+		{
+		  "match_id": "218349",
+		  "country_id": "165",
+		  "country_name": "Europe",
+		  "league_id": "590",
+		  "league_name": "Europa League",
+		  "match_date": "2019-05-29",
+		  "match_status": "Finished",
+		  "match_time": "21:00",
+		  "match_hometeam_id": "2616",
+		  "match_hometeam_name": "Chelsea",
+		  "match_hometeam_score": "4 ",
+		  "match_awayteam_id": "2617",
+		  "match_awayteam_name": "Arsenal",
+		  "match_awayteam_score": " 1",
+		  "match_hometeam_halftime_score": "0",
+		  "match_awayteam_halftime_score": "0",
+		  "match_live": "0"
+		},
+		{
+		  "match_id": "167631",
+		  "country_id": "41",
+		  "country_name": "ENGLAND",
+		  "league_id": "148",
+		  "league_name": "Premier League",
+		  "match_date": "2019-01-19",
+		  "match_status": "Finished",
+		  "match_time": "18:30",
+		  "match_hometeam_id": "2617",
+		  "match_hometeam_name": "Arsenal",
+		  "match_hometeam_score": "2",
+		  "match_awayteam_id": "2616",
+		  "match_awayteam_name": "Chelsea",
+		  "match_awayteam_score": "0",
+		  "match_hometeam_halftime_score": "2",
+		  "match_awayteam_halftime_score": "0",
+		  "match_live": "0"
+		},
+	.....
+	  ],
+	  "firstTeam_lastResults": [
+		{
+		  "match_id": "218349",
+		  "country_id": "165",
+		  "country_name": "Europe",
+		  "league_id": "590",
+		  "league_name": "Europa League",
+		  "match_date": "2019-05-29",
+		  "match_status": "Finished",
+		  "match_time": "21:00",
+		  "match_hometeam_id": "2616",
+		  "match_hometeam_name": "Chelsea",
+		  "match_hometeam_score": "4 ",
+		  "match_awayteam_id": "2617",
+		  "match_awayteam_name": "Arsenal",
+		  "match_awayteam_score": " 1",
+		  "match_hometeam_halftime_score": "0",
+		  "match_awayteam_halftime_score": "0",
+		  "match_live": "0"
+		},
+		{
+		  "match_id": "212425",
+		  "country_id": "41",
+		  "country_name": "England",
+		  "league_id": "148",
+		  "league_name": "Premier League",
+		  "match_date": "2019-05-12",
+		  "match_status": "Finished",
+		  "match_time": "16:00",
+		  "match_hometeam_id": "2611",
+		  "match_hometeam_name": "Leicester",
+		  "match_hometeam_score": "0 ",
+		  "match_awayteam_id": "2616",
+		  "match_awayteam_name": "Chelsea",
+		  "match_awayteam_score": " 0",
+		  "match_hometeam_halftime_score": "0",
+		  "match_awayteam_halftime_score": "0",
+		  "match_live": "0"
+		},
+	.....
+	  ],
+	  "secondTeam_lastResults": [
+		{
+		  "match_id": "218349",
+		  "country_id": "165",
+		  "country_name": "Europe",
+		  "league_id": "590",
+		  "league_name": "Europa League",
+		  "match_date": "2019-05-29",
+		  "match_status": "Finished",
+		  "match_time": "21:00",
+		  "match_hometeam_id": "2616",
+		  "match_hometeam_name": "Chelsea",
+		  "match_hometeam_score": "4 ",
+		  "match_awayteam_id": "2617",
+		  "match_awayteam_name": "Arsenal",
+		  "match_awayteam_score": " 1",
+		  "match_hometeam_halftime_score": "0",
+		  "match_awayteam_halftime_score": "0",
+		  "match_live": "0"
+		},
+		{
+		  "match_id": "212422",
+		  "country_id": "41",
+		  "country_name": "England",
+		  "league_id": "148",
+		  "league_name": "Premier League",
+		  "match_date": "2019-05-12",
+		  "match_status": "Finished",
+		  "match_time": "16:00",
+		  "match_hometeam_id": "2629",
+		  "match_hometeam_name": "Burnley",
+		  "match_hometeam_score": "1 ",
+		  "match_awayteam_id": "2617",
+		  "match_awayteam_name": "Arsenal",
+		  "match_awayteam_score": " 3",
+		  "match_hometeam_halftime_score": "0",
+		  "match_awayteam_halftime_score": "0",
+		  "match_live": "0"
+		},
+	.....
+]
+```
+
+Techniquement il y'aura beaucoup de requêtes. (une pour `firstTeam_VS_secondTeam` et une requête pour chaque match de cette requête). Soucis de performance. Comment faire? Ce qui serait le mieux serait réellement le tableau mais cela m'a l'air très compliqué à réaliser...
+
+Après discussion avec Florian Burgener, ce qu'il y'a de mieux à faire est de récupérer les matchs des deux équipes et ensuite de faire une concatenation en python de tout les id des matchs et les insérer dans la WHERE CLAUSE avec un IN --> 
+
+```sql
+SELECT s.`type`, s.home, s.away, s.id_match FROM footballPrediction.statistic s WHERE s.id_match IN (113238,116112,155389) # IN (id_match_1, id_match_2, ...)
+```
+
+Après passage de M. Schmid, il s'avère que ce n'est pas une bonne idée car le IN a un nombre de paramètres limités, une jointure INNER suffisait pour avoir le même nombre de données
+
+Implémentation de transaction pour l'insertion de données en base. Statistiques sont dépendantes des matchs, on ne veut donc que des statistiques soient ajoutés si le match n'est pas ajouté
+
+12h40 Rédaction du rapport : Organisation
+
+13h30 Début de la création de la méthode pour récupérer toutes les statistiques des équipes choisies depuis la base de données
+
+14h35 Fin de l'implémentation de la méthode pour formater les matchs pour la classe Prediction (c'est très très moche va falloir probablement revenir dessus). Y'a des repétitions de code :/ . Le soucis c'est que la base de données n'a pas les mêmes normes de nommages que l'API (mettre `match` devant chaque attribut dans la table `match` c'est vraiment pas mon dada) et je recupère pas mes données de la même manière qu'avec l'API
+
+15h Les requêtes pour avoir les matchs sont bonnes mais je n'arrive pas à spécifier que je veux que les matchs avant une certaines dates
+
+```sql
+SELECT m.id, m.date, m.time, m.league_id, m.league_name, m.home_team_name, m.away_team_name, m.home_team_score, m.away_team_score
+FROM `match` m 
+WHERE m.home_team_name="Chelsea" OR m.away_team_name="Chelsea" OR m.home_team_name="Burnley" OR m.away_team_name="Burnley" AND m.date < '2018-08-10'
+```
+
+Cette requête est clairement là pour dire que je veux les matchs de Chelsea et de Burnley avant le 10 août 2018 mais je reçois tout les matchs de Burnley et de Chelsea, même ceux qui passe outre la date spécifié
+
+Le soucis était l'ordre des condition booléenne
+
+```sql
+SELECT m.id, m.date, m.time, m.league_id, m.league_name, m.home_team_name, m.away_team_name, m.home_team_score, m.away_team_score
+FROM `match` m 
+WHERE (m.home_team_name="Chelsea" OR m.away_team_name="Chelsea" OR m.home_team_name="Burnley" OR m.away_team_name="Burnley") AND m.date < "2018-08-10"
+```
+
+#### Recap de la journée
+
+* Transformation des données de la base dans le même format que ceux de l'API
+  * Comme les requêtes et la manière des requêtes sur les deux sources de données sont différentes, il y a de la "duplication" de code. Les colonnes n'ont pas le même nom que l'API
+* Rapport --> Organisation

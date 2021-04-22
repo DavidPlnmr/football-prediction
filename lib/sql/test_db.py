@@ -18,7 +18,15 @@ db = DbManager(os.getenv("DB_HOST"), os.getenv("DB_USER"), os.getenv("DB_PASSWOR
 
 
 
-print(db.getStatsOfMatches("Chelsea", "Burnley"))
+#print(db.getStatsOfMatchesWithSpecificTeams("Chelsea", "Burnley", "2018-08-10"))
+response = db.getMatchesWithSpecificTeams("Chelsea", "Burnley", "2018-08-10")
+for match in response:
+      print(match["date"])
+      
+
+
+
+    
 
 """for match in response:
       print(match["id"], match["date"], match["time"])"""

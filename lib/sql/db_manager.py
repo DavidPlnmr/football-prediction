@@ -34,17 +34,20 @@ class DbManager:
         """
         Get matches with specific teams [before the date specified in params if it is specified]
         """
-        query = f"""SELECT m.id, m.date, m.time, m.home_team_name, m.away_team_name 
-                                FROM `match` m 
-                                WHERE m.home_team_name="{first_team_name}" OR m.away_team_name="{first_team_name}" OR m.home_team_name="{second_team_name}" OR m.away_team_name="{first_team_name}" """
+        query = f"""SELECT m.id, m.date, m.time, m.league_id, m.league_name, m.home_team_name, m.away_team_name, m.home_team_score, m.away_team_score
+                    FROM `match` m 
+                    WHERE (m.home_team_name="{first_team_name}" OR m.away_team_name="{first_team_name}" OR m.home_team_name="{second_team_name}" OR m.away_team_name="{second_team_name}") """
         if len(date)>0:
-            query += f'AND m.`date` < "{date}"'
+            query += f'AND m.date < "{date}"'
         
         query += ";"
-            
+        
         return self.__query(query)
     
-    def getStatsOfMatches(self, first_team_name, second_team_name, date=""):
+    def getStatsOfMatchesWithSpecificTeams(self, first_team_name, second_team_name, date=""):
+        """
+        This method search all the games of each of the teams and returns the statistics of each match [before the date specified in param if it specified]
+        """
         query = f"""SELECT s.`type`, s.home, s.away, s.id_match
                                 FROM footballPrediction.statistic s 
                                 INNER JOIN footballPrediction.`match` m ON s.id_match  = m.id 
