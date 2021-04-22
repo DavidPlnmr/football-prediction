@@ -1,1 +1,4 @@
 .env
+/lib/__pycache__/
+/lib/sql/__pycache__/
+/lib/api/__pycache__/

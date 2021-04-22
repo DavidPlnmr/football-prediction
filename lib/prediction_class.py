@@ -12,6 +12,7 @@ class Prediction:
 
         self.provider = Provider()
         
+        #Change this line to API when tests are finished
         self.results = self.provider.get_all_stats_from_teams_db(home_team, away_team, "2018-08-10", "2019-08-10")
         
         self.home_team_result.heat_of_moment = self.__compute_heat_moment(home_team, self.results["firstTeam_lastResults"])

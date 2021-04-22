@@ -100,7 +100,7 @@ class Provider:
     
    
         
-    def get_matches_inI_interval(self, from_date, to_date, league_id=""):
+    def get_matches_in_interval(self, from_date, to_date, league_id=""):
         """
         Get the matches from a date to an other [in a specific a league]
         """
