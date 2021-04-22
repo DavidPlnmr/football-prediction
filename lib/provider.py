@@ -61,18 +61,17 @@ class Provider:
             logging.error("No results for one of the two teams selected")
             raise Exception("No results for one of the two team selected")
         
-    def get_all_stats_from_teams_db(self, first_team_name, second_team_name, date=""):
+    def get_all_stats_from_teams_db(self, first_team_name, second_team_name, from_date="", to_date=""):
         """
         Get all the matches between the two teams in params with the stats of each matches
         """
-        reqmatch = self.db_manager.get_matches_with_specific_teams(first_team_name, second_team_name, date)
-        reqstats = self.db_manager.get_stats_of_matches_with_specific_teams(first_team_name, second_team_name, date)
+        reqmatch = self.db_manager.get_matches_with_specific_teams(first_team_name, second_team_name, from_date, to_date)
+        reqstats = self.db_manager.get_stats_of_matches_with_specific_teams(first_team_name, second_team_name, from_date, to_date)
         
         result = {}
         stats_matches_two_team = []
         stats_first_team = []
         stats_second_team = []
-        
         
         if len(reqmatch) > 0 and len(reqstats) > 0:
             for match in reqmatch:

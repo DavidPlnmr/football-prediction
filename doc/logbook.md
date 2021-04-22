@@ -724,3 +724,7 @@ Comme une victoire a plus d'importance quant au niveau de l'équipe j'ai décid�
 J'ai mis toutes les pondérations. Maintenant comment déterminer avec ce score final qui est le vainqueur?
 
 12h40 Rédaction du rapport
+
+14h35 Idée provenant de M. Schmid -> pour le score défensif prendre aussi le nombre d'attaques de l'équipe adverse. Mais comment j'agis sur la pondération avec ça? ça serait des malus sur le score défensif
+
+Autre idée de Monsieur Schmid, avoir plus tard un sorte de script qui joue avec les pondérations des statistiques pour pouvoir avoir le meilleur résultat possible.

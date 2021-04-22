@@ -30,21 +30,20 @@ class DbManager:
     def get_prediction_with_api_id(self, api_match_id):
         return self.__query(f"""SELECT * FROM prediction p WHERE api_match_id={api_match_id};""")
     
-    def get_matches_with_specific_teams(self, first_team_name, second_team_name, date=""):
+    def get_matches_with_specific_teams(self, first_team_name, second_team_name, from_date="", to_date=""):
         """
         Get matches with specific teams [before the date specified in params if it is specified]
         """
         query = f"""SELECT m.id, m.date, m.time, m.league_id, m.league_name, m.home_team_name, m.away_team_name, m.home_team_score, m.away_team_score
                     FROM `match` m 
                     WHERE (m.home_team_name="{first_team_name}" OR m.away_team_name="{first_team_name}" OR m.home_team_name="{second_team_name}" OR m.away_team_name="{second_team_name}") """
-        if len(date)>0:
-            query += f'AND m.date < "{date}"'
+        if len(from_date)>0 and len(to_date)>0:
+            query += f'AND m.date > "{from_date}" AND m.date < "{to_date}"'
         
         query += ";"
-        
         return self.__query(query)
     
-    def get_stats_of_matches_with_specific_teams(self, first_team_name, second_team_name, date=""):
+    def get_stats_of_matches_with_specific_teams(self, first_team_name, second_team_name, from_date="", to_date=""):
         """
         This method search all the games of each of the teams and returns the statistics of each match [before the date specified in param if it specified]
         """
@@ -57,8 +56,8 @@ class DbManager:
                                 OR m.away_team_name="{second_team_name}"
                                 AND m.`date` < "2019-09-19" """
         
-        if len(date)>0:
-            query += f'AND m.`date` < "{date}"'
+        if len(from_date)>0 and len(to_date)>0:
+            query += f'AND m.date > "{from_date}" AND m.date < {to_date}'
             
         query += ";"
         
