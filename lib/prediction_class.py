@@ -6,36 +6,53 @@ class Prediction:
     """
     Class to make a prediction on a match between two football teams
     """
-    def __init__(self, home_team, away_team):
+    def __init__(self, home_team, away_team, from_date="", to_date=""):
         self.home_team_result = TeamResult(home_team)
         self.away_team_result = TeamResult(away_team)
+        
 
         self.provider = Provider()
         
-        #Change this line to API when tests are finished
-        self.results = self.provider.get_all_stats_from_teams_db(home_team, away_team, "2018-08-10", "2019-08-10")
         
-        self.home_team_result.heat_of_moment = self.__compute_heat_moment(home_team, self.results["firstTeam_lastResults"])
-        self.away_team_result.heat_of_moment = self.__compute_heat_moment(away_team, self.results["secondTeam_lastResults"])
+        try:
+            #Change this line to API when tests are finished
+            #self.results = self.provider.get_all_stats_from_teams_api(home_team, away_team)
+            self.results = self.provider.get_all_stats_from_teams_db(home_team, away_team, from_date, to_date)
+            
+            self.home_team_result.heat_of_moment = self.__compute_heat_moment(home_team, self.results["firstTeam_lastResults"])
+            self.away_team_result.heat_of_moment = self.__compute_heat_moment(away_team, self.results["secondTeam_lastResults"])
+
+            self.__insert_data_team_result(self.home_team_result, "firstTeam_lastResults")
+            self.__insert_data_team_result(self.away_team_result, "secondTeam_lastResults")
+            
+            self.__insert_data_team_result(self.home_team_result, "firstTeam_VS_secondTeam")
+            self.__insert_data_team_result(self.away_team_result, "firstTeam_VS_secondTeam")
+        except Exception:
+            #At the moment we show a print but later WE MUST RAISE AN EXCEPTION OR AN ERROR
+            
+            raise Exception("Prediction unmakeable. Not enought stats.")
+            
         
-        self.__insert_data_team_result(self.home_team_result, "firstTeam_lastResults")
-        self.__insert_data_team_result(self.away_team_result, "secondTeam_lastResults")
-        
-        self.__insert_data_team_result(self.home_team_result, "firstTeam_VS_secondTeam")
-        self.__insert_data_team_result(self.away_team_result, "firstTeam_VS_secondTeam")
-    
     def define_winner(self):
-        home_team_final_score = self.__compute_off_score(self.home_team_result)
-        away_team_final_score = self.__compute_off_score(self.away_team_result)
-        
-        home_team_final_score += self.__compute_def_score(self.home_team_result)
-        away_team_final_score += self.__compute_def_score(self.away_team_result)
-        
-        home_team_final_score += self.__compute_heat_moment_score(self.home_team_result)
-        away_team_final_score += self.__compute_heat_moment_score(self.away_team_result)
-        
-        print(f"{self.get_home_team_name()} Final Score : {home_team_final_score}")
-        print(f"{self.get_away_team_name()} Final Score : {away_team_final_score}")
+        if self.home_team_result.games_count > 0 and self.away_team_result.games_count > 0:    
+            home_team_final_score = self.__compute_off_score(self.home_team_result)
+            away_team_final_score = self.__compute_off_score(self.away_team_result)
+            
+            home_team_final_score += self.__compute_def_score(self.home_team_result)
+            away_team_final_score += self.__compute_def_score(self.away_team_result)
+            
+            home_team_final_score += self.__compute_heat_moment_score(self.home_team_result)
+            away_team_final_score += self.__compute_heat_moment_score(self.away_team_result)
+            
+            #print(f"{self.get_home_team_name()} Final Score : {home_team_final_score}")
+            #print(f"{self.get_away_team_name()} Final Score : {away_team_final_score}")
+            
+            if home_team_final_score > away_team_final_score * constants.DELTA_TO_DETERMINE_DRAW:
+                return self.get_home_team_name()    
+            elif away_team_final_score > home_team_final_score * constants.DELTA_TO_DETERMINE_DRAW:
+                return self.get_away_team_name()    
+            else:
+                return "Draw"
         
         pass
         
@@ -56,15 +73,17 @@ class Prediction:
         Compute the heat of the moment of the team with its results
         """
         heat_of_moment = ""
-        for index in range(constants.NB_GAMES_HEAT_OF_THE_MOMENT):
-            result = int(last_results[index]["home_team_score"]) - int(last_results[index]["away_team_score"])
-            if result == 0:
-                heat_of_moment += 'D' # D for Draw
-            else:
-                if last_results[index]["home_team"] == team_name:
-                    heat_of_moment += 'W' if result > 0 else 'L' # W for Win, L for Lose
+        if len(last_results) > constants.NB_GAMES_HEAT_OF_THE_MOMENT:    
+            for index in range(constants.NB_GAMES_HEAT_OF_THE_MOMENT):
+                result = int(last_results[index]["home_team_score"]) - int(last_results[index]["away_team_score"])
+                if result == 0:
+                    heat_of_moment += 'D' # D for Draw
                 else:
-                    heat_of_moment += 'L' if result > 0 else 'W' # W for Win, L for Lose
+                    if last_results[index]["home_team"] == team_name:
+                        heat_of_moment += 'W' if result > 0 else 'L' # W for Win, L for Lose
+                    else:
+                        heat_of_moment += 'L' if result > 0 else 'W' # W for Win, L for Lose
+        
         return heat_of_moment
         pass       
     

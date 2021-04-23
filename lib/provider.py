@@ -14,7 +14,11 @@ class Provider:
         logging.basicConfig(filename=log_path, filemode='a', format='%(asctime)s - %(levelname)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.INFO)
         self.api_facade = ApiFacade(os.getenv("API_KEY"), log_path)
         self.db_manager = DbManager("127.0.0.1", os.getenv("DB_USER"), os.getenv("DB_PASSWORD"), log_path)
-        
+    
+    def get_matches_from_to_db(self, from_date, to_date, league_id=""):
+        return self.db_manager.get_matches_from_to(from_date, to_date, league_id)
+            
+    
     def get_all_stats_from_teams_api(self, first_team_name, second_team_name):
         """
         Make a call to the API using getH2H and make a treatment to have the stats for each match of the two different teams
@@ -68,6 +72,7 @@ class Provider:
         reqmatch = self.db_manager.get_matches_with_specific_teams(first_team_name, second_team_name, from_date, to_date)
         reqstats = self.db_manager.get_stats_of_matches_with_specific_teams(first_team_name, second_team_name, from_date, to_date)
         
+        
         result = {}
         stats_matches_two_team = []
         stats_first_team = []
@@ -77,21 +82,26 @@ class Provider:
             for match in reqmatch:
                 #Check for the game with the two teams
                 if (match["home_team_name"] == first_team_name or match["away_team_name"] == first_team_name) and (match["home_team_name"] == second_team_name or match["away_team_name"] == second_team_name):
-                    if self.__checkArrayIsContainedWithSpecificId(constants.STATISTICS_TO_GET, reqstats, "type", match["id"]):
-                        self.__insertStatsInArrayForDB(match, stats_matches_two_team, reqstats, constants.STATISTICS_TO_GET)
+                    if self.__check_array_is_contained_with_specific_id(constants.STATISTICS_TO_GET, reqstats, "type", match["id"]):
+                        self.__insert_stats_in_array_for_db(match, stats_matches_two_team, reqstats, constants.STATISTICS_TO_GET)
                         
                 elif (match["home_team_name"] == first_team_name or match["away_team_name"] == first_team_name):
-                    if self.__checkArrayIsContainedWithSpecificId(constants.STATISTICS_TO_GET, reqstats, "type", match["id"]):
-                        self.__insertStatsInArrayForDB(match, stats_first_team, reqstats, constants.STATISTICS_TO_GET)
+                    if self.__check_array_is_contained_with_specific_id(constants.STATISTICS_TO_GET, reqstats, "type", match["id"]):
+                        self.__insert_stats_in_array_for_db(match, stats_first_team, reqstats, constants.STATISTICS_TO_GET)
                     
                 elif (match["home_team_name"] == second_team_name or match["away_team_name"] == second_team_name):    
-                    if self.__checkArrayIsContainedWithSpecificId(constants.STATISTICS_TO_GET, reqstats, "type", match["id"]):
-                        self.__insertStatsInArrayForDB(match, stats_second_team, reqstats, constants.STATISTICS_TO_GET)
+                    if self.__check_array_is_contained_with_specific_id(constants.STATISTICS_TO_GET, reqstats, "type", match["id"]):
+                        self.__insert_stats_in_array_for_db(match, stats_second_team, reqstats, constants.STATISTICS_TO_GET)
                 
-            result["firstTeam_VS_secondTeam"]=stats_matches_two_team
-            result["firstTeam_lastResults"]=stats_first_team
-            result["secondTeam_lastResults"]=stats_second_team
-                    
+            if len(stats_first_team)>0 and len(stats_second_team)>0 :
+        
+                result["firstTeam_VS_secondTeam"]=stats_matches_two_team
+                result["firstTeam_lastResults"]=stats_first_team
+                result["secondTeam_lastResults"]=stats_second_team
+            else:
+                logging.error("No results for one of the two teams selected")
+                return None
+            
             return result
         else:
             logging.error("No results for one of the two teams selected")
@@ -112,7 +122,6 @@ class Provider:
         """
         return self.db_manager.insert_match_with_stats(match_id, match_date, match_time, league_id, league_name, hometeam_name, awayteam_name, hometeam_score, awayteam_score, stats_array)
         
-    
     def save_prediction(self, prediction_winner, home_team_name, away_team_name, off_score_home_team, def_score_home_team, off_score_away_team, def_score_away_team, api_match_id="NULL"):
         """
         Save the prediction in the DB
@@ -137,7 +146,7 @@ class Provider:
                 elem[stat["type"]]={"home": stat["home"], "away": stat["away"]}
         array.append(elem)
     
-    def __insertStatsInArrayForDB(self, match, array, stats_array, required_stats_array):
+    def __insert_stats_in_array_for_db(self, match, array, stats_array, required_stats_array):
         """
         Create a dictionary to insert in the array param. Use with the db names
         The structure of the DB is not the same as the API
@@ -173,7 +182,7 @@ class Provider:
         else:
             return False
         
-    def __checkArrayIsContainedWithSpecificId(self, array, second_array, key, id):
+    def __check_array_is_contained_with_specific_id(self, array, second_array, key, id):
         """
         This method permits you to check if all the data in the first array is in the second array with the specific id
         """

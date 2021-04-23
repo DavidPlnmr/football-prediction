@@ -738,3 +738,32 @@ Chose à faire demain / à noter :
 
 * Faire le script de test `test_many_prediction.py`
 * Potentiellement voir pour stocker le nombre d'attaques dangereuses des équipes adverses dans le score défensif
+
+### 23.04.2021
+
+8h Début script pour voir le pourcentage de réussite des prédictions sur la saison 2019-20
+
+9h Fin du script -> Test sur le pourcentage de déterminer qu'un match est une égalité -> avec 2% -> 45% de chance
+
+10h Fichier excel de test sur le pourcentage de réussite de chaque saison pour quelques ligues
+
+12h40 J'essaie comprendre pourquoi les prédictions ne fonctionnent pas avec les données de la super league
+
+Quasiment tous les matchs de super league n'ont pas toutes les statistiques qu'il me faut pour faire une prédiction
+
+J'ai trouvé qu'il y a un bug au moment ou on veut faire une prédiction. Si on a aucun match dans les derniers résultats pour établir notre prédiction et bien il faut
+
+RECTIFICATION DU % de REUSSITE
+
+![ReussitePrediction](./img/pourcentReussitePrediction.png)
+
+Voici le tableau qui montre les différents % de réussite selon le niveau de delta que l'on choisit. Techniquement, on doit aussi prédire en cas d'égalité
+
+#### Recap de la journée
+
+* Script pour voir à quel point la prédiction est précise --> 48.5% de moyenne sur les 5 championnats majeurs
+* Correction d'un bug qui faisait que des prédictions était faites sans données sur les matchs précédents
+
+Choses à faire pour la prochaine journée : 
+
+* Rédaction du rapport : Recherche de solution -> Expliquer comment je suis arrivé à élaborer ma prédiction. Expliquer le choix de tel pondération -> Test de la réussite de la prédiction

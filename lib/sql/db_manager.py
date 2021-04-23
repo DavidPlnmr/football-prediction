@@ -43,6 +43,19 @@ class DbManager:
         query += ";"
         return self.__query(query)
     
+    def get_matches_from_to(self, from_date, to_date, league_id=""):
+        """
+        Get matches from a date to an other
+        """
+        query = f"""SELECT m.id, m.date, m.time, m.league_id, m.league_name, m.home_team_name, m.away_team_name, m.home_team_score, m.away_team_score
+                    FROM `match` m 
+                    WHERE m.date > "{from_date}" AND m.date < "{to_date}" """
+        if type(league_id)==int:
+            query+= f" AND m.league_id={league_id}"            
+        
+        query += ";"
+        return self.__query(query)
+    
     def get_stats_of_matches_with_specific_teams(self, first_team_name, second_team_name, from_date="", to_date=""):
         """
         This method search all the games of each of the teams and returns the statistics of each match [before the date specified in param if it specified]
