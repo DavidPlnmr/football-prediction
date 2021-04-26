@@ -767,3 +767,35 @@ Voici le tableau qui montre les différents % de réussite selon le niveau de de
 Choses à faire pour la prochaine journée : 
 
 * Rédaction du rapport : Recherche de solution -> Expliquer comment je suis arrivé à élaborer ma prédiction. Expliquer le choix de tel pondération -> Test de la réussite de la prédiction
+
+### 26.04.2021
+
+8h Rédaction rapport -> Recherche de solutions 
+
+Analyse approfondie pour pouvoir faire des prédictions entre championnat différents -> Techniquement infaisable (Partie `Niveau des différents championnats`)
+
+10h Fin de l'explication de pourquoi c'est pas possible de connaitre le niveau d'un championnat ou d'une équipe par rapport à une autre
+
+10h Début de la page d'accueil du site
+
+12h40 On continue à appréhender Python Flask et à mettre un bon template bootstrap en place
+
+15h Ajout de colonne "league_name" et "league_id"
+
+Update finalement il sert à rien
+
+16h L'appel à la méthode pour récupérer les prédictions fait une erreur 500 sur Flask
+
+Ok finalement après avoir activé le debug c'était un soucis d'appel
+
+Maintenant il faut voir pourquoi est-ce que je ne reçois rien dans les prédictions précédentes
+
+#### Recap de la journée 
+
+* Redaction du rapport -> Niveau des différents championnats
+* Création des templates du site avec Flask
+
+Choses à faire demain : 
+
+* Continuer la rédaction "Recherche de solutions"
+* Continuer à développer la page Home du site avec "Previous Games"

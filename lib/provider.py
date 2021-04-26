@@ -2,20 +2,26 @@
 import os
 from dotenv import load_dotenv
 import logging
-from api.api_facade import ApiFacade
-from sql.db_manager import DbManager
-import constants
+from lib.api.api_facade import ApiFacade
+from lib.sql.db_manager import DbManager
+import lib.constants
 
 
 
 class Provider:
-    def __init__(self, log_path='./log/app.log'):
+    """
+    This provider is used in the main.py file and in the prediction_class.py
+    """
+    def __init__(self, log_path='./lib/log/app.log'):
         load_dotenv()
         logging.basicConfig(filename=log_path, filemode='a', format='%(asctime)s - %(levelname)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.INFO)
         self.api_facade = ApiFacade(os.getenv("API_KEY"), log_path)
         self.db_manager = DbManager("127.0.0.1", os.getenv("DB_USER"), os.getenv("DB_PASSWORD"), log_path)
     
     def get_matches_from_to_db(self, from_date, to_date, league_id=""):
+        """
+        Get matches from date to date from the db
+        """
         return self.db_manager.get_matches_from_to(from_date, to_date, league_id)
             
     
@@ -108,7 +114,11 @@ class Provider:
             raise Exception("No results for one of the two team selected")
         pass
     
-   
+    def get_predictions_in_interval_from_db(self, from_date, to_date):
+        """
+        Get the predictions from a date to an other [in a specific a league]
+        """
+        return self.db_manager.get_predictions_in_interval(from_date, to_date)
         
     def get_matches_in_interval(self, from_date, to_date, league_id=""):
         """

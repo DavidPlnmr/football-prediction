@@ -8,7 +8,7 @@ CREATE TABLE `prediction` (
   `off_score_home_team` double,
   `def_score_home_team` double,
   `off_score_away_team` double,
-  `def_score_away_team` double
+  `def_score_away_team` double,
 );
 
 CREATE TABLE `match` (

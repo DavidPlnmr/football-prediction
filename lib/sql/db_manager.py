@@ -22,6 +22,17 @@ class DbManager:
         """
         return self.__query("SELECT * FROM prediction")
     
+    def get_predictions_in_interval(self, from_date, to_date):
+        """
+        Get all the rows in the table
+        """
+        query = f"""SELECT * 
+                            FROM prediction p 
+                            WHERE p.created_at > "{to_date}" AND p.created_at < "{to_date}" AND p.api_match_id IS NOT NULL;"""
+            
+        return self.__query(query)
+        
+    
     def get_prediction_with_specific_teams(self, first_team_name, second_team_name):
         return self.__query(f"""SELECT * FROM prediction p 
                           WHERE (home_team_name="{first_team_name}" OR away_team_name="{first_team_name}") 
@@ -83,7 +94,7 @@ class DbManager:
         self.__cursor.execute(your_query)
         return self.__cursor.fetchall()
     
-    def insert_prediction(self, prediction, home_team_name, away_team_name, off_score_home_team, def_score_home_team, off_score_away_team, def_score_away_team, api_match_id="NULL"):
+    def insert_prediction(self, prediction, home_team_name, away_team_name, off_score_home_team, def_score_home_team, off_score_away_team, def_score_away_team, league_name, league_id, api_match_id="NULL"):
         """
         Insert a prediction in the database with the parameters given.
         """
@@ -95,8 +106,10 @@ class DbManager:
                             `off_score_home_team`,
                             `def_score_home_team`,
                             `off_score_away_team`,
-                            `def_score_away_team`)
-                            VALUES ( "{prediction}", {api_match_id},  "{home_team_name}", "{away_team_name}", {off_score_home_team}, {def_score_home_team}, {off_score_away_team}, {def_score_home_team});""")
+                            `def_score_away_team`,
+                            `league_name`,
+                            `league_id`)
+                            VALUES ( "{prediction}", {api_match_id},  "{home_team_name}", "{away_team_name}", {off_score_home_team}, {def_score_home_team}, {off_score_away_team}, {def_score_home_team}, "{league_name}", {league_id});""")
         
         self.__db.commit() # Save the changes
         logging.info(f"Inserted prediction in the DB with params : {prediction}, {api_match_id}, {home_team_name}, {away_team_name}, {off_score_home_team}, {def_score_home_team}, {off_score_away_team}, {def_score_away_team}")

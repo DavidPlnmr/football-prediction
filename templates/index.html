@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block header %}Football Prediction{% endblock %}
+
+{% block description %}The app which helps you to choose the good bets.{% endblock %}
+
+{% block content %}
+<div class="container">
+    
+    <div class="text-center">
+        <h2 class="page-section-heading text-secondary mb-0 d-inline-block">Matches</h2>
+    </div>
+    <!-- Icon Divider-->
+    <div class="divider-custom">
+        <div class="divider-custom-line"></div>
+    </div>
+    <div class="row">
+        <div class="text-center col-lg-6 ml-auto">
+            <h3 class="text-secondary mb-0 d-inline-block">Previous Games</h3>
+        </div>
+        <div class="text-center col-lg-6 mr-auto">
+            <h3 class="text-secondary mb-0 d-inline-block">Upcoming Games</h3>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block about %}
+<!-- About section -->
+<section class="page-section bg-primary text-white mb-0" id="about">
+    <div class="container">
+        <!-- About Section Heading-->
+        <div class="text-center">
+            <h2 class="page-section-heading d-inline-block text-white">About</h2>
+        </div>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- About Section Content-->
+        <div class="row">
+            <div class="col-lg-4 ml-auto">
+                <p class="pre-wrap lead">Football Prediction is an app that make a prediction on a football game using the last results of each team playing the game. This project has been done during my diploma work.</p>
+            </div>
+            <div class="col-lg-4 mr-auto">
+                <p class="pre-wrap lead">You can create your own custom prediction in the section <a class="text-secondary" href="{{ url_for("h2h") }}">Head To Head</a>. This feature is useful to make hypothetic prediction.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock  %}
