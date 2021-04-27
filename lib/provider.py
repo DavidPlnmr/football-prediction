@@ -2,9 +2,10 @@
 import os
 from dotenv import load_dotenv
 import logging
-from lib.api.api_facade import ApiFacade
-from lib.sql.db_manager import DbManager
+from .api.api_facade import ApiFacade
+from .sql.db_manager import DbManager
 import lib.constants
+import datetime
 
 
 
@@ -43,29 +44,30 @@ class Provider:
                 api_match_id = match["match_id"]
                 reqstatsresult = self.api_facade.get_stats_from_match(api_match_id)
                 
-                if self.__check_array_is_in_other_array(constants.STATISTICS_TO_GET, reqstatsresult[api_match_id]["statistics"], "type"):
-                    self.__insert_stats_in_array_for_api(match, stats_matches_two_team, reqstatsresult[api_match_id]["statistics"], constants.STATISTICS_TO_GET)
+                if self.__check_array_is_in_other_array(lib.constants.STATISTICS_TO_GET, reqstatsresult[api_match_id]["statistics"], "type"):
+                    self.__insert_stats_in_array_for_api(match, stats_matches_two_team, reqstatsresult[api_match_id]["statistics"], lib.constants.STATISTICS_TO_GET)
                     
             for match in reqresult["firstTeam_lastResults"]:
                 
                 api_match_id = match["match_id"]
                 reqstatsresult = self.api_facade.get_stats_from_match(api_match_id)
                 
-                if self.__check_array_is_in_other_array(constants.STATISTICS_TO_GET, reqstatsresult[api_match_id]["statistics"], "type"):
-                    self.__insert_stats_in_array_for_api(match, stats_first_team, reqstatsresult[api_match_id]["statistics"], constants.STATISTICS_TO_GET)
+                if self.__check_array_is_in_other_array(lib.constants.STATISTICS_TO_GET, reqstatsresult[api_match_id]["statistics"], "type"):
+                    self.__insert_stats_in_array_for_api(match, stats_first_team, reqstatsresult[api_match_id]["statistics"], lib.constants.STATISTICS_TO_GET)
                 
             for match in reqresult["secondTeam_lastResults"]:
                 
                 api_match_id = match["match_id"]
                 reqstatsresult = self.api_facade.get_stats_from_match(api_match_id)
                 
-                if self.__check_array_is_in_other_array(constants.STATISTICS_TO_GET, reqstatsresult[api_match_id]["statistics"], "type"):
-                    self.__insert_stats_in_array_for_api(match, stats_second_team, reqstatsresult[api_match_id]["statistics"], constants.STATISTICS_TO_GET)
+                if self.__check_array_is_in_other_array(lib.constants.STATISTICS_TO_GET, reqstatsresult[api_match_id]["statistics"], "type"):
+                    self.__insert_stats_in_array_for_api(match, stats_second_team, reqstatsresult[api_match_id]["statistics"], lib.constants.STATISTICS_TO_GET)
                 
             result["firstTeam_VS_secondTeam"]=stats_matches_two_team
             result["firstTeam_lastResults"]=stats_first_team
             result["secondTeam_lastResults"]=stats_second_team
                     
+
             return result
         else:
             logging.error("No results for one of the two teams selected")
@@ -88,16 +90,16 @@ class Provider:
             for match in reqmatch:
                 #Check for the game with the two teams
                 if (match["home_team_name"] == first_team_name or match["away_team_name"] == first_team_name) and (match["home_team_name"] == second_team_name or match["away_team_name"] == second_team_name):
-                    if self.__check_array_is_contained_with_specific_id(constants.STATISTICS_TO_GET, reqstats, "type", match["id"]):
-                        self.__insert_stats_in_array_for_db(match, stats_matches_two_team, reqstats, constants.STATISTICS_TO_GET)
+                    if self.__check_array_is_contained_with_specific_id(lib.constants.STATISTICS_TO_GET, reqstats, "type", match["id"]):
+                        self.__insert_stats_in_array_for_db(match, stats_matches_two_team, reqstats, lib.constants.STATISTICS_TO_GET)
                         
                 elif (match["home_team_name"] == first_team_name or match["away_team_name"] == first_team_name):
-                    if self.__check_array_is_contained_with_specific_id(constants.STATISTICS_TO_GET, reqstats, "type", match["id"]):
-                        self.__insert_stats_in_array_for_db(match, stats_first_team, reqstats, constants.STATISTICS_TO_GET)
+                    if self.__check_array_is_contained_with_specific_id(lib.constants.STATISTICS_TO_GET, reqstats, "type", match["id"]):
+                        self.__insert_stats_in_array_for_db(match, stats_first_team, reqstats, lib.constants.STATISTICS_TO_GET)
                     
                 elif (match["home_team_name"] == second_team_name or match["away_team_name"] == second_team_name):    
-                    if self.__check_array_is_contained_with_specific_id(constants.STATISTICS_TO_GET, reqstats, "type", match["id"]):
-                        self.__insert_stats_in_array_for_db(match, stats_second_team, reqstats, constants.STATISTICS_TO_GET)
+                    if self.__check_array_is_contained_with_specific_id(lib.constants.STATISTICS_TO_GET, reqstats, "type", match["id"]):
+                        self.__insert_stats_in_array_for_db(match, stats_second_team, reqstats, lib.constants.STATISTICS_TO_GET)
                 
             if len(stats_first_team)>0 and len(stats_second_team)>0 :
         
@@ -114,9 +116,30 @@ class Provider:
             raise Exception("No results for one of the two team selected")
         pass
     
+    def get_previous_matches_predictions(self, from_date, to_date):
+        response = self.get_predictions_in_interval_from_db(from_date, to_date)
+        
+        result = []
+        for prediction in response:
+            match_info = self.api_facade.get_match_infos(prediction["api_match_id"])
+            
+            if len(match_info)>0: # Check if we got some data from the API
+                date_match = datetime.datetime.strptime(match_info[0]["match_date"], "%Y-%m-%d").date()
+                if date_match < to_date:
+                    match = {
+                        "Home" : prediction["home_team_name"],
+                        "Away" : prediction["away_team_name"],
+                        "Prediction winner" : prediction["prediction"],
+                        "Real home score" : match_info[0]["match_hometeam_score"],
+                        "Real away score" : match_info[0]["match_awayteam_score"],
+                        "Date" : date_match
+                    }
+                    result.append(match)
+        return result
+    
     def get_predictions_in_interval_from_db(self, from_date, to_date):
         """
-        Get the predictions from a date to an other [in a specific a league]
+        Get the predictions from a date to an other [only with an api_match_id]
         """
         return self.db_manager.get_predictions_in_interval(from_date, to_date)
         
@@ -132,11 +155,11 @@ class Provider:
         """
         return self.db_manager.insert_match_with_stats(match_id, match_date, match_time, league_id, league_name, hometeam_name, awayteam_name, hometeam_score, awayteam_score, stats_array)
         
-    def save_prediction(self, prediction_winner, home_team_name, away_team_name, off_score_home_team, def_score_home_team, off_score_away_team, def_score_away_team, api_match_id="NULL"):
+    def save_prediction(self, prediction_winner, home_team_name, away_team_name, off_score_home_team, def_score_home_team, off_score_away_team, def_score_away_team, date_of_game="NULL", api_match_id="NULL"):
         """
         Save the prediction in the DB
         """
-        return self.db_manager.insert_prediction(prediction_winner, home_team_name, away_team_name, off_score_home_team, def_score_home_team, off_score_away_team, def_score_away_team, api_match_id)
+        return self.db_manager.insert_prediction(prediction_winner, home_team_name, away_team_name, off_score_home_team, def_score_home_team, off_score_away_team, def_score_away_team, date_of_game, api_match_id)
         pass
     
     def __insert_stats_in_array_for_api(self, match, array, stats_array, required_stats_array):

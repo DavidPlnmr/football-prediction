@@ -799,3 +799,42 @@ Choses à faire demain :
 
 * Continuer la rédaction "Recherche de solutions"
 * Continuer à développer la page Home du site avec "Previous Games"
+
+### 27.04.2021
+
+8h Récupération des matchs précédents avec leur prédictions
+
+10h Récupération des prochains matchs + création d'une prédiction pour chacun d'eux
+
+Dans la page d'accueil, recherche de solutions pour créer des prédictions automatiques pour tout les nouveau matchs
+
+Par contre le soucis c'est que la page met du temps à charger selon le nombre de matchs à prédire.
+
+Potentiellement faire une route qui est appelé de manière journalière. chron ?
+
+Explication du soucis avec les imports à Monsieur Schmid après recherche
+
+Finalement, uniquement changer le PYTHONPATH vers le chemin du module qu'on veut importer 
+
+Solution 1 -> https://dkhambu.medium.com/importing-files-in-python-repository-28ab49fade37
+
+
+
+Maintenant on repasse a la création d'une prédiction si le match est nouveau
+
+Upcoming matches fait pour une ligue. Maintenant, on fait une autre méthode qui récupère tout les prochains matchs
+
+
+
+16h10 Cache sur l'affichage des predictions sur la page d'accueil autrement la page d'accueil tout est bon
+
+#### Recap de la journée
+
+* Match précédents sur l'accueil
+* Prochains matchs dans l'accueil + cache
+* Gestion des importations des modules perfectionnés
+
+Choses à faire demain :
+
+* Rapport rapport et rapport -> Résumé + Abstract, Récupération des données et des matchs
+  * Ne pas oublier de mettre a jour le Trello

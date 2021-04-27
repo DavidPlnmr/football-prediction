@@ -14,12 +14,49 @@
     <div class="divider-custom">
         <div class="divider-custom-line"></div>
     </div>
-    <div class="row">
-        <div class="text-center col-lg-6 ml-auto">
+    <div>
+        <div class="text-center col-xlg-4 ml-auto">
             <h3 class="text-secondary mb-0 d-inline-block">Previous Games</h3>
+            {% if previous_matches %}
+                <table class="table">
+                <tr>
+                {% for key in previous_matches[0] %}<th>{{key}}</th>{% endfor %}
+                </tr>
+                {% for match in previous_matches %}
+                <tr>
+                <td>{{match["Home"]}}</td>
+                <td>{{match["Away"]}}</td>
+                <td>{{match["Prediction winner"]}}</td>
+                <td>{{match["Real home score"]}}</td>
+                <td>{{match["Real away score"]}}</td>
+                <td>{{match["Date"]}}</td>
+                </tr>
+                {% endfor %}
+                </table>
+            {% else %}
+            <p class="lead">No previous games stored.</p>
+            {% endif %}
+            
         </div>
-        <div class="text-center col-lg-6 mr-auto">
+        <div class="text-center col-xlg-4 mr-auto">
             <h3 class="text-secondary mb-0 d-inline-block">Upcoming Games</h3>
+            {% if upcoming_matches %}
+                <table class="table">
+                <tr>
+                {% for key in upcoming_matches[0] %}<th>{{key}}</th>{% endfor %}
+                </tr>
+                {% for match in upcoming_matches %}
+                <tr>
+                <td>{{match["Home"]}}</td>
+                <td>{{match["Away"]}}</td>
+                <td>{{match["Prediction winner"]}}</td>
+                <td>{{match["Date"]}}</td>
+                </tr>
+                {% endfor %}
+                </table>
+            {% else %}
+            <p class="lead">No upcoming games.</p>
+            {% endif %}
         </div>
     </div>
 </div>
@@ -43,7 +80,7 @@
                 <p class="pre-wrap lead">Football Prediction is an app that make a prediction on a football game using the last results of each team playing the game. This project has been done during my diploma work.</p>
             </div>
             <div class="col-lg-4 mr-auto">
-                <p class="pre-wrap lead">You can create your own custom prediction in the section <a class="text-secondary" href="{{ url_for("h2h") }}">Head To Head</a>. This feature is useful to make hypothetic prediction.</p>
+                <p class="pre-wrap lead">You can create your own custom prediction in the section <a class="text-secondary" href="{{ url_for("h2h") }}">Head To Head</a>. This feature is useful to make hypothetic prediction. By the way, the application tells not the truth, it means that predictions can be wrong.</p>
             </div>
         </div>
     </div>

@@ -1,7 +1,17 @@
 STATISTICS_TO_GET = ["Ball Possession", "Goal Attempts", "Shots on Goal", "Attacks", "Dangerous Attacks", "Tackles", "Fouls", "Goalkeeper Saves", "Yellow Cards"]
 NB_GAMES_HEAT_OF_THE_MOMENT=5
 
-DELTA_TO_DETERMINE_DRAW = 1.0
+MULTIPLE_LEAGUES = {
+    "Premier League" : 148,
+    "Liga NOS" : 391,
+    "Ligue 1" : 176,
+    "Bundesliga" : 195,
+    "LaLiga" : 468,
+    "Serie A" : 262
+                    }
+
+DELTA_TO_DETERMINE_DRAW = 1.01
+DELTA_DAY = 3
 
 WEIGHT_GOALS=8
 WEIGHT_DANGEROUS_ATTACKS=5

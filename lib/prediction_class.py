@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from lib.provider import Provider
+from .provider import Provider
 import lib.constants
 
 class Prediction:
@@ -9,6 +9,7 @@ class Prediction:
     def __init__(self, home_team, away_team, from_date="", to_date=""):
         self.home_team_result = TeamResult(home_team)
         self.away_team_result = TeamResult(away_team)
+        self.winner=""
         
 
         self.provider = Provider()
@@ -17,6 +18,7 @@ class Prediction:
         try:
             #Change this line to API when tests are finished
             self.results = self.provider.get_all_stats_from_teams_api(home_team, away_team)
+
             #self.results = self.provider.get_all_stats_from_teams_db(home_team, away_team, from_date, to_date)
             
             self.home_team_result.heat_of_moment = self.__compute_heat_moment(home_team, self.results["firstTeam_lastResults"])
@@ -34,27 +36,44 @@ class Prediction:
             
         
     def define_winner(self):
-        if self.home_team_result.games_count > 0 and self.away_team_result.games_count > 0:    
-            home_team_final_score = self.__compute_off_score(self.home_team_result)
-            away_team_final_score = self.__compute_off_score(self.away_team_result)
-            
-            home_team_final_score += self.__compute_def_score(self.home_team_result)
-            away_team_final_score += self.__compute_def_score(self.away_team_result)
-            
-            home_team_final_score += self.__compute_heat_moment_score(self.home_team_result)
-            away_team_final_score += self.__compute_heat_moment_score(self.away_team_result)
-            
-            #print(f"{self.get_home_team_name()} Final Score : {home_team_final_score}")
-            #print(f"{self.get_away_team_name()} Final Score : {away_team_final_score}")
-            
-            if home_team_final_score > away_team_final_score * constants.DELTA_TO_DETERMINE_DRAW:
-                return self.get_home_team_name()    
-            elif away_team_final_score > home_team_final_score * constants.DELTA_TO_DETERMINE_DRAW:
-                return self.get_away_team_name()    
-            else:
-                return "Draw"
-        
+        if self.winner== "":
+            if self.home_team_result.games_count > 0 and self.away_team_result.games_count > 0:    
+                home_team_final_score = self.__compute_off_score(self.home_team_result)
+                away_team_final_score = self.__compute_off_score(self.away_team_result)
+                
+                home_team_final_score += self.__compute_def_score(self.home_team_result)
+                away_team_final_score += self.__compute_def_score(self.away_team_result)
+                
+                home_team_final_score += self.__compute_heat_moment_score(self.home_team_result)
+                away_team_final_score += self.__compute_heat_moment_score(self.away_team_result)
+                
+                #print(f"{self.get_home_team_name()} Final Score : {home_team_final_score}")
+                #print(f"{self.get_away_team_name()} Final Score : {away_team_final_score}")
+                
+                if home_team_final_score > away_team_final_score * lib.constants.DELTA_TO_DETERMINE_DRAW:
+                    self.winner = self.get_home_team_name()    
+                elif away_team_final_score > home_team_final_score * lib.constants.DELTA_TO_DETERMINE_DRAW:
+                    self.winner = self.get_away_team_name()    
+                else:
+                    self.winner = "Draw"
+                    
+                
+        return self.winner
         pass
+    
+    def save_prediction(self, date_of_game="NULL", api_match_id="NULL"):
+        """
+        Save the prediction in the DB
+        """
+        return self.provider.save_prediction(self.define_winner(),
+                                             self.get_home_team_name(),
+                                             self.get_away_team_name(),
+                                             self.__compute_off_score(self.home_team_result),
+                                             self.__compute_def_score(self.home_team_result),
+                                             self.__compute_off_score(self.away_team_result),
+                                             self.__compute_def_score(self.away_team_result),
+                                             date_of_game,
+                                             api_match_id)
         
     def get_home_team_name(self):
         return self.home_team_result.team_name
@@ -65,7 +84,7 @@ class Prediction:
         pass
         
     def __compute_heat_moment_score(self, team_result):
-        return team_result.average_points_per_game()*constants.WEIGHT_HEAT_OF_MOMENT
+        return team_result.average_points_per_game()*lib.constants.WEIGHT_HEAT_OF_MOMENT
         pass
         
     def __compute_heat_moment(self, team_name, last_results):
@@ -73,8 +92,8 @@ class Prediction:
         Compute the heat of the moment of the team with its results
         """
         heat_of_moment = ""
-        if len(last_results) > constants.NB_GAMES_HEAT_OF_THE_MOMENT:    
-            for index in range(constants.NB_GAMES_HEAT_OF_THE_MOMENT):
+        if len(last_results) > lib.constants.NB_GAMES_HEAT_OF_THE_MOMENT:    
+            for index in range(lib.constants.NB_GAMES_HEAT_OF_THE_MOMENT):
                 result = int(last_results[index]["home_team_score"]) - int(last_results[index]["away_team_score"])
                 if result == 0:
                     heat_of_moment += 'D' # D for Draw
@@ -91,12 +110,12 @@ class Prediction:
         
         score = 0
         
-        score += team_result.average_goal_scored_per_game()*constants.WEIGHT_GOALS
-        score += team_result.average_dangerous_attacks_per_game()*constants.WEIGHT_DANGEROUS_ATTACKS
-        score += team_result.average_shots_on_goal_per_game()*constants.WEIGHT_SHOTS_ON_GOAL
-        score += team_result.average_attacks_per_game()*constants.WEIGHT_ATTACKS
-        score += team_result.average_goal_attempts_per_game()*constants.WEIGHT_GOAL_ATTEMPTS
-        score += team_result.average_ball_possession_per_game()*constants.WEIGHT_BALL_POSSESSION
+        score += team_result.average_goal_scored_per_game()*lib.constants.WEIGHT_GOALS
+        score += team_result.average_dangerous_attacks_per_game()*lib.constants.WEIGHT_DANGEROUS_ATTACKS
+        score += team_result.average_shots_on_goal_per_game()*lib.constants.WEIGHT_SHOTS_ON_GOAL
+        score += team_result.average_attacks_per_game()*lib.constants.WEIGHT_ATTACKS
+        score += team_result.average_goal_attempts_per_game()*lib.constants.WEIGHT_GOAL_ATTEMPTS
+        score += team_result.average_ball_possession_per_game()*lib.constants.WEIGHT_BALL_POSSESSION
 
         return score
         pass
@@ -105,13 +124,13 @@ class Prediction:
         
         score = 0
         #Bonus
-        score += team_result.average_tackles_per_game()*constants.WEIGHT_TACKLES
-        score += team_result.average_goalkeeper_saves_per_game()*constants.WEIGHT_GOALKEEPER_SAVES
+        score += team_result.average_tackles_per_game()*lib.constants.WEIGHT_TACKLES
+        score += team_result.average_goalkeeper_saves_per_game()*lib.constants.WEIGHT_GOALKEEPER_SAVES
         
         #Malus
-        score -= team_result.average_goal_conceded_per_game()*constants.WEIGHT_GOALS
-        score -= team_result.average_fouls_per_game()*constants.WEIGHT_FOULS
-        score -= team_result.average_yellow_cards_per_game()*constants.WEIGHT_YELLOW_CARDS
+        score -= team_result.average_goal_conceded_per_game()*lib.constants.WEIGHT_GOALS
+        score -= team_result.average_fouls_per_game()*lib.constants.WEIGHT_FOULS
+        score -= team_result.average_yellow_cards_per_game()*lib.constants.WEIGHT_YELLOW_CARDS
         
         return score
         pass
@@ -203,9 +222,9 @@ class TeamResult:
         result = 0
         for char in self.heat_of_moment:
             if char=='W':
-                result+=constants.POINTS_FOR_A_WIN
+                result+=lib.constants.POINTS_FOR_A_WIN
             elif char=='D':
-                result+=constants.POINTS_FOR_A_DRAW
+                result+=lib.constants.POINTS_FOR_A_DRAW
             elif char=='L':
-                result+=constants.POINTS_FOR_A_LOSE
+                result+=lib.constants.POINTS_FOR_A_LOSE
         return result/self.games_count

@@ -33,6 +33,13 @@ class ApiFacade:
             # Error from the library
             logging.error(f"Happened during the request to the API with error : {response.status_code}")
             raise Exception("Could not connect to the API.")
+    
+    def get_match_infos(self, match_id):
+        """
+        Get the last results of each teams and the last results of each matchs between them both
+        """
+        endpoint_action = "get_events"
+        return self.__get_action(f'action={endpoint_action}&match_id={match_id}')
         
     def get_H2H(self, first_team_name, second_team_name):
         """

@@ -28,8 +28,7 @@ class DbManager:
         """
         query = f"""SELECT * 
                             FROM prediction p 
-                            WHERE p.created_at > "{to_date}" AND p.created_at < "{to_date}" AND p.api_match_id IS NOT NULL;"""
-            
+                            WHERE p.date_of_game >= "{from_date}" AND p.date_of_game <= "{to_date}" AND p.api_match_id IS NOT NULL ORDER BY date_of_game ;"""
         return self.__query(query)
         
     
@@ -94,7 +93,7 @@ class DbManager:
         self.__cursor.execute(your_query)
         return self.__cursor.fetchall()
     
-    def insert_prediction(self, prediction, home_team_name, away_team_name, off_score_home_team, def_score_home_team, off_score_away_team, def_score_away_team, league_name, league_id, api_match_id="NULL"):
+    def insert_prediction(self, prediction, home_team_name, away_team_name, off_score_home_team, def_score_home_team, off_score_away_team, def_score_away_team, date_of_game="NULL", api_match_id="NULL"):
         """
         Insert a prediction in the database with the parameters given.
         """
@@ -107,12 +106,11 @@ class DbManager:
                             `def_score_home_team`,
                             `off_score_away_team`,
                             `def_score_away_team`,
-                            `league_name`,
-                            `league_id`)
-                            VALUES ( "{prediction}", {api_match_id},  "{home_team_name}", "{away_team_name}", {off_score_home_team}, {def_score_home_team}, {off_score_away_team}, {def_score_home_team}, "{league_name}", {league_id});""")
+                            `date_of_game`)
+                            VALUES ( "{prediction}", {api_match_id},  "{home_team_name}", "{away_team_name}", {off_score_home_team}, {def_score_home_team}, {off_score_away_team}, {def_score_home_team}, "{date_of_game}");""")
         
         self.__db.commit() # Save the changes
-        logging.info(f"Inserted prediction in the DB with params : {prediction}, {api_match_id}, {home_team_name}, {away_team_name}, {off_score_home_team}, {def_score_home_team}, {off_score_away_team}, {def_score_away_team}")
+        logging.info(f"Inserted prediction in the DB with params : {prediction}, {api_match_id}, {home_team_name}, {away_team_name}, {off_score_home_team}, {def_score_home_team}, {off_score_away_team}, {def_score_away_team}, {date_of_game}")
         return True
     
     def delete_at(self, id):

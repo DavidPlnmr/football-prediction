@@ -8,17 +8,17 @@ db = DbManager(os.getenv("DB_HOST"), os.getenv("DB_USER"), os.getenv("DB_PASSWOR
 
 #db.delete_at(6) # Delete at a specific id
 
-#db.insert_prediction("Home", "Tottenham", "Burnley", 1900, 1800, 2202, 1000) # Insert row in the table
+db.insert_prediction("Home", "Tottenham", "Burnley", 1900, 1800, 2202, 1000, "2020-12-10") # Insert row in the table
 
-#print (db.get_all_predictions()) # Get all the predictions
+print (db.get_all_predictions()) # Get all the predictions
 
 #print(db.get_prediction_with_specific_teams("Tottenham", "Burnley")) # Returns prediction with 2 specific teams
 
 #print (db.get_prediction_with_api_id(201908))
 
-response = db.get_matches_with_specific_teams("Chelsea", "Burnley", "2018-08-10")
+"""response = db.get_matches_with_specific_teams("Chelsea", "Burnley", "2018-08-10")
 for match in response:
-      print(match["date"])
+      print(match["date"])"""
       
 
 
