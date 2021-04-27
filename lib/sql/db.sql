@@ -9,7 +9,7 @@ CREATE TABLE `prediction` (
   `def_score_home_team` double,
   `off_score_away_team` double,
   `def_score_away_team` double,
-  `date_of_game` date,
+  `date_of_game` date
 );
 
 CREATE TABLE `match` (
@@ -32,4 +32,4 @@ CREATE TABLE `statistic` (
   `id_match` int
 );
 
-ALTER TABLE `statistics` ADD FOREIGN KEY (`id_match`) REFERENCES `match` (`id`);
+ALTER TABLE `statistic` ADD FOREIGN KEY (`id_match`) REFERENCES `match` (`id`);
