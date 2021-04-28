@@ -33,11 +33,17 @@ class DbManager:
         
     
     def get_prediction_with_specific_teams(self, first_team_name, second_team_name):
+        """
+        Get the prediction with specific teams
+        """
         return self.__query(f"""SELECT * FROM prediction p 
                           WHERE (home_team_name="{first_team_name}" OR away_team_name="{first_team_name}") 
                           AND (home_team_name="{second_team_name}" OR away_team_name="{second_team_name}");""")
     
     def get_prediction_with_api_id(self, api_match_id):
+        """
+        Get predictions with a specifi api_match_id
+        """
         return self.__query(f"""SELECT * FROM prediction p WHERE api_match_id={api_match_id};""")
     
     def get_matches_with_specific_teams(self, first_team_name, second_team_name, from_date="", to_date=""):

@@ -37,6 +37,7 @@ class Provider:
         stats_first_team = []
         stats_second_team = []
         
+        # We check the last results of the teams aren't empty
         if len(reqresult["firstTeam_lastResults"]) > 0 and len(reqresult["secondTeam_lastResults"]) > 0:
             
             for match in reqresult["firstTeam_VS_secondTeam"]:
@@ -86,6 +87,8 @@ class Provider:
         stats_first_team = []
         stats_second_team = []
         
+        # We check if the requests aren't empty
+        
         if len(reqmatch) > 0 and len(reqstats) > 0:
             for match in reqmatch:
                 #Check for the game with the two teams
@@ -117,6 +120,9 @@ class Provider:
         pass
     
     def get_previous_matches_predictions(self, from_date, to_date):
+        """
+        Get the predictions of the previous matches with their result
+        """
         response = self.get_predictions_in_interval_from_db(from_date, to_date)
         
         result = []

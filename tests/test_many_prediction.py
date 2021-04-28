@@ -5,7 +5,12 @@ To use it : ./test_many_prediction.py > my_file.csv
 It will write your data in the csv in this order :
 Correct predictions count; Games count; Percent of the delta
 """
-import unittest
+import sys
+import os
+
+# insert the "import_test" directory into the sys.path
+sys.path.insert(1, os.path.abspath(".."))
+
 from lib.prediction_class import Prediction
 from lib.provider import Provider
 from datetime import date
@@ -14,7 +19,7 @@ from dateutil.relativedelta import relativedelta # $ pip install python-dateutil
 
 prov = Provider()
 
-response = prov.get_matches_from_to_db("2019-08-09", "2020-07-26", 148)
+response = prov.get_matches_from_to_db("2019-08-09", "2020-07-26")
 
 for index in range(9):
     games_count = 0
@@ -44,9 +49,9 @@ for index in range(9):
             pass
         
     
-    print(f"{good_predictions_count};{games_count};{(constants.DELTA_TO_DETERMINE_DRAW-1)*100}")
+    print(f"{good_predictions_count};{games_count};{(lib.constants.DELTA_TO_DETERMINE_DRAW-1)*100}")
     
-    constants.DELTA_TO_DETERMINE_DRAW += 0.01
+    lib.constants.DELTA_TO_DETERMINE_DRAW += 0.01
         
         
         
