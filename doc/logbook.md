@@ -838,3 +838,28 @@ Choses à faire demain :
 
 * Rapport rapport et rapport -> Résumé + Abstract, Récupération des données et des matchs
   * Ne pas oublier de mettre a jour le Trello
+
+### 28.04.2021
+
+8h Création de la page Head To Head
+
+PS : Ne pas oublier de rendre la page d'accueil plus friendly (ordre chronologique des matchs, pouvoir ajouter la ligue sur la prédiction pour avoir un accueil filtré par ligue -> ça va nécessiter de changer quelques méthodes et d'ajouter une colonne sur la table prédiction)
+
+10h Rapport `Récupération des matchs et de leurs statistiques`
+
+12h Rapport `Choix de la pondération des statistiques`
+
+15h30 Test des predictions depuis un autre repos : https://stackoverflow.com/questions/57328142/modulenot-founderror-no-module-named-lib
+
+#### Recap de la journée 
+
+* Rapport, rapport et rapport... -> Récup match + stats et Choix pondération stat
+* Début création Head To Head
+* Fixer un soucis que j'ai remarqué dans les constantes de l'appli "DRAW=WIN=LOSE" aucun sens :/
+
+Choses à faire demain :
+
+* Continuer a faire le head to head sur le site
+* Changer le tableau excel sur la réussite de la prédiction et le mettre à jour sur git toussa toussa
+* Continuer le rapport : Résumé + Abstract
+

@@ -12,14 +12,14 @@ class Prediction:
         self.winner=""
         
 
-        self.provider = Provider()
+        self.provider = Provider("../lib/log/app.log")
         
         
         try:
             #Change this line to API when tests are finished
-            self.results = self.provider.get_all_stats_from_teams_api(home_team, away_team)
-
-            #self.results = self.provider.get_all_stats_from_teams_db(home_team, away_team, from_date, to_date)
+            #self.results = self.provider.get_all_stats_from_teams_api(home_team, away_team)
+            # This line down below is here to test the success of the prediction. Making a prediction from a past game
+            self.results = self.provider.get_all_stats_from_teams_db(home_team, away_team, from_date, to_date)
             
             self.home_team_result.heat_of_moment = self.__compute_heat_moment(home_team, self.results["firstTeam_lastResults"])
             self.away_team_result.heat_of_moment = self.__compute_heat_moment(away_team, self.results["secondTeam_lastResults"])
@@ -36,6 +36,9 @@ class Prediction:
             
         
     def define_winner(self):
+        """
+        Returns the winner of the prediction by computing the offensive score, defensive score and the heat of moment
+        """
         if self.winner== "":
             if self.home_team_result.games_count > 0 and self.away_team_result.games_count > 0:    
                 home_team_final_score = self.__compute_off_score(self.home_team_result)
@@ -89,7 +92,7 @@ class Prediction:
         
     def __compute_heat_moment(self, team_name, last_results):
         """
-        Compute the heat of the moment of the team with its results
+        Compute the heat of the moment of the team with its last results
         """
         heat_of_moment = ""
         if len(last_results) > lib.constants.NB_GAMES_HEAT_OF_THE_MOMENT:    
@@ -136,6 +139,9 @@ class Prediction:
         pass
 
     def __insert_data_team_result(self, team_result_obj, last_results):
+        """
+        For each game in the last_results array, we insert the stats in team_result_obj
+        """
         for match in self.results[last_results]:
                 team_result_obj.games_count += 1
                 
