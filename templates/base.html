@@ -6,6 +6,8 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <title>{{ app_name }}</title>
+        {% block link %}{% endblock %}
+        
         <!-- Font Awesome icons (free version)-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -13,6 +15,7 @@
         <!-- Fonts CSS-->
         <link rel="stylesheet" href="{{ url_for('static', filename="css/heading.css") }}">
         <link rel="stylesheet" href="{{ url_for('static', filename="css/body.css") }}">
+        
     </head>
     <body id="page-top">
         <nav class="navbar navbar-expand-lg bg-secondary fixed-top" id="mainNav">

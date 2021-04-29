@@ -18,72 +18,87 @@
     </div>
     <div>
         <div class="text-center col-xlg-4 ml-auto">
-            <h3 class="text-secondary mb-0 d-inline-block">Previous Games</h3>
-            {% if previous_matches %}
+            <h3 class="text-secondary mb-0 d-inline-block">Previous Games</h3>     
+            <!-- Icon Divider-->
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+            </div>          
             <div class="table-responsive-md">
-                <table class="table table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                    <th>Home</th>
-                    <th>Away</th>
-                    <th>Real home score</th>
-                    <th>Real away score</th>
-                    <th>Date</th>
-                    </tr>
-                </thead>
-                {% for match in previous_matches %}
-                    <tr>
-                        {% if match["Home"] == match["Prediction winner"] %}
-                        <td class="text-success"><b>{{match["Home"]}}</b></td>
-                        <td class="text-danger">{{match["Away"]}}</td>
-                        {% elif match["Away"] == match["Prediction winner"] %}
-                        <td class="text-danger">{{match["Home"]}}</td>
-                        <td class="text-success"><b>{{match["Away"]}}</b></td>
-                        {% else %}
-                        <td class="text-warning"><b>{{match["Home"]}}</b></td>
-                        <td class="text-warning"><b>{{match["Away"]}}</b></td>
-                        {% endif %}
-                        <td>{{match["Real home score"]}}</td>
-                        <td>{{match["Real away score"]}}</td>
-                        <td>{{match["Date"]}}</td>
-                    </tr>
-                {% endfor %}
-                </table>
-            </div>
-            {% else %}
-            <p class="lead">No previous games stored.</p>
-            {% endif %}
-            
+                {%  if previous_matches %}
+                
+                    {% for league in previous_matches %}
+                    
+                    {% if previous_matches[league] %}
+                        <h4>{{league}}</h4>
+                        <table class="table table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                <th>Home</th>
+                                <th>Away</th>
+                                <th>Date</th>
+                                </tr>
+                            </thead>
+                            {% for match in previous_matches[league] %}
+                                <tr>
+                                    {% if match["Home"] == match["Prediction winner"] %}
+                                    <td class="text-success"><b>{{match["Home"]}}</b></td>
+                                    <td class="text-danger">{{match["Away"]}}</td>
+                                    {% elif match["Away"] == match["Prediction winner"] %}
+                                    <td class="text-danger">{{match["Home"]}}</td>
+                                    <td class="text-success"><b>{{match["Away"]}}</b></td>
+                                    {% else %}
+                                    <td class="text-warning"><b>{{match["Home"]}}</b></td>
+                                    <td class="text-warning"><b>{{match["Away"]}}</b></td>
+                                    {% endif %}
+                                    <td>{{match["Date"]}}</td>
+                                </tr>
+                            
+                            {% endfor %}
+                        </table>
+                    {% endif %}
+                    {% endfor %}
+                {% else %}
+                <p>No previous games stored.</p>
+                {% endif %}
+            </div>            
         </div>
         <div class="text-center col-xlg-4 mr-auto">
             <h3 class="text-secondary mb-0 d-inline-block">Upcoming Games</h3>
+            <!-- Icon Divider-->
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+            </div>
             {% if upcoming_matches %}
             <div class="table-responsive-md">
+                
+                {% for league in upcoming_matches %}
+                <h4>{{league}}</h4>
                 <table class="table table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                    <th>Home</th>
-                    <th>Away</th>
-                    <th>Date</th>
-                    </tr>
-                </thead>
-                {% for match in upcoming_matches %}
-                    <tr>
-                        {% if match["Home"] == match["Prediction winner"] %}
-                        <td class="text-success"><b>{{match["Home"]}}</b></td>
-                        <td class="text-danger">{{match["Away"]}}</td>
-                        {% elif match["Away"] == match["Prediction winner"] %}
-                        <td class="text-danger">{{match["Home"]}}</td>
-                        <td class="text-success"><b>{{match["Away"]}}</b></td>
-                        {% else %}
-                        <td class="text-warning"><b>{{match["Home"]}}</b></td>
-                        <td class="text-warning"><b>{{match["Away"]}}</b></td>
-                        {% endif %}
-                        
-                        <td>{{match["Date"]}}</td>
-                    </tr>
-                {% endfor %}
+                    <thead class="thead-dark">
+                        <tr>
+                        <th>Home</th>
+                        <th>Away</th>
+                        <th>Date</th>
+                        </tr>
+                    </thead>
+                    {% for match in upcoming_matches[league] %}
+                        <tr>
+                            {% if match["Home"] == match["Prediction winner"] %}
+                            <td class="text-success"><b>{{match["Home"]}}</b></td>
+                            <td class="text-danger">{{match["Away"]}}</td>
+                            {% elif match["Away"] == match["Prediction winner"] %}
+                            <td class="text-danger">{{match["Home"]}}</td>
+                            <td class="text-success"><b>{{match["Away"]}}</b></td>
+                            {% else %}
+                            <td class="text-warning"><b>{{match["Home"]}}</b></td>
+                            <td class="text-warning"><b>{{match["Away"]}}</b></td>
+                            {% endif %}
+                            <td>{{match["Date"]}}</td>
+                        </tr>
+                    
+                    {% endfor %}
                 </table>
+                {% endfor %}
             </div>
             {% else %}
             <p class="lead">No upcoming games.</p>

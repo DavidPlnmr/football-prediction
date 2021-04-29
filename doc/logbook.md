@@ -863,3 +863,49 @@ Choses à faire demain :
 * Changer le tableau excel sur la réussite de la prédiction et le mettre à jour sur git toussa toussa
 * Continuer le rapport : Résumé + Abstract
 
+### 29.04.2021
+
+![image-20210429081119639](C:\Users\Administrateur\AppData\Roaming\Typora\typora-user-images\image-20210429081119639.png)
+
+8h Voila le pourcentage de réussite après avoir fix le soucis des constantes de victoire, égalité, défaite
+
+9h Affichage plus correct sur la page d'accueil avec chaque ligue
+
+10h Essai de mettre la classe bootstrap select picker
+
+C'est abominable, si j'essaie d'importer le style du composant bootstrap le style de base de mon site se fait marcher dessus et si j'enlève juste le css, le composant s'affiche pas.
+
+ça m'aurait permis juste de transmettre les équipes pour la page h2h
+
+Bon du coup on va le faire sans fonction de recherche juste avec un optgroup pour chaque ligue
+
+Ok pour faire la création de la prédiction Head To Head j'ai besoin de faire une route pour chaque étape de la création de la prédiction
+
+Actuellement en train de voir comment fonctionne la récupération de données d'un formulaire avec Flask
+
+Ce tuto doit faire l'affaire : https://pythonbasics.org/flask-http-methods/
+
+16h J'ai fini de faire l'affichage pour la page Head To Head
+
+En gros ce qu'il manque à faire pour la perfectionner ça serait :
+
+* Virer le nom de l'équipe dans le deuxième select
+* Virer les autres ligues si je sélectionne une équipe anglaise par exemple
+
+Et ensuite il faudra faire la prédiction et afficher toutes les prédictions entre les deux équipes
+
+#### Recap de la journée
+
+Par rapport à ce que j'avais prévu de faire :
+
+* Le Head To Head est vachement avancé
+  * Il faut juste gérer quelques trucs de sécurité pour éviter de pouvoir choisir deux équipes de championnat différent
+  * Ne pas afficher le premier club sélectionné
+  * Ne pas afficher les autres ligues
+* Tableau excel changé mais j'ai pas perdu de temps et j'ai pris le max de match possibles sur une année -> 48% de réussite
+* Par contre pas une seule ligne de rapport faite
+
+Donc pour demain :
+
+* Faire ABSOLUMENT le Résumé et l'Abstract + Parler du score de la forme du moment dans `Choix de la pondération des stats`
+* Fixer les ptits soucis de la page Head To Head + faire la prédiction et la stocker
