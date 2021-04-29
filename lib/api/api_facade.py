@@ -74,12 +74,19 @@ class ApiFacade:
             endpoint_action+=f"&country_id={country_id}"
         return self.__get_action(f'action={endpoint_action}')
     
-    def get_teams(self, league_id):
+    def get_teams_from_league(self, league_id):
         """
         Get all the teams in the specified league_id
         """
         endpoint_action = "get_teams"
         return self.__get_action(f'action={endpoint_action}&league_id={league_id}')
+    
+    def get_teams_with_team_id(self, team_id):
+        """
+        Get all the teams in the specified league_id
+        """
+        endpoint_action = "get_teams"
+        return self.__get_action(f'action={endpoint_action}&team_id={team_id}')
     
     def get_stats_from_match(self, match_id):
         """

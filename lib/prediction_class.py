@@ -47,6 +47,8 @@ class Prediction:
                 home_team_final_score += self.__compute_def_score(self.home_team_result)
                 away_team_final_score += self.__compute_def_score(self.away_team_result)
                 
+                
+                
                 home_team_final_score += self.__compute_heat_moment_score(self.home_team_result)
                 away_team_final_score += self.__compute_heat_moment_score(self.away_team_result)
                 
@@ -59,22 +61,20 @@ class Prediction:
                     self.winner = self.get_away_team_name()    
                 else:
                     self.winner = "Draw"
-                    
                 
         return self.winner
         pass
     
-    def save_prediction(self, date_of_game="NULL", api_match_id="NULL"):
+    def save_prediction(self, league_id="NULL", league_name="NULL", date_of_game="NULL", api_match_id="NULL"):
         """
         Save the prediction in the DB
         """
+        
         return self.provider.save_prediction(self.define_winner(),
                                              self.get_home_team_name(),
                                              self.get_away_team_name(),
-                                             self.__compute_off_score(self.home_team_result),
-                                             self.__compute_def_score(self.home_team_result),
-                                             self.__compute_off_score(self.away_team_result),
-                                             self.__compute_def_score(self.away_team_result),
+                                             league_id,
+                                             league_name,
                                              date_of_game,
                                              api_match_id)
         

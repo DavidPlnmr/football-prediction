@@ -5,10 +5,8 @@ CREATE TABLE `prediction` (
   `api_match_id` int,
   `home_team_name` varchar(255),
   `away_team_name` varchar(255),
-  `off_score_home_team` double,
-  `def_score_home_team` double,
-  `off_score_away_team` double,
-  `def_score_away_team` double,
+  `league_id` int,
+  `league_name` varchar(255),
   `date_of_game` date
 );
 
