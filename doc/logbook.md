@@ -863,3 +863,8 @@ Choses à faire demain :
 * Changer le tableau excel sur la réussite de la prédiction et le mettre à jour sur git toussa toussa
 * Continuer le rapport : Résumé + Abstract
 
+### 29.04.2021
+
+![image-20210429081119639](C:\Users\Administrateur\AppData\Roaming\Typora\typora-user-images\image-20210429081119639.png)
+
+8h Voila le pourcentage de réussite après avoir fix le soucis des constantes de victoire, égalité, défaite
