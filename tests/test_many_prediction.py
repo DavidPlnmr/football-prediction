@@ -8,7 +8,7 @@ Correct predictions count; Games count; Percent of the delta
 import sys
 import os
 
-# insert the "import_test" directory into the sys.path
+# insert the "football-prediction" directory into the sys.path
 sys.path.insert(1, os.path.abspath(".."))
 
 from lib.prediction_class import Prediction
@@ -17,7 +17,7 @@ from datetime import date
 import lib.constants
 from dateutil.relativedelta import relativedelta # $ pip install python-dateutil
 
-prov = Provider()
+prov = Provider("../lib/log/app.log")
 
 response = prov.get_matches_from_to_db("2019-08-09", "2020-07-26")
 
