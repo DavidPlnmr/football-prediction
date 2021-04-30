@@ -34,7 +34,6 @@ def index():
         #Check if all the keys in the dict are empty
         if not any(cache["upcoming_matches"].values()):
             cache["upcoming_matches"]=[]
-    print(cache["previous_matches"])
     
     return render_template("index.html", app_name="Football Prediction", previous_matches=cache["previous_matches"], upcoming_matches=cache["upcoming_matches"])
 
@@ -106,18 +105,18 @@ def make_prediction(first_team_name, second_team_name, league_id, league_name, a
     """
     Make a new prediction for the upcoming matches
     """
-    pred = Prediction(first_team_name, second_team_name)
     
+    pred = Prediction(first_team_name, second_team_name)
+
     pred.save_prediction(league_id, league_name, date_of_game, api_match_id)
     
     game = {
         "Home" : first_team_name,
         "Away" : second_team_name,
         "Prediction winner" : pred.define_winner(),
-        "Date": date_of_game.strftime("%d %B %Y"),
+        "Date": date_of_game,
     }
     return game
-    
     pass
 
 def get_upcoming_matches_predictions(from_date, to_date, league_id):
@@ -155,7 +154,7 @@ def get_upcoming_matches_predictions(from_date, to_date, league_id):
                         
                         if int(match["match_id"]) not in array_match_ids:
 
-                            result.append(make_prediction(match["match_hometeam_name"], match["match_awayteam_name"], int(match["league_id"]), match["league_id"], int(match["match_id"]), match["match_date"]))
+                            result.append(make_prediction(match["match_hometeam_name"], match["match_awayteam_name"], int(match["league_id"]), match["league_name"], int(match["match_id"]), match["match_date"]))
                             array_match_ids.append(int(match["match_id"]))
             else:
                 # Make a prediction for this match
@@ -167,9 +166,7 @@ def get_upcoming_matches_multiple_leagues(from_date, to_date, multiple_leagues_a
     """
     Get the upcoming matches for multiple leagues give in param
     """
-    result = {
-        
-    }
+    result = {}
     for key in multiple_leagues_array:
         try:
             result[key] = get_upcoming_matches_predictions(from_date, to_date, multiple_leagues_array[key])            
@@ -184,12 +181,9 @@ def get_previous_matches_multiple_leagues(from_date, to_date, multiple_leagues_a
     """
     Get the previous matches for multiple leagues give in param
     """
-    result = {
-        
-    }
+    result = {}
     for key in multiple_leagues_array:
         result[key] = prov.get_previous_matches_predictions(from_date, to_date, multiple_leagues_array[key])            
-        
         pass
     return result
 

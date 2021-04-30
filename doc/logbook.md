@@ -1,5 +1,3 @@
-
-
 # Journal de bord
 
 Ce journal de bord a pour but de permettre de simplifier la rédaction du rapport final de stage de technicien. Le stage de technicien est un POC (proof of concept) du travail de diplôme de technicien. Il contiendra toutes les réflexions, les éléments techniques liés à votre travail, résumés des rencontres avec des enseignants, élèves, etc.
@@ -909,3 +907,7 @@ Donc pour demain :
 
 * Faire ABSOLUMENT le Résumé et l'Abstract + Parler du score de la forme du moment dans `Choix de la pondération des stats`
 * Fixer les ptits soucis de la page Head To Head + faire la prédiction et la stocker
+
+### 30.04.2021
+
+J'arrive et l'application marche plus :/ Je vais donc essayer de fixer tout les problem

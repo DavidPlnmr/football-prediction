@@ -109,7 +109,6 @@ class DbManager:
         """
         Insert a prediction in the database with the parameters given.
         """
-                            
         self.__cursor.execute(f"""INSERT INTO prediction (
                             `prediction`, 
                             `api_match_id`, 
