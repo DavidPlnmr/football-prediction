@@ -4,8 +4,20 @@ from lib.prediction_class import Prediction
 from lib.provider import Provider
 import lib.constants
 
+
 from dateutil.relativedelta import relativedelta
 from datetime import datetime
+import os
+
+dir = "./log"
+log_path = os.path.join(dir, "app.log")
+if not os.path.isdir(dir):
+    os.mkdir(dir)
+if not os.path.isfile(log_path):
+    f = open("app.log", "w")
+    f.close
+    
+    
 
 app = Flask(__name__)
 prov = Provider()

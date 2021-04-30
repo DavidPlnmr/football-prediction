@@ -12,7 +12,7 @@ class Prediction:
         self.winner=""
         
 
-        self.provider = Provider("../lib/log/app.log")
+        self.provider = Provider("../log/app.log")
         
         
         try:

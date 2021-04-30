@@ -967,7 +967,10 @@ On continue tout de même ce qu'on a commencé à faire avant l'évaluation à s
 
 On remplit la catégorie `CDC` -> `API` avec les explications plus précises des endpoints + comment j'ai eu élévation
 
+Création d'un dossier à la racine pour les log + fichier
 
+#### Recap de la journée
 
-
-
+* Changement du README et fichier de requirements pour simplifier l'installation de l'app
+* Review du projet en général de la part du responsable de projet
+* Doc technique + changement après remarque (app.log changement d'emplacement)
