@@ -955,6 +955,19 @@ Quelques petits trucs à ajouter qui n'ont rien à voir avec l'évaluation en ta
 * Pour avoir un truc technique en plus mais à faire plus tard
   * Faire une popup à l'arrivée du site pour les conditions d'utilisation + prévention sur paris sport que l'on doit accepter et qui se stocke dans les cookies
 
+Voilà à quoi ressemble ce qu'a noté M. Schmid : 
+
+![evalIntermed1](./img/evalIntermed1.jpg)
+
 ### 30.04.2021
 
 On continue tout de même ce qu'on a commencé à faire avant l'évaluation à savoir : le README
+
+14h45 Readme fait
+
+On remplit la catégorie `CDC` -> `API` avec les explications plus précises des endpoints + comment j'ai eu l'élevation
+
+
+
+
+
