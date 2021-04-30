@@ -14,10 +14,8 @@ log_path = os.path.join(dir, "app.log")
 if not os.path.isdir(dir):
     os.mkdir(dir)
 if not os.path.isfile(log_path):
-    f = open("app.log", "w")
-    f.close
-    
-    
+    f = open(log_path, "w")
+    f.close()
 
 app = Flask(__name__)
 prov = Provider()
