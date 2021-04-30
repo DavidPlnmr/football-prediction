@@ -7,8 +7,28 @@ This application, made in Python, is an application that make prediction on an h
 The API that I use to get all the data is https://apifootball.com. Make sure to have an API_KEY on this API before starting the project.
 
 ## Getting Started
-
 This app uses the third version of Python (so `python3`).
+
+### Windows 
+To start, it should be better to work on a WSL with VSCode, follow this link to setup a WSL : https://code.visualstudio.com/docs/remote/wsl
+### Linux
+You should be good to go.
+
+### MariaDB (MySQL)
+Once you have the good environment to develop, if it's not installed, install :
+```bash
+sudo apt install mariadb-client mariadb-server
+```
+Then start MariaDB :
+```bash
+sudo service mysql start
+```
+and 
+```bash
+sudo mysql_secure_installation
+```
+
+To connect to the DB, use DBeaver or MySQLWorkbench. It will be very helpful.
 
 ### `pip3`
 
