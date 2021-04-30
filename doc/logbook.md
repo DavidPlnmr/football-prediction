@@ -2,7 +2,9 @@
 
 Ce journal de bord a pour but de permettre de simplifier la rédaction du rapport final de stage de technicien. Le stage de technicien est un POC (proof of concept) du travail de diplôme de technicien. Il contiendra toutes les réflexions, les éléments techniques liés à votre travail, résumés des rencontres avec des enseignants, élèves, etc.
 
-## Contenu
+# Contenu
+
+## Stage
 
 ### 30.03.2021
 
@@ -347,6 +349,8 @@ Choses à faire demain :
 14h15 On continue à bosser sur le provider
 
 15h La classe Prediction n'a plus besoin du Provider, maintenant il faut faire les méthodes pour le fichier principal du projet. Donc une méthode `getUpcomingMatches()`
+
+## Début TD
 
 ### 19.04.2021
 
@@ -863,7 +867,7 @@ Choses à faire demain :
 
 ### 29.04.2021
 
-![image-20210429081119639](C:\Users\Administrateur\AppData\Roaming\Typora\typora-user-images\image-20210429081119639.png)
+![pourcentageReussitePrediction](./img/pourcentReussitePredictionV2.png)
 
 8h Voila le pourcentage de réussite après avoir fix le soucis des constantes de victoire, égalité, défaite
 
@@ -910,4 +914,47 @@ Donc pour demain :
 
 ### 30.04.2021
 
-J'arrive et l'application marche plus :/ Je vais donc essayer de fixer tout les problem
+J'arrive et l'application marche plus :/ Je vais donc essayer de fixer tout les problemes.
+Ok tout est bon y'avait un soucis sur l'affichage et dans l'insertion d'une prediction dans la base de données
+
+Je commence à faire le rapport. J'avancerais dans la fonctionnalité H2H plus tard
+
+Et pour la fonction Head To Head, il va falloir vérifier côté serveur que les deux équipes soient dans le même championnat. Probablement passé
+
+Pour les paquets nécessaire à l'application, je viens de discuter avec Fabian qui m'a expliqué qu'il y a la possibilité d'extraire tout les paquets de notre `venv` dans un fichier .txt appelé `requirements` et qu'ensuite en faisant `pip3 install -r requirements.txt` cela installe toute les dépendances de l'application.
+
+Pour sortir les requirements :
+
+```bash
+pip3 freeze > requirements.txt
+```
+
+ça me permet d'alléger le README et d'éviter de le mettre à jour manuellement à chaque fois que j'ai besoin d'un nouveau paquet. Et cela permet aussi de simplifier l'installation de l'application sur un nouveau PC.
+
+## Evaluation intermédiaire 1.
+
+Tout d'abord, on est bien :). Mais on se repose pas sur nos acquis loin de là. Ce qu'il faut travailler :
+
+* Doc
+  * Avancer dans la technique sur la doc -> comment j'ai fait pour appliquer le design pattern et la théorie dans mon programme
+    * Technique de programmation
+      * Pseudo code des pondérations
+      * Architecture
+      * Requêtes à l'API
+      * Requêtes à la base de données
+  * Dans la doc, plus expliquer les endpoints de l'API (quelles sont les sorties ?  + comment j'ai réussi à avoir une élevation?)
+  * Voir pour faire de VRAIS Unit Tests + les documenter
+  * Voir potentiellement pour un paquet de documentation de code
+* Code
+  * La structure est bonne
+  * Attention à ne pas arrêter de commenter le code malgré que certaines méthodes soient évidentes
+
+Quelques petits trucs à ajouter qui n'ont rien à voir avec l'évaluation en tant que tel :
+
+* Les logs ne doivent pas être dans le git et ils doivent être à la racine -> création automatique lors du lancement de l'application ou à la main pour l'instant
+* Pour avoir un truc technique en plus mais à faire plus tard
+  * Faire une popup à l'arrivée du site pour les conditions d'utilisation + prévention sur paris sport que l'on doit accepter et qui se stocke dans les cookies
+
+### 30.04.2021
+
+On continue tout de même ce qu'on a commencé à faire avant l'évaluation à savoir : le README

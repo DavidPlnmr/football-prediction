@@ -4,13 +4,11 @@ This application, made in Python, is an application that make prediction on an h
 
 ## API
 
-The API that I use to get all the data is https://apifootball.com.
+The API that I use to get all the data is https://apifootball.com. Make sure to have an API_KEY on this API before starting the project.
 
 ## Getting Started
 
 This app uses the third version of Python (so `python3`).
-
-
 
 ### `pip3`
 
@@ -40,47 +38,35 @@ Now, you can see that your shell is working on your virtual environment for Pyth
 
 Now, make all the `pip3 install` commands in the venv.
 
-### `Requests` package
-The package is used to make calls to the API that it's used. Be certain that you have this package downloaded before launching the app.
+To disable the venv just make `deactivate`.
+
+### Requirements
+
+Once, you have installed the `pip3` and `python3-venv`, the last thing you have to do is :
+
 ```bash
-pip3 install requests
+pip3 install -r requirements.txt
+
+This command will installed all the packages that the project needs.
+
+**/ ! \\** Do not touch this file.
+
+### Database
+
+Firstly, create DB called `footballPrediction`,  (respect the name, else it won't work), then run the sql script which is located in `/lib/sql/db.sql`
+
+### .env
+
+For the environment variables, make a copy of the `.env.example` file in the root repository. Once, you have done it, include the `API_KEY` that you get in from [APIFootball](https://apifootball.com), the name of the user from the DB with his password, and the host.
+
 ```
-
-### `Dotenv`
-Make sure to have `python-dotenv` installed. Then, you'll need to make a copy of the `.env.example` file and name it `.env` and put your own credentials in the environment variable `API_KEY`. You can get your own key at this link : https://apifootball.com
-
-To install :
-```bash
-pip3 install python-dotenv
-```
-
-### `Database`
-The app uses a database. You can find the structure of the DB in the "sql" repository. Don't forget to change the `.env` file with the correct username and password to connect to your DB.
-
-To install the package that permits you to communicate with the DB :
-```bash
-pip3 install mysql-connector-python
-```
-
-### `Python Flask`
-For the view, we use Python Flask. To make all the good setup, follow the link down below :
-https://flask.palletsprojects.com/en/1.1.x/installation/
-
-OR
-
-```bash
-pip3 install Flask
-```
-And then to run the view make `flask run`
-
-### Dateutil
-
-This package is used to make addition of dates.
-
-Installation : 
-```bash
-pip3 install python-dateutil
+API_KEY=[YOUR_API_KEY]
+DB_USER=[YOUR_USERNAME]
+DB_PASSWORD=[YOUR_PASSWORD]
+DB_HOST=[THE_HOST_WHERE_THE_DB_IS]
 ```
 
 ## Thanks
+
 I really want to thank the team behind [APIFootball](https://apifootball.com) who generously elevated my plan for the period of this work.
+

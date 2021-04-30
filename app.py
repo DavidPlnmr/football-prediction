@@ -48,14 +48,20 @@ def h2h():
     if "teams" not in cache:
         for league_name in leagues:    
             sorted_teams = sorted(prov.get_teams_from_league(leagues[league_name]), key=sort_by_team_name)
+            
+            #Insert the team id to make the verification for the prediction
+            for team in sorted_teams:
+                team["league_id"] = leagues[league_name]
+            
             teams[league_name] = sorted_teams
             
         cache["teams"] = teams
+        
     return render_template("h2h.html", app_name="Football Prediction", all_teams=cache["teams"])
 
-@app.route('/h2h/<int:first_team_id>')
-def h2h_one_team_selected(first_team_id):
-    first_team=prov.get_teams_with_team_id(first_team_id)
+@app.route('/h2h/<int:first_team>')
+def h2h_one_team_selected(first_team):
+    first_team=prov.get_teams_with_team_id(first_team)
     
     team_infos={
         "team_key" : first_team[0]["team_key"],
@@ -64,8 +70,8 @@ def h2h_one_team_selected(first_team_id):
     }
     return render_template("h2h.html", app_name="Football Prediction", all_teams=cache["teams"], first_team=team_infos)
 
-@app.route('/h2h/<int:first_team_id>/<int:second_team_id>')
-def h2h_two_teams_selected(first_team_id, second_team_id):
+@app.route('/h2h/<int:first_team>/<int:second_team>')
+def h2h_two_teams_selected(first_team, second_team):
     first_team=prov.get_teams_with_team_id(first_team_id)
     second_team=prov.get_teams_with_team_id(second_team_id)
     
@@ -86,12 +92,18 @@ def h2h_two_teams_selected(first_team_id, second_team_id):
 
 @app.route('/h2h/select', methods=["POST"])
 def h2h_select():
-    first_team_id = request.form["teamIdHome"]
-    if "teamIdAway" in request.form:
-        second_team_id = request.form["teamIdAway"]
-        return redirect(url_for('h2h_two_teams_selected', first_team_id=first_team_id, second_team_id=second_team_id))
+    first_team_infos = request.form["teamIdHome"].split(";")
+    if len(first_team_infos)==2:
+        if "teamIdAway" in request.form:
+            second_team_infos = request.form["teamIdAway"].split(";")
+            return redirect(url_for('h2h_two_teams_selected', first_team=first_team_infos, second_team=second_team_infos))
+        else:
+            print(first_team_infos)
+            return redirect(url_for('h2h_one_team_selected', first_team=first_team_infos))
+            pass
     else:
-        return redirect(url_for('h2h_one_team_selected', first_team_id=first_team_id))
+        return redirect(url_for("h2h"))
+    
 
 """
 COMPETITIONS ROUTE
@@ -146,7 +158,7 @@ def get_upcoming_matches_predictions(from_date, to_date, league_id):
                             "Home" : prediction["home_team_name"],
                             "Away" : prediction["away_team_name"],
                             "Prediction winner" : prediction["prediction"],
-                            "Date": prediction["date_of_game"].strftime("%d %B %Y"),
+                            "Date": prediction["date_of_game"],
                         }
                         result.append(game)
                     

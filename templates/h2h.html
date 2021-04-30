@@ -2,7 +2,10 @@
 
 {% block header %}Head To Head{% endblock %}
 
-{% block description %}Make an hypothetic prediction.{% endblock %}
+{% block description %}
+Make an hypothetic prediction. 
+Make sure to select two teams from the same championship. Else the prediction won't be correct.
+{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -39,7 +42,7 @@
     </div>
 </div>
 
-
+{% if not first_team %}
 <!-- First Modal -->
 <div id="firstTeamModal" class="modal fade" role="dialog">
   <div class="modal-dialog modal-md">
@@ -58,7 +61,7 @@
                 {% for league_name in all_teams %}
                   <optgroup label="{{league_name}}">
                   {% for team in all_teams[league_name] %}
-                  <option value="{{ team["team_key"] }}">{{ team["team_name"] }}</option>
+                  <option value="{{ team["league_id"] }};{{ team["team_key"] }}">{{ team["team_name"] }}</option>
                   {% endfor %}
                   </optgroup>
                 {% endfor %}
@@ -71,8 +74,9 @@
 
   </div>
 </div>
+{% endif %}
 
-
+{% if first_team %}
 <!-- Second Modal -->
 <div id="secondTeamModal" class="modal fade" role="dialog">
   <div class="modal-dialog modal-md">
@@ -91,7 +95,7 @@
                 {% for league_name in all_teams %}
                   <optgroup label="{{league_name}}">
                   {% for team in all_teams[league_name] %}
-                  <option value="{{ team["team_key"] }}">{{ team["team_name"] }}</option>
+                  <option value="{{ league_name }};{{ team["team_key"] }}">{{ team["team_name"] }}</option>
                   {% endfor %}
                   </optgroup>
                 {% endfor %}
@@ -107,6 +111,7 @@
 
   </div>
 </div>
+{% endif %}
 
 </form>
 {% endblock %}
