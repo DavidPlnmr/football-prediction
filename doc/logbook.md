@@ -965,7 +965,7 @@ On continue tout de même ce qu'on a commencé à faire avant l'évaluation à s
 
 14h45 Readme fait
 
-On remplit la catégorie `CDC` -> `API` avec les explications plus précises des endpoints + comment j'ai eu l'élevation
+On remplit la catégorie `CDC` -> `API` avec les explications plus précises des endpoints + comment j'ai eu élévation
 
 
 

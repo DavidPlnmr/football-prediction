@@ -66,6 +66,7 @@ Once, you have installed the `pip3` and `python3-venv`, the last thing you have 
 
 ```bash
 pip3 install -r requirements.txt
+```
 
 This command will installed all the packages that the project needs.
 
