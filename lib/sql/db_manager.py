@@ -88,11 +88,10 @@ class DbManager:
                                 WHERE m.home_team_name="{first_team_name}" 
                                 OR m.away_team_name="{first_team_name}" 
                                 OR m.home_team_name="{second_team_name}" 
-                                OR m.away_team_name="{second_team_name}"
-                                AND m.`date` < "2019-09-19" """
+                                OR m.away_team_name="{second_team_name}" """
         
         if len(from_date)>0 and len(to_date)>0:
-            query += f'AND m.date > "{from_date}" AND m.date < {to_date}'
+            query += f'AND m.date > "{from_date}" AND m.date < "{to_date}"'
             
         query += ";"
         
@@ -109,7 +108,8 @@ class DbManager:
         """
         Insert a prediction in the database with the parameters given.
         """
-        self.__cursor.execute(f"""INSERT INTO prediction (
+        try:
+            self.__cursor.execute(f"""INSERT INTO prediction (
                             `prediction`, 
                             `api_match_id`, 
                             `home_team_name`, 
@@ -119,9 +119,14 @@ class DbManager:
                             `date_of_game`)
                             VALUES ( "{prediction}", {api_match_id},  "{home_team_name}", "{away_team_name}", {league_id}, "{league_name}", "{date_of_game}");""")
         
-        self.__db.commit() # Save the changes
-        logging.info(f"Inserted prediction in the DB with params : {prediction}, {api_match_id}, {home_team_name}, {away_team_name}, {league_id}, {league_name}, {date_of_game}")
-        return True
+            self.__db.commit() # Save the changes
+            logging.info(f"Inserted prediction in the DB with params : {prediction}, {api_match_id}, {home_team_name}, {away_team_name}, {league_id}, {league_name}, {date_of_game}")
+            return True
+        except mysql.connector.Error as error: # If something happens in our insert
+            logging.warning(f"Error with insert predicitons : {error}")
+            return False
+            pass
+        
     
     def delete_at(self, id):
         """
@@ -136,7 +141,7 @@ class DbManager:
         """
         Insert a match with its stats in the database with the parameters given.
         """
-        #We try to make our queries
+        #We try to make our inserts
         try:
             self.__cursor.execute(f"""INSERT INTO `match` (
                             `id`, 
@@ -165,8 +170,8 @@ class DbManager:
             logging.info(f"Inserted match in the DB with params : {match_id},  {match_date}, {match_time}, {league_id}, {league_name}, {home_team_name}, {away_team_name}, {home_team_score}, {away_team_score}, {stats_array}")
             return True
         
-        except mysql.connector.Error as error: # If something happens in our queries
-            self.__db.rollback() # We cancel our queries
+        except mysql.connector.Error as error: # If something happens in our insert
+            self.__db.rollback() # We cancel our insert
             logging.warning(f"Rolled back the transaction : {error}")
             return False
             pass

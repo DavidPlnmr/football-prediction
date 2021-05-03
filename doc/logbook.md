@@ -974,3 +974,11 @@ Création d'un dossier à la racine pour les log + fichier
 * Changement du README et fichier de requirements pour simplifier l'installation de l'app
 * Review du projet en général de la part du responsable de projet
 * Doc technique + changement après remarque (app.log changement d'emplacement)
+
+### 03.05.2021
+
+8h Exclusivement de la doc aujourd'hui `Gestion de la base de données` avec explication de comment j'ai procédé sur la conception de la classe
+
+12h40 Doc partie technique `Provider` 
+
+Actuellement en train d'expliquer la méthode qui met les données de l'API dans le bon format
