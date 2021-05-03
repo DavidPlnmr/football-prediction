@@ -72,7 +72,6 @@ def h2h():
 @app.route('/h2h/<int:first_team>')
 def h2h_one_team_selected(first_team):
     first_team=prov.get_teams_with_team_id(first_team)
-    
     team_infos={
         "team_key" : first_team[0]["team_key"],
         "team_name" : first_team[0]["team_name"],
@@ -103,6 +102,7 @@ def h2h_two_teams_selected(first_team, second_team):
 @app.route('/h2h/select', methods=["POST"])
 def h2h_select():
     first_team_infos = request.form["teamIdHome"].split(";")
+    print(first_team_infos)
     if len(first_team_infos)==2:
         if "teamIdAway" in request.form:
             second_team_infos = request.form["teamIdAway"].split(";")

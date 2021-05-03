@@ -982,3 +982,21 @@ Création d'un dossier à la racine pour les log + fichier
 12h40 Doc partie technique `Provider` 
 
 Actuellement en train d'expliquer la méthode qui met les données de l'API dans le bon format
+
+**/ ! \ 
+D'AILLEURS NE PAS OUBLIER QUAND JE REVIENDRAIS DANS LA PARTIE THEORIQUE DE DIRE POURQUOI EST-CE QUE J'AI PAS CHOISI LES MÊMES NOMS DE COLONNE QUE L'API (match.match_id = répétition de match alors qu'il y a déjà le nom de la table) ET DE DIRE QUE CELA A CRÉÉ UNE "REPETITION DE CODE" **
+
+Explication de la partie technique de la création d'une prédiction
+
+
+
+Je viens de remarquer qu'il y a un soucis avec la route Head To Head, on ne peut pas passer une liste à une route avec url_for, du moins la manière dont je le fais ne fonctionne pas
+
+#### Recap de la journée
+
+* Essentiellement de la doc et quelques changement au niveau des commentaires du code + changement d'emplacement des fichiers de tests (api et db)
+
+Choses à faire demain :
+
+* Continuer la doc,
+* une fois que la doc est finie, fixer le soucis ou trouver une solution pour le head to head
