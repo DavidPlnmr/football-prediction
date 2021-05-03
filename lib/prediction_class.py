@@ -12,7 +12,7 @@ class Prediction:
         self.winner=""
         
 
-        self.provider = Provider("../lib/log/app.log")
+        self.provider = Provider("../log/app.log")
         
         
         try:
@@ -46,8 +46,6 @@ class Prediction:
                 
                 home_team_final_score += self.__compute_def_score(self.home_team_result)
                 away_team_final_score += self.__compute_def_score(self.away_team_result)
-                
-                
                 
                 home_team_final_score += self.__compute_heat_moment_score(self.home_team_result)
                 away_team_final_score += self.__compute_heat_moment_score(self.away_team_result)

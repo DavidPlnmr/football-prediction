@@ -35,11 +35,15 @@
                                 <tr>
                                 <th>Home</th>
                                 <th>Away</th>
+                                <th>Real home score</th>
+                                <th>Real away score</th>
                                 <th>Date</th>
                                 </tr>
                             </thead>
                             {% for match in previous_matches[league] %}
+                                {% if match["Real home score"] != "" and match["Real away score"] != "" %}
                                 <tr>
+                                
                                     {% if match["Home"] == match["Prediction winner"] %}
                                     <td class="text-success"><b>{{match["Home"]}}</b></td>
                                     <td class="text-danger">{{match["Away"]}}</td>
@@ -50,15 +54,17 @@
                                     <td class="text-warning"><b>{{match["Home"]}}</b></td>
                                     <td class="text-warning"><b>{{match["Away"]}}</b></td>
                                     {% endif %}
+                                    <td>{{match["Real home score"]}}</td>
+                                    <td>{{match["Real away score"]}}</td>
                                     <td>{{match["Date"]}}</td>
                                 </tr>
-                            
+                                {% endif %}
                             {% endfor %}
                         </table>
                     {% endif %}
                     {% endfor %}
                 {% else %}
-                <p>No previous games stored.</p>
+                <p class="lead" >No previous games stored.</p>
                 {% endif %}
             </div>            
         </div>

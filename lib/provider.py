@@ -13,7 +13,7 @@ class Provider:
     """
     This provider is used in the main.py file and in the prediction_class.py
     """
-    def __init__(self, log_path='./lib/log/app.log'):
+    def __init__(self, log_path='./log/app.log'):
         load_dotenv()
         logging.basicConfig(filename=log_path, filemode='a', format='%(asctime)s - %(levelname)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.INFO)
         self.api_facade = ApiFacade(os.getenv("API_KEY"), log_path)
@@ -128,7 +128,6 @@ class Provider:
         else:
             logging.error("No results for one of the two teams selected")
             raise Exception("No results for one of the two team selected")
-        pass
     
     def get_previous_matches_predictions(self, from_date, to_date, league_id=""):
         """

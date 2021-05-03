@@ -4,8 +4,18 @@ from lib.prediction_class import Prediction
 from lib.provider import Provider
 import lib.constants
 
+
 from dateutil.relativedelta import relativedelta
 from datetime import datetime
+import os
+
+dir = "./log"
+log_path = os.path.join(dir, "app.log")
+if not os.path.isdir(dir):
+    os.mkdir(dir)
+if not os.path.isfile(log_path):
+    f = open(log_path, "w")
+    f.close()
 
 app = Flask(__name__)
 prov = Provider()
@@ -34,7 +44,6 @@ def index():
         #Check if all the keys in the dict are empty
         if not any(cache["upcoming_matches"].values()):
             cache["upcoming_matches"]=[]
-    print(cache["previous_matches"])
     
     return render_template("index.html", app_name="Football Prediction", previous_matches=cache["previous_matches"], upcoming_matches=cache["upcoming_matches"])
 
@@ -49,15 +58,20 @@ def h2h():
     if "teams" not in cache:
         for league_name in leagues:    
             sorted_teams = sorted(prov.get_teams_from_league(leagues[league_name]), key=sort_by_team_name)
+            
+            #Insert the team id to make the verification for the prediction
+            for team in sorted_teams:
+                team["league_id"] = leagues[league_name]
+            
             teams[league_name] = sorted_teams
             
         cache["teams"] = teams
+        
     return render_template("h2h.html", app_name="Football Prediction", all_teams=cache["teams"])
 
-@app.route('/h2h/<int:first_team_id>')
-def h2h_one_team_selected(first_team_id):
-    first_team=prov.get_teams_with_team_id(first_team_id)
-    
+@app.route('/h2h/<int:first_team>')
+def h2h_one_team_selected(first_team):
+    first_team=prov.get_teams_with_team_id(first_team)
     team_infos={
         "team_key" : first_team[0]["team_key"],
         "team_name" : first_team[0]["team_name"],
@@ -65,8 +79,8 @@ def h2h_one_team_selected(first_team_id):
     }
     return render_template("h2h.html", app_name="Football Prediction", all_teams=cache["teams"], first_team=team_infos)
 
-@app.route('/h2h/<int:first_team_id>/<int:second_team_id>')
-def h2h_two_teams_selected(first_team_id, second_team_id):
+@app.route('/h2h/<int:first_team>/<int:second_team>')
+def h2h_two_teams_selected(first_team, second_team):
     first_team=prov.get_teams_with_team_id(first_team_id)
     second_team=prov.get_teams_with_team_id(second_team_id)
     
@@ -87,12 +101,19 @@ def h2h_two_teams_selected(first_team_id, second_team_id):
 
 @app.route('/h2h/select', methods=["POST"])
 def h2h_select():
-    first_team_id = request.form["teamIdHome"]
-    if "teamIdAway" in request.form:
-        second_team_id = request.form["teamIdAway"]
-        return redirect(url_for('h2h_two_teams_selected', first_team_id=first_team_id, second_team_id=second_team_id))
+    first_team_infos = request.form["teamIdHome"].split(";")
+    print(first_team_infos)
+    if len(first_team_infos)==2:
+        if "teamIdAway" in request.form:
+            second_team_infos = request.form["teamIdAway"].split(";")
+            return redirect(url_for('h2h_two_teams_selected', first_team=first_team_infos, second_team=second_team_infos))
+        else:
+            print(first_team_infos)
+            return redirect(url_for('h2h_one_team_selected', first_team=first_team_infos))
+            pass
     else:
-        return redirect(url_for('h2h_one_team_selected', first_team_id=first_team_id))
+        return redirect(url_for("h2h"))
+    
 
 """
 COMPETITIONS ROUTE
@@ -106,18 +127,18 @@ def make_prediction(first_team_name, second_team_name, league_id, league_name, a
     """
     Make a new prediction for the upcoming matches
     """
-    pred = Prediction(first_team_name, second_team_name)
     
+    pred = Prediction(first_team_name, second_team_name)
+
     pred.save_prediction(league_id, league_name, date_of_game, api_match_id)
     
     game = {
         "Home" : first_team_name,
         "Away" : second_team_name,
         "Prediction winner" : pred.define_winner(),
-        "Date": date_of_game.strftime("%d %B %Y"),
+        "Date": date_of_game,
     }
     return game
-    
     pass
 
 def get_upcoming_matches_predictions(from_date, to_date, league_id):
@@ -147,7 +168,7 @@ def get_upcoming_matches_predictions(from_date, to_date, league_id):
                             "Home" : prediction["home_team_name"],
                             "Away" : prediction["away_team_name"],
                             "Prediction winner" : prediction["prediction"],
-                            "Date": prediction["date_of_game"].strftime("%d %B %Y"),
+                            "Date": prediction["date_of_game"],
                         }
                         result.append(game)
                     
@@ -155,7 +176,7 @@ def get_upcoming_matches_predictions(from_date, to_date, league_id):
                         
                         if int(match["match_id"]) not in array_match_ids:
 
-                            result.append(make_prediction(match["match_hometeam_name"], match["match_awayteam_name"], int(match["league_id"]), match["league_id"], int(match["match_id"]), match["match_date"]))
+                            result.append(make_prediction(match["match_hometeam_name"], match["match_awayteam_name"], int(match["league_id"]), match["league_name"], int(match["match_id"]), match["match_date"]))
                             array_match_ids.append(int(match["match_id"]))
             else:
                 # Make a prediction for this match
@@ -167,9 +188,7 @@ def get_upcoming_matches_multiple_leagues(from_date, to_date, multiple_leagues_a
     """
     Get the upcoming matches for multiple leagues give in param
     """
-    result = {
-        
-    }
+    result = {}
     for key in multiple_leagues_array:
         try:
             result[key] = get_upcoming_matches_predictions(from_date, to_date, multiple_leagues_array[key])            
@@ -184,12 +203,9 @@ def get_previous_matches_multiple_leagues(from_date, to_date, multiple_leagues_a
     """
     Get the previous matches for multiple leagues give in param
     """
-    result = {
-        
-    }
+    result = {}
     for key in multiple_leagues_array:
         result[key] = prov.get_previous_matches_predictions(from_date, to_date, multiple_leagues_array[key])            
-        
         pass
     return result
 
