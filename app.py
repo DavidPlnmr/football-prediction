@@ -53,67 +53,91 @@ HEAD TO HEAD ROUTE
 @app.route('/h2h')
 def h2h():   
     leagues = lib.constants.MULTIPLE_LEAGUES
-    teams = {}
-    
-    if "teams" not in cache:
-        for league_name in leagues:    
-            sorted_teams = sorted(prov.get_teams_from_league(leagues[league_name]), key=sort_by_team_name)
-            
-            #Insert the team id to make the verification for the prediction
-            for team in sorted_teams:
-                team["league_id"] = leagues[league_name]
-            
-            teams[league_name] = sorted_teams
-            
-        cache["teams"] = teams
-        
-    return render_template("h2h.html", app_name="Football Prediction", all_teams=cache["teams"])
+    return render_template("h2h.html", app_name="Football Prediction", leagues=leagues)
 
-@app.route('/h2h/<int:first_team>')
-def h2h_one_team_selected(first_team):
+@app.route('/h2h/<int:league_id>/<int:first_team>')
+def h2h_one_team_selected(league_id, first_team):
     first_team=prov.get_teams_with_team_id(first_team)
+    
     team_infos={
-        "team_key" : first_team[0]["team_key"],
-        "team_name" : first_team[0]["team_name"],
-        "team_badge" : first_team[0]["team_badge"],
+        "key" : first_team[0]["team_key"],
+        "name" : first_team[0]["team_name"],
+        "badge" : first_team[0]["team_badge"],
     }
-    return render_template("h2h.html", app_name="Football Prediction", all_teams=cache["teams"], first_team=team_infos)
+    print(cache["teams"])
+    return render_template("h2h.html", app_name="Football Prediction", league_id=league_id, teams=cache["teams"], first_team=team_infos)
 
-@app.route('/h2h/<int:first_team>/<int:second_team>')
-def h2h_two_teams_selected(first_team, second_team):
-    first_team=prov.get_teams_with_team_id(first_team_id)
-    second_team=prov.get_teams_with_team_id(second_team_id)
+@app.route('/h2h/<int:league_id>/<int:first_team>/<int:second_team>')
+def h2h_two_teams_selected(league_id, first_team, second_team):
+    first_team=prov.get_teams_with_team_id(first_team)
+    second_team=prov.get_teams_with_team_id(second_team)
     
     first_team_infos={
-        "team_key" : first_team[0]["team_key"],
-        "team_name" : first_team[0]["team_name"],
-        "team_badge" : first_team[0]["team_badge"],
+        "key" : first_team[0]["team_key"],
+        "name" : first_team[0]["team_name"],
+        "badge" : first_team[0]["team_badge"],
     }
     
     second_team_infos={
-        "team_key" : second_team[0]["team_key"],
-        "team_name" : second_team[0]["team_name"],
-        "team_badge" : second_team[0]["team_badge"],
+        "key" : second_team[0]["team_key"],
+        "name" : second_team[0]["team_name"],
+        "badge" : second_team[0]["team_badge"],
     }
     
-    return render_template("h2h.html", app_name="Football Prediction", all_teams=cache["teams"], first_team=first_team_infos, second_team=second_team_infos)
+    return render_template("h2h.html", app_name="Football Prediction", league_id=league_id, first_team=first_team_infos, second_team=second_team_infos)
 
 
-@app.route('/h2h/select', methods=["POST"])
-def h2h_select():
-    first_team_infos = request.form["teamIdHome"].split(";")
-    print(first_team_infos)
-    if len(first_team_infos)==2:
-        if "teamIdAway" in request.form:
-            second_team_infos = request.form["teamIdAway"].split(";")
-            return redirect(url_for('h2h_two_teams_selected', first_team=first_team_infos, second_team=second_team_infos))
-        else:
-            print(first_team_infos)
-            return redirect(url_for('h2h_one_team_selected', first_team=first_team_infos))
-            pass
+
+@app.route('/h2h/teams/select', methods=["POST"])
+def h2h_teams_select():
+    first_team = request.form["teamIdHome"]
+    league_id = request.form["leagueId"]
+
+    if "teamIdAway" in request.form:
+        second_team = request.form["teamIdAway"]
+        
+        return redirect(url_for('h2h_two_teams_selected', league_id=league_id, first_team=first_team, second_team=second_team))
     else:
-        return redirect(url_for("h2h"))
+        return redirect(url_for('h2h_one_team_selected', league_id=league_id, first_team=first_team))
+        pass
+
+@app.route('/h2h/<int:league_id>')
+def h2h_league_selected(league_id):
+    response = prov.get_teams_from_league(league_id)
+    teams = []
     
+    for team in response:
+        team_info = {
+            "key" : team["team_key"],
+            "name" : team["team_name"],
+            "badge" : team["team_badge"]
+        }
+        teams.append(team_info)
+    
+    sorted_teams = sorted(teams, key=sort_by_team_name)
+    
+    cache["teams"] = sorted_teams
+    
+    return render_template("h2h.html", app_name="Football Prediction", league_id=league_id, teams=cache["teams"])
+    
+
+@app.route('/h2h/league/select', methods=["POST"])
+def h2h_league_select():
+    league_id = request.form["leagueId"]
+    print(league_id)
+    return redirect(url_for('h2h_league_selected', league_id=league_id))
+
+@app.route('/h2h/make', methods=["POST"])
+def h2h_make_prediction():
+    first_team = request.form["teamIdHome"]
+    second_team = request.form["teamIdAway"]
+    league_id = request.form["leagueId"]
+    print(league_id)
+    print(first_team)
+    print(second_team)
+    return render_template("h2h.html", app_name="Football Prediction", first_team=first_team, second_team=second_team)
+
+
 
 """
 COMPETITIONS ROUTE
@@ -213,7 +237,7 @@ def sort_by_team_name(team):
     """
     This method is useful to sort the teams in the select 
     """
-    return team.get("team_name")
+    return team.get("name")
     
 
 app.run(host="127.0.0.1", port=8080, debug=True)

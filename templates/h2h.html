@@ -10,33 +10,47 @@ Make sure to select two teams from the same championship. Else the prediction wo
 {% block content %}
 <div class="container">
     <div class="text-center row">
+        {% if (league_id and teams) or (second_team and first_team) %}
         <div class="col-sm">
-        <h1>Home</h1><br>
-        {% if not first_team %}
-        <button type="button" class="btn btn-primary btn-xlg-2" data-toggle="modal" data-target="#firstTeamModal">+</button>
+          <h1>Home</h1><br>
+          {% if not first_team %}
+          <button type="button" class="btn btn-primary btn-xlg-2" data-toggle="modal" data-target="#firstTeamModal">+</button>
+          {% else %}
+          <img src="{{first_team["badge"]}}">
+          <br>
+          <p>{{ first_team["name"] }}</p>
+          {% endif %}
+          
+          </div>
+    
+          <div class="col-sm">
+          <br>
+          <h2>VS.</h2><br>
+          {% if first_team and second_team %}
+            <form action="{{ url_for("h2h_make_prediction") }}" method="post">
+              <input type="hidden" name="leagueId" value="{{ league_id }}">
+              <input type="hidden" name="teamIdHome" value="{{ first_team }}">
+              <input type="hidden" name="teamIdAway" value="{{ second_team }}">
+            <p class="text-center"><input class="btn btn-secondary" type="submit" value="Make the prediction"></p>
+            </form>
+          {% endif %}
+          </div>
+
+          <div class="col-sm">
+          <h1>Away</h1><br>
+          {% if first_team and not second_team %}
+          <button type="button" class="btn btn-primary btn-xlg-2" data-toggle="modal" data-target="#secondTeamModal">+</button>
+          {% endif %}
+          {% if second_team %}
+          <img src="{{second_team["badge"]}}">
+          <br>
+          <p>{{ second_team["name"] }}</p>
+          {% endif %}
         {% else %}
-        <img src="{{first_team["team_badge"]}}">
-        <br>
-        <p>{{ first_team["team_name"] }}</p>
-        {% endif %}
-        
+        <div class="col-sm text-center">
+          <h1>League</h1>
+          <button type="button" class="btn btn-primary btn-xlg-2" data-toggle="modal" data-target="#leagueModal">+</button>
         </div>
-
-        <div class="col-sm">
-        <br>
-        <h2>VS.</h2>
-        
-        </div>
-
-        <div class="col-sm">
-        <h1>Away</h1><br>
-        {% if first_team and not second_team %}
-        <button type="button" class="btn btn-primary btn-xlg-2" data-toggle="modal" data-target="#secondTeamModal">+</button>
-        {% endif %}
-        {% if second_team %}
-        <img src="{{second_team["team_badge"]}}">
-        <br>
-        <p>{{ second_team["team_name"] }}</p>
         {% endif %}
         </div>
     </div>
@@ -54,18 +68,17 @@ Make sure to select two teams from the same championship. Else the prediction wo
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <form action="/h2h/select" method="post">
+        <form action="{{ url_for("h2h_teams_select") }}" method="post">
             <p>
                 <label for="teamIdHome">Team</label>
-                <select class="form-control" name="teamIdHome" id="teamIdHome">
-                {% for league_name in all_teams %}
-                  <optgroup label="{{league_name}}">
-                  {% for team in all_teams[league_name] %}
-                  <option value="{{ team["league_id"] }};{{ team["team_key"] }}">{{ team["team_name"] }}</option>
+                {% if teams %}
+                  <select class="form-control" name="teamIdHome" id="teamIdHome">
+                  {% for team in teams %}
+                    <option value="{{ team["key"] }}">{{ team["name"] }}</option>
                   {% endfor %}
-                  </optgroup>
-                {% endfor %}
-                </select>
+                  </select>
+                  <input type="hidden" name="leagueId" value="{{ league_id }}">
+                {% endif %}
             </p>
         <p class="text-center"><input class="btn btn-secondary" type="submit" value="Select Team"></p>
         </form>
@@ -88,20 +101,19 @@ Make sure to select two teams from the same championship. Else the prediction wo
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <form action="/h2h/select" method="post">
+        <form action="{{ url_for("h2h_teams_select") }}" method="post">
             <p>
                 <label for="teamIdAway">Team</label>
-                <select class="form-control" name="teamIdAway" id="teamIdAway">
-                {% for league_name in all_teams %}
-                  <optgroup label="{{league_name}}">
-                  {% for team in all_teams[league_name] %}
-                  <option value="{{ league_name }};{{ team["team_key"] }}">{{ team["team_name"] }}</option>
+                {% if teams %}
+                  <select class="form-control" name="teamIdAway" id="teamIdAway">
+                  {% for team in teams %}
+                    <option value="{{ team["key"] }}">{{ team["name"] }}</option>
                   {% endfor %}
-                  </optgroup>
-                {% endfor %}
-                </select>
-                {% if first_team %}
-                <input type="hidden" name="teamIdHome" value="{{first_team["team_key"]}}">
+                  </select>
+                  <input type="hidden" name="leagueId" value="{{ league_id }}">
+                  {% if first_team %}
+                  <input type="hidden" name="teamIdHome" value="{{first_team["key"]}}">
+                  {% endif %}
                 {% endif %}
             </p>
             <p class="text-center"><input class="btn btn-secondary" type="submit" value="Select Team"></p>
@@ -112,6 +124,35 @@ Make sure to select two teams from the same championship. Else the prediction wo
   </div>
 </div>
 {% endif %}
+
+<!-- Second Modal -->
+<div id="leagueModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-md">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">League Picker</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form action="/h2h/league/select" method="post">
+            <p>
+                <label for="leagueId">League</label>
+                <select class="form-control" name="leagueId" id="leagueId">
+                {% for league_name in leagues %}
+
+                  <option value="{{ leagues[league_name]}}">{{ league_name }}</option>
+                {% endfor %}
+                </select>
+            </p>
+            <p class="text-center"><input class="btn btn-secondary" type="submit" value="Select Team"></p>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 </form>
 {% endblock %}

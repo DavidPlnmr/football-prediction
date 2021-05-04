@@ -14,8 +14,6 @@ class DbManager:
         self.__db = mysql.connector.connect(host=hostname, user=username, password=pwd, database="footballPrediction")
         self.__cursor = self.__db.cursor(dictionary=True) # Used to have a dictionary for each row
         
-        logging.info("Connector to the DB correctly made")
-        
     def get_all_predictions(self):
         """
         Get all the rows in the table

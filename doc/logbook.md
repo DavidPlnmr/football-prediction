@@ -315,7 +315,7 @@ Après aide de Jonathan et Lorenzo on a trouvé une solution
 
 Début de la rédaction de cette activité
 
-![providerv2](./img/schemaProviderV2.jpg)
+![providerv2](./img/schemaProviderV2.png)
 
 Schéma du provider en version numérique pour l'insérer dans le rapport
 
@@ -1006,3 +1006,17 @@ Choses à faire demain :
 8h Télé-travail pour la matinée, car travaux dans la salle. Mais on avance sur la doc
 
 10h Fin de l'explication technique de la création de prédiction et début de l'explication pour la réussite de la prédiction
+
+12h40 On continue la doc partie sur le tests de réussite des prédictions
+
+Après avoir documenté les tests de réussite je me suis dit que j'allais lancé le script mais le soucis que j'avais est que je prenais tout les matchs de chaque équipe datant d'il y a un an, après avoir modifié cet interval à 6 mois j'arrive à 50.4% de réussite sur 1395 matches ce qui est un chiffre vraiment excellent. Surtout du côté d'un utilisateur, la confiance d'un utilisateur est pour moi gagnée à partir du moment ou les 50% sont atteint, car psychologiquement on compare ça à un pile ou face. Même si techniquement ça n'a rien à voir et les gains vont être clairement différent. Mais c'est déjà bon signe d'atteindre ce chiffre actuellement
+
+![pourcentReussitePredictionV3](./img/pourcentReussitePredictionV3.png)
+
+Je suis assez content actuellement. 
+
+
+
+14h Donc là, j'arrive à un soucis au niveau du head to head c'est que je passe la ligue et l'id de l'équipe via la route. Le soucis c'est que ça plante. Je viens d'avoir une idée. Lors de la création d'une nouvelle prédiction hypothétique. On demande d'abord la ligue -> et ensuite on la garde sur la route, ça nous permet de faire le filtre sur le select et d'éviter plus facilement la possibilité de faire une confrontation entre deux équipes de championnats différents
+
+15h J'ai bien implémenté l'idée du coup tout est carré :)
