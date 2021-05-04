@@ -1020,3 +1020,15 @@ Je suis assez content actuellement.
 14h Donc là, j'arrive à un soucis au niveau du head to head c'est que je passe la ligue et l'id de l'équipe via la route. Le soucis c'est que ça plante. Je viens d'avoir une idée. Lors de la création d'une nouvelle prédiction hypothétique. On demande d'abord la ligue -> et ensuite on la garde sur la route, ça nous permet de faire le filtre sur le select et d'éviter plus facilement la possibilité de faire une confrontation entre deux équipes de championnats différents
 
 15h J'ai bien implémenté l'idée du coup tout est carré :)
+
+Il manque juste à créer la prédiction, la sauvegarder et afficher les prédictions qui ont été faites entre les équipes par d'autre utilisateur 
+
+#### Recap de la journée
+
+* Bien avancé dans la doc technique et théorique
+* Changé le formulaire de Head To Head
+
+Choses à faire demain :
+
+* Finir la fonctionnalité Head To Head -> créer la prédiction, la sauvegarder et récupérer les prédictions qui ont été faites entre les deux équipes
+* Une fois que c'est fait commencer à documenter la vue
