@@ -39,19 +39,20 @@ class Prediction:
         """
         Returns the winner of the prediction by computing the offensive score, defensive score and the heat of moment
         """
+        #This check is here to not compute everything if we already have the name of the winner
         if self.winner== "":
             if self.home_team_result.games_count > 0 and self.away_team_result.games_count > 0:    
+                # Adding the off score
                 home_team_final_score = self.__compute_off_score(self.home_team_result)
                 away_team_final_score = self.__compute_off_score(self.away_team_result)
                 
+                #Adding the def score
                 home_team_final_score += self.__compute_def_score(self.home_team_result)
                 away_team_final_score += self.__compute_def_score(self.away_team_result)
                 
+                #Adding the heat of the moment score
                 home_team_final_score += self.__compute_heat_moment_score(self.home_team_result)
                 away_team_final_score += self.__compute_heat_moment_score(self.away_team_result)
-                
-                #print(f"{self.get_home_team_name()} Final Score : {home_team_final_score}")
-                #print(f"{self.get_away_team_name()} Final Score : {away_team_final_score}")
                 
                 if home_team_final_score > away_team_final_score * lib.constants.DELTA_TO_DETERMINE_DRAW:
                     self.winner = self.get_home_team_name()    
@@ -61,7 +62,6 @@ class Prediction:
                     self.winner = "Draw"
                 
         return self.winner
-        pass
     
     def save_prediction(self, league_id="NULL", league_name="NULL", date_of_game="NULL", api_match_id="NULL"):
         """

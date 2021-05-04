@@ -1000,3 +1000,9 @@ Choses à faire demain :
 
 * Continuer la doc,
 * une fois que la doc est finie, fixer le soucis ou trouver une solution pour le head to head
+
+### 04.05.2021
+
+8h Télé-travail pour la matinée, car travaux dans la salle. Mais on avance sur la doc
+
+10h Fin de l'explication technique de la création de prédiction et début de l'explication pour la réussite de la prédiction

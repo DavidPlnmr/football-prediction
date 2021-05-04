@@ -9,9 +9,9 @@ MULTIPLE_LEAGUES = {
     "LaLiga" : 468,
     "Serie A" : 262
                     }
+DELTA_DAY = 3
 
 DELTA_TO_DETERMINE_DRAW = 1.01
-DELTA_DAY = 3
 
 WEIGHT_GOALS=8
 WEIGHT_DANGEROUS_ATTACKS=5
