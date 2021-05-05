@@ -1032,3 +1032,94 @@ Choses à faire demain :
 
 * Finir la fonctionnalité Head To Head -> créer la prédiction, la sauvegarder et récupérer les prédictions qui ont été faites entre les deux équipes
 * Une fois que c'est fait commencer à documenter la vue
+
+### 05.05.2021
+
+8h Création de la prédiction après sélection des deux équipes
+
+Lors de la récupération des données des équipes pour la création, donner un json ne fonctionne pas
+
+```json
+{'key': '2619', 'name': 'Crystal Palace', 'badge': 'https://apiv2.apifootball.com/badges/2619_crystal-palace.png'}
+```
+
+J'ai ce json là et je veux le transformer en dictionnaire avec `json.loads()` cependant l'erreur suivante apparaît
+
+```
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+```
+
+Cette erreur provient d'un soucis dans le contenu du json mais comme on peut le voir, il ne manque pas de virgule ni même de quote. Pour l'instant la seul solution serait d'appeler à nouveau l'api pour ces données là
+
+Affichage d'erreur si les équipes ne sont pas dans la même ligue
+
+En train de réflechir pour l'affichage des prédictions qui ont été faites par d'autres utilisateurs par rapport au match que l'on prédit hypothétiquement :
+
+ça ne sert à rien d'afficher / voire même d'insérer la prédiction si elle a déjà été faite dans la journée. En effet, ça floodera juste l'affichage de prédictions qui sont concrètement toutes les mêmes. Je me demande même si je devrais pas réduire ça à des matchs réels uniquement. Ce qui fait que je n'ai plus besoin de sauvegarder 
+
+La création de la prédiction est longue. (8 sec approximativement) Je vais voir réellement le temps que ça prend en loggant le temps entre l'appel et la réception de la requête
+
+Après avoir loggé, l'appel vers l'endpoint H2H de l'API prend 3.5 secondes
+
+En tout ça prend plus ou moins 8-10 secondes
+
+```
+05-May-21 13:00:15 - INFO - Request to the API with the params: action=get_teams&league_id=176. Time lapsed 0.474027156829834
+05-May-21 13:00:15 - INFO - Request to the API with the params: action=get_teams&team_id=3040. Time lapsed 0.5148117542266846
+05-May-21 13:00:16 - INFO - Request to the API with the params: action=get_teams&team_id=3023. Time lapsed 0.1593461036682129
+05-May-21 13:00:19 - INFO - Request to the API with the params: action=get_H2H&firstTeam=Paris SG&secondTeam=Marseille. Time lapsed 3.848410129547119
+05-May-21 13:00:20 - INFO - Request to the API with the params: action=get_statistics&match_id=378623. Time lapsed 0.20369172096252441
+05-May-21 13:00:20 - INFO - Request to the API with the params: action=get_statistics&match_id=378418. Time lapsed 0.15790009498596191
+05-May-21 13:00:20 - INFO - Request to the API with the params: action=get_statistics&match_id=228875. Time lapsed 0.23819708824157715
+05-May-21 13:00:20 - INFO - Request to the API with the params: action=get_statistics&match_id=187714. Time lapsed 0.15365242958068848
+05-May-21 13:00:20 - INFO - Request to the API with the params: action=get_statistics&match_id=144676. Time lapsed 0.2567324638366699
+05-May-21 13:00:21 - INFO - Request to the API with the params: action=get_statistics&match_id=78125. Time lapsed 0.3443276882171631
+05-May-21 13:00:21 - INFO - Request to the API with the params: action=get_statistics&match_id=16479. Time lapsed 0.21913647651672363
+05-May-21 13:00:21 - INFO - Request to the API with the params: action=get_statistics&match_id=494733. Time lapsed 0.25625014305114746
+05-May-21 13:00:22 - INFO - Request to the API with the params: action=get_statistics&match_id=378738. Time lapsed 0.24104857444763184
+05-May-21 13:00:22 - INFO - Request to the API with the params: action=get_statistics&match_id=494225. Time lapsed 0.26943206787109375
+05-May-21 13:00:22 - INFO - Request to the API with the params: action=get_statistics&match_id=378723. Time lapsed 0.16981863975524902
+05-May-21 13:00:22 - INFO - Request to the API with the params: action=get_statistics&match_id=488669. Time lapsed 0.16003727912902832
+05-May-21 13:00:22 - INFO - Request to the API with the params: action=get_statistics&match_id=378717. Time lapsed 0.18957829475402832
+05-May-21 13:00:23 - INFO - Request to the API with the params: action=get_statistics&match_id=482192. Time lapsed 0.17419219017028809
+05-May-21 13:00:23 - INFO - Request to the API with the params: action=get_statistics&match_id=378708. Time lapsed 0.1712970733642578
+05-May-21 13:00:23 - INFO - Request to the API with the params: action=get_statistics&match_id=482189. Time lapsed 0.21203994750976562
+05-May-21 13:00:23 - INFO - Request to the API with the params: action=get_statistics&match_id=378697. Time lapsed 0.34915637969970703
+05-May-21 13:00:24 - INFO - Request to the API with the params: action=get_statistics&match_id=378734. Time lapsed 0.3076632022857666
+05-May-21 13:00:24 - INFO - Request to the API with the params: action=get_statistics&match_id=378725. Time lapsed 0.184234619140625
+05-May-21 13:00:24 - INFO - Request to the API with the params: action=get_statistics&match_id=378714. Time lapsed 0.18867278099060059
+05-May-21 13:00:24 - INFO - Request to the API with the params: action=get_statistics&match_id=378704. Time lapsed 0.1949474811553955
+05-May-21 13:00:25 - INFO - Request to the API with the params: action=get_statistics&match_id=378693. Time lapsed 0.48620057106018066
+05-May-21 13:00:25 - INFO - Request to the API with the params: action=get_statistics&match_id=378686. Time lapsed 0.24368023872375488
+05-May-21 13:00:25 - INFO - Request to the API with the params: action=get_statistics&match_id=378673. Time lapsed 0.2736332416534424
+05-May-21 13:00:25 - INFO - Request to the API with the params: action=get_statistics&match_id=378604. Time lapsed 0.23070621490478516
+05-May-21 13:00:26 - INFO - Request to the API with the params: action=get_statistics&match_id=475896. Time lapsed 0.333587646484375
+05-May-21 13:00:26 - INFO - Request to the API with the params: action=get_statistics&match_id=378661. Time lapsed 0.22836947441101074
+```
+
+Et voilà à quoi ressemble les logs, et la on est uniquement dans les appels de l'API, ça se trouve il y'a encore des trucs plus lent.
+
+Je pense qu'on va faire un truc plus simple déjà qui va nous permettre d'éviter de faire tout ces appels :
+
+Si dans la journée, j'ai déjà fait une prédiction sur ce match, comme je l'ai stocké en base. Je vais uniquement le récupérer en base. Ou même trois jours. ça va nous permettre de pouvoir 
+
+J'ai fixé un problème qui m'empêchait d'insérer "NULL" pour la date, car cette valeur n'est pas un string. Cependant, quand j'insère la date c'est un string
+
+Actuellement en train de sécuriser le plus possible l'application par injection d'id dans l'url
+
+Désormais quand je fais une prédiction je vérifie si dans les 3 derniers jours elle a déjà été faite (par la page d'accueil ou même pas)
+
+Il manque plus qu'à afficher les prédictions faites précédement entre les deux équipes et on pourra passer à la documentation de la vue.
+
+#### Recap de la journée
+
+* Head to head quasi fini
+  * Manque plus qu'à afficher les prédictions déjà faites entre les équipes selectionnées
+  * J'ai fait une récupération de prédiction pour soulager les appels à l'API
+  * Il manque tout de même le loading screen quand on crée pour la première fois une prédiction
+    * A voir comment faire
+
+Choses à faire demain :
+
+* Finir complètement la vue Head to head
+* Documenter dans la partie `Développement Python Flask`

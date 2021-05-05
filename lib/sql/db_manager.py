@@ -35,6 +35,15 @@ class DbManager:
         
         return self.__query(query)
         
+    def get_one_prediction_with_specific_teams_after_date(self, first_team_name, second_team_name, creation_date):
+        """
+        Get the prediction with specific teams at date (only one row selected)
+        """
+        return self.__query(f"""SELECT * FROM prediction p 
+                          WHERE (home_team_name="{first_team_name}" OR away_team_name="{first_team_name}") 
+                          AND (home_team_name="{second_team_name}" OR away_team_name="{second_team_name}")
+                          AND created_at > "{creation_date}" 
+                          ORDER BY created_at DESC LIMIT 1;""")
     
     def get_prediction_with_specific_teams(self, first_team_name, second_team_name):
         """
@@ -107,6 +116,11 @@ class DbManager:
         Insert a prediction in the database with the parameters given.
         """
         try:
+            # Actually if it ain't null we must put the quotes in the statement
+            if league_name != "NULL" and date_of_game != "NULL":
+                league_name = "\"" + league_name + "\""
+                date_of_game = "\"" + date_of_game + "\""
+                
             self.__cursor.execute(f"""INSERT INTO prediction (
                             `prediction`, 
                             `api_match_id`, 
@@ -115,7 +129,7 @@ class DbManager:
                             `league_id`,
                             `league_name`,
                             `date_of_game`)
-                            VALUES ( "{prediction}", {api_match_id},  "{home_team_name}", "{away_team_name}", {league_id}, "{league_name}", "{date_of_game}");""")
+                            VALUES ( "{prediction}", {api_match_id},  "{home_team_name}", "{away_team_name}", {league_id}, {league_name}, {date_of_game});""")
         
             self.__db.commit() # Save the changes
             logging.info(f"Inserted prediction in the DB with params : {prediction}, {api_match_id}, {home_team_name}, {away_team_name}, {league_id}, {league_name}, {date_of_game}")

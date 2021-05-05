@@ -17,7 +17,7 @@ class Prediction:
         
         try:
             #Change this line to API when tests are finished
-            #self.results = self.provider.get_all_stats_from_teams_api(home_team, away_team)
+            self.results = self.provider.get_all_stats_from_teams_api(home_team, away_team)
             # This line down below is here to test the success of the prediction. Making a prediction from a past game
             self.results = self.provider.get_all_stats_from_teams_db(home_team, away_team, from_date, to_date)
             

@@ -16,32 +16,32 @@ class Provider:
     def __init__(self, log_path='./log/app.log'):
         load_dotenv()
         logging.basicConfig(filename=log_path, filemode='a', format='%(asctime)s - %(levelname)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.INFO)
-        self.api_facade = ApiFacade(os.getenv("API_KEY"), log_path)
-        self.db_manager = DbManager("127.0.0.1", os.getenv("DB_USER"), os.getenv("DB_PASSWORD"), log_path)
+        self.__api_facade = ApiFacade(os.getenv("API_KEY"), log_path)
+        self.__db_manager = DbManager("127.0.0.1", os.getenv("DB_USER"), os.getenv("DB_PASSWORD"), log_path)
     
     def get_matches_from_to_db(self, from_date, to_date, league_id=""):
         """
         Get matches from date to date from the db
         """
-        return self.db_manager.get_matches_from_to(from_date, to_date, league_id)
+        return self.__db_manager.get_matches_from_to(from_date, to_date, league_id)
             
     def get_teams_from_league(self, league_id):
         """
         Get the team list from a league
         """
-        return self.api_facade.get_teams_from_league(league_id)
+        return self.__api_facade.get_teams_from_league(league_id)
     
     def get_teams_with_team_id(self, team_id):
         """
         Get the team list from a league
         """
-        return self.api_facade.get_teams_with_team_id(team_id)
+        return self.__api_facade.get_teams_with_team_id(team_id)
     
     def get_all_stats_from_teams_api(self, first_team_name, second_team_name):
         """
         Make a call to the API using getH2H and make a treatment to have the stats for each match of the two different teams
         """
-        reqresult = self.api_facade.get_H2H(first_team_name, second_team_name)
+        reqresult = self.__api_facade.get_H2H(first_team_name, second_team_name)
         
         result = {}
         stats_matches_two_team = []
@@ -54,7 +54,7 @@ class Provider:
             for match in reqresult["firstTeam_VS_secondTeam"]:
                 
                 api_match_id = match["match_id"]
-                reqstatsresult = self.api_facade.get_stats_from_match(api_match_id)
+                reqstatsresult = self.__api_facade.get_stats_from_match(api_match_id)
                 
                 if self.__check_array_is_in_other_array(lib.constants.STATISTICS_TO_GET, reqstatsresult[api_match_id]["statistics"], "type"):
                     self.__insert_stats_in_array_for_api(match, stats_matches_two_team, reqstatsresult[api_match_id]["statistics"], lib.constants.STATISTICS_TO_GET)
@@ -62,7 +62,7 @@ class Provider:
             for match in reqresult["firstTeam_lastResults"]:
                 
                 api_match_id = match["match_id"]
-                reqstatsresult = self.api_facade.get_stats_from_match(api_match_id)
+                reqstatsresult = self.__api_facade.get_stats_from_match(api_match_id)
                 
                 if self.__check_array_is_in_other_array(lib.constants.STATISTICS_TO_GET, reqstatsresult[api_match_id]["statistics"], "type"):
                     self.__insert_stats_in_array_for_api(match, stats_first_team, reqstatsresult[api_match_id]["statistics"], lib.constants.STATISTICS_TO_GET)
@@ -70,7 +70,7 @@ class Provider:
             for match in reqresult["secondTeam_lastResults"]:
                 
                 api_match_id = match["match_id"]
-                reqstatsresult = self.api_facade.get_stats_from_match(api_match_id)
+                reqstatsresult = self.__api_facade.get_stats_from_match(api_match_id)
                 
                 if self.__check_array_is_in_other_array(lib.constants.STATISTICS_TO_GET, reqstatsresult[api_match_id]["statistics"], "type"):
                     self.__insert_stats_in_array_for_api(match, stats_second_team, reqstatsresult[api_match_id]["statistics"], lib.constants.STATISTICS_TO_GET)
@@ -89,8 +89,8 @@ class Provider:
         """
         Get all the matches between the two teams in params with the stats of each matches
         """
-        reqmatch = self.db_manager.get_matches_with_specific_teams(first_team_name, second_team_name, from_date, to_date)
-        reqstats = self.db_manager.get_stats_of_matches_with_specific_teams(first_team_name, second_team_name, from_date, to_date)
+        reqmatch = self.__db_manager.get_matches_with_specific_teams(first_team_name, second_team_name, from_date, to_date)
+        reqstats = self.__db_manager.get_stats_of_matches_with_specific_teams(first_team_name, second_team_name, from_date, to_date)
         
         
         result = {}
@@ -137,7 +137,7 @@ class Provider:
         
         result = []
         for prediction in response:
-            match_info = self.api_facade.get_match_infos(prediction["api_match_id"])
+            match_info = self.__api_facade.get_match_infos(prediction["api_match_id"])
             
             if len(match_info)>0: # Check if we got some data from the API
                 date_match = datetime.datetime.strptime(match_info[0]["match_date"], "%Y-%m-%d").date()
@@ -158,26 +158,32 @@ class Provider:
         """
         Get the predictions from a date to an other [only with an api_match_id]
         """
-        return self.db_manager.get_predictions_in_interval(from_date, to_date, league_id)
+        return self.__db_manager.get_predictions_in_interval(from_date, to_date, league_id)
         
     def get_matches_in_interval(self, from_date, to_date, league_id=""):
         """
         Get the matches from a date to an other [in a specific a league]
         """
-        return self.api_facade.get_matches_in_interval(from_date,to_date,league_id)
+        return self.__api_facade.get_matches_in_interval(from_date,to_date,league_id)
     
     def save_match_with_stats(self, match_id, match_date, match_time, league_id, league_name, hometeam_name, awayteam_name, hometeam_score, awayteam_score, stats_array):
         """
         Save the match in the DB with its stats
         """
-        return self.db_manager.insert_match_with_stats(match_id, match_date, match_time, league_id, league_name, hometeam_name, awayteam_name, hometeam_score, awayteam_score, stats_array)
+        return self.__db_manager.insert_match_with_stats(match_id, match_date, match_time, league_id, league_name, hometeam_name, awayteam_name, hometeam_score, awayteam_score, stats_array)
         
     def save_prediction(self, prediction_winner, home_team_name, away_team_name, league_id="NULL", league_name="NULL", date_of_game="NULL", api_match_id="NULL"):
         """
         Save the prediction in the DB
         """
-        return self.db_manager.insert_prediction(prediction_winner, home_team_name, away_team_name, league_id, league_name, date_of_game, api_match_id)
+        return self.__db_manager.insert_prediction(prediction_winner, home_team_name, away_team_name, league_id, league_name, date_of_game, api_match_id)
         pass
+    
+    def get_prediction_with_specific_teams_after_date(self, first_team_name, second_team_name, creation_date):
+        """
+        Returns one prediction made at a specific date
+        """
+        return self.__db_manager.get_one_prediction_with_specific_teams_after_date(first_team_name, second_team_name, creation_date)
     
     def __insert_stats_in_array_for_api(self, match, array, stats_array, required_stats_array):
         """

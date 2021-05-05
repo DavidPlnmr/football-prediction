@@ -8,6 +8,9 @@ Make sure to select two teams from the same championship. Else the prediction wo
 {% endblock %}
 
 {% block content %}
+
+
+
 <div class="container">
     <div class="text-center row">
         {% if (league_id and teams) or (second_team and first_team) %}
@@ -26,11 +29,11 @@ Make sure to select two teams from the same championship. Else the prediction wo
           <div class="col-sm">
           <br>
           <h2>VS.</h2><br>
-          {% if first_team and second_team %}
+          {% if first_team and second_team and not winner%}
             <form action="{{ url_for("h2h_make_prediction") }}" method="post">
               <input type="hidden" name="leagueId" value="{{ league_id }}">
-              <input type="hidden" name="teamIdHome" value="{{ first_team }}">
-              <input type="hidden" name="teamIdAway" value="{{ second_team }}">
+              <input type="hidden" name="teamIdHome" value="{{ first_team["key"] }}">
+              <input type="hidden" name="teamIdAway" value="{{ second_team["key"] }}">
             <p class="text-center"><input class="btn btn-secondary" type="submit" value="Make the prediction"></p>
             </form>
           {% endif %}
@@ -54,6 +57,11 @@ Make sure to select two teams from the same championship. Else the prediction wo
         {% endif %}
         </div>
     </div>
+    {% if winner %}
+    <div class="text-center">
+          <h2 class="text-center lead"><strong>Prediction : </strong>{{ winner }}</h2>
+    </div>
+    {% endif %}
 </div>
 
 {% if not first_team %}
@@ -155,4 +163,18 @@ Make sure to select two teams from the same championship. Else the prediction wo
 </div>
 
 </form>
+
+{% if error %}
+
+<script src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+<div class="alert fixed-bottom alert-danger alert-dismissible fade show" role="alert">
+  <strong>Error</strong> {{error}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+
+{% endif %}
+
 {% endblock %}
