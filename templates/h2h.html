@@ -4,7 +4,7 @@
 
 {% block description %}
 Make an hypothetic prediction. 
-Make sure to select two teams from the same championship. Else the prediction won't be correct.
+Make sure to select two teams from the same championship. Else the prediction won't be correct. There is no difference between "Home" and "Away".
 {% endblock %}
 
 {% block content %}
@@ -59,7 +59,7 @@ Make sure to select two teams from the same championship. Else the prediction wo
     </div>
     {% if winner %}
     <div class="text-center">
-          <h2 class="text-center lead"><strong>Prediction : </strong>{{ winner }}</h2>
+          <h3 class="text-center"><strong>Prediction : </strong>{{ winner }}</h3>
     </div>
     {% endif %}
     <br>

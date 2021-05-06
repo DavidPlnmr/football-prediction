@@ -30,8 +30,7 @@ INDEX ROUTE
 @app.route('/index')
 @app.route('/home')
 def index():
-    #now = datetime.now()
-    now = datetime.strptime("2020-01-01", "%Y-%m-%d")
+    now = datetime.now()
     three_days_before = now - relativedelta(days=lib.constants.DELTA_DAY)
     three_days_after = now + relativedelta(days=lib.constants.DELTA_DAY)
 
@@ -312,7 +311,7 @@ def get_upcoming_matches_multiple_leagues(from_date, to_date, multiple_leagues_a
             pass
         
         pass
-    return result
+    return result 
         
 def get_previous_matches_multiple_leagues(from_date, to_date, multiple_leagues_array):
     """

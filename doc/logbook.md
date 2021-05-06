@@ -1143,3 +1143,17 @@ New est appelé avant init
 En gros pour faire le singleton en python on doit obligatoirement utiliser new car elle retourne l'objet.
 
 Article qui explique comment ça marche. https://sametmax.com/la-difference-entre-__new__-et-__init__-en-python/
+
+Singleton documenté
+
+Affichage des prédictions sur les matchs précédent documenté aussi
+
+#### Recap de la journée
+
+* Avancé dans la doc `Dev Python Flask`
+* Singleton sur le Provider
+* Quasi fini H2H il manque juste le loading screen quand la prédiction est en train de se faire et c'est tout.
+
+Choses à faire demain :
+
+* Continuer la doc et une fois que c'est fini : commencer a analyser l'implémentation des compétitions
