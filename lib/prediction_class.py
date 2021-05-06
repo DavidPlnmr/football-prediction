@@ -11,9 +11,7 @@ class Prediction:
         self.away_team_result = TeamResult(away_team)
         self.winner=""
         
-
-        self.provider = Provider("../log/app.log")
-        
+        self.provider = Provider()
         
         try:
             #Change this line to API when tests are finished

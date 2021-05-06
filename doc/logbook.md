@@ -1123,3 +1123,23 @@ Choses à faire demain :
 
 * Finir complètement la vue Head to head
 * Documenter dans la partie `Développement Python Flask`
+
+### 06.05.2021
+
+8h Récupération des prédictions déjà faites entre les équipes sélectionnées
+
+Bon je me lance sur la doc `Développement Python Flask` -> explication des principes de flask et de comment je les ai utiliser. Par contre, il manque plus qu'à afficher un loading pour la prédiction Head to Head et tout est bon.
+
+Juste piqûre de rappel pour moi -> Ne pas oublier de faire la tâche cron pour la page d'accueil et le loading pour le head to head et d'essayer de mettre le projet sur le serveur mis à disposition par M. Maréchal
+
+
+
+Singleton fait pour le provider pour éviter de créer plein de fois une facade etc
+
+par contre il faut utiliser `__new__` et plus `__init__` la différence entre les deux est que new est un constructeur, c'est à dire qu'il instancie réellement la classe et init met uniquement les variables au valeurs qu'il faut 
+
+New est appelé avant init
+
+En gros pour faire le singleton en python on doit obligatoirement utiliser new car elle retourne l'objet.
+
+Article qui explique comment ça marche. https://sametmax.com/la-difference-entre-__new__-et-__init__-en-python/

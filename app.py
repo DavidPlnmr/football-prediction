@@ -30,24 +30,31 @@ INDEX ROUTE
 @app.route('/index')
 @app.route('/home')
 def index():
-    now = datetime.now()
+    #now = datetime.now()
+    now = datetime.strptime("2020-01-01", "%Y-%m-%d")
     three_days_before = now - relativedelta(days=lib.constants.DELTA_DAY)
     three_days_after = now + relativedelta(days=lib.constants.DELTA_DAY)
 
     if "previous_matches" not in cache:
             
-        cache["previous_matches"] = get_previous_matches_multiple_leagues(three_days_before.date(), now.date(), lib.constants.MULTIPLE_LEAGUES)
+        cache["previous_matches"] = get_previous_matches_multiple_leagues(three_days_before.date(), 
+                                                                          now.date(), 
+                                                                          lib.constants.MULTIPLE_LEAGUES)
         #Check if all the keys in the dict are empty
         if not any(cache["previous_matches"].values()):
             cache["previous_matches"]=[]
             
     if "upcoming_matches" not in cache:
-        cache["upcoming_matches"] = get_upcoming_matches_multiple_leagues(now.date(), three_days_after.date(), lib.constants.MULTIPLE_LEAGUES)
+        cache["upcoming_matches"] = get_upcoming_matches_multiple_leagues(now.date(), 
+                                                                          three_days_after.date(), 
+                                                                          lib.constants.MULTIPLE_LEAGUES)
         #Check if all the keys in the dict are empty
         if not any(cache["upcoming_matches"].values()):
             cache["upcoming_matches"]=[]
     
-    return render_template("index.html", app_name="Football Prediction", previous_matches=cache["previous_matches"], upcoming_matches=cache["upcoming_matches"])
+    return render_template("index.html", 
+                           previous_matches=cache["previous_matches"], 
+                           upcoming_matches=cache["upcoming_matches"])
 
 
 
@@ -58,9 +65,9 @@ HEAD TO HEAD ROUTES
 def h2h():
     leagues = lib.constants.MULTIPLE_LEAGUES
     if "error" in cache:
-        return render_template("h2h.html", app_name="Football Prediction", leagues=leagues, error=cache["error"])
+        return render_template("h2h.html", leagues=leagues, error=cache["error"])
     else:
-        return render_template("h2h.html", app_name="Football Prediction", leagues=leagues)
+        return render_template("h2h.html", leagues=leagues)
     
 @app.route('/h2h/<int:league_id>/<int:first_team>')
 def h2h_one_team_selected(league_id, first_team):
@@ -71,7 +78,7 @@ def h2h_one_team_selected(league_id, first_team):
         "name" : first_team[0]["team_name"],
         "badge" : first_team[0]["team_badge"],
     }
-    return render_template("h2h.html", app_name="Football Prediction", league_id=league_id, teams=cache["teams"], first_team=team_infos)
+    return render_template("h2h.html", league_id=league_id, teams=cache["teams"], first_team=team_infos)
 
 @app.route('/h2h/<int:league_id>/<int:first_team>/<int:second_team>')
 def h2h_two_teams_selected(league_id, first_team, second_team):
@@ -90,7 +97,7 @@ def h2h_two_teams_selected(league_id, first_team, second_team):
         "badge" : second_team[0]["team_badge"],
     }
     
-    return render_template("h2h.html", app_name="Football Prediction", league_id=league_id, first_team=first_team_infos, second_team=second_team_infos)
+    return render_template("h2h.html", league_id=league_id, first_team=first_team_infos, second_team=second_team_infos)
 
 @app.route('/h2h/teams/select', methods=["POST"])
 def h2h_teams_select():
@@ -123,7 +130,7 @@ def h2h_league_selected(league_id):
         
         cache["teams"] = sorted_teams
         
-        return render_template("h2h.html", app_name="Football Prediction", league_id=league_id, teams=cache["teams"])
+        return render_template("h2h.html", league_id=league_id, teams=cache["teams"])
     else:
         cache["error"] = "Unknown league."
         return redirect(url_for("h2h"))
@@ -169,9 +176,28 @@ def h2h_make_prediction():
             
             now = datetime.now()
             three_days_before = now - relativedelta(days=lib.constants.DELTA_DAY)
-            prediction_already_made = prov.get_prediction_with_specific_teams_at_date(first_team_infos["name"], 
+            
+            last_predictions = prov.get_one_prediction_per_day_with_specific_teams(first_team_infos["name"], 
+                                                                                   second_team_infos["name"])
+            predictions = []
+            #Reformat the predictions
+            if len(last_predictions)>0:
+                for prediction in last_predictions:
+                    prediction_info = {
+                        "Prediction": prediction["prediction"],
+                        "Home" : prediction["home_team_name"],
+                        "Away" : prediction["away_team_name"],
+                        "Creation date" : prediction["creation_date"]
+                    }
+                    predictions.append(prediction_info)
+                    
+            last_predictions=predictions
+            
+            prediction_already_made = prov.get_prediction_with_specific_teams_after_date(first_team_infos["name"], 
                                                                                       second_team_infos["name"], 
                                                                                       three_days_before.date())
+            winner=""
+            
             #Check if the prediction has been done today
             if len(prediction_already_made) == 0:
                 #Try to make the prediction                
@@ -179,20 +205,18 @@ def h2h_make_prediction():
                     pred = Prediction(first_team_infos["name"], second_team_infos["name"])
                     winner = pred.define_winner()
                     pred.save_prediction()
-                    return render_template("h2h.html", 
-                                           app_name="Football Prediction", 
-                                           first_team=first_team_infos, 
-                                           second_team=second_team_infos, 
-                                           winner=winner)
+                
+                
                 except Exception:
                     cache["error"]="Sorry, we had a problem to process your prediction."
                     return redirect(url_for("h2h"))
             else:
-                return render_template("h2h.html", 
-                                       app_name="Football Prediction", 
-                                       first_team=first_team_infos, 
-                                       second_team=second_team_infos, 
-                                       winner=prediction_already_made[0]["prediction"])
+                winner = prediction_already_made[0]["prediction"]
+            return render_template("h2h.html", 
+                                           first_team=first_team_infos, 
+                                           second_team=second_team_infos, 
+                                           winner=winner,
+                                           last_predictions=last_predictions)
         else:
             cache["error"]="Teams not found in this league."
             return redirect(url_for("h2h"))
@@ -207,8 +231,13 @@ COMPETITIONS ROUTE
 """
 @app.route('/competitions')
 def competitions():   
-    return render_template("competitions.html", app_name="Football Prediction")
+    return render_template("competitions.html")
 
+
+
+"""
+USEFUL METHODS
+"""
 def make_prediction(first_team_name, second_team_name, league_id, league_name, api_match_id, date_of_game):    
     """
     Make a new prediction for the upcoming matches

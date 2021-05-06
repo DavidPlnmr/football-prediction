@@ -53,6 +53,15 @@ class DbManager:
                           WHERE (home_team_name="{first_team_name}" OR away_team_name="{first_team_name}") 
                           AND (home_team_name="{second_team_name}" OR away_team_name="{second_team_name}");""")
     
+    def get_one_prediction_per_day_with_specific_teams(self, first_team_name, second_team_name):
+        """
+        Get a prediction per day with specific teams
+        """
+        return self.__query(f"""SELECT p.id, DATE(p.created_at) as creation_date, p.prediction, p.home_team_name, p.away_team_name FROM prediction p 
+                                WHERE (home_team_name="{first_team_name}" OR away_team_name="{first_team_name}") 
+                                AND (home_team_name="{second_team_name}" OR away_team_name="{second_team_name}") GROUP BY DATE(created_at) LIMIT 20;
+                            """)
+    
     def get_prediction_with_api_id(self, api_match_id):
         """
         Get predictions with a specifi api_match_id

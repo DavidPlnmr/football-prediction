@@ -11,13 +11,18 @@ import datetime
 
 class Provider:
     """
-    This provider is used in the main.py file and in the prediction_class.py
+    This provider is used in the app.py file and in the prediction_class.py
     """
-    def __init__(self, log_path='./log/app.log'):
-        load_dotenv()
-        logging.basicConfig(filename=log_path, filemode='a', format='%(asctime)s - %(levelname)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.INFO)
-        self.__api_facade = ApiFacade(os.getenv("API_KEY"), log_path)
-        self.__db_manager = DbManager("127.0.0.1", os.getenv("DB_USER"), os.getenv("DB_PASSWORD"), log_path)
+    __instance = None
+    def __new__(cls):
+        if cls.__instance is None:
+            cls.__instance = super(Provider, cls).__new__(cls)    
+            load_dotenv()
+            log_path = './log/app.log'
+            logging.basicConfig(filename=log_path, filemode='a', format='%(asctime)s - %(levelname)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.INFO)
+            cls.__api_facade = ApiFacade(os.getenv("API_KEY"), log_path)
+            cls.__db_manager = DbManager("127.0.0.1", os.getenv("DB_USER"), os.getenv("DB_PASSWORD"), log_path)
+        return cls.__instance
     
     def get_matches_from_to_db(self, from_date, to_date, league_id=""):
         """
@@ -140,6 +145,8 @@ class Provider:
             match_info = self.__api_facade.get_match_infos(prediction["api_match_id"])
             
             if len(match_info)>0: # Check if we got some data from the API
+                
+                
                 date_match = datetime.datetime.strptime(match_info[0]["match_date"], "%Y-%m-%d").date()
                 if date_match < to_date:
                     match = {
@@ -149,7 +156,7 @@ class Provider:
                         "Real home score" : match_info[0]["match_hometeam_score"],
                         "Real away score" : match_info[0]["match_awayteam_score"],
                         "League" : prediction["league_name"],
-                        "Date" : date_match.strftime("%d %B %Y")
+                        "Date" : date_match
                     }
                     result.append(match)
         return result
@@ -184,6 +191,10 @@ class Provider:
         Returns one prediction made at a specific date
         """
         return self.__db_manager.get_one_prediction_with_specific_teams_after_date(first_team_name, second_team_name, creation_date)
+    
+    def get_one_prediction_per_day_with_specific_teams(self, first_team_name, second_team_name):
+        return self.__db_manager.get_one_prediction_per_day_with_specific_teams(first_team_name, second_team_name)
+        
     
     def __insert_stats_in_array_for_api(self, match, array, stats_array, required_stats_array):
         """
