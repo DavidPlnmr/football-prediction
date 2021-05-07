@@ -269,11 +269,12 @@ def get_upcoming_matches_predictions(from_date, to_date, league_id):
         array_match_ids.append(prediction["api_match_id"])
         
     
-    is_response_empty = len(response) > 0    
+    is_response_not_empty = len(response) > 0    
     #If there is no predictions in the db for this interval of time
-    if is_response_empty:
+    if is_response_not_empty:
         # For each match of the api
         for match in next_matches:
+            
             for prediction in response:
                         
                 if int(prediction["api_match_id"]) == int(match["match_id"]):
@@ -288,7 +289,6 @@ def get_upcoming_matches_predictions(from_date, to_date, league_id):
                 else:
                     
                     if int(match["match_id"]) not in array_match_ids:
-
                         result.append(make_prediction(match["match_hometeam_name"], match["match_awayteam_name"], int(match["league_id"]), match["league_name"], int(match["match_id"]), match["match_date"]))
                         array_match_ids.append(int(match["match_id"]))
     else:
@@ -330,4 +330,5 @@ def sort_by_team_name(team):
     """
     return team.get("name")
     
-app.run(host="127.0.0.1", port=8080, debug=True)   
+if __name__ == '__main__':
+    app.run(debug=True, host="0.0.0.0", port=5000)   

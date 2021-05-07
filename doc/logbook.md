@@ -1163,3 +1163,23 @@ Choses à faire demain :
 En ce qui concerne `__new__` et `__init__`, c'est très rare d'utiliser `__new__` car c'est le constructeur d'`object` qui est appelé généralement (toutes classes hérite d'`object`)
 
 Documentation `Affichage et création des prédictions pour les prochains matchs`
+
+Documentation Head To Head avec toutes les étapes 
+
+En train d'essayer de voir pour mettre un loading quand l'user clique sur make prediction
+
+Ok maintenant y'a le loading sur la page head to head elle est intégralement finie tout est bon j'ai plus besoin d'y toucher
+
+#### Recap de la journée 
+
+* Doc sur la page d'accueil fait. 
+* Doc sur la sélection de ligue pour la page head to head fait
+* Loading screen pour le chargement de la page head to head après avoir fait une prédiction fait.
+
+Choses à faire demain : 
+
+* Continuer la doc de la vue, plus particulièrement la sélection des équipes et la gestion des potentielles erreurs ou faille au niveau des id donné par l'user
+
+* ENFIN COMMENCER LES COMPETITIONS
+* Le poster parce qu'il faut le rendre le 17 mai il me semble 
+  * Pareil pour l'abstract et le résumé du projet

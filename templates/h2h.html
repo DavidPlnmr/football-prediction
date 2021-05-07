@@ -10,8 +10,10 @@ Make sure to select two teams from the same championship. Else the prediction wo
 {% block content %}
 
 
-
-<div class="container">
+<div class="text-center" id="loading_div" style="display:none;">
+  <img src="{{ url_for("static", filename="assets/loading.gif")}}" width="150px">
+</div>
+<div class="container" id="content">
     <div class="text-center row">
         {% if (league_id and teams) or (second_team and first_team) %}
         <div class="col-sm">
@@ -34,7 +36,7 @@ Make sure to select two teams from the same championship. Else the prediction wo
               <input type="hidden" name="leagueId" value="{{ league_id }}">
               <input type="hidden" name="teamIdHome" value="{{ first_team["key"] }}">
               <input type="hidden" name="teamIdAway" value="{{ second_team["key"] }}">
-            <p class="text-center"><input class="btn btn-secondary" type="submit" value="Make the prediction"></p>
+            <p class="text-center"><input class="btn btn-secondary" type="submit" value="Make the prediction" onclick="loading()"></p>
             </form>
           {% endif %}
           </div>
@@ -163,7 +165,7 @@ Make sure to select two teams from the same championship. Else the prediction wo
 </div>
 {% endif %}
 
-<!-- Second Modal -->
+<!-- League Modal -->
 <div id="leagueModal" class="modal fade" role="dialog">
   <div class="modal-dialog modal-md">
 
@@ -174,7 +176,7 @@ Make sure to select two teams from the same championship. Else the prediction wo
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <form action="/h2h/league/select" method="post">
+        <form action="{{ url_for("h2h_league_select") }}" method="post">
             <p>
                 <label for="leagueId">League</label>
                 <select class="form-control" name="leagueId" id="leagueId">
@@ -194,16 +196,24 @@ Make sure to select two teams from the same championship. Else the prediction wo
 
 </form>
 
-{% if error %}
-
 <script src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+{% if error %}
 <div class="alert fixed-bottom alert-danger alert-dismissible fade show" role="alert">
   <strong>Error</strong> {{error}}
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
+{% endif %}
 
+{% if first_team and second_team and not winner %}
+<script>
+function loading() {
+  $("#loading_div").show()
+  $("#content").hide()
+}
+</script>
 
 {% endif %}
 
