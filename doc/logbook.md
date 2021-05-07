@@ -1157,3 +1157,9 @@ Affichage des prédictions sur les matchs précédent documenté aussi
 Choses à faire demain :
 
 * Continuer la doc et une fois que c'est fini : commencer a analyser l'implémentation des compétitions
+
+### 07.05.2021
+
+En ce qui concerne `__new__` et `__init__`, c'est très rare d'utiliser `__new__` car c'est le constructeur d'`object` qui est appelé généralement (toutes classes hérite d'`object`)
+
+Documentation `Affichage et création des prédictions pour les prochains matchs`
