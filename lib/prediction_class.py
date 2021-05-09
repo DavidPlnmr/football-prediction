@@ -17,7 +17,7 @@ class Prediction:
             #Change this line to API when tests are finished
             self.results = self.provider.get_all_stats_from_teams_api(home_team, away_team)
             # This line down below is here to test the success of the prediction. Making a prediction from a past game
-            self.results = self.provider.get_all_stats_from_teams_db(home_team, away_team, from_date, to_date)
+            #self.results = self.provider.get_all_stats_from_teams_db(home_team, away_team, from_date, to_date)
             
             self.home_team_result.heat_of_moment = self.__compute_heat_moment(home_team, self.results["firstTeam_lastResults"])
             self.away_team_result.heat_of_moment = self.__compute_heat_moment(away_team, self.results["secondTeam_lastResults"])
@@ -58,7 +58,8 @@ class Prediction:
                     self.winner = self.get_away_team_name()    
                 else:
                     self.winner = "Draw"
-                
+            else :
+                pass
         return self.winner
     
     def save_prediction(self, league_id="NULL", league_name="NULL", date_of_game="NULL", api_match_id="NULL"):
@@ -90,20 +91,23 @@ class Prediction:
         """
         Compute the heat of the moment of the team with its last results
         """
-        heat_of_moment = ""
-        if len(last_results) > lib.constants.NB_GAMES_HEAT_OF_THE_MOMENT:    
-            for index in range(lib.constants.NB_GAMES_HEAT_OF_THE_MOMENT):
-                result = int(last_results[index]["home_team_score"]) - int(last_results[index]["away_team_score"])
-                if result == 0:
-                    heat_of_moment += 'D' # D for Draw
-                else:
-                    if last_results[index]["home_team"] == team_name:
-                        heat_of_moment += 'W' if result > 0 else 'L' # W for Win, L for Lose
+        if len(last_results)>0:
+            
+            heat_of_moment = ""
+            if len(last_results) > lib.constants.NB_GAMES_HEAT_OF_THE_MOMENT:    
+                for index in range(lib.constants.NB_GAMES_HEAT_OF_THE_MOMENT):
+                    result = int(last_results[index]["home_team_score"]) - int(last_results[index]["away_team_score"])
+                    if result == 0:
+                        heat_of_moment += 'D' # D for Draw
                     else:
-                        heat_of_moment += 'L' if result > 0 else 'W' # W for Win, L for Lose
-        
-        return heat_of_moment
-        pass       
+                        if last_results[index]["home_team"] == team_name:
+                            heat_of_moment += 'W' if result > 0 else 'L' # W for Win, L for Lose
+                        else:
+                            heat_of_moment += 'L' if result > 0 else 'W' # W for Win, L for Lose
+            
+            return heat_of_moment
+        else:
+            raise Exception("No games in the last results")
     
     def __compute_off_score(self, team_result):
         
@@ -165,6 +169,7 @@ class Prediction:
                 team_result_obj.attacks += int(match["Attacks"]["home"]) if team_result_obj.team_name == match["home_team"] else int(match["Attacks"]["away"])
                 
                 team_result_obj.dangerous_attacks += int(match["Dangerous Attacks"]["home"]) if team_result_obj.team_name == match["home_team"] else int(match["Dangerous Attacks"]["away"])
+        
         
 
 class TeamResult:

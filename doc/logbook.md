@@ -1183,3 +1183,14 @@ Choses à faire demain :
 * ENFIN COMMENCER LES COMPETITIONS
 * Le poster parce qu'il faut le rendre le 17 mai il me semble 
   * Pareil pour l'abstract et le résumé du projet
+
+### 09.05.2021 (week-end)
+Après avoir testé l'application chez moi, j'ai remarqué qu'on pouvait avoir une prédiction avec comme résultat "", c'était à cause du fait que le define_winner n'a pas d'else. J'ai donc fix ça et une exception est lancée désormais
+J'ai aussi remarqué que j'ai deux prédictions par équipe en Serie A, je vais probablement réduire le delta des jours sur la vue pour éviter ce soucis et notamment changer dans la doc là ou je parle de ça. 
+
+Donc rectification pour demain :
+* Faire doc de la vue (sélection équipes, erreurs sur  le head to head, etc)
+* Commencer les compéts
+* Faire le poster pour le 17 mai
+	* Pareil pour l'abstaract + résumé du projet
+* Check que le rapport est bon après la correction du bug qui a été trouvé le 09.05.2021 (vérifier que les listings sont corrects, et potentiellement changer le deltas des jours pour la vue là)
