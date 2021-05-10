@@ -1192,5 +1192,25 @@ Donc rectification pour demain :
 * Faire doc de la vue (sélection équipes, erreurs sur  le head to head, etc)
 * Commencer les compéts
 * Faire le poster pour le 17 mai
-	* Pareil pour l'abstaract + résumé du projet
+	* Pareil pour l'abstract + résumé du projet
 * Check que le rapport est bon après la correction du bug qui a été trouvé le 09.05.2021 (vérifier que les listings sont corrects, et potentiellement changer le deltas des jours pour la vue là)
+
+### 10.05.2021
+
+8h On continue la doc sur la vue et la sélection des équipes.
+
+10h Doc sur la création d'une prédiction
+
+13h30 Documentation de la vue finie. On va commencer à faire l'abstract et le résumé je pense et probablement démarrer le poster.
+
+#### Recap de la journée
+
+* Doc sur la vue fini après tout ce que j'ai fait au niveau du code
+* Abstract + Résumé fait
+* Début du poster
+
+Choses à faire demain : 
+
+* Continuer le poster
+* Une fois que c'est fait
+  * Analyse pour implémentation de la prédiction

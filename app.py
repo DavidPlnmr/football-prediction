@@ -30,6 +30,9 @@ INDEX ROUTE
 @app.route('/index')
 @app.route('/home')
 def index():
+    """
+    Home route
+    """
     now = datetime.now()
     three_days_before = now - relativedelta(days=lib.constants.DELTA_DAY)
     three_days_after = now + relativedelta(days=lib.constants.DELTA_DAY)
@@ -62,6 +65,9 @@ HEAD TO HEAD ROUTES
 """
 @app.route('/h2h')
 def h2h():
+    """
+    Route for the functionnality Head To Head
+    """
     leagues = lib.constants.MULTIPLE_LEAGUES
     if "error" in cache:
         return render_template("h2h.html", leagues=leagues, error=cache["error"])
@@ -70,6 +76,9 @@ def h2h():
     
 @app.route('/h2h/<int:league_id>/<int:first_team>')
 def h2h_one_team_selected(league_id, first_team):
+    """
+    Route where the user has already selected one team
+    """
     first_team=prov.get_teams_with_team_id(first_team)
     
     team_infos={
@@ -81,6 +90,9 @@ def h2h_one_team_selected(league_id, first_team):
 
 @app.route('/h2h/<int:league_id>/<int:first_team>/<int:second_team>')
 def h2h_two_teams_selected(league_id, first_team, second_team):
+    """
+    Route where the user has already selected two teams
+    """
     first_team=prov.get_teams_with_team_id(first_team)
     second_team=prov.get_teams_with_team_id(second_team)
     
@@ -100,6 +112,9 @@ def h2h_two_teams_selected(league_id, first_team, second_team):
 
 @app.route('/h2h/teams/select', methods=["POST"])
 def h2h_teams_select():
+    """
+    Action of the form to select the teams.
+    """
     first_team = request.form["teamIdHome"]
     league_id = request.form["leagueId"]
 
@@ -113,6 +128,9 @@ def h2h_teams_select():
 
 @app.route('/h2h/<int:league_id>')
 def h2h_league_selected(league_id):
+    """
+    Route where the user has already selected the league
+    """
     if league_id in lib.constants.MULTIPLE_LEAGUES.values():
         response = prov.get_teams_from_league(league_id)
         teams = []
@@ -136,15 +154,22 @@ def h2h_league_selected(league_id):
         
 @app.route('/h2h/league/select', methods=["POST"])
 def h2h_league_select():
+    """
+    Action of the form to select the league
+    """
     league_id = request.form["leagueId"]
     return redirect(url_for('h2h_league_selected', league_id=league_id))
 
 @app.route('/h2h/make', methods=["POST"])
 def h2h_make_prediction():
+    """
+    Route to create a prediction
+    """
+    first_team = request.form["teamIdHome"]
+    second_team = request.form["teamIdAway"]
+    league_id = request.form["leagueId"]
     
-    first_team = int(request.form["teamIdHome"])
-    second_team = int(request.form["teamIdAway"])
-    league_id = int(request.form["leagueId"])
+    # We don't wanna make a prediction if the teams are the same
     if first_team != second_team:
         teams_from_league = prov.get_teams_from_league(league_id)
         first_team = prov.get_teams_with_team_id(first_team)
@@ -217,9 +242,11 @@ def h2h_make_prediction():
                                            winner=winner,
                                            last_predictions=last_predictions)
         else:
+            # Error message because the two teams selected are not in the league selected.
             cache["error"]="Teams not found in this league."
             return redirect(url_for("h2h"))
     else:
+        # Error message because the user selected the same teams
         cache["error"]="You cannot pick the same teams to make a prediction."
         return redirect(url_for("h2h"))
 

@@ -22,11 +22,11 @@ class Prediction:
             self.home_team_result.heat_of_moment = self.__compute_heat_moment(home_team, self.results["firstTeam_lastResults"])
             self.away_team_result.heat_of_moment = self.__compute_heat_moment(away_team, self.results["secondTeam_lastResults"])
 
-            self.__insert_data_team_result(self.home_team_result, "firstTeam_lastResults")
-            self.__insert_data_team_result(self.away_team_result, "secondTeam_lastResults")
+            self.__insert_data_team_result(self.home_team_result, self.results["firstTeam_lastResults"])
+            self.__insert_data_team_result(self.away_team_result, self.results["secondTeam_lastResults"])
             
-            self.__insert_data_team_result(self.home_team_result, "firstTeam_VS_secondTeam")
-            self.__insert_data_team_result(self.away_team_result, "firstTeam_VS_secondTeam")
+            self.__insert_data_team_result(self.home_team_result, self.results["firstTeam_VS_secondTeam"])
+            self.__insert_data_team_result(self.away_team_result, self.results["firstTeam_VS_secondTeam"])
         except Exception:
             #At the moment we show a print but later WE MUST RAISE AN EXCEPTION OR AN ERROR
             
@@ -59,6 +59,7 @@ class Prediction:
                 else:
                     self.winner = "Draw"
             else :
+                raise Exception("No games count")
                 pass
         return self.winner
     
@@ -142,7 +143,7 @@ class Prediction:
         """
         For each game in the last_results array, we insert the stats in team_result_obj
         """
-        for match in self.results[last_results]:
+        for match in last_results:
                 team_result_obj.games_count += 1
                 
                 team_result_obj.goals_scored_count += int(match["home_team_score"]) if team_result_obj.team_name == match["home_team"] else int(match["away_team_score"])

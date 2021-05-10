@@ -151,9 +151,7 @@ Make sure to select two teams from the same championship. Else the prediction wo
                   {% endfor %}
                   </select>
                   <input type="hidden" name="leagueId" value="{{ league_id }}">
-                  {% if first_team %}
                   <input type="hidden" name="teamIdHome" value="{{first_team["key"]}}">
-                  {% endif %}
                 {% endif %}
             </p>
             <p class="text-center"><input class="btn btn-secondary" type="submit" value="Select Team"></p>
