@@ -1214,3 +1214,7 @@ Choses à faire demain :
 * Continuer le poster
 * Une fois que c'est fait
   * Analyse pour implémentation de la prédiction
+
+### 11.05.2021
+
+8h Fin du poster, je le mets dans le fichier `doc` (Merci Gawen pour l'aide)
