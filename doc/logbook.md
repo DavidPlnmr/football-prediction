@@ -1218,3 +1218,13 @@ Choses à faire demain :
 ### 11.05.2021
 
 8h Fin du poster, je le mets dans le fichier `doc` (Merci Gawen pour l'aide)
+
+Petit soucis après l'avoir mis dans le git, j'ai du l'enlever du à la taille des fichiers qui est trop grande par rapport à la limite imposée par git.
+
+13h Après passage de Monsieur Schmid, review du résumé, de l'abstract et du poster
+
+Sur le poster, réduire la partie result pour pouvoir augmenter la taille du titre et de la phrase d'accroche
+
+Dans le résumé + abstract, ne pas dire qu'on a cherché le meilleur algorithme mais qu'on a établi un algorithme faisable selon mon niveau en statistiques/mathématiques/probabilité.
+
+On remercie à nouveau Gawen pour le logo. Décidemment il est sur tout les travaux
