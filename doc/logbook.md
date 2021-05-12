@@ -1266,5 +1266,5 @@ standings = {
 }
 ```
 
-
+Je viens de me rappeler qu'à aucun moment je parle de l'arborescence des fichiers de l'application. Donc je rédige une explication sur les répertoires et de leur contenu
 
