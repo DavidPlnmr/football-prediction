@@ -1225,6 +1225,46 @@ Petit soucis après l'avoir mis dans le git, j'ai du l'enlever du à la taille d
 
 Sur le poster, réduire la partie result pour pouvoir augmenter la taille du titre et de la phrase d'accroche
 
-Dans le résumé + abstract, ne pas dire qu'on a cherché le meilleur algorithme mais qu'on a établi un algorithme faisable selon mon niveau en statistiques/mathématiques/probabilité.
+Dans le résumé + abstract, ne pas dire qu'on a cherché le meilleur algorithme mais qu'on a établi un algorithme faisable selon mon niveau en statistiques/mathématiques/probabilité. Ce qui est vrai, il ne faut pas dire que c'est le "meilleur algorithme" car ça ne l'est clairement pas mais c'est une manière d'établir des prédictions à partir de statistiques faisable avec mes compétences techniques.
 
 On remercie à nouveau Gawen pour le logo. Décidemment il est sur tout les travaux
+
+Tout les changements préconisés par M. Schmid ont été appliqué
+
+On part sur l'analyse de l'implémentation de la classe championnat.
+
+#### Recap de la journée
+
+* poster fait 
+* logo fait
+* début de démarche sur l'implémentation des championnats
+* Correction abstract + résumé
+
+Choses à faire demain :
+
+* Compétsssssss
+
+### 12.05.2021
+
+8h Lors de la création d'un championnat (classe), on va récupérer toutes les équipes du championnat sélectionné et les stocker. Ensuite, il y aura une méthode qui va process toutes les prédictions sur le championnat. Enfin pour le stockage du classement, j'aurai vu un truc du genre
+
+```python
+standings = {
+    "Liverpool" : {
+        "Wins" : 0,
+        "Draws" : 0,
+        "Loses" : 0,
+		"Points" : 0,
+    },
+    "Arsenal" : {
+        "Wins" : 0,
+        "Draws" : 0,
+        "Loses" : 0,
+		"Points" : 0,
+    },
+  ....
+}
+```
+
+
+
