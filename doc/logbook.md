@@ -1294,3 +1294,5 @@ Ajout de la documentation dans le repértoire du projet
 Ajout du poster dans la documentation et remise en forme de la documentation après ces ajouts.
 
 Envoi de mail au responsable du projet pour parler du changement d'emplacement de la documentation.
+
+J'ai corrigé tout les fichiers de tests. On les appelles tous sans problème et sans rien toucher d'autre

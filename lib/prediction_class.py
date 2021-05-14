@@ -6,12 +6,12 @@ class Prediction:
     """
     Class to make a prediction on a match between two football teams
     """
-    def __init__(self, home_team, away_team, from_date="", to_date=""):
+    def __init__(self, home_team, away_team, log_path="", from_date="", to_date=""):
         self.home_team_result = TeamResult(home_team)
         self.away_team_result = TeamResult(away_team)
         self.winner=""
         
-        self.provider = Provider()
+        self.provider = Provider(log_path)
         
         try:
             #Change this line to API when tests are finished
