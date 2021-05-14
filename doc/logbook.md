@@ -1290,3 +1290,7 @@ Comme j'ai changé de compilateur j'ai quelques changements à faire dans ma doc
 Évidement j'ai aussi changé la partie "Format de la documentation" ou je parlais d'overleaf. J'explique qu'il y'a un timeout avec overleaf et que je fais ça en local maintenant
 
 Ajout de la documentation dans le repértoire du projet
+
+Ajout du poster dans la documentation et remise en forme de la documentation après ces ajouts.
+
+Envoi de mail au responsable du projet pour parler du changement d'emplacement de la documentation.
