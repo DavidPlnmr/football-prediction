@@ -1,6 +1,11 @@
 #!/usr/bin/python3
 import os
-from db_manager import DbManager
+import sys
+
+# insert the "football-prediction" directory into the sys.path
+sys.path.insert(1, os.path.abspath(".."))
+
+from lib.sql.db_manager import DbManager
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -8,7 +13,7 @@ db = DbManager(os.getenv("DB_HOST"), os.getenv("DB_USER"), os.getenv("DB_PASSWOR
 
 #db.delete_at(6) # Delete at a specific id
 
-db.insert_prediction("Home", "Tottenham", "Burnley", 1900, 1800, 2202, 1000, "2020-12-10") # Insert row in the table
+#db.insert_prediction("Home", "Tottenham", "Burnley", 1900, 1800, 2202, 1000, "2020-12-10") # Insert row in the table
 
 print (db.get_all_predictions()) # Get all the predictions
 
