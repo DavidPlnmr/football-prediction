@@ -5,3 +5,12 @@
 /venv/
 /__pycache__/
 /log/
+/doc/latex/*
+!/doc/latex/main.tex
+!/doc/latex/main.pdf
+!/doc/latex/json.tex
+!/doc/latex/js.tex
+!/doc/latex/include.tex
+!/doc/latex/img
+!/doc/latex/src
+!/doc/latex/README.md

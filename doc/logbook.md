@@ -1268,3 +1268,25 @@ standings = {
 
 Je viens de me rappeler qu'à aucun moment je parle de l'arborescence des fichiers de l'application. Donc je rédige une explication sur les répertoires et de leur contenu
 
+![Reflexion sur les compétitions](./img/reflexionCompetitions.jpg)
+
+Explication de l'environnement de développement du projet
+
+#### Recap de la journée
+
+* Analyse de l'implémentation des compétitions
+* Documentation de l'environnement de développement
+
+Choses à faire demain :
+
+* Commencer réellement l'implémentation des compétitions
+
+### 14.05.2021
+
+Bon y'a réellement un soucis avec Overleaf. Le fichier est trop gros et overleaf a un timeout si le fichier met trop de temps à être compilé. J'installe donc LaTeX localement avec `sudo apt install texlive-full` pour être sur d'avoir tout les paquets dont j'ai besoin. Par contre l'installation est très longue.
+
+Comme j'ai changé de compilateur j'ai quelques changements à faire dans ma documentation je fixe donc cela. c'était un imprévu mais je préfère faire ça maintenant plutôt qu'à la fin
+
+Évidement j'ai aussi changé la partie "Format de la documentation" ou je parlais d'overleaf. J'explique qu'il y'a un timeout avec overleaf et que je fais ça en local maintenant
+
+Ajout de la documentation dans le repértoire du projet
