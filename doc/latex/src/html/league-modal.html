@@ -1,0 +1,27 @@
+<div id="leagueModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-md">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">League Picker</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ url_for("h2h_league_select") }}" method="post">
+            <p>
+                <label for="leagueId">League</label>
+                <select class="form-control" name="leagueId" id="leagueId">
+                {% for league_name in leagues %}
+
+                  <option value="{{ leagues[league_name]}}">{{ league_name }}</option>
+                {% endfor %}
+                </select>
+            </p>
+            <p class="text-center"><input class="btn btn-secondary" type="submit" value="Select Team"></p>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>

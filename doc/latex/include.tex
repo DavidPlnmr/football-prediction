@@ -1,0 +1,76 @@
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.95}
+
+% Définit un style pour l'affichage du code source
+\lstdefinestyle{python}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{black},
+    stringstyle=\color{orange},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=python}
+% replace sequence of char by another sequence of char
+% see http://stackoverflow.com/questions/1116266/listings-in-latex-with-utf-8-or-at-least-german-umlauts
+\lstset{literate=%
+{ä}{{\"a}}1
+{â}{{\^a}}1
+{à}{{\`a}}1
+{Ä}{{\"A}}1
+{Â}{{\^A}}1
+{À}{{\`A}}1
+{ë}{{\"e}}1
+{ê}{{\^e}}1
+{é}{{\'e}}1
+{è}{{\`e}}1
+{Ë}{{\"E}}1
+{Ê}{{\^E}}1
+{É}{{\'E}}1
+{È}{{\`E}}1
+{ï}{{\"i}}1
+{î}{{\^i}}1
+{Ï}{{\"I}}1
+{Î}{{\^I}}1
+{ö}{{\"o}}1
+{ô}{{\^o}}1
+{Ö}{{\"O}}1
+{Ô}{{\^O}}1
+{ü}{{\"u}}1
+{û}{{\^u}}1
+{ù}{{\`u}}1
+{Ü}{{\"U}}1
+{Û}{{\^U}}1
+{Ù}{{\`U}}1
+{ç}{{\c c}}1
+{Ç}{{\c C}}1
+{°}{{\textsuperscript{o}}}1
+% suppress BOM (Byte Order Mark) characters at the beginning of Visual Studio source
+% see http://tex.stackexchange.com/questions/5935/how-to-suppress-bom-effect-in-the-output
+{ï}{}0
+{»}{}0
+{¿}{}0
+}
+
+% Commande pour intégrer les fichiers sources de l'application
+\newcommand{\listingPathPython}{./src/python}
+\newcommand{\lstinputPython}[1]{
+\lstinputlisting[caption={\texttt{#1}.py}, label={list-#1}, includerangemarker=false,language=Python]{\listingPathPython/#1.py}
+}
+
+\newcommand{\listingPathHTML}{./src/html}
+\newcommand{\lstinputHTML}[1]{
+\lstinputlisting[caption={\texttt{#1}.html}, label={list-#1}, includerangemarker=false,language=HTML]{\listingPathHTML/#1.html}
+}
+

@@ -1,0 +1,35 @@
+{% if upcoming_matches %}
+<div class="table-responsive-md">
+	
+	{% for league in upcoming_matches %}
+	<h4>{{league}}</h4>
+	<table class="table table-striped">
+		<thead class="thead-dark">
+			<tr>
+			<th>Home</th>
+			<th>Away</th>
+			<th>Date</th>
+			</tr>
+		</thead>
+		{% for match in upcoming_matches[league] %}
+			<tr>
+				{% if match["Home"] == match["Prediction winner"] %}
+				<td class="text-success"><b>{{match["Home"]}}</b></td>
+				<td class="text-danger">{{match["Away"]}}</td>
+				{% elif match["Away"] == match["Prediction winner"] %}
+				<td class="text-danger">{{match["Home"]}}</td>
+				<td class="text-success"><b>{{match["Away"]}}</b></td>
+				{% else %}
+				<td class="text-warning"><b>{{match["Home"]}}</b></td>
+				<td class="text-warning"><b>{{match["Away"]}}</b></td>
+				{% endif %}
+				<td>{{match["Date"]}}</td>
+			</tr>
+		
+		{% endfor %}
+	</table>
+	{% endfor %}
+</div>
+{% else %}
+<p class="lead">No upcoming games.</p>
+{% endif %}

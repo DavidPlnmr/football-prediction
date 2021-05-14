@@ -1,0 +1,17 @@
+<form action="{{ url_for("h2h_teams_select") }}" method="post">
+<p>
+	<label for="teamIdAway">Team</label>
+	{% if teams %}
+	  <select class="form-control" name="teamIdAway" id="teamIdAway">
+	  {% for team in teams %}
+		<option value="{{ team["key"] }}">{{ team["name"] }}</option>
+	  {% endfor %}
+	  </select>
+	  <input type="hidden" name="leagueId" value="{{ league_id }}">
+	  {% if first_team %}
+	  <input type="hidden" name="teamIdHome" value="{{first_team["key"]}}">
+	  {% endif %}
+	{% endif %}
+</p>
+<p class="text-center"><input class="btn btn-secondary" type="submit" value="Select Team"></p>
+</form>

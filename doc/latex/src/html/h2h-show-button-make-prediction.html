@@ -1,0 +1,8 @@
+{% if first_team and second_team and not winner%}
+<form action="{{ url_for("h2h_make_prediction") }}" method="post">
+  <input type="hidden" name="leagueId" value="{{ league_id }}">
+  <input type="hidden" name="teamIdHome" value="{{ first_team["key"] }}">
+  <input type="hidden" name="teamIdAway" value="{{ second_team["key"] }}">
+  <p class="text-center"><input class="btn btn-secondary" type="submit" value="Make the prediction" onclick="loading()"></p>
+</form>
+{% endif %}
