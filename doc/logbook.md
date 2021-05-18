@@ -1307,7 +1307,7 @@ J'ai corrigé tout les fichiers de tests. On les appelles tous sans problème et
 
 8h On reprend les compétitions
 
-A noter que je vois pas comment changer une prédiction par rapport à des prédictions précédentes. En gros inclure une prédiction comme data pure c'est un peu compliqué comme je sais pas si elle est correcte. Je pourrais prendre en compte le fait que cette prédiction est forcément correcte.
+A noter que je vois pas comment changer une prédiction par rapport à des prédictions précédentes. En gros inclure une prédiction comme data pure c'est un peu compliqué comme je sais pas si elle est correcte. Je pourrais prendre en compte le fait que cette prédiction est forcément correcte, mais ça va créer des prédictions qui seraient fausses en chaine :/
 
 Constructeur de la classe compétition fait
 
@@ -1417,7 +1417,7 @@ Cela viendrait probablement de la librairie requests qui essaie d'appeler l'endp
 
 La solution serait d'ajouter `verify=False` dans le `requests.get()` de la facade. Je vais essayer
 
-Donc déjà ça fix pas tout le problème et en plus en terme de sécurité c'est déconseillé
+Donc déjà ça fix pas du tout le problème et en plus en terme de sécurité c'est déconseillé
 
 ```
 ts.exceptions.ConnectionError: HTTPSConnectionPool(host='apiv2.apifootball.com', port=443): Max retries exceeded with url: /?APIkey=cf9feded04e3c0cfc203a9622abe1b785d36f1096da46498b246cc9e3c073a61&action=get_statistics&match_id=417652 (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x7f4b28772ef0>: Failed to establish a new connection: [Errno 11] Resource temporarily unavailable'))
@@ -1445,3 +1445,13 @@ J'ai toujours l'erreur et
 Le message qui déconseille d'utiliser `verify=True`
 
 Bon, mis à part ça je pense qu'on va passer la page d'accueil en multiprocessing
+
+Y'a la même erreur qu'avec les compétitions pour le multiprocessing...
+
+#### Recap de la journée
+
+* Tentative de multiprocessing pour les compétitions
+  * Multiprocessing parce que la compétition prendrait une vingtaine de minutes à être compute de manière séquentielle..
+  * Erreur sur certaines prédictions
+    * Sur des matchs ou quand on les fait à la main tout fonctionne mais avec le multiprocessing ça plante
+    * Je suppose que ça vient de l'API ou de la librairie Requests python
