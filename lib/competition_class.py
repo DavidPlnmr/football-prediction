@@ -60,7 +60,7 @@ class Competition:
                                           args=(matches[i][0], matches[i][1], out_list))
             jobs.append(thread)
 
-        # Start the threads (i.e. calculate the random number lists)
+        # Start the threads 
         for j in jobs:
             j.start()
 
@@ -75,16 +75,15 @@ class Competition:
                       
 
     def make_prediction(self, first_team, second_team, out_list):
-        try:
-            pred = Prediction(first_team, second_team)
-            winner = pred.define_winner()
-            out_list.append({
-                "Home" : first_team,
-                "Away" : second_team,
-                "Prediction" : winner
-            })
-        except Exception:
-            print(f"Unable to make the prediction between the team {first_team} and {second_team}")
-            pass
-        time.sleep(1)
+        #try:
+        pred = Prediction(first_team, second_team)
+        winner = pred.define_winner()
+        out_list.append({
+            "Home" : first_team,
+            "Away" : second_team,
+            "Prediction" : winner
+        })
+        # except Exception:
+        #     print(f"Unable to make the prediction between the team {first_team} and {second_team}")
+        #     pass
         

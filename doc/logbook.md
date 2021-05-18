@@ -1455,3 +1455,95 @@ Y'a la même erreur qu'avec les compétitions pour le multiprocessing...
   * Erreur sur certaines prédictions
     * Sur des matchs ou quand on les fait à la main tout fonctionne mais avec le multiprocessing ça plante
     * Je suppose que ça vient de l'API ou de la librairie Requests python
+
+### 18.05.2021
+
+Je viens de réessayer le multiprocessing sur la compétition et maintenant j'ai des erreurs provenant de l'API. C'est une erreur 500 -> https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#5xx_Server_Error
+
+OK JE CROIS SAVOIR. Je viens de tester de lancer mon script et faire une requête à l'API en même temps. L'API met du temps à envoyer la requête mais le serveur ne renvoie pas de requête 500. C'est le paquet Requests qui déclenche l'erreur probablement du au fait que l'API met trop de temps à répondre
+
+J'essaie d'avoir contact avec les dévs de l'API pour pouvoir voir comment régler ce soucis (du moins avoir des informations par rapport à leur serveur possiblement jsp)
+
+```
+Hi,
+
+I send you this message because I have a problem with a Python script and it might be a API-side problem.
+
+I explain what I'm trying to do. The goal of the functionnality I'm developing is to make a prediction on a whole competition (I have my own prediction class which works correctly if I select two teams).
+
+Actually, a single prediction make 8 seconds to be processed. If I have to make prediction for 380 matches, it will take a lot of time to process.
+So I tried to parallelize this process. When I try to parallelize, it starts well. The first predictions are done correctly. But at the middle of the script, your API starts to send 500 errors.
+
+This is probably due to the big number of requests I make in a few seconds and your server has certainly a sort of security against spamming.
+
+So I sent you this message to find a way to solve my problem or have more information about it.
+
+The link to the code :
+https://github.com/DavidPlnmr/football-prediction/blob/main/lib/competition_class.py
+
+Thanks in advance. 
+```
+
+Bon du coup je sais pas trop quoi faire
+
+Je vais avancer dans la documentation pour passer le temps
+
+Après avoir foutu un time.sleep de 2 secondes après chaque thread, il y'a tout de même moins d'erreur mais il y a toujours des erreurs sur des matchs ou il n'est pas sensé y avoir. (Chelsea Tottenham par ex. je viens de le faire à la main et il y'a aucun soucis)
+
+```
+Unable to make the prediction between the team Brighton and Fulham
+Unable to make the prediction between the team Brighton and Sheffield Utd
+Unable to make the prediction between the team Southampton and Chelsea
+Unable to make the prediction between the team Southampton and Tottenham
+Unable to make the prediction between the team Southampton and Leeds
+Unable to make the prediction between the team Chelsea and Crystal Palace
+Unable to make the prediction between the team Chelsea and West Ham
+Unable to make the prediction between the team Chelsea and Tottenham
+Unable to make the prediction between the team Arsenal and Manchester United
+Unable to make the prediction between the team Arsenal and Manchester City
+Unable to make the prediction between the team Arsenal and Aston Villa
+Unable to make the prediction between the team Arsenal and Wolves
+Unable to make the prediction between the team West Ham and Manchester City
+Unable to make the prediction between the team Manchester City and Fulham
+Unable to make the prediction between the team Tottenham and Newcastle
+Unable to make the prediction between the team Burnley and Fulham
+Unable to make the prediction between the team Burnley and Aston Villa
+Unable to make the prediction between the team Burnley and Wolves
+Unable to make the prediction between the team Burnley and Newcastle
+Unable to make the prediction between the team Tottenham and Sheffield Utd
+Unable to make the prediction between the team Newcastle and Sheffield Utd
+Unable to make the prediction between the team Aston Villa and Fulham
+```
+
+
+
+Donc là j'essaie de voir les potentielles solutions à ce problème :
+
+* Utiliser la base de données comme "API"
+  * Utiliser l'API uniquement pour charger les résultats en base de manière quotidienne.
+  * On est pas sûr que ça crée pas d'erreur non plus
+  * Cela veut dire qu'il faudra faire réutiliser et modifier potentiellement le script python `load_data_in_db.py`
+* Faire de manière séquentielle
+  * Beaucoup trop long mais techniquement faisable
+  * Faire un cron job pour faire la prédiction sur chaque compétition à 1h du matin par ex?
+* Lâcher les compétitions (?)
+  * Trop long à compute donc inutilisable
+
+Ok rectification du mail avec M. Schmid là on est à 11 secondes d'attente juste pour l'endpoint H2H. Je vais clairement utiliser la base de données pour faire les prédictions et plus l'API
+
+Après passage de M. Schmid :
+
+`get_all_stats_from_teams_api` -> `get_all_stats_from_teams`  et dedans on vérifie si on a les données en base si c'est pas le cas on fait l'appel à l'api et puis on stocke les matchs dans la base de données.
+
+Autrement l'évaluation intermédiaire :
+
+Tout pareil que la première juste une baisse de cadence de travail.
+
+Bon on développe le fait d'insérer les matchs en base
+
+#### Recap de la journée
+
+* Solution trouvée pour l'erreur 500 de l'API
+  * Récupérer les matchs en base et si ils y sont pas, récupérer les matchs de l'api et les stocker en base
+  * Ne pas oublier de faire du cache en SQL
+* Regarder si il faut changer la doc par rapport au code modifié dans le provider 

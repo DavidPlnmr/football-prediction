@@ -519,9 +519,9 @@ L'idéal pour l'application serait de pouvoir donner deux équipes différentes 
 Au niveau des restrictions de l'application, cette dernière ne peut qu'établir une prédiction entre deux équipes du même championnat. En effet, il n'y a aucun moyen de déterminer si un championnat d'un pays est plus fort qu'un autre et donc qu'une équipe d'un championnat est meilleure qu'une autre. 
 
 Prenons un cas concret avec comme exemple, un match entre Anderlecht (BEL) et le FC Bayern (ALL). Dans le cas ou le Bayern est dans une série de défaites et que l'Anderlecht dans une série de victoires, l'application sortira probablement l'équipe d'Anderlecht comme vainqueur de cet affrontement, ce qui a très peu de chance d'arriver. 
-On pourrait envisager de prendre le classement du championnat national de l'Allemagne et de la Belgique et de dire que le premier du classement de Belgique a le même niveau que le premier allemand, ce qui n'est pas envisageable.  
+On pourrait envisager de prendre le classement du championnat national de l'Allemagne et de la Belgique et de dire que le premier du classement de Belgique a le même niveau que le premier allemand, mais ce n'est pas envisageable car ces équipes n'ont pas le même niveau.  
 
-Une autre solution qui est plus envisageable mais qui a toujours un problème : le coefficient de clubs des associations de l'UEFA\footnote{\url{https://fr.uefa.com/memberassociations/uefarankings/country/\#/yr/2021}}. Ce coefficient est utilisé pour déterminer le nombre de places disponibles dans un championnat pour accéder au compétitions de clubs de l'UEFA. Par exemple, le championnat d'Angleterre est celui qui a le plus de places disponibles.
+Une autre solution qui est plus envisageable mais qui a toujours un problème : le coefficient de clubs des associations de l'UEFA\footnote{\url{https://fr.uefa.com/memberassociations/uefarankings/country/\#/yr/2021}}. Ce coefficient est utilisé pour déterminer le nombre de places disponibles dans un championnat pour accéder aux compétitions de clubs de l'UEFA. Par exemple, le championnat d'Angleterre est celui qui a le plus de places disponibles.
 
 \begin{figure}[htp]
     \centering
@@ -745,7 +745,13 @@ Enfin pour tester, il m'a fallu faire un script qui récupère les matchs de la 
     \label{fig:pourcentReussite}
 \end{figure}
 
+\subsection{Élaboration de prédictions sur une compétition}
+
+Pour ce qui concerne les compétitions, je me suis dit qu'il fallait faire un constructeur qui récupère toutes les équipes du championnat sélectionné et qui forme un classement avec ces équipes. On y stockerait les victoires, les égalités, les défaites ainsi que les points. Pour l'historique de matchs, j'avais initialement prévu de stocker l'historique pour chaque équipe mais cela créerait des données en double. J'ai donc gardé le choix de faire un historique global des matchs et ensuite on cherche dedans les matchs d'une équipe X. 
+Ensuite, une méthode qui fait une prédiction pour chacun des matchs de la compétition. Pour diminuer le temps de calcul, j'ai pensé faire du multiprocessing pour faire des prédictions en parallèles les une des autres. Il n'y a pas d'intérêt de faire du séquentielle puisque une prédiction n'est pas du tout dépendante d'une autre.
+
 \newpage
+
 
 \section{Environnement de développement}
 

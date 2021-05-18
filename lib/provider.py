@@ -2,10 +2,14 @@
 import os
 from dotenv import load_dotenv
 import logging
+
+from requests.models import Response
 from .api.api_facade import ApiFacade
 from .sql.db_manager import DbManager
 import lib.constants
-import datetime
+
+from dateutil.relativedelta import relativedelta
+from datetime import datetime
 
 
 
@@ -40,6 +44,28 @@ class Provider:
         Get the team list from a league
         """
         return self.__api_facade.get_teams_with_team_id(team_id)
+    
+    def get_all_stats_from_teams(self, first_team_name, second_team_name):
+        """
+        This method try to get games from the two teams in the DB. If there is no data in the DB, it will get data from the API and then save it in the DB.
+        """
+        response = ""
+        try:
+            now = datetime.now().date()
+            three_months_before = now - relativedelta(months=3)
+            response = self.get_all_stats_from_teams_db(first_team_name, second_team_name, three_months_before, now )
+            print("Data from DB")
+        except Exception:
+            
+            response = self.get_all_stats_from_teams_api( first_team_name, second_team_name)
+            print("Data from API")
+            for match in response:
+                print(match)
+                pass                
+                
+            
+        return response
+        
     
     def get_all_stats_from_teams_api(self, first_team_name, second_team_name):
         """
@@ -206,10 +232,12 @@ class Provider:
                 "away_team" : match["match_awayteam_name"],
                 "home_team_score" : match["match_hometeam_score"],
                 "away_team_score" : match["match_awayteam_score"],
+                "stats" : {}
         }
+        
         for stat in stats_array:
             if stat["type"] in required_stats_array:
-                elem[stat["type"]]={"home": stat["home"], "away": stat["away"]}
+                elem["stats"][stat["type"]]={"home": stat["home"], "away": stat["away"]}
         array.append(elem)
     
     def __insert_stats_in_array_for_db(self, match, array, stats_array, required_stats_array):
@@ -223,12 +251,13 @@ class Provider:
                 "away_team" : match["away_team_name"],
                 "home_team_score" : match["home_team_score"],
                 "away_team_score" : match["away_team_score"],
+                "stats" : {}
         }
         
         for stat in stats_array:
             if stat["id_match"] == match["id"]:
                 if stat["type"] in required_stats_array:
-                    elem[stat["type"]]={"home": stat["home"], "away": stat["away"]}
+                    elem["stats"][stat["type"]]={"home": stat["home"], "away": stat["away"]}
         array.append(elem)
         
             

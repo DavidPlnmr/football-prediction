@@ -18,9 +18,9 @@ class ApiFacade:
         """
         Private method to call any endpoint of the API
         """
-        start_time = time.time()
+        start_time = time.perf_counter()
         response = requests.get(f'https://apiv2.apifootball.com/?APIkey={self.api_key}&{request_params}')
-        end_time = time.time()
+        end_time = time.perf_counter()
         
         if response.status_code == 200: # Code 200 = OK. Healthy connection
             obj = json.loads(response.content.decode('utf-8'))
@@ -33,7 +33,7 @@ class ApiFacade:
                 return obj # decode to get the content in string
         else:
             # Error from the library
-            logging.error(f"Happened during the request to the API with error : {response.status_code}")
+            logging.error(f"Could not connect to the API. Error : {response.status_code} | Params : {request_params}")
             raise Exception("Could not connect to the API.")
     
     def get_match_infos(self, match_id):

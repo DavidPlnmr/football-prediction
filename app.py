@@ -4,7 +4,6 @@ from lib.prediction_class import Prediction
 from lib.provider import Provider
 import lib.constants
 
-import json
 from dateutil.relativedelta import relativedelta
 from datetime import datetime
 import os
@@ -20,8 +19,6 @@ if not os.path.isfile(log_path):
 app = Flask(__name__)
 prov = Provider()
 cache = {}
-
-
 
 """
 INDEX ROUTE
@@ -70,7 +67,9 @@ def h2h():
     """
     leagues = lib.constants.MULTIPLE_LEAGUES
     if "error" in cache:
-        return render_template("h2h.html", leagues=leagues, error=cache["error"])
+        error_message = cache["error"]
+        cache.pop("error")
+        return render_template("h2h.html", leagues=leagues, error=error_message)
     else:
         return render_template("h2h.html", leagues=leagues)
     
