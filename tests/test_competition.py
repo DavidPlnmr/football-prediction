@@ -10,4 +10,6 @@ sys.path.insert(1, os.path.abspath(".."))
 
 from lib.competition_class import Competition
 
-comp = Competition(148, "../log/app.log")
+comp = Competition(262, "../log/app.log")
+
+comp.compute_competition()

@@ -1296,3 +1296,152 @@ Ajout du poster dans la documentation et remise en forme de la documentation apr
 Envoi de mail au responsable du projet pour parler du changement d'emplacement de la documentation.
 
 J'ai corrigé tout les fichiers de tests. On les appelles tous sans problème et sans rien toucher d'autre
+
+#### Recap de la journée
+
+* Transfert de la doc en local
+* Changement de la doc par rapport au fait qu'elle soit en local
+* Correction des fichiers de tests
+
+### 17.05.2021
+
+8h On reprend les compétitions
+
+A noter que je vois pas comment changer une prédiction par rapport à des prédictions précédentes. En gros inclure une prédiction comme data pure c'est un peu compliqué comme je sais pas si elle est correcte. Je pourrais prendre en compte le fait que cette prédiction est forcément correcte.
+
+Constructeur de la classe compétition fait
+
+```python
+def __init__(self, league_id, log_path=""):
+        self.standings = {}
+        prov = Provider(log_path)
+        response = prov.get_teams_from_league(int(league_id))
+        
+        for team in response:
+            self.standings[team["team_name"]] = {
+                "Badge" : team["team_badge"],
+                "Wins" : 0,
+                "Draws" : 0,
+                "Loses" : 0,
+                "Points" : 0,
+                "History": []
+            }
+```
+
+J'ai pas vraiment besoin de plus. J'ai décidé d'insérer l'historique des matchs dans chacune des équipes. Je pourrais aussi faire l'historique dans la compétitions. 
+
+EDIT : En fait c'est mieux de sortir l'historique des matchs et les mettre juste en variable de classe. 
+
+En train de voir pour le processing des compétitions et c'est très très long.
+
+Ok donc j'ai une idée : PARALLELISATION DU TRAVAIL ET AJOUT DE TOUT LES RESULTATS DANS L'HISTORIQUE.
+
+Donc là je viens d'implémenter du multiprocessing mais le temps est carrément doublé. Je ne comprends pas.
+
+ça c'est utilisé avec le paquet multiprocessing
+
+```python
+start = time.perf_counter()
+for num in range(1,100):
+    self.compute_prime_numbers(num)
+for num in range(1,300):
+    self.compute_prime_numbers(num)
+for num in range(1,750):
+	self.compute_prime_numbers(num)
+for num in range(1,100000):
+    self.compute_prime_numbers(num)
+end = time.perf_counter()
+```
+
+Ce code prend 16.8 à s'éxecuter -> `Finished in 16.809918099999777 seconds`
+
+```python
+results = [pool.apply(self.compute_prime_numbers, args=([num])) for num in range(1,100)]
+results = [pool.apply(self.compute_prime_numbers, args=([num])) for num in range(1,300)]
+results = [pool.apply(self.compute_prime_numbers, args=([num])) for num in range(1,750)]
+results = [pool.apply(self.compute_prime_numbers, args=([num])) for num in range(1,100000)]
+```
+
+Mais celui ci qui est en sensé s'éxecuter en parallel prend 2 fois plus de temps soit 
+`Finished in 33.68452669999897 seconds`
+
+
+
+Je réessaie de le faire en utilisant la librairie threading et en faisant des jobs
+
+Threading n'améliore pas drastiquement. Cependant -> Process du paquet multithreading parallèlise bien
+
+Bon il y'a un petit soucis qui était vachement prévisible. C'est le fait qu'une prédiction peut être infaisable ce qui fait que la compétition est totalement useless à process 
+
+Ok donc après avoir essayer plusieurs fois, des matchs qui ont l'air normaux ont l'air de planter. Quand je dis normaux je parle du fait qu'il manque aucune données pour faire la prédiction. Cependant je pense que l'API a du mal à suivre et qu'il y a potentiellement des reponses de l'API qui sont vides sans écrire d'erreur dans les logs :/
+
+
+
+Je deviens fou pour de vrai. J'arrive pas à savoir pourquoi est-ce que les prédictions ne se font pas
+
+```
+Prediction between AC Milan and Spezia is unmakeable
+Prediction between Genoa and Verona is unmakeable
+Prediction between Fiorentina and Sassuolo is unmakeable
+Prediction between Sampdoria and Inter is unmakeable
+Prediction between Lazio and Verona is unmakeable
+Prediction between Udinese and Bologna is unmakeable
+Prediction between Atalanta and Bologna is unmakeable
+Prediction between Udinese and Spezia is unmakeable
+Prediction between Juventus and Parma is unmakeable
+Prediction between Bologna and Verona is unmakeable
+Prediction between Genoa and Parma is unmakeable
+Prediction between Udinese and Inter is unmakeable
+Prediction between Napoli and Atalanta is unmakeable
+Prediction between Sampdoria and Lazio is unmakeable
+Prediction between AC Milan and Juventus is unmakeable
+Prediction between Atalanta and Lazio is unmakeable
+Prediction between Inter and Spezia is unmakeable
+Prediction between Sassuolo and Verona is unmakeable
+Prediction between Sampdoria and Genoa is unmakeable
+Prediction between Verona and Parma is unmakeable
+Prediction between Fiorentina and Sampdoria is unmakeable
+Prediction between Bologna and Spezia is unmakeable
+Prediction between Udinese and Juventus is unmakeable
+Finished in 65.93564940000215 seconds
+```
+
+```
+HTTPSConnectionPool(host='apiv2.apifootball.com', port=443): Max retries exceeded with url: /?APIkey=cf9feded04e3c0cfc203a9622abe1b785d36f1096da46498b246cc9e3c073a61&action=get_statistics&match_id=417892 (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x7fb7ea699ef0>: Failed to establish a new connection: [Errno 11] Resource temporarily unavailable'))
+```
+
+L'erreur qui est produite avant celle là c'est celle-ci et c'est ce qui me fait penser que cette erreur viennent d'une requête faites à l'API.
+
+Je viens de trouver un stackoverflow parlant de cette erreur -> https://stackoverflow.com/questions/16230850/httpsconnectionpool-max-retries-exceeded
+Cela viendrait probablement de la librairie requests qui essaie d'appeler l'endpoint plusieurs fois car il répond pas (?)
+
+La solution serait d'ajouter `verify=False` dans le `requests.get()` de la facade. Je vais essayer
+
+Donc déjà ça fix pas tout le problème et en plus en terme de sécurité c'est déconseillé
+
+```
+ts.exceptions.ConnectionError: HTTPSConnectionPool(host='apiv2.apifootball.com', port=443): Max retries exceeded with url: /?APIkey=cf9feded04e3c0cfc203a9622abe1b785d36f1096da46498b246cc9e3c073a61&action=get_statistics&match_id=417652 (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x7f4b28772ef0>: Failed to establish a new connection: [Errno 11] Resource temporarily unavailable'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.7/multiprocessing/process.py", line 297, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.7/multiprocessing/process.py", line 99, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/davidplnmr/football-prediction/lib/competition_class.py", line 80, in make_prediction
+    winner = pred.define_winner()
+  File "/home/davidplnmr/football-prediction/lib/prediction_class.py", line 31, in __init__
+    raise Exception("Prediction unmakeable. Not enought stats.")
+Exception: Prediction unmakeable. Not enought stats.
+```
+
+J'ai toujours l'erreur et
+
+```
+/usr/lib/python3/dist-packages/urllib3/connectionpool.py:849: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+```
+
+Le message qui déconseille d'utiliser `verify=True`
+
+Bon, mis à part ça je pense qu'on va passer la page d'accueil en multiprocessing

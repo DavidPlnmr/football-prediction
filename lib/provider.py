@@ -52,6 +52,7 @@ class Provider:
         stats_first_team = []
         stats_second_team = []
         
+        
         # We check the last results of the teams aren't empty
         if len(reqresult["firstTeam_lastResults"]) > 0 and len(reqresult["secondTeam_lastResults"]) > 0:
             
@@ -82,7 +83,6 @@ class Provider:
             result["firstTeam_VS_secondTeam"]=stats_matches_two_team
             result["firstTeam_lastResults"]=stats_first_team
             result["secondTeam_lastResults"]=stats_second_team
-                    
 
             return result
         else:
