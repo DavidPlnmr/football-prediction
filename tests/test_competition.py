@@ -12,4 +12,4 @@ from lib.competition_class import Competition
 
 comp = Competition(148, "../log/app.log")
 
-comp.compute_competition()
+print(comp.compute_competition())

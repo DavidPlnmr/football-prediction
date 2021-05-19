@@ -148,7 +148,6 @@ class DbManager:
             return False
             pass
         
-    
     def delete_at(self, id):
         """
         Delete the row with the id in parameter
@@ -175,11 +174,11 @@ class DbManager:
                             `home_team_score`,
                             `away_team_score`)
                             VALUES ( {match_id},  STR_TO_DATE("{match_date}", "%Y-%m-%d"), "{match_time}", {league_id}, "{league_name}", "{home_team_name}", "{away_team_name}", {home_team_score}, {away_team_score} );""")
-        
-            for stat in stats_array:
-                type = stat["type"]
-                home = stat["home"]
-                away = stat["away"]
+
+            
+            for type in stats_array:
+                home = stats_array[type]["home"]
+                away = stats_array[type]["away"]
                 self.__cursor.execute(f"""INSERT INTO `statistic` (
                                     `type`,
                                     `home`,

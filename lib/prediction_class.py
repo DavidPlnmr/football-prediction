@@ -16,9 +16,7 @@ class Prediction:
         try:
             #Change this line to API when tests are finished
             self.results = self.provider.get_all_stats_from_teams(home_team, away_team)
-            # This line down below is here to test the success of the prediction. Making a prediction from a past game
-            #self.results = self.provider.get_all_stats_from_teams_db(home_team, away_team, from_date, to_date)
-
+            
             self.home_team_result.heat_of_moment = self.__compute_heat_moment(home_team, self.results["firstTeam_lastResults"])
             self.away_team_result.heat_of_moment = self.__compute_heat_moment(away_team, self.results["secondTeam_lastResults"])
 
@@ -147,27 +145,27 @@ class Prediction:
                 team_result_obj.goals_scored_count += int(match["home_team_score"]) if team_result_obj.team_name == match["home_team"] else int(match["away_team_score"])
                 # This line is the reverse of the top one
                 team_result_obj.goals_conceded_count += int(match["home_team_score"]) if team_result_obj.team_name != match["home_team"] else int(match["away_team_score"])
-                
+                stats = match["stats"]
                 #These 2 lines are here to remove the "%" char of the Ball Possession Stat
-                match["Ball Possession"]["home"] = match["Ball Possession"]["home"].replace('%', '')
-                match["Ball Possession"]["away"] = match["Ball Possession"]["away"].replace('%', '')
-                team_result_obj.ball_possession += int(match["Ball Possession"]["home"]) if team_result_obj.team_name == match["home_team"] else int(match["Ball Possession"]["away"])
+                stats["Ball Possession"]["home"] = stats["Ball Possession"]["home"].replace('%', '')
+                stats["Ball Possession"]["away"] = stats["Ball Possession"]["away"].replace('%', '')
+                team_result_obj.ball_possession += int(stats["Ball Possession"]["home"]) if team_result_obj.team_name == match["home_team"] else int(stats["Ball Possession"]["away"])
                 
-                team_result_obj.goal_attempts += int(match["Goal Attempts"]["home"]) if team_result_obj.team_name == match["home_team"] else int(match["Goal Attempts"]["away"])
+                team_result_obj.goal_attempts += int(stats["Goal Attempts"]["home"]) if team_result_obj.team_name == match["home_team"] else int(stats["Goal Attempts"]["away"])
                 
-                team_result_obj.shots_on_goal += int(match["Shots on Goal"]["home"]) if team_result_obj.team_name == match["home_team"] else int(match["Shots on Goal"]["away"])
+                team_result_obj.shots_on_goal += int(stats["Shots on Goal"]["home"]) if team_result_obj.team_name == match["home_team"] else int(stats["Shots on Goal"]["away"])
                 
-                team_result_obj.goalkeeper_saves += int(match["Goalkeeper Saves"]["home"]) if team_result_obj.team_name == match["home_team"] else int(match["Goalkeeper Saves"]["away"])
+                team_result_obj.goalkeeper_saves += int(stats["Goalkeeper Saves"]["home"]) if team_result_obj.team_name == match["home_team"] else int(stats["Goalkeeper Saves"]["away"])
                 
-                team_result_obj.fouls += int(match["Fouls"]["home"]) if team_result_obj.team_name == match["home_team"] else int(match["Fouls"]["away"])
+                team_result_obj.fouls += int(stats["Fouls"]["home"]) if team_result_obj.team_name == match["home_team"] else int(stats["Fouls"]["away"])
                 
-                team_result_obj.yellow_cards += int(match["Yellow Cards"]["home"]) if team_result_obj.team_name == match["home_team"] else int(match["Yellow Cards"]["away"])
+                team_result_obj.yellow_cards += int(stats["Yellow Cards"]["home"]) if team_result_obj.team_name == match["home_team"] else int(stats["Yellow Cards"]["away"])
                 
-                team_result_obj.tackles += int(match["Tackles"]["home"]) if team_result_obj.team_name == match["home_team"] else int(match["Tackles"]["away"])
+                team_result_obj.tackles += int(stats["Tackles"]["home"]) if team_result_obj.team_name == match["home_team"] else int(stats["Tackles"]["away"])
                 
-                team_result_obj.attacks += int(match["Attacks"]["home"]) if team_result_obj.team_name == match["home_team"] else int(match["Attacks"]["away"])
+                team_result_obj.attacks += int(stats["Attacks"]["home"]) if team_result_obj.team_name == match["home_team"] else int(stats["Attacks"]["away"])
                 
-                team_result_obj.dangerous_attacks += int(match["Dangerous Attacks"]["home"]) if team_result_obj.team_name == match["home_team"] else int(match["Dangerous Attacks"]["away"])
+                team_result_obj.dangerous_attacks += int(stats["Dangerous Attacks"]["home"]) if team_result_obj.team_name == match["home_team"] else int(stats["Dangerous Attacks"]["away"])
         
         
 

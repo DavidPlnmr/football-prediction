@@ -1547,3 +1547,71 @@ Bon on développe le fait d'insérer les matchs en base
   * Récupérer les matchs en base et si ils y sont pas, récupérer les matchs de l'api et les stocker en base
   * Ne pas oublier de faire du cache en SQL
 * Regarder si il faut changer la doc par rapport au code modifié dans le provider 
+
+### 19.05.2021
+
+8h On ajoute la méthode qui va récupérer les données en base et si elles existent pas elle les récupère de l'API et les stocke en base
+
+Création d'une requête qui récupère les matchs en head to head avec 2 équipes et d'une autre qui récupère les matchs des deux équipes mais sans les head to head.
+
+Finalement une requête est infaisable car j'y mettais un limit donc pour récupérer les stats ça allait pas récupérer le bon nombre de stats pour les matchs qu'il faut.
+
+Bon après avoir mis la base de données j'ai toujours l'erreur
+
+Cette fois-ci c'est dû à une erreur SQL
+
+````
+Traceback (most recent call last):
+  File "/home/davidplnmr/.local/lib/python3.7/site-packages/mysql/connector/connection_cext.py", line 509, in cmd_query
+    raw_as_string=raw_as_string)
+_mysql_connector.MySQLInterfaceError: MySQL server has gone away
+
+````
+
+https://stackoverflow.com/questions/12444272/error-2006-mysql-server-has-gone-away-using-python-bottle-microframework-and
+
+Donc possibilité de l'erreur :
+
+* *You tried to run a query after closing the connection to the server. This indicates a logic error in the application that should be corrected.*
+
+- *A client application running on a different host does not have the necessary privileges to connect to the MySQL server from that host.*
+- *You have encountered a timeout on the server side and the automatic reconnection in the client is disabled (the reconnect flag in the MYSQL structure is equal to 0).*
+- *You can also get these errors if you send a query to the server that is incorrect or too large. If mysqld receives a packet that is too large or out of order, it assumes that something has gone wrong with the client and closes the connection. If you need big queries (for example, if you are working with big BLOB columns), you can increase the query limit by setting the server's [`max_allowed_packet`](http://dev.mysql.com/doc/refman/5.5/en/server-system-variables.html#sysvar_max_allowed_packet) variable, which has a default value of 1MB. You may also need to increase the maximum packet size on the client end. More information on setting the packet size is given in [Section C.5.2.10, “Packet too large”](http://dev.mysql.com/doc/refman/5.5/en/packet-too-large.html).*
+- *You also get a lost connection if you are sending a packet 16MB or larger if your client is older than 4.0.8 and your server is 4.0.8 and above, or the other way around.*
+- *and so on...*
+
+De ce que je lis je comprends que potentiellement un timeout doit être fait de la part de MySQL. Je vais donc essayer de faire un time.sleep pour réduire la quantité d'appel pour éviter de surcharger la base. Parce que cette exception fait que c'est un appel à l'API qui est process et cela surcharge ensuite l'API.
+
+Sachant que j'ai insérer tout les matchs des 3 derniers mois de la Premier League
+
+```
+Traceback (most recent call last):
+  File "/home/davidplnmr/football-prediction/lib/provider.py", line 57, in get_all_stats_from_teams
+    response = self.get_all_stats_from_teams_db(first_team_name, second_team_name, three_months_before, now)
+  File "/home/davidplnmr/football-prediction/lib/provider.py", line 136, in get_all_stats_from_teams_db
+    reqmatch = self.__db_manager.get_matches_with_specific_teams(first_team_name, second_team_name, from_date, to_date)
+  File "/home/davidplnmr/football-prediction/lib/sql/db_manager.py", line 82, in get_matches_with_specific_teams
+    return self.__query(query)
+  File "/home/davidplnmr/football-prediction/lib/sql/db_manager.py", line 120, in __query
+    self.__cursor.execute(your_query)
+  File "/home/davidplnmr/.local/lib/python3.7/site-packages/mysql/connector/cursor_cext.py", line 276, in execute
+    raw_as_string=self._raw_as_string)
+  File "/home/davidplnmr/.local/lib/python3.7/site-packages/mysql/connector/connection_cext.py", line 512, in cmd_query
+    sqlstate=exc.sqlstate)
+mysql.connector.errors.DatabaseError: 2006 (HY000): MySQL server has gone away
+```
+
+Je viens de mettre un time.sleep de 2 secondes et pour l'instant il y'a pas de soucis
+
+J'ai quand même eu une erreur SQL au 137ème process (Il y en a 190 en tout)
+
+Faut que j'en parle à M. Schmid parce que du coup je vois pas comment régler le soucis
+
+#### Recap de la journée
+
+* Changement du code pour récupérer les stats avec les matchs pour la prédiction
+  * Tout de même une erreur SQL car trop de requête ce qui crée une exception donc qui fait appel à l'API et elle est ensuite trop surchargé et cela recrée une exception
+* Essai avec un délai avant le lancement de chaque process
+  * ça a réduit le nombre d'erreur mais à augmenter le temps de process.
+  * A voir si le temps me convient par rapport aux erreurs :/
+  * De plus il faut voir comment réellement récupérer les données de chacun des process parce que visiblement ça marche pas trop là. Ils sont lancés mais le résultat a pas l'air d'être stocké dans la liste passé en paramètre

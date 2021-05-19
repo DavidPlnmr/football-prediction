@@ -3,7 +3,6 @@ from .provider import Provider
 from .prediction_class import Prediction
 import lib.constants
 
-import threading
 import multiprocessing
 import time
 
@@ -54,8 +53,8 @@ class Competition:
         # the number of threads appending each thread to
         # the job list 
         jobs = []
+        out_list = []
         for i in range(0, threads):
-            out_list = list()
             thread = multiprocessing.Process(target=self.make_prediction, 
                                           args=(matches[i][0], matches[i][1], out_list))
             jobs.append(thread)
@@ -63,6 +62,7 @@ class Competition:
         # Start the threads 
         for j in jobs:
             j.start()
+            time.sleep(1)
 
         # Ensure all of the threads have finished
         for j in jobs:
@@ -70,20 +70,19 @@ class Competition:
         
         end = time.perf_counter()
         print(f"Finished in {end-start} seconds")
-                 
-        pass
+        return out_list
                       
 
     def make_prediction(self, first_team, second_team, out_list):
         #try:
-        pred = Prediction(first_team, second_team)
-        winner = pred.define_winner()
-        out_list.append({
-            "Home" : first_team,
-            "Away" : second_team,
-            "Prediction" : winner
-        })
-        # except Exception:
-        #     print(f"Unable to make the prediction between the team {first_team} and {second_team}")
-        #     pass
+            pred = Prediction(first_team, second_team)
+            winner = pred.define_winner()
+            out_list.append({
+                "Home" : first_team,
+                "Away" : second_team,
+                "Prediction" : winner
+            })
+        #except Exception:
+            #print(f"Unable to make the prediction between the team {first_team} and {second_team}")
+            pass
         

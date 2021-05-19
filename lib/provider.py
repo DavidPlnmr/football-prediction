@@ -3,7 +3,6 @@ import os
 from dotenv import load_dotenv
 import logging
 
-from requests.models import Response
 from .api.api_facade import ApiFacade
 from .sql.db_manager import DbManager
 import lib.constants
@@ -53,20 +52,35 @@ class Provider:
         try:
             now = datetime.now().date()
             three_months_before = now - relativedelta(months=3)
-            response = self.get_all_stats_from_teams_db(first_team_name, second_team_name, three_months_before, now )
-            print("Data from DB")
+            now = now.strftime("%Y-%m-%d")
+            three_months_before = three_months_before.strftime("%Y-%m-%d")
+            response = self.get_all_stats_from_teams_db(first_team_name, second_team_name, three_months_before, now)
+            # Checking how many matches we have for each teams
+
+            if len(response["firstTeam_lastResults"])<lib.constants.MIN_OF_GAMES_TO_MAKE_PREDICTION and len(response["secondTeam_lastResults"])<lib.constants.MIN_OF_GAMES_TO_MAKE_PREDICTION:
+                #Raise an exception
+                raise Exception("Not enough match for one of the teams.")    
         except Exception:
             
             response = self.get_all_stats_from_teams_api( first_team_name, second_team_name)
-            print("Data from API")
-            for match in response:
-                print(match)
+            for result in response:
+                for match in response[result]:
+                    try:
+                        self.save_match_with_stats(match["api_match_id"], 
+                                                match["date"],
+                                                match["time"],
+                                                match["league_id"],
+                                                match["league_name"],
+                                                match["home_team"],
+                                                match["away_team"],
+                                                match["home_team_score"], 
+                                                match["away_team_score"], 
+                                                match["stats"])
+                    except Exception:
+                        logging.warning("Could not save the match")
                 pass                
-                
-            
         return response
-        
-    
+          
     def get_all_stats_from_teams_api(self, first_team_name, second_team_name):
         """
         Make a call to the API using getH2H and make a treatment to have the stats for each match of the two different teams
@@ -80,7 +94,7 @@ class Provider:
         
         
         # We check the last results of the teams aren't empty
-        if len(reqresult["firstTeam_lastResults"]) > 0 and len(reqresult["secondTeam_lastResults"]) > 0:
+        if len(reqresult["firstTeam_lastResults"]) > lib.constants.MIN_OF_GAMES_TO_MAKE_PREDICTION and len(reqresult["secondTeam_lastResults"]) > lib.constants.MIN_OF_GAMES_TO_MAKE_PREDICTION:
             
             for match in reqresult["firstTeam_VS_secondTeam"]:
                 
@@ -130,7 +144,7 @@ class Provider:
         
         # We check if the requests aren't empty
         
-        if len(reqmatch) > 0 and len(reqstats) > 0:
+        if len(reqmatch) > lib.constants.MIN_OF_GAMES_TO_MAKE_PREDICTION and len(reqstats) > lib.constants.MIN_OF_GAMES_TO_MAKE_PREDICTION:
             for match in reqmatch:
                 #Check for the game with the two teams
                 if (match["home_team_name"] == first_team_name or match["away_team_name"] == first_team_name) and (match["home_team_name"] == second_team_name or match["away_team_name"] == second_team_name):
@@ -152,7 +166,7 @@ class Provider:
                 result["secondTeam_lastResults"]=stats_second_team
             else:
                 logging.error("No results for one of the two teams selected")
-                return None
+                raise Exception("No results for one of the two team selected")
             
             return result
         else:
@@ -172,7 +186,7 @@ class Provider:
             if len(match_info)>0: # Check if we got some data from the API
                 
                 
-                date_match = datetime.datetime.strptime(match_info[0]["match_date"], "%Y-%m-%d").date()
+                date_match = datetime.strptime(match_info[0]["match_date"], "%Y-%m-%d").date()
                 if date_match < to_date:
                     match = {
                         "Home" : prediction["home_team_name"],
@@ -219,7 +233,6 @@ class Provider:
     
     def get_one_prediction_per_day_with_specific_teams(self, first_team_name, second_team_name):
         return self.__db_manager.get_one_prediction_per_day_with_specific_teams(first_team_name, second_team_name)
-        
     
     def __insert_stats_in_array_for_api(self, match, array, stats_array, required_stats_array):
         """
@@ -232,6 +245,10 @@ class Provider:
                 "away_team" : match["match_awayteam_name"],
                 "home_team_score" : match["match_hometeam_score"],
                 "away_team_score" : match["match_awayteam_score"],
+                "date" : match["match_date"],
+                "time" : match["match_time"],
+                "league_id" : match["league_id"],
+                "league_name" : match["league_name"],
                 "stats" : {}
         }
         
@@ -251,6 +268,8 @@ class Provider:
                 "away_team" : match["away_team_name"],
                 "home_team_score" : match["home_team_score"],
                 "away_team_score" : match["away_team_score"],
+                "date" : match["date"],
+                "time" : match["time"],
                 "stats" : {}
         }
         
