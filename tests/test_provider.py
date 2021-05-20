@@ -11,4 +11,6 @@ prov = Provider("../log/app.log")
 #print(prov.get_all_stats_from_teams_api("Chelsea", "Burnley"))
 #print(prov.get_all_stats_from_teams_db("Chelsea", "Burnley"))
 
-print(prov.get_all_stats_from_teams("Chelsea", "Tottenham"))
+#print(prov.get_all_stats_from_teams("Chelsea", "Tottenham"))
+
+print(prov.get_api_call_from_today("Newcastle", "Tottenham"))

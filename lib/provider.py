@@ -55,30 +55,30 @@ class Provider:
             now = now.strftime("%Y-%m-%d")
             three_months_before = three_months_before.strftime("%Y-%m-%d")
             response = self.get_all_stats_from_teams_db(first_team_name, second_team_name, three_months_before, now)
-            # Checking how many matches we have for each teams
-
-            if len(response["firstTeam_lastResults"])<lib.constants.MIN_OF_GAMES_TO_MAKE_PREDICTION and len(response["secondTeam_lastResults"])<lib.constants.MIN_OF_GAMES_TO_MAKE_PREDICTION:
-                #Raise an exception
-                raise Exception("Not enough match for one of the teams.")    
-        except Exception:
             
-            response = self.get_all_stats_from_teams_api( first_team_name, second_team_name)
-            for result in response:
-                for match in response[result]:
-                    try:
-                        self.save_match_with_stats(match["api_match_id"], 
-                                                match["date"],
-                                                match["time"],
-                                                match["league_id"],
-                                                match["league_name"],
-                                                match["home_team"],
-                                                match["away_team"],
-                                                match["home_team_score"], 
-                                                match["away_team_score"], 
-                                                match["stats"])
-                    except Exception:
-                        logging.warning("Could not save the match")
-                pass                
+            
+            
+        except Exception:
+            if len(self.get_api_call_from_today(first_team_name,second_team_name)) <= 0:    
+                response = self.get_all_stats_from_teams_api(first_team_name, second_team_name)
+                self.save_api_call(first_team_name, second_team_name)
+                for result in response:
+                    for match in response[result]:
+                        try:
+                            self.save_match_with_stats(match["api_match_id"], 
+                                                    match["date"],
+                                                    match["time"],
+                                                    match["league_id"],
+                                                    match["league_name"],
+                                                    match["home_team"],
+                                                    match["away_team"],
+                                                    match["home_team_score"], 
+                                                    match["away_team_score"], 
+                                                    match["stats"])
+                            
+                        except Exception:
+                            logging.warning("Could not save the match")
+                    pass   
         return response
           
     def get_all_stats_from_teams_api(self, first_team_name, second_team_name):
@@ -173,6 +173,13 @@ class Provider:
             logging.error("No results for one of the two teams selected")
             raise Exception("No results for one of the two team selected")
     
+    def get_api_call_from_today(self, first_team_name, second_team_name):
+        """
+        Get the API call from today
+        """
+        now = datetime.now().date()
+        return self.__db_manager.get_api_call(first_team_name, second_team_name, now)
+        
     def get_previous_matches_predictions(self, from_date, to_date, league_id=""):
         """
         Get the predictions of the previous matches with their result
@@ -223,6 +230,10 @@ class Provider:
         Save the prediction in the DB
         """
         return self.__db_manager.insert_prediction(prediction_winner, home_team_name, away_team_name, league_id, league_name, date_of_game, api_match_id)
+        pass
+    
+    def save_api_call(self, first_team_name, second_team_name):
+        self.__db_manager.insert_api_call_in_history(first_team_name, second_team_name)
         pass
     
     def get_prediction_with_specific_teams_after_date(self, first_team_name, second_team_name, creation_date):
@@ -311,3 +322,6 @@ class Provider:
             return True
         else:
             return False
+        
+    def disconnect(self):
+        self.__db_manager.disconnect()

@@ -30,4 +30,11 @@ CREATE TABLE `statistic` (
   `id_match` int
 );
 
+CREATE TABLE `api_calls_h2h_history` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `created_date` date,
+  `home_team_name` varchar(255),
+  `away_team_name` varchar(255)
+);
+
 ALTER TABLE `statistic` ADD FOREIGN KEY (`id_match`) REFERENCES `match` (`id`);

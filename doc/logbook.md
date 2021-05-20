@@ -1615,3 +1615,73 @@ Faut que j'en parle à M. Schmid parce que du coup je vois pas comment régler l
   * ça a réduit le nombre d'erreur mais à augmenter le temps de process.
   * A voir si le temps me convient par rapport aux erreurs :/
   * De plus il faut voir comment réellement récupérer les données de chacun des process parce que visiblement ça marche pas trop là. Ils sont lancés mais le résultat a pas l'air d'être stocké dans la liste passé en paramètre
+
+### 20.05.2021
+
+8h Je vais essayer de voir comment récupérer chaque sortie de chaque process
+
+"De plus il faut voir comment réellement récupérer les données de chacun des process parce que visiblement ça marche pas trop là. Ils sont lancés mais le résultat a pas l'air d'être stocké dans la liste passé en paramètre"
+
+https://stackoverflow.com/questions/41611868/multiprocessing-a-loop-of-a-function-that-writes-to-an-array-in-python
+
+Il semblerait que les process ne partage pas la mémoire et il semblerait que la classe multiprocessing.Manager permet d'avoir un "partage" de variable
+
+https://stackoverflow.com/questions/9436757/how-to-use-a-multiprocessing-manager
+
+Bon maintenant on dirait que ça marche la variable est partagé. En gros il fallait créer une liste depuis la classe manager de multiprocessing parce que la class multiprocessing n'arrive pas à partager la mémoire de la variable et la classe manager permet d'en faire une liste partagée.
+
+Alors là donc après avoir fait ça
+
+donc la ça marche vraiment???????????????
+
+genre réellement?
+
+mais je comprends plus rien là. J'ai testé et ça a mis 28 secondes pour faire les 190 matchs (aucune erreur)
+
+Je reteste et ça en a fait 186 (4 erreurs)
+
+Je rereteste et ça en fait 180 (10 erreurs)
+
+Je suis pas sensé avoir stocké les choses en base????? Pourquoi est-ce qu'il appelle quand même l'API?
+
+Je viens de tester avec la ligue italienne et la première fois ça plante (logique il y'a pas tout les matchs en base) et ensuite ça marche
+
+
+
+Après aide de M. Schmid, ce qu'il faut faire c'est stocké les appels qu'on fait à l'API. 
+
+C'est-à-dire :
+
+Si le 20.05.2021, je fais un appel à l'API parce que je n'ai pas de données en base pour une prédiction X et bah je vais stocker les données de ces matchs en base mais je vais aussi stocker en base le fait que j'ai fait cet appel. Cela va permettre d'éviter de surcharger l'API d'appel et donc de faire que des appels utiles
+
+1. Faire un appel en base
+   1. Si cet appel en base a planté
+      1. Faire un autre appel à la base pour savoir si on a déjà fait un appel à l'API aujourd'hui
+         1. Si on a déjà fait un appel à l'API, (que faire?)
+         2. Sinon, on fait un appel à l'API on stocke les matchs en base et on stocke le fait qu'on ait appelé l'API
+      2. Sinon on retourne le résultat de l'appel à la base
+
+![Table d'historique d'appel à l'API](./img/newTableHistoryCallApi.png)
+
+Je viens d'implémenter ce qui a été suggéré mais j'ai encore plus d'erreur je comprends plus rien vraiment.
+
+Par contre pour la ligue italienne toujours aucun soucis, mais y'a aucune donnée qui est stocké dans la table d'historique
+
+Ok je viens de remarquer que le bug vient uniquement de "Manchester United". En effet, dans l'endpoint "get_teams", l'équipe s'appelle "Manchester United". Cependant quand je mets dans l'endpoint "Manchester United" je reçois des matchs de 2018. Pour pouvoir avoir des matchs de 2021 il faut mettre "Manchester Utd". Comme je le prends automatiquement grâce à l'endpoint "get_teams" je suis juste dans la sauce.
+
+*Note : Evidement le team_key ne fonctionne pas. J'avais déjà demandé aux devs de l'API si il y avait moyen de le faire ils m'ont répondu que non*
+
+Mais M. Schmid m'a dit que c'était donc un bug, et qu'il fallait gérer ce cas manuellement dans le code.
+
+#### Recap de la journée
+
+* Liste partagée par les process pour récupérer les données traitées par chaque process
+* Stockage des appels de l'API dans la base de données pour éviter d'appeler l'API pour rien
+* Découverte d'un bug avec Manchester United pour get_h2h et get_teams
+
+Choses à faire demain :
+
+* Fix le soucis avec Man United à la main et vérifier que ça marche pour toutes les ligues
+* Documenter la classe Competition et potentiellement modifier la doc (si besoin) "Provider.get_all_stats_from_teams", "DbManager" et la structure de la base de données.
+* Ne pas oublier de faire un dump de la structure de la base de données.
+

@@ -12,4 +12,10 @@ from lib.competition_class import Competition
 
 comp = Competition(148, "../log/app.log")
 
-print(comp.compute_competition())
+match_history = comp.compute_competition()
+standing = comp.get_standing()
+
+#print(match_history)
+#print(len(match_history))
+
+print(standing)
