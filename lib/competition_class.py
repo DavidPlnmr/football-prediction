@@ -19,6 +19,9 @@ class Competition:
         
         # for team in teams:
         for i in range(len(teams)):
+            # We must put this line because there is a bug with the API 
+            if teams[i]["team_name"] == "Manchester United":
+                teams[i]["team_name"] = "Manchester Utd"
             self.standings.append({
                 "Name" : teams[i]["team_name"],
                 "Badge" : teams[i]["team_badge"],
@@ -73,6 +76,7 @@ class Competition:
 
             # Ensure all of the threads have finished
             for j in jobs:
+                
                 j.join()    
             
             #end = time.perf_counter()

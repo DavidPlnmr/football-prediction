@@ -18,7 +18,7 @@ prov = Provider("../log/app.log")
 
 now = datetime.now()
 
-three_months_before = now - relativedelta(months=3)
+three_months_before = now - relativedelta(months=9)
 
 now = now.strftime("%Y-%m-%d")
 three_months_before = three_months_before.strftime("%Y-%m-%d")

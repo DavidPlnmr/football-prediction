@@ -51,14 +51,20 @@ class Provider:
         response = ""
         try:
             now = datetime.now().date()
-            three_months_before = now - relativedelta(months=3)
+            three_months_before = now - relativedelta(months=6)
             now = now.strftime("%Y-%m-%d")
             three_months_before = three_months_before.strftime("%Y-%m-%d")
-            response = self.get_all_stats_from_teams_db(first_team_name, second_team_name, three_months_before, now)
+            if len(self.get_api_call_from_today(first_team_name,second_team_name))>0:
+                # Try catch cause the method below can throw an exception if we haven't enought stats
+                try:
+                    response = self.get_all_stats_from_teams_db(first_team_name, second_team_name, three_months_before, now)
+                except Exception:
+                    raise Exception("Data unavailable for this prediction")
+                    
+            else:
+                raise APICallNotFound("No API call made today")
             
-            
-            
-        except Exception:
+        except APICallNotFound:
             if len(self.get_api_call_from_today(first_team_name,second_team_name)) <= 0:    
                 response = self.get_all_stats_from_teams_api(first_team_name, second_team_name)
                 self.save_api_call(first_team_name, second_team_name)
@@ -75,10 +81,9 @@ class Provider:
                                                     match["home_team_score"], 
                                                     match["away_team_score"], 
                                                     match["stats"])
-                            
                         except Exception:
                             logging.warning("Could not save the match")
-                    pass   
+        
         return response
           
     def get_all_stats_from_teams_api(self, first_team_name, second_team_name):
@@ -127,7 +132,7 @@ class Provider:
             return result
         else:
             logging.error("No results for one of the two teams selected")
-            raise Exception("No results for one of the two team selected")
+            raise NoMatchError("No results for one of the two team selected")
         
     def get_all_stats_from_teams_db(self, first_team_name, second_team_name, from_date="", to_date=""):
         """
@@ -136,7 +141,6 @@ class Provider:
         reqmatch = self.__db_manager.get_matches_with_specific_teams(first_team_name, second_team_name, from_date, to_date)
         reqstats = self.__db_manager.get_stats_of_matches_with_specific_teams(first_team_name, second_team_name, from_date, to_date)
         
-        
         result = {}
         stats_matches_two_team = []
         stats_first_team = []
@@ -144,7 +148,7 @@ class Provider:
         
         # We check if the requests aren't empty
         
-        if len(reqmatch) > lib.constants.MIN_OF_GAMES_TO_MAKE_PREDICTION and len(reqstats) > lib.constants.MIN_OF_GAMES_TO_MAKE_PREDICTION:
+        if len(reqmatch) > 0 and len(reqstats) > 0:
             for match in reqmatch:
                 #Check for the game with the two teams
                 if (match["home_team_name"] == first_team_name or match["away_team_name"] == first_team_name) and (match["home_team_name"] == second_team_name or match["away_team_name"] == second_team_name):
@@ -158,20 +162,20 @@ class Provider:
                 elif (match["home_team_name"] == second_team_name or match["away_team_name"] == second_team_name):    
                     if self.__check_array_is_contained_with_specific_id(lib.constants.STATISTICS_TO_GET, reqstats, "type", match["id"]):
                         self.__insert_stats_in_array_for_db(match, stats_second_team, reqstats, lib.constants.STATISTICS_TO_GET)
-                
+        
             if len(stats_first_team)>0 and len(stats_second_team)>0 :
         
                 result["firstTeam_VS_secondTeam"]=stats_matches_two_team
                 result["firstTeam_lastResults"]=stats_first_team
                 result["secondTeam_lastResults"]=stats_second_team
             else:
-                logging.error("No results for one of the two teams selected")
-                raise Exception("No results for one of the two team selected")
+                logging.error("No stats for one of the two teams selected")
+                raise StatsError("No stats for one of the two team selected")
             
             return result
         else:
             logging.error("No results for one of the two teams selected")
-            raise Exception("No results for one of the two team selected")
+            raise NoMatchError("No results for one of the two team selected")
     
     def get_api_call_from_today(self, first_team_name, second_team_name):
         """
@@ -288,8 +292,7 @@ class Provider:
             if stat["id_match"] == match["id"]:
                 if stat["type"] in required_stats_array:
                     elem["stats"][stat["type"]]={"home": stat["home"], "away": stat["away"]}
-        array.append(elem)
-        
+        array.append(elem)      
             
     def __check_array_is_in_other_array(self, array, second_array, key):
         """
@@ -302,6 +305,7 @@ class Provider:
             for second_elem in second_array:
                 if second_elem[key] == elem:
                     i+=1
+        
         if i==count:
             return True
         else:
@@ -314,10 +318,10 @@ class Provider:
         count = len(array)
         
         i = 0
-        for elem in array:
-            for second_elem in second_array:
-                if second_elem[key] == elem and second_elem["id_match"]==id:
-                    i+=1
+        
+        for second_elem in second_array:
+            if second_elem[key] in array and second_elem["id_match"]==id:
+                i+=1                    
         if i==count:
             return True
         else:
@@ -325,3 +329,12 @@ class Provider:
         
     def disconnect(self):
         self.__db_manager.disconnect()
+
+class StatsError(Exception):
+    pass
+
+class NoMatchError(Exception):
+    pass
+
+class APICallNotFound(Exception):
+    pass

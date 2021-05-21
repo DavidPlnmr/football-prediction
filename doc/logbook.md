@@ -1685,3 +1685,28 @@ Choses à faire demain :
 * Documenter la classe Competition et potentiellement modifier la doc (si besoin) "Provider.get_all_stats_from_teams", "DbManager" et la structure de la base de données.
 * Ne pas oublier de faire un dump de la structure de la base de données.
 
+### 21.05.2021
+
+8h Y'a un soucis là. que faire si on a que 3 matchs en base? On veut pas faire de prédiction.
+
+En plus de ça si j'ai une erreur SQL qu'est-ce que je dois faire? ça fait tout péter déjà. En gros comme je fais la requête SQL dans le try si elle lance une exception elle part dans le except qui fait l'appel à l'api et si la dedans j'ai un appel qui a été fait et bah ça va juste rien faire.
+
+Bon j'ai fait des exception un peu plus explicit qui me permet de gérer correctement tout les cas potentiels
+
+J'ai ajouté une contrainte unique sur l'id du match et sur le type de stat dans la table des statistiques.
+
+Y'a un soucis avec le premier appel pour la compétition. Comme on stocke en base de données plus on lance la méthode moins il y'a d'erreur. Il va évidement devoir documenter ces erreurs et dire pourquoi elles sont inévitables.
+
+Après discussion avec M. Schmid, il y aurait possibilité de faire une planification direct sur le site sur un bout de code de l'application pour appeler à une heure précise de la journée et de détecter des erreurs. S'il y en a on relance etc.
+
+#### Recap de la journée 
+
+* Drop des données de la base qui causait problème
+* Fix le soucis avec Man United
+* Nouveau dump de la bdd
+* Création d'exception perso pour gérer correctement les cas de bords.
+
+Choses à faire la prochaine fois :
+
+* documenter les compétitions
+* documenter les potentiels changements dans le provider et dans la classe prédiction

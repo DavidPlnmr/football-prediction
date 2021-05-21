@@ -173,12 +173,10 @@ class DbManager:
         Try to insert params of an api call in the history
         """
         try:
-            print("Execute")
             self.__cursor.execute(f"""INSERT INTO api_calls_h2h_history (
                             `home_team_name`, 
                             `away_team_name`)
                             VALUES ( "{home_team_name}", "{away_team_name}");""")
-            print("Commit")
             self.__db.commit() # Save the changes
             
             logging.info(f"Inserted API call in the DB with params : {home_team_name}, {away_team_name}")

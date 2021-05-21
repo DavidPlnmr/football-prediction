@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-from .provider import Provider
+from .provider import Provider, NoMatchError
 import lib.constants
 
 class Prediction:
     """
     Class to make a prediction on a match between two football teams
     """
-    def __init__(self, home_team, away_team, log_path="", from_date="", to_date=""):
+    def __init__(self, home_team, away_team, log_path=""):
         self.home_team_result = TeamResult(home_team)
         self.away_team_result = TeamResult(away_team)
         self.winner=""
@@ -14,7 +14,6 @@ class Prediction:
         self.provider = Provider(log_path)
         
         try:
-            #Change this line to API when tests are finished
             self.results = self.provider.get_all_stats_from_teams(home_team, away_team)
             
             self.home_team_result.heat_of_moment = self.__compute_heat_moment(home_team, self.results["firstTeam_lastResults"])
@@ -26,9 +25,8 @@ class Prediction:
             self.__insert_data_team_result(self.home_team_result, self.results["firstTeam_VS_secondTeam"])
             self.__insert_data_team_result(self.away_team_result, self.results["firstTeam_VS_secondTeam"])
         except Exception:
-            raise Exception("Prediction unmakeable. Not enought stats.")
+            raise UnmakeablePrediction("Prediction unmakeable. Not enough stats.")
             
-        
     def define_winner(self):
         """
         Returns the winner of the prediction by computing the offensive score, defensive score and the heat of moment
@@ -55,8 +53,7 @@ class Prediction:
                 else:
                     self.winner = "Draw"
             else :
-                raise Exception("No games count")
-                pass
+                raise NoMatchError("No games count")
         return self.winner
     
     def save_prediction(self, league_id="NULL", league_name="NULL", date_of_game="NULL", api_match_id="NULL"):
@@ -101,10 +98,9 @@ class Prediction:
                             heat_of_moment += 'W' if result > 0 else 'L' # W for Win, L for Lose
                         else:
                             heat_of_moment += 'L' if result > 0 else 'W' # W for Win, L for Lose
-            
             return heat_of_moment
         else:
-            raise Exception("No games in the last results")
+            raise NoMatchError("No games in the last results")
     
     def __compute_off_score(self, team_result):
         
@@ -149,6 +145,7 @@ class Prediction:
                 #These 2 lines are here to remove the "%" char of the Ball Possession Stat
                 stats["Ball Possession"]["home"] = stats["Ball Possession"]["home"].replace('%', '')
                 stats["Ball Possession"]["away"] = stats["Ball Possession"]["away"].replace('%', '')
+
                 team_result_obj.ball_possession += int(stats["Ball Possession"]["home"]) if team_result_obj.team_name == match["home_team"] else int(stats["Ball Possession"]["away"])
                 
                 team_result_obj.goal_attempts += int(stats["Goal Attempts"]["home"]) if team_result_obj.team_name == match["home_team"] else int(stats["Goal Attempts"]["away"])
@@ -166,9 +163,7 @@ class Prediction:
                 team_result_obj.attacks += int(stats["Attacks"]["home"]) if team_result_obj.team_name == match["home_team"] else int(stats["Attacks"]["away"])
                 
                 team_result_obj.dangerous_attacks += int(stats["Dangerous Attacks"]["home"]) if team_result_obj.team_name == match["home_team"] else int(stats["Dangerous Attacks"]["away"])
-        
-        
-
+               
 class TeamResult:
     def __init__(self, team_name):
         self.team_name = team_name
@@ -232,3 +227,6 @@ class TeamResult:
             elif char=='L':
                 result+=lib.constants.POINTS_FOR_A_LOSE
         return result/self.games_count
+    
+class UnmakeablePrediction(Exception):
+    pass
