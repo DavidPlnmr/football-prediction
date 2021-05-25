@@ -6,7 +6,7 @@ import os
 import sys
 # insert the "football-prediction" directory into the sys.path
 sys.path.insert(1, os.path.abspath(".."))
-from lib.provider import Provider
+from lib.provider_class import Provider
 import os
 from dotenv import load_dotenv
 from datetime import datetime

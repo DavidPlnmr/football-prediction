@@ -1,7 +1,7 @@
 from flask import Flask, redirect, url_for, request, render_template
 
 from lib.prediction_class import Prediction
-from lib.provider import Provider
+from lib.provider_class import Provider
 import lib.constants
 
 from dateutil.relativedelta import relativedelta

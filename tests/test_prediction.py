@@ -10,8 +10,8 @@ sys.path.insert(1, os.path.abspath(".."))
 
 from lib.prediction_class import *
 
-first_team = "Leicester"
-second_team = "Crystal Palace"
+first_team = "Arsenal"
+second_team = "Chelsea"
 
 pred = Prediction(first_team, second_team, "../log/app.log")
 

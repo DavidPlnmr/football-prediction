@@ -14,7 +14,7 @@ import os
 sys.path.insert(1, os.path.abspath(".."))
 
 from lib.prediction_class import Prediction
-from lib.provider import Provider
+from lib.provider_class import Provider
 from datetime import date
 import lib.constants
 from dateutil.relativedelta import relativedelta # $ pip install python-dateutil

@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from .provider import Provider
+from .provider_class import Provider
 from .prediction_class import Prediction, TeamResult
 import lib.constants
 
@@ -19,9 +19,6 @@ class Competition:
         
         # for team in teams:
         for i in range(len(teams)):
-            # We must put this line because there is a bug with the API 
-            if teams[i]["team_name"] == "Manchester United":
-                teams[i]["team_name"] = "Manchester Utd"
             self.standings.append({
                 "Name" : teams[i]["team_name"],
                 "Badge" : teams[i]["team_badge"],
@@ -114,19 +111,19 @@ class Competition:
         """
         Method called by each process. Out_list is Manager.list() to share the memory for each process
         """
-        try:
-            pred = Prediction(first_team, second_team)
-            winner = pred.define_winner()
-            game = {
-                "Home" : first_team,
-                "Away" : second_team,
-                "Prediction" : winner
-            }
-            out_list.append(game)
+        # try:
+        pred = Prediction(first_team, second_team)
+        winner = pred.define_winner()
+        game = {
+            "Home" : first_team,
+            "Away" : second_team,
+            "Prediction" : winner
+        }
+        out_list.append(game)
             
-        except Exception:
-            print(f"Unable to make the prediction between the team {first_team} and {second_team}")
-            pass
+        # except Exception:
+        #     print(f"Unable to make the prediction between the team {first_team} and {second_team}")
+        #     pass
     
 def sort_by_team_points(team):
     return team.get("Points")

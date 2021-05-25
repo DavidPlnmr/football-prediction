@@ -5,7 +5,7 @@ import sys
 # insert the "football-prediction" directory into the sys.path
 sys.path.insert(1, os.path.abspath(".."))
 
-from lib.provider import *
+from lib.provider_class import *
 
 prov = Provider("../log/app.log")
 #print(prov.get_all_stats_from_teams_api("Chelsea", "Burnley"))

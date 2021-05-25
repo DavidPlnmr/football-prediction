@@ -1710,3 +1710,32 @@ Choses à faire la prochaine fois :
 
 * documenter les compétitions
 * documenter les potentiels changements dans le provider et dans la classe prédiction
+
+### 25.05.2021
+
+8h On commence à documenter
+
+9h Passage de M. Garcia et idée intéressante qui serait de faire un script qui simule et qui déduit le vainqueur d'un match aléatoirement et sortir le % de réussite de cet aléatoire.
+
+J'essaie de lancer le serveur flask mais il charge indéfiniment
+
+Ok donc là j'ai probablement la source du probleme : NE PAS FAIRE CTRL Z ET FAIRE CTRL C
+
+Je viens d'y penser que dans la vue, il y'a un soucis avec la vérification pour le head to head. Comme je vérifie si l'équipe est dans la ligue. Bah c'est ok si je change manuellement Manchester United en Manchester Utd, sauf que j'appelle l'api avec l'id de l'équipe donc je reçois à nouveau Manchester United au lieu de Manchester Utd
+
+J'ai donc du mettre une condition spéciale dans `get_teams_with_team_id()` et `get_teams_from_league()`
+
+Sortie de la v3 de l'API qu'est-ce que je fais maintenant et ils proposent d'utiliser les ids dans l'endpoint head to head
+
+ILS ONT FIX LE SOUCIS AVEC MAN UNITED DANS LA V3 :
+
+- Y'a même pas besoin d'utiliser l'id pour l'head to head
+- J'ai juste eu à changer l'url et les ids des ligues
+
+Evidement soucis de la v3 -> Les stats sont pas présentes et renommées
+
+Bon bah finalement on va éviter d'utiliser la v3 tout simplement parce qu'il me manque des stats et que les stats ont été renommées. Donc on va juste cancel et prendre en compte le cas d'united
+
+Ok, le soucis avec la compétition allemande vient du fait qu'on a pas les stats nécessaires pour chaque match de la ligue allemande. Je pense qu'on va juste pas permettre de faire une prédiction sur cette compétition et ça sera plus simple
+
+Parler dans la doc du fait que la v3 est sortie et pq on l'utilise pas

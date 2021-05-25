@@ -740,18 +740,19 @@ Enfin pour tester, il m'a fallu faire un script qui récupère les matchs de la 
 
 \begin{figure}[htp]
     \centering
-    \includegraphics{../img/pourcentReussitePredictionV2.png}
+    \includegraphics{../img/pourcentReussitePredictionV3.png}
     \caption{Pourcentage de réussite des prédictions}
     \label{fig:pourcentReussite}
 \end{figure}
 
 \subsection{Élaboration de prédictions sur une compétition}
-
+\label{predictionCompetition}
 Pour ce qui concerne les compétitions, je me suis dit qu'il fallait faire un constructeur qui récupère toutes les équipes du championnat sélectionné et qui forme un classement avec ces équipes. On y stockerait les victoires, les égalités, les défaites ainsi que les points. Pour l'historique de matchs, j'avais initialement prévu de stocker l'historique pour chaque équipe mais cela créerait des données en double. J'ai donc gardé le choix de faire un historique global des matchs et ensuite on cherche dedans les matchs d'une équipe X. 
 Ensuite, une méthode qui fait une prédiction pour chacun des matchs de la compétition. Pour diminuer le temps de calcul, j'ai pensé faire du multiprocessing pour faire des prédictions en parallèles les une des autres. Il n'y a pas d'intérêt de faire du séquentielle puisque une prédiction n'est pas du tout dépendante d'une autre.
 
-\newpage
+Donc dans cette classe, je prévois de stocker une variable qui contient le classement de la compétition et une autre qui contient l'historique de tout les matchs de la compétition.
 
+\newpage
 
 \section{Environnement de développement}
 
@@ -880,6 +881,117 @@ Pour pouvoir utiliser ce script, il faut d'abord changer la manière de récupé
 Le script suivant permet de tester le taux de réussite des prédictions en prenant entre le 9 août 2019 et le 28 juillet 2020. Il permet aussi de trouver le meilleur delta de détermination d'égalité. On récupère les matchs de entre ces deux dates. Pour chacun de ces matchs, on crée une prédiction qui récupérera les données des matchs d'il y a 6 mois et on compare le résultat de la prédiction avec le vrai résultat du match.
 \lstinputPython{test-success-prediction}
 
+
+\subsection{Classe de compétition}
+
+\subsubsection{Constructeur}
+
+Pour rappel, la classe \texttt{Competition} a pour but de faire une prédiction sur une compétition complète. Cela permet d'avoir un aperçu du résultat d'une compétition.
+
+Pour cette classe, le constructeur contient la récupération des équipes d'une ligue et l'instanciation de la variable de classement. Dans cette liste, on y met un dictionnaire contenant les données spécifiques à chaque équipe (victoires, égalités, défaites, badges, noms, etc.) dans la compétition.
+
+\lstinputPython{competition-ctor}
+
+\subsubsection{Multiprocessing de tous les matchs}
+
+Dans la méthode \texttt{compute\_competition()}, comme expliqué dans le point \ref{predictionCompetition}, je trouvais important de faire du multiprocessing pour calculer parallèlement le vainqueur de tous les matchs d'un championnat. J'ai choisi d'utiliser la librairie \texttt{multiprocessing} et d'utiliser la classe \texttt{Process}.
+Pour commencer, je crée toutes les possibilités de matchs\footnote{Il y en a 190 car mon application ne prend pas en compte le fait que le match soit joué à domicile donc il n'y a pas besoin de faire les matchs aller-retour}. Ensuite, je crée un \texttt{Process} par match. Chaque process appelle la méthode \texttt{make\_prediction()} qui crée la prédiction et insère le résultat dans la liste de sortie\footnote{Cette liste doit être crée avec la classe \texttt{Manager} de la librairie multiprocessing car la liste de cette classe est partagée par tous les process. Autrement, le stockage des données ne se fera pas correctement.}. Je cherchais une manière rapide de créer toutes ces prédictions et le multiprocessing est la chose qui me fallait. Le multithreading aurait faciliter le partage des données entre les process mais lorsque je l'ai testé, il prenait le même temps que la manière séquentielle.\footnote{\url{https://datanoon.com/blog/multiprocessing_in_python/}}
+Je fais tout de même un \texttt{time.sleep()} de 100 millisecondes entre chaque lancement de process en guise de sécurité surtout pour éviter de trop saturer la base de données ou l'API.
+Enfin, je vérifie que tous les process soient bien finis pour retourner l'historique des matchs.
+
+À noter que le code ci-dessous contient du code en commentaires qui permettait de voir la performance du parallèlisme.
+
+\lstinputPython{compute-competition}
+
+\subsubsection{Retour du classement du championnat}
+
+\subsubsection{Problème de donnée de l'API}
+Il y a eu un soucis rencontré lors du développement de cette fonctionnalité\footnote{Ce problème est présent sur toutes les fonctionnalités mais il a été découvert lors du développement des compétitions}. L'API n'est pas cohérente sur les données qu'elle transmet. Je m'explique :
+Dans le code du constructeur, je récupère toutes les équipes de la compétition sélectionnée. Ces équipes seront ensuite utilisées pour créer les compétitions\footnote{Pour rappel, je récupère les derniers résultats de chaque équipe via l'endpoint H2H de l'API et ce dernier fonctionne \textbf{uniquement} avec le nom des équipes}. Cependant, le soucis que j'ai pu rencontré est le fait que l'API me donne comme donnée "Manchester United" à la récupération des équipes d'une compétition. Et pour l'endpoint H2H, en passant en paramètre "Manchester United", on reçoit des matchs de 2018, ce qui est inutile pour faire nos prédictions. Cependant, on reçoit des résultats, quand on met le nom "Manchester Utd", datant de 2021.
+
+
+\begin{lstlisting}[language=json, firstnumber=1, caption=Aperçu du JSON avec "Manchester United", captionpos=b, label=apercuJSON]
+// 20210525104030
+// https://apiv2.apifootball.com/?action=get_H2H&
+firstTeam=Manchester%20United&secondTeam=Newcastle&
+APIkey=[...]
+
+{
+  "firstTeam_VS_secondTeam": [
+    {
+      "match_id": "134613",
+      "country_id": "41",
+      "country_name": "ENGLAND",
+      "league_id": "148",
+      "league_name": "Premier League",
+      "match_date": "2018-10-06",
+      "match_status": "Finished",
+      "match_time": "18:30",
+      "match_hometeam_id": "2627",
+      "match_hometeam_name": "Manchester United",
+      "match_hometeam_score": "3",
+      "match_awayteam_id": "2630",
+      "match_awayteam_name": "Newcastle",
+      "match_awayteam_score": "2",
+      "match_hometeam_halftime_score": "0",
+      "match_awayteam_halftime_score": "2",
+      "match_live": "0",
+      "team_home_badge": "https://apiv2.apifootball.com/badges/
+      2627_manchester-united.png",
+      "team_away_badge": "https://apiv2.apifootball.com/badges/
+      2630_newcastle.png",
+      "league_logo": "https://apiv2.apifootball.com/badges/
+      logo_leagues/148_premier-league.png",
+      "country_logo": "https://apiv2.apifootball.com/badges/
+      logo_country/41_england.png"
+    },
+    [...]
+\end{lstlisting}
+
+\begin{lstlisting}[language=json, firstnumber=1, caption=Aperçu du JSON avec "Manchester United", captionpos=b, label=apercuJSON]
+// 20210525104515
+// https://apiv2.apifootball.com/?action=get_H2H&
+firstTeam=Manchester%20Utd&secondTeam=Newcastle&
+APIkey=[...]
+
+{
+    "firstTeam_VS_secondTeam": [
+    {
+        "match_id": "411423",
+        "country_id": "41",
+        "country_name": "England",
+        "league_id": "148",
+        "league_name": "Premier League",
+        "match_date": "2021-02-21",
+        "match_status": "Finished",
+        "match_time": "20:00",
+        "match_hometeam_id": "2627",
+        "match_hometeam_name": "Manchester Utd",
+        "match_hometeam_score": "3",
+        "match_awayteam_id": "2630",
+        "match_awayteam_name": "Newcastle",
+        "match_awayteam_score": "1",
+        "match_hometeam_halftime_score": "1",
+        "match_awayteam_halftime_score": "1",
+        "match_live": "0",
+        "team_home_badge": "https://apiv2.apifootball.com/badges/
+        2627_manchester-united.png",
+        "team_away_badge": "https://apiv2.apifootball.com/badges/
+        2630_newcastle.png",
+        "league_logo": "https://apiv2.apifootball.com/badges/
+        logo_leagues/148_premier-league.png",
+        "country_logo": "https://apiv2.apifootball.com/badges/
+        logo_country/41_england.png"
+    },
+    [...]
+\end{lstlisting}
+
+On peut voir que l'id de l'équipe est le même mais que le nom est différent et surtout que les résultats sont totalement différents.
+
+Pour régler ce soucis, je n'ai pas trouvé d'autre solution que d'avertir tout d'abord les développeurs de l'API de ce soucis de données et de gérer ce cas de bord spécifique dans le code avec une condition.
+
+À noter que la version 3 de l'API est sortie et le soucis a été réglé. Cependant, les statistiques que j'utilise ont "disparu"\footnote{Elles n'ont pas réellement disparu mais elles sont liée à un joueur en particulier. Donc pour les avoir je vais devoir parcouris les statistiques de chacun des joueurs d'un match.} ce qui fait que je dois changer la manière de récupérer les statistiques dans le code. La version 3 de l'API est sortie le 20 mai 2021. 
+
 \section{Développement Python Flask}
 
 Python Flask est un framework web Python très simple d'utilisation et très puissant. Il utilise Jinja2 pour le templating et Werkzeug pour faire la communication avec entre un serveur web et une application web. 
@@ -961,8 +1073,6 @@ Pour ce qui concerne le code de la vue, je vous invite à voir le listing \ref{l
 \lstinputHTML{index-upcoming-matches}
 
 \subsubsection{Aperçus}
-
-
 
 \begin{figure}[htp]
     \centering
