@@ -5,7 +5,70 @@
 {% block description %}Make an hypothetic prediction on a whole competition.{% endblock %}
 
 {% block content %}
+<div class="container">
+  {% if standings %}
+  <div class="text-center">
+    <table class="table table-striped">
+      <thead class="thead-dark">
+          <tr>
+          <th>N°</th>
+          <th class="text-left">Name</th>
+          <th>Games</th>
+          <th>W</th>
+          <th>D</th>
+          <th>L</th>
+          <th>Points</th>
+          </tr>
+      </thead>
+      {% for team in range(standings_count) %}
+      <tr>
+      <td>{{team+1}}</td>
+      <td class="text-left"><img style="width: 25px;" src="{{standings[team]["Badge"]}}" alt="{{standings[team]["Name"]}}_logo"> {{ standings[team]["Name"] }}</td>
+      <td>{{ standings[team]["Games"] }}</td>
+      <td>{{ standings[team]["Wins"] }}</td>
+      <td>{{ standings[team]["Draws"] }}</td>
+      <td>{{ standings[team]["Losses"] }}</td>
+      <td>{{ standings[team]["Points"] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% endif %}
+</div>
 
-<h1 class="text-center lead">This page is under maintenance.</h1>
+{% if leagues %}
 
+<div class="col-sm text-center">
+  <h1>League</h1>
+  <button type="button" class="btn btn-primary btn-xlg-2" data-toggle="modal" data-target="#leagueModal">+</button>
+</div>
+
+<!-- League Modal -->
+<div id="leagueModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-md">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">League Picker</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ url_for("competitions_select") }}" method="post">
+            <p>
+                <label for="leagueId">League</label>
+                <select class="form-control" name="leagueId" id="leagueId">
+                {% for league_name in leagues %}
+
+                  <option value="{{ leagues[league_name]}}">{{ league_name }}</option>
+                {% endfor %}
+                </select>
+            </p>
+            <p class="text-center"><input class="btn btn-secondary" type="submit" value="Select League"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
 {% endblock %}

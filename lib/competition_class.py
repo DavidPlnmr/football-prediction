@@ -14,7 +14,7 @@ class Competition:
         self.standings =  []
         prov = Provider(log_path)
         teams = prov.get_teams_from_league(int(league_id))
-        self.history = []
+        self.__history = []
         self.standing_computed = False
         
         # for team in teams:
@@ -33,7 +33,7 @@ class Competition:
         """
         Compute the whole competitions using multiprocessing
         """
-        if len(self.history) <= 0:
+        if len(self.__history) <= 0:
             matches = []
             for first_team in self.standings:
                 for second_team in self.standings:
@@ -73,25 +73,25 @@ class Competition:
 
             # Ensure all of the threads have finished
             for j in jobs:
-                
-                j.join()    
+                j.join()
             
             #end = time.perf_counter()
             #print(f"Finished in {end-start} seconds")
             print(len(out_list))
             print(threads)
-            self.history = out_list
-        return self.history
+            self.__history = out_list
+        return self.__history
 
     def get_standing(self):
         """
-        Get the standing with the self.history var. It will return the standing of the competition sorted by points
+        Get the standing with the self.__history var. It will return the standing of the competition sorted by points
         """
-        if not self.standing_computed:    
+        if not self.standing_computed:   
+            self.__history = self.compute_competition() 
             for team in self.standings:
                 team_name = team["Name"]
-                for i in range(len(self.history)):
-                    game = self.history[i]
+                for i in range(len(self.__history)):
+                    game = self.__history[i]
                     if team_name == game["Home"] or team_name == game["Away"]:
                         team["Games"] += 1
                         if team_name == game["Prediction"]:
@@ -106,24 +106,24 @@ class Competition:
             self.standings = sorted(self.standings, key=sort_by_team_points, reverse=True)
         
         return self.standings
-        
+    
     def make_prediction(self, first_team, second_team, out_list):
         """
         Method called by each process. Out_list is Manager.list() to share the memory for each process
         """
-        # try:
-        pred = Prediction(first_team, second_team)
-        winner = pred.define_winner()
-        game = {
-            "Home" : first_team,
-            "Away" : second_team,
-            "Prediction" : winner
-        }
-        out_list.append(game)
+        try:
+            pred = Prediction(first_team, second_team)
+            winner = pred.define_winner()
+            game = {
+                "Home" : first_team,
+                "Away" : second_team,
+                "Prediction" : winner
+            }
+            out_list.append(game)
             
-        # except Exception:
-        #     print(f"Unable to make the prediction between the team {first_team} and {second_team}")
-        #     pass
+        except Exception:
+            print(f"Unable to make the prediction between the team {first_team} and {second_team}")
+            pass
     
 def sort_by_team_points(team):
     return team.get("Points")

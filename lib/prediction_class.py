@@ -15,7 +15,6 @@ class Prediction:
         
         try:
             self.results = self.provider.get_all_stats_from_teams(home_team, away_team)
-
             self.home_team_result.heat_of_moment = self.__compute_heat_moment(home_team, self.results["firstTeam_lastResults"])
             self.away_team_result.heat_of_moment = self.__compute_heat_moment(away_team, self.results["secondTeam_lastResults"])
 

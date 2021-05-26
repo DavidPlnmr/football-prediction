@@ -2,6 +2,7 @@ from flask import Flask, redirect, url_for, request, render_template
 
 from lib.prediction_class import Prediction
 from lib.provider_class import Provider
+from lib.competition_class import Competition
 import lib.constants
 
 from dateutil.relativedelta import relativedelta
@@ -255,10 +256,25 @@ def h2h_make_prediction():
 COMPETITIONS ROUTE
 """
 @app.route('/competitions')
-def competitions():   
-    return render_template("competitions.html")
+def competitions():
+    """
+    Competition first route
+    """
+    return render_template("competitions.html", leagues=lib.constants.MULTIPLE_LEAGUES)
 
+@app.route('/competitions/select', methods=["POST"])
+def competitions_select():
+    """
+    Action of the form to select the league
+    """
+    competition_id = request.form["leagueId"]
+    return redirect(url_for("competitions_make_prediction", competition_id=competition_id))
 
+@app.route('/competitions/<int:competition_id>')
+def competitions_make_prediction(competition_id):
+    competition = Competition(competition_id)
+    standings = competition.get_standing()
+    return render_template("competitions.html", standings=standings, standings_count=len(standings))
 
 """
 USEFUL METHODS

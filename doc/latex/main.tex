@@ -427,22 +427,25 @@ J'ai choisi de développer mon projet en Python car c'est le langage que je maî
 
 \subsubsection{Librairies utilisées}
 
-\noindent\textbf{Dotenv}\footnote{\url{https://pypi.org/project/python-dotenv/}}
+\textbf{Dotenv}\footnote{\url{https://pypi.org/project/python-dotenv/}}
 La librairie Dotenv est une librairie qui permet d'avoir des variables d'environnement, ce qui est très utile pour éviter de stocker des données sensibles, telles que des mots de passe de base de données ou des tokens d'API. Pour pouvoir récupérer les variables d'environnement, il faut importer \texttt{os} dans notre fichier pour accéder au variable d'environnement du système.
 
-\noindent\textbf{Logging}\footnote{\url{https://docs.python.org/3/library/logging.html}}
+\textbf{Logging}\footnote{\url{https://docs.python.org/3/library/logging.html}}
 La librairie Logging me permet de garder une trace sur les actions effectuées par l'application. 
 
-\noindent\textbf{MySQL.Connector}\footnote{\url{https://dev.mysql.com/doc/connector-python/en/}}
+\textbf{MySQL.Connector}\footnote{\url{https://dev.mysql.com/doc/connector-python/en/}}
 La librairie MySQL.Connector permet à l'application de se connecter à une base de données et de pouvoir faire différentes requêtes sur cette dernière. 
 
-\noindent\textbf{Requests}\footnote{\url{https://pypi.org/project/requests/}}
+\textbf{Requests}\footnote{\url{https://pypi.org/project/requests/}}
 La librairie Requests permet de faire des requêtes HTTP de manière très élégante et épurée. C'est avec cette librairie que je fais des requêtes à ma source de données. 
 
-\noindent\textbf{JSON}\footnote{\url{https://docs.python.org/3/library/json.html}}
+\textbf{JSON}\footnote{\url{https://docs.python.org/3/library/json.html}}
 Cette librairie permet de sérialiser et désérialier des objets JSON. 
 
-\noindent\textbf{Python Flask}\footnote{\url{https://flask.palletsprojects.com/en/1.1.x/}}
+\textbf{Multiprocessing}\footnote{\url{https://docs.python.org/3/library/multiprocessing.html}}
+Multiprocessing permet de paralléliser des tâches pour réduire le temps d'exécution d'algorithmes qui prennent du temps.
+
+\textbf{Python Flask}\footnote{\url{https://flask.palletsprojects.com/en/1.1.x/}}
 Flask est un framework web écrit en Python. C'est le framework web le plus populaire, ce qui fait qu'il est mis à jour régulièrement. Flask me sert de vue pour mon application. Le framework permet de créer des routes de manière très simpliste.
 
 \subsubsection{Architecture}
@@ -752,6 +755,8 @@ Ensuite, une méthode qui fait une prédiction pour chacun des matchs de la comp
 
 Donc dans cette classe, je prévois de stocker une variable qui contient le classement de la compétition et une autre qui contient l'historique de tout les matchs de la compétition.
 
+
+
 \newpage
 
 \section{Environnement de développement}
@@ -789,7 +794,7 @@ De plus, je fais des logs pour pouvoir avoir une traçabilité sur les requêtes
 
 \lstinputPython{getH2H}
 
-La méthode spécifie l'action pour l'API ( dans notre cas \texttt{get\_H2H} ) avec les paramètres pour spécifique à l'endpoint.
+La méthode spécifie l'action pour l'API ( dans notre cas \texttt{get\_H2H} ) avec les paramètres spécifique à l'endpoint.
 J'ai essayé de faire un code qui permet d'être facilement extensible pour ajouter de potentiels nouveaux endpoints. Pour conclure sur le code pour la communication avec l'API, je pense avoir fourni une classe respectant le design pattern \texttt{Façade} et suffisament extensible ce qui me permet de gagner du temps sur l'ajout de nouveaux endpoints.
 
 \subsection{Gestion de la base de données}
@@ -798,11 +803,11 @@ La base de données est gérée par la classe \texttt{DbManager}. Dans cette cla
 
 \lstinputPython{query}
 
-Comme indiqué dans les commentaires de la méthode, les requêtes \texttt{INSERT}, \texttt{UPDATE} ou \texttt{DELETE} ne fonctionneront pas avec cette méthode car il manque la méthode \texttt{commit()} de sauver les changements fait sur la table en question. Le \texttt{fetchall()} permet de retourner toutes les lignes de la requête qui a été faite.
+Comme indiqué dans les commentaires de la méthode, les requêtes \texttt{INSERT}, \texttt{UPDATE} ou \texttt{DELETE} ne fonctionneront pas avec cette méthode car il manque la méthode \texttt{commit()} de sauver les changements faits sur la table en question. Le \texttt{fetchall()} permet de retourner toutes les lignes de la requête qui a été faite.
 
 \lstinputPython{query-used}
 
-Dans cette méthode, on voit bien que j'utilise la méthode du listing \ref{list-query} à la dernière ligne. Le fait de créer des méthodes plus ou moins générale comme celle du listing \ref{list-query} permet de simplifier la lecture du code. Ici, j'ai une méthode qui accepte des paramètres vides et je vérifie si ces derniers contiennent quelque chose, si oui, j'inclus les paramètres donnés dans la requête.
+Dans cette méthode, on voit bien que j'utilise la méthode du listing \ref{list-query} à la dernière ligne. Le fait de créer des méthodes généralistes comme celle du listing \ref{list-query} permet de simplifier la lecture du code. Ici, j'ai une méthode qui accepte des paramètres vides et je vérifie si ces derniers contiennent quelque chose, si oui, j'inclus les paramètres donnés dans la requête.
 
 \lstinputPython{insert-prediction}
 
@@ -811,12 +816,12 @@ On peut se poser la question aussi sur le fait que l'API est techniquement aussi
 
 \subsubsection{Transaction}
 
-Une transaction\footnote{\url{https://openclassrooms.com/fr/courses/1959476-administrez-vos-bases-de-donnees-avec-mysql/1970063-transactions}} est très utile dans mon cas pour éviter les erreurs d'insertion de données qui sont liés dans ma base. Ici, pour insérer un match en base et pour insérer les statistiques qui lui sont liés. Il faut absolument en faire une pour éviter que des statistiques soient ajoutées alors que le match ne l'a pas été.
+Une transaction\footnote{\url{https://openclassrooms.com/fr/courses/1959476-administrez-vos-bases-de-donnees-avec-mysql/1970063-transactions}} est très utile dans mon cas pour éviter les erreurs d'insertion de données qui sont liés entre elles dans ma base. Ici, pour insérer un match en base et pour insérer les statistiques qui lui sont liés. Il faut \textbf{absolument} en faire une pour éviter que des statistiques soient ajoutées alors que le match ne l'a pas été.
 
 
 \lstinputPython{insert-match-with-stats}
 
-Pour un match, on insère chaque statistique dans la table "statistic". Si aucune erreur est apparu, on sauvegarde les changements dans la base. La transaction est un bloc de neuf requêtes. Elle contient l'insertion du match et 9 insertions de statistiques. Et contrairement au listing \ref{list-insert-prediction}, on fait un \texttt{rollback()}. Le rollback permet d'annuler les requêtes faites auparavant et on le fait lorsque l'on détecte une erreur sur un \texttt{INSERT} statement.
+Pour un match, on insère chaque statistique dans la table "statistic". Si aucune erreur est apparu, on sauvegarde les changements dans la base. La transaction est un bloc de dix requêtes. Elle contient l'insertion du match et 9 insertions de statistiques. Et contrairement au listing \ref{list-insert-prediction}, on fait un \texttt{rollback()}. Le rollback permet d'annuler les requêtes faites auparavant et on le fait lorsque l'on détecte une erreur sur un \texttt{INSERT} statement.
 
 \subsection{Provider}
 
@@ -904,6 +909,12 @@ Enfin, je vérifie que tous les process soient bien finis pour retourner l'histo
 \lstinputPython{compute-competition}
 
 \subsubsection{Retour du classement du championnat}
+
+Le retour du classement se fait après avoir appelé la méthode \texttt{compute\_competition()}.
+
+Pour le retour du classement de la compétition, je dois parcourir le classement des équipes et chercher dans l'historique des matchs pour compter les victoires, égalités, défaites et ainsi compter les points pour les équipes dans le classement. Pour finir, le classement est trié par nombre de points de chaque équipe de manière décroissante. Pour ce qui concerne la méthode \texttt{sorted()}, la clé est là pour spécifier avec quoi on doit trier.
+
+\lstinputPython{get-standings}
 
 \subsubsection{Problème de donnée de l'API}
 Il y a eu un soucis rencontré lors du développement de cette fonctionnalité\footnote{Ce problème est présent sur toutes les fonctionnalités mais il a été découvert lors du développement des compétitions}. L'API n'est pas cohérente sur les données qu'elle transmet. Je m'explique :

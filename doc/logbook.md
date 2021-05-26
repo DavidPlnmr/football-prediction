@@ -1739,3 +1739,37 @@ Bon bah finalement on va éviter d'utiliser la v3 tout simplement parce qu'il me
 Ok, le soucis avec la compétition allemande vient du fait qu'on a pas les stats nécessaires pour chaque match de la ligue allemande. Je pense qu'on va juste pas permettre de faire une prédiction sur cette compétition et ça sera plus simple
 
 Parler dans la doc du fait que la v3 est sortie et pq on l'utilise pas
+
+#### Recap de la journée 
+
+* J'ai parlé du mp dans la doc
+* et du soucis avec Man United et aussi de la v3 de l'API
+* J'ai fix le soucis avec Man U dans la vue.
+
+Choses à faire demain :
+
+* Retour du classement de la compétition
+* Commencer la vue compétition
+* Prendre en compte le test aléatoire sur un bon nombre de match pour prouver que mon algorithme marche bien
+
+### 26.05.2021
+
+8h Suite de la documentation
+
+9h40 Vue de la compétition 
+
+Comme le premier lancement est un chargement infini, il faudrait faire un genre de timer qui vérifie le temps de processing et qui fait un timeout au bout d'une minute
+
+J'essaie déjà de comprendre pourquoi est-ce qu'il bloque sur un process mais j'arrive pas trop à comprendre
+
+Mis à part ça la vue est ok mais il faut absolument que je fasse ce timeout pour pouvoir afficher une erreur du au temps d'attente.
+
+Je viens de lancer un debug et on voit bien tout les subprocess qui se lance cependant ils restent bloquer lorsqu'il en manque 6-7
+
+J'me demande juste pourquoi est-ce que ça reste bloquer la première fois mais pas la deuxième?
+
+Alors selon un post de stackoverflow il serait préférable d'utiliser une Queue et non une liste mais je vois pas vraiment pour quelle raison?
+
+https://stackoverflow.com/questions/62179361/multiprocessing-threading-gets-stuck-and-printing-output-gets-messed-up
+
+J'essaie de débugger mais je comprends pas trop ce qu'il se passe et j'arrive à avoir accès au process mais je peux pas voir ou il en est
