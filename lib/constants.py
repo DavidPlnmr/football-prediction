@@ -10,6 +10,8 @@ STATISTICS_TO_GET = ["Ball Possession",
 
 NB_GAMES_HEAT_OF_THE_MOMENT=5
 
+TIMEOUT_IN_SECONDS = 45
+
 MULTIPLE_LEAGUES = {
     "Premier League" : 148,
     "Liga NOS" : 391,

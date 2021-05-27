@@ -3,8 +3,7 @@ from .provider_class import Provider
 from .prediction_class import Prediction, TeamResult
 import lib.constants
 
-import multiprocessing
-import time
+import asyncio
 
 class Competition:
     """
@@ -12,8 +11,11 @@ class Competition:
     """
     def __init__(self, league_id, log_path=""):
         self.standings =  []
-        prov = Provider(log_path)
-        teams = prov.get_teams_from_league(int(league_id))
+        self.league_id = league_id
+        self.prov = Provider(log_path)
+    
+    async def create(self):
+        teams = await self.prov.get_teams_from_league(int(self.league_id))
         self.__history = []
         self.standing_computed = False
         
@@ -50,38 +52,39 @@ class Competition:
                     pass
                 pass
             
-            #start = time.perf_counter()
-            
-            threads = len(matches)   # Number of threads to create
-            manager = multiprocessing.Manager()
-            out_list = manager.list()
-            
-            # Create a list of jobs and then iterate through
-            # the number of threads appending each thread to
-            # the job list 
-            jobs = []
-            
-            for i in range(0, threads):
-                thread = multiprocessing.Process(target=self.make_prediction, 
-                                            args=(matches[i][0], matches[i][1], out_list))
-                jobs.append(thread)
+            asyncio.run(self.__async_wait_all_predictions(matches, self.__history))
 
-            # Start the threads 
-            for j in jobs:
-                j.start()
-                time.sleep(0.1)
-
-            # Ensure all of the threads have finished
-            for j in jobs:
-                j.join()
-            
-            #end = time.perf_counter()
-            #print(f"Finished in {end-start} seconds")
-            print(len(out_list))
-            print(threads)
-            self.__history = out_list
         return self.__history
-
+        
+    async def __async_wait_all_predictions(self, matches, out_list):
+        """
+        Wait for all the predictions to be completed
+        """
+        
+        await asyncio.wait([self.make_prediction(match[0], match[1], out_list) for match in matches])
+    
+    async def make_prediction(self, first_team, second_team, out_list):
+        """
+        Method called by each process. Out_list is simple list
+        """
+        try:
+            print("Start")
+            pred = Prediction(first_team, second_team)
+            print("Prediction created")
+            await pred.call_data()
+            print("Data called")
+            #winner = pred.define_winner()
+            # game = {
+            #     "Home" : first_team,
+            #     "Away" : second_team,
+            #     "Prediction" : winner
+            # }
+            # out_list.append(game)
+            
+        except Exception:
+            print(f"Unable to make the prediction between the team {first_team} and {second_team}")
+            pass
+    
     def get_standing(self):
         """
         Get the standing with the self.__history var. It will return the standing of the competition sorted by points
@@ -106,24 +109,6 @@ class Competition:
             self.standings = sorted(self.standings, key=sort_by_team_points, reverse=True)
         
         return self.standings
-    
-    def make_prediction(self, first_team, second_team, out_list):
-        """
-        Method called by each process. Out_list is Manager.list() to share the memory for each process
-        """
-        try:
-            pred = Prediction(first_team, second_team)
-            winner = pred.define_winner()
-            game = {
-                "Home" : first_team,
-                "Away" : second_team,
-                "Prediction" : winner
-            }
-            out_list.append(game)
-            
-        except Exception:
-            print(f"Unable to make the prediction between the team {first_team} and {second_team}")
-            pass
     
 def sort_by_team_points(team):
     return team.get("Points")

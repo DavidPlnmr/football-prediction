@@ -1773,3 +1773,72 @@ Alors selon un post de stackoverflow il serait préférable d'utiliser une Queue
 https://stackoverflow.com/questions/62179361/multiprocessing-threading-gets-stuck-and-printing-output-gets-messed-up
 
 J'essaie de débugger mais je comprends pas trop ce qu'il se passe et j'arrive à avoir accès au process mais je peux pas voir ou il en est
+
+Ok j'ai trouvé une solution. Pour chaque process on peut mettre un timeout pour être sur qu'il s'arrête et qu'on continue le code.
+
+```python
+# Ensure all of the threads have finished
+            for j in jobs:
+                j.join(timeout=lib.constants.TIMEOUT_IN_SECONDS)
+```
+
+Par contre il faut s'assurer que ça prenne le bon nombre en secondes. En tout cas la classe Process assure pas ça.
+
+Timeout dans join n'a pas l'air de fonctionner, c'est très louche ça reste bloquer avec encore plus de process 
+
+La première fois avec la ligue italienne a fonctionné pour 130 matchs mais avec un timeout d'1 seconde à voir comment ça se passe avec un timeout plus élevé
+
+#### Recap de la journée
+
+Tentative d'utilisation du timeout sur les process mais ça ne fonctionne pas. C'est vraiment louche parce que ça ne fonctionne vraiment pas de la même manière que quand je le mets pas. En gros si je mets pas le timeout ça va vite au début pour la première éxecution de la journée puis ça bloque à 6 process manquant. Alors que quand je mets le timeout ça reste bloqué à une vingtaine de process.
+
+### 27.05.2021
+
+J'essaie de comprendre pourquoi est-ce que ça fait ça mais j'ai du mal à comprendre le comportement du programme après l'ajout de ce paramètre
+
+Bon je viens de trouver qu'il y'a un timeout sur bash mais bon c'est pas la meilleure des solutions.
+
+Autrement je pourrais faire de l'asynchrone. Mais ça veut dire que je devrais changer et revoir tout le fonctionnement d'appel à l'API. Voir comment je pourrais faire de l'asynchrone sur l'appel sur mes méthode de haut niveau
+
+Recherche d'un équivalent de `Promise.all` de JS mais sur Python avec M. Schmid : 
+https://stackoverflow.com/questions/34377319/combine-awaitables-like-promise-all
+
+```python
+import asyncio
+
+async def bar(i):
+  print('started', i)
+  await asyncio.sleep(1)
+  print('finished', i)
+
+async def main():
+  await asyncio.wait([bar(i) for i in range(10)])
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
+loop.close()
+```
+
+... Le soucis de faire de l'asynchrone c'est que ça reste plus lent que le multiprocessing mais au moins je suis sur que ça va pas se bloquer. En a peu pres 2-3min ça en a fait 40. En termes de perf c'est clairement pas fou. Donc la je sais pas trop quoi faire. Surtout que s'il y'a les données en base c'est performant mais autrement ça l'est pas. Je sais pas pourquoi ça bloque pour chaque thread en réalité
+
+De ce que je vois ça attend réellement que chaque prédiction soient finies, sauf que c'est pas ce que je veux là
+
+Pourtant ils se lancent bien en parallèle. Ok je crois avoir la solution au problème, le soucis c'est que le constructeur de la classe Prediction n'est pas asynchrone donc il bloque dessus cependant je trouve ça quand même bizarre qu'il bloque puisqu'on est dans un thread séparé du reste
+
+Je vais faire une méthode qui fait les appels hors du constructeur de la classe Prediction
+
+ça marche pas totalement ça bloque sur la méthode asynchrone call_data()
+
+En fait il faut rendre asynchrone littéralement tout les appels à l'API
+
+Et pour ça il faut changer de librairie car requests ne permet pas de faire de l'asynchrone :clown_face:
+
+J'ai eu un gros probleme avec la librairie aiohttp mais maintenant c'est réglé il faut juste régler les soucis avec le status code dans la facade mais on fera ça demain.
+
+#### Recap de la journée 
+
+* Passage de multiprocessing à asynchrone mais changement de littéralement tout le système de call à l'api
+
+Pour demain : 
+
+* Fix le soucis avec le `__get_Action`

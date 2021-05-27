@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 from .provider_class import Provider, NoMatchError
 import lib.constants
+import asyncio
 
 class Prediction:
     """
@@ -10,13 +11,14 @@ class Prediction:
         self.home_team_result = TeamResult(home_team)
         self.away_team_result = TeamResult(away_team)
         self.winner=""
-        
         self.provider = Provider(log_path)
         
+    async def call_data(self):
         try:
-            self.results = self.provider.get_all_stats_from_teams(home_team, away_team)
-            self.home_team_result.heat_of_moment = self.__compute_heat_moment(home_team, self.results["firstTeam_lastResults"])
-            self.away_team_result.heat_of_moment = self.__compute_heat_moment(away_team, self.results["secondTeam_lastResults"])
+            await asyncio.sleep(0)
+            self.results = self.provider.get_all_stats_from_teams(self.get_home_team_name(), self.get_away_team_name())
+            self.home_team_result.heat_of_moment = self.__compute_heat_moment(self.get_home_team_name(), self.results["firstTeam_lastResults"])
+            self.away_team_result.heat_of_moment = self.__compute_heat_moment(self.get_away_team_name(), self.results["secondTeam_lastResults"])
 
             self.__insert_data_team_result(self.home_team_result, self.results["firstTeam_lastResults"])
             self.__insert_data_team_result(self.away_team_result, self.results["secondTeam_lastResults"])
@@ -25,7 +27,9 @@ class Prediction:
             self.__insert_data_team_result(self.away_team_result, self.results["firstTeam_VS_secondTeam"])
         except Exception:
             raise UnmakeablePrediction("Prediction unmakeable. Not enough stats.")
-            
+        
+        
+    
     def define_winner(self):
         """
         Returns the winner of the prediction by computing the offensive score, defensive score and the heat of moment

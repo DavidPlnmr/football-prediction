@@ -9,7 +9,7 @@ import lib.constants
 
 from dateutil.relativedelta import relativedelta
 from datetime import datetime
-
+import asyncio
 
 
 class Provider:
@@ -26,28 +26,28 @@ class Provider:
             cls.__db_manager = DbManager("127.0.0.1", os.getenv("DB_USER"), os.getenv("DB_PASSWORD"), log_path)
         return cls.__instance
     
-    def get_matches_from_to_db(self, from_date, to_date, league_id=""):
+    async def get_matches_from_to_db(self, from_date, to_date, league_id=""):
         """
         Get matches from date to date from the db
         """
         return self.__db_manager.get_matches_from_to(from_date, to_date, league_id)
             
-    def get_teams_from_league(self, league_id):
+    async def get_teams_from_league(self, league_id):
         """
         Get the team list from a league
         """
-        response = self.__api_facade.get_teams_from_league(league_id)
+        response = await self.__api_facade.get_teams_from_league(league_id)
         for team in response:
             # We must put this line because there is a bug with the API 
             if team["team_name"] == "Manchester United":
                 team["team_name"] = "Manchester Utd"
         return response
     
-    def get_teams_with_team_id(self, team_id):
+    async def get_teams_with_team_id(self, team_id):
         """
         Get the team list from a league
         """
-        response = self.__api_facade.get_teams_with_team_id(team_id)
+        response = await self.__api_facade.get_teams_with_team_id(team_id)
         for team in response:
             # We must put this line because there is a bug with the API 
             if team["team_name"] == "Manchester United":
@@ -55,7 +55,7 @@ class Provider:
         
         return response
     
-    def get_all_stats_from_teams(self, first_team_name, second_team_name):
+    async def get_all_stats_from_teams(self, first_team_name, second_team_name):
         """
         This method try to get games from the two teams in the DB. If there is no data in the DB, it will get data from the API and then save it in the DB.
         """
@@ -74,10 +74,11 @@ class Provider:
                     
             else:
                 raise APICallNotFound("No API call made today")
+            await asyncio.sleep(0)
             
         except APICallNotFound:
             if len(self.get_api_call_from_today(first_team_name,second_team_name)) <= 0:    
-                response = self.get_all_stats_from_teams_api(first_team_name, second_team_name)
+                response = await self.get_all_stats_from_teams_api(first_team_name, second_team_name)
                 self.save_api_call(first_team_name, second_team_name)
                 for result in response:
                     for match in response[result]:
@@ -97,11 +98,11 @@ class Provider:
         
         return response
           
-    def get_all_stats_from_teams_api(self, first_team_name, second_team_name):
+    async def get_all_stats_from_teams_api(self, first_team_name, second_team_name):
         """
         Make a call to the API using getH2H and make a treatment to have the stats for each match of the two different teams
         """
-        reqresult = self.__api_facade.get_H2H(first_team_name, second_team_name)
+        reqresult = await self.__api_facade.get_H2H(first_team_name, second_team_name)
 
         result = {}
         stats_matches_two_team = []
@@ -115,7 +116,7 @@ class Provider:
             for match in reqresult["firstTeam_VS_secondTeam"]:
                 
                 api_match_id = match["match_id"]
-                reqstatsresult = self.__api_facade.get_stats_from_match(api_match_id)
+                reqstatsresult = await self.__api_facade.get_stats_from_match(api_match_id)
                 
                 if self.__check_array_is_in_other_array(lib.constants.STATISTICS_TO_GET, reqstatsresult[api_match_id]["statistics"], "type"):
                     self.__insert_stats_in_array_for_api(match, stats_matches_two_team, reqstatsresult[api_match_id]["statistics"], lib.constants.STATISTICS_TO_GET)
@@ -123,7 +124,7 @@ class Provider:
             for match in reqresult["firstTeam_lastResults"]:
                 
                 api_match_id = match["match_id"]
-                reqstatsresult = self.__api_facade.get_stats_from_match(api_match_id)
+                reqstatsresult = await self.__api_facade.get_stats_from_match(api_match_id)
                 
                 if self.__check_array_is_in_other_array(lib.constants.STATISTICS_TO_GET, reqstatsresult[api_match_id]["statistics"], "type"):
                     self.__insert_stats_in_array_for_api(match, stats_first_team, reqstatsresult[api_match_id]["statistics"], lib.constants.STATISTICS_TO_GET)
@@ -131,7 +132,7 @@ class Provider:
             for match in reqresult["secondTeam_lastResults"]:
                 
                 api_match_id = match["match_id"]
-                reqstatsresult = self.__api_facade.get_stats_from_match(api_match_id)
+                reqstatsresult = await self.__api_facade.get_stats_from_match(api_match_id)
                 
                 if self.__check_array_is_in_other_array(lib.constants.STATISTICS_TO_GET, reqstatsresult[api_match_id]["statistics"], "type"):
                     self.__insert_stats_in_array_for_api(match, stats_second_team, reqstatsresult[api_match_id]["statistics"], lib.constants.STATISTICS_TO_GET)
@@ -195,7 +196,7 @@ class Provider:
         now = datetime.now().date()
         return self.__db_manager.get_api_call(first_team_name, second_team_name, now)
         
-    def get_previous_matches_predictions(self, from_date, to_date, league_id=""):
+    async def get_previous_matches_predictions(self, from_date, to_date, league_id=""):
         """
         Get the predictions of the previous matches with their result
         """
@@ -203,7 +204,7 @@ class Provider:
         
         result = []
         for prediction in response:
-            match_info = self.__api_facade.get_match_infos(prediction["api_match_id"])
+            match_info = await self.__api_facade.get_match_infos(prediction["api_match_id"])
             
             if len(match_info)>0: # Check if we got some data from the API
                 
@@ -228,11 +229,11 @@ class Provider:
         """
         return self.__db_manager.get_predictions_in_interval(from_date, to_date, league_id)
         
-    def get_matches_in_interval(self, from_date, to_date, league_id=""):
+    async def get_matches_in_interval(self, from_date, to_date, league_id=""):
         """
         Get the matches from a date to an other [in a specific a league]
         """
-        return self.__api_facade.get_matches_in_interval(from_date,to_date,league_id)
+        return await self.__api_facade.get_matches_in_interval(from_date,to_date,league_id)
     
     def save_match_with_stats(self, match_id, match_date, match_time, league_id, league_name, hometeam_name, awayteam_name, hometeam_score, awayteam_score, stats_array):
         """
