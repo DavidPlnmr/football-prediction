@@ -15,8 +15,8 @@ class Prediction:
         
     async def call_data(self):
         try:
-            await asyncio.sleep(0)
-            self.results = self.provider.get_all_stats_from_teams(self.get_home_team_name(), self.get_away_team_name())
+            self.results = await self.provider.get_all_stats_from_teams(self.get_home_team_name(), self.get_away_team_name())
+
             self.home_team_result.heat_of_moment = self.__compute_heat_moment(self.get_home_team_name(), self.results["firstTeam_lastResults"])
             self.away_team_result.heat_of_moment = self.__compute_heat_moment(self.get_away_team_name(), self.results["secondTeam_lastResults"])
 

@@ -23,21 +23,21 @@ class ApiFacade:
             async with session.get(f'https://apiv2.apifootball.com/?APIkey={self.api_key}&{request_params}') as response:
                     
                 start_time = time.perf_counter()
-                response = await response.text()
+                result = await response.text()
                 end_time = time.perf_counter()
-                
-                if response.status_code == 200: # Code 200 = OK. Healthy connection
-                    obj = json.loads(response.content.decode('utf-8'))
+
+                if response.status == 200: # Code 200 = OK. Healthy connection
+                    obj = json.loads(result)
                     # Check if obj contains error so there is problem in the API side
                     if 'error' in obj:
-                        logging.error(f"Error {obj['error']} returned from the API with message : {obj['message']}")    
-                        raise Exception(f"Error with the API : {obj['message']}")
+                        logging.error(f"Error {obj['error']} returned from the API with message : {obj['message']}. Request made : {request_params}")    
+                        raise Exception(f"Error with the API : {obj['message']}. Request made : {request_params}")
                     else: # No error from the API we can return the result
                         logging.info(f"Request to the API with the params: {request_params}. Time lapsed {end_time-start_time}")
                         return obj # decode to get the content in string
                 else:
                     # Error from the library
-                    logging.error(f"Could not connect to the API. Error : {response.status_code} | Params : {request_params}")
+                    logging.error(f"Could not connect to the API. Error : {response.status} | Params : {request_params}")
                     raise Exception("Could not connect to the API.")
     
     async def get_match_infos(self, match_id):
@@ -62,14 +62,14 @@ class ApiFacade:
         endpoint_action = "get_events"
         params = f'action={endpoint_action}&from={from_date}&to={to_date}'
         params += f"&league_id={league_id}" if (type(league_id) == int) else ''
-        return self.__get_action(params)
+        return await self.__get_action(params)
     
     async def get_countries(self):
         """
         Get countries available in the API
         """
         endpoint_action = "get_countries"
-        return self.__get_action(f'action={endpoint_action}')
+        return await self.__get_action(f'action={endpoint_action}')
     
     async def get_competitions(self, country_id = ""):
         """
@@ -78,25 +78,25 @@ class ApiFacade:
         endpoint_action = "get_leagues"
         if type(country_id)==int:
             endpoint_action+=f"&country_id={country_id}"
-        return self.__get_action(f'action={endpoint_action}')
+        return await self.__get_action(f'action={endpoint_action}')
     
     async def get_teams_from_league(self, league_id):
         """
         Get all the teams in the specified league_id
         """
         endpoint_action = "get_teams"
-        return self.__get_action(f'action={endpoint_action}&league_id={league_id}')
+        return await self.__get_action(f'action={endpoint_action}&league_id={league_id}')
     
     async def get_teams_with_team_id(self, team_id):
         """
         Get all the teams in the specified league_id
         """
         endpoint_action = "get_teams"
-        return self.__get_action(f'action={endpoint_action}&team_id={team_id}')
+        return await self.__get_action(f'action={endpoint_action}&team_id={team_id}')
     
     async def get_stats_from_match(self, match_id):
         """
         Get the statistics of a specific match
         """
         endpoint_action = "get_statistics"
-        return self.__get_action(f'action={endpoint_action}&match_id={match_id}')
+        return await self.__get_action(f'action={endpoint_action}&match_id={match_id}')

@@ -1842,3 +1842,35 @@ J'ai eu un gros probleme avec la librairie aiohttp mais maintenant c'est réglé
 Pour demain : 
 
 * Fix le soucis avec le `__get_Action`
+
+### 28.05.2021
+
+8h Tout l'asynchrone fonctionne bien.
+
+10h Je viens de voir que j'avais reçu des réponses des développeurs de l'API et pour le mail avec le multiprocessing, ils m'ont dit qu'effectivement c'est pas trop possible mais ils m'ont conseillé la même chose que Schmid et ensuite pour l'appel à l'endpoint H2H de l'API (v2) il y a les paramètres "firstTeamId" qui fonctionnent, cependant ils sont pas indiqués dans la doc.
+
+Donc la ce que je vais faire c'est que je vais changer l'appel à l'API pour l'endpoint
+
+Si je dois changer l'appel de l'endpoint H2H en id qu'est-ce que ça fait impliquer à changer dans le code?
+
+* On doit changer les paramètres en int dans l'appel de get_H2H
+* `get_all_stats_from_teams ` devra récupérer les noms des équipes car j'en ai besoin pour le stockage
+  * Je stocke le nom des équipes en base
+  * Il faut changer aussi la vue
+  * Il faut gérer la manière de l'async
+
+J'me prends pas la tête je change pas c'est bon. J'ai demandé au dev de l'API et il peut pas changer le nom de la donnée pour la v2
+
+Bon maintenant on va fixer la vue avec tout l'asynchrone que j'ai fait :thumbsup:
+
+Je pense qu'on arrive à la partie pas très drôle
+
+https://flask.palletsprojects.com/en/2.0.x/async-await/
+
+J'ai essayé et ça a pas marché parce qu'il faut mettre flask 2.0
+
+#### Recap de la journée
+
+* Changement de tout le principe de l'app en asynchrone
+* Vue home pour les previous matches fait en asynchrone
+  * Il manque plus que le upcoming matches à faire

@@ -26,12 +26,7 @@ class DbManager:
         """
         query = f"""SELECT * 
                             FROM prediction p 
-                            WHERE p.date_of_game >= "{from_date}" AND p.date_of_game <= "{to_date}" AND p.api_match_id IS NOT NULL"""
-                            
-        if type(league_id)==int:
-            query += f" AND league_id={league_id}"
-            
-        query+=" ORDER BY date_of_game;"
+                            WHERE p.date_of_game >= "{from_date}" AND p.date_of_game <= "{to_date}" AND p.api_match_id IS NOT NULL AND league_id={league_id} ORDER BY date_of_game;"""
         
         return self.__query(query)
         

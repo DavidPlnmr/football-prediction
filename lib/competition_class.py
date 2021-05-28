@@ -31,9 +31,9 @@ class Competition:
                 "Points" : 0
             })
         
-    def compute_competition(self):
+    async def compute_competition(self):
         """
-        Compute the whole competitions using multiprocessing
+        Compute the whole competitions using async
         """
         if len(self.__history) <= 0:
             matches = []
@@ -52,7 +52,7 @@ class Competition:
                     pass
                 pass
             
-            asyncio.run(self.__async_wait_all_predictions(matches, self.__history))
+            await self.__async_wait_all_predictions(matches, self.__history)
 
         return self.__history
         
@@ -68,29 +68,27 @@ class Competition:
         Method called by each process. Out_list is simple list
         """
         try:
-            print("Start")
             pred = Prediction(first_team, second_team)
-            print("Prediction created")
             await pred.call_data()
-            print("Data called")
-            #winner = pred.define_winner()
-            # game = {
-            #     "Home" : first_team,
-            #     "Away" : second_team,
-            #     "Prediction" : winner
-            # }
-            # out_list.append(game)
+
+            winner = pred.define_winner()
+            game = {
+                "Home" : first_team,
+                "Away" : second_team,
+                "Prediction" : winner
+            }
+            out_list.append(game)
             
         except Exception:
             print(f"Unable to make the prediction between the team {first_team} and {second_team}")
             pass
     
-    def get_standing(self):
+    async def get_standing(self):
         """
         Get the standing with the self.__history var. It will return the standing of the competition sorted by points
         """
         if not self.standing_computed:   
-            self.__history = self.compute_competition() 
+            await self.compute_competition() 
             for team in self.standings:
                 team_name = team["Name"]
                 for i in range(len(self.__history)):

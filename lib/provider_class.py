@@ -60,6 +60,7 @@ class Provider:
         This method try to get games from the two teams in the DB. If there is no data in the DB, it will get data from the API and then save it in the DB.
         """
         response = ""
+        
         try:
             now = datetime.now().date()
             three_months_before = now - relativedelta(months=6)
@@ -74,6 +75,7 @@ class Provider:
                     
             else:
                 raise APICallNotFound("No API call made today")
+            # We must make an await because the method is an async else it will create an error
             await asyncio.sleep(0)
             
         except APICallNotFound:
@@ -113,29 +115,42 @@ class Provider:
         # We check the last results of the teams aren't empty
         if len(reqresult["firstTeam_lastResults"]) > lib.constants.MIN_OF_GAMES_TO_MAKE_PREDICTION and len(reqresult["secondTeam_lastResults"]) > lib.constants.MIN_OF_GAMES_TO_MAKE_PREDICTION:
             
-            for match in reqresult["firstTeam_VS_secondTeam"]:
-                
+            
+            reqstatsresult_firstTeam_vs_secondTeam = await asyncio.wait([self.__api_facade.get_stats_from_match(match["match_id"]) for match in reqresult["firstTeam_VS_secondTeam"]])
+            reqstatsresult_firstTeam_lastResults = await asyncio.wait([self.__api_facade.get_stats_from_match(match["match_id"]) for match in reqresult["firstTeam_lastResults"]])
+            reqstatsresult_secondTeam_lastResults = await asyncio.wait([self.__api_facade.get_stats_from_match(match["match_id"]) for match in reqresult["secondTeam_lastResults"]])
+            
+
+            for match in reqresult["firstTeam_VS_secondTeam"]:   
                 api_match_id = match["match_id"]
-                reqstatsresult = await self.__api_facade.get_stats_from_match(api_match_id)
-                
-                if self.__check_array_is_in_other_array(lib.constants.STATISTICS_TO_GET, reqstatsresult[api_match_id]["statistics"], "type"):
-                    self.__insert_stats_in_array_for_api(match, stats_matches_two_team, reqstatsresult[api_match_id]["statistics"], lib.constants.STATISTICS_TO_GET)
+                # Reqstatsresult is an array of Set but we only want the first one (which contains the tasks)
+                for task in reqstatsresult_firstTeam_vs_secondTeam[0]:
+                    stats_of_match = task.result()
+                    for stat_match_id in task.result():
+                        if stat_match_id == api_match_id:                            
+                            if  self.__check_array_is_in_other_array(lib.constants.STATISTICS_TO_GET, stats_of_match[stat_match_id]["statistics"], "type"):
+                                self.__insert_stats_in_array_for_api(match, stats_matches_two_team, stats_of_match[stat_match_id]["statistics"], lib.constants.STATISTICS_TO_GET)
                     
-            for match in reqresult["firstTeam_lastResults"]:
-                
+            for match in reqresult["firstTeam_lastResults"]:   
                 api_match_id = match["match_id"]
-                reqstatsresult = await self.__api_facade.get_stats_from_match(api_match_id)
-                
-                if self.__check_array_is_in_other_array(lib.constants.STATISTICS_TO_GET, reqstatsresult[api_match_id]["statistics"], "type"):
-                    self.__insert_stats_in_array_for_api(match, stats_first_team, reqstatsresult[api_match_id]["statistics"], lib.constants.STATISTICS_TO_GET)
+                # Reqstatsresult is an array of Set but we only want the first one (which contains the tasks)
+                for task in reqstatsresult_firstTeam_lastResults[0]:
+                    stats_of_match = task.result()
+                    for stat_match_id in task.result():
+                        if stat_match_id == api_match_id:                            
+                            if  self.__check_array_is_in_other_array(lib.constants.STATISTICS_TO_GET, stats_of_match[stat_match_id]["statistics"], "type"):
+                                self.__insert_stats_in_array_for_api(match, stats_first_team, stats_of_match[stat_match_id]["statistics"], lib.constants.STATISTICS_TO_GET)
                 
             for match in reqresult["secondTeam_lastResults"]:
-                
                 api_match_id = match["match_id"]
-                reqstatsresult = await self.__api_facade.get_stats_from_match(api_match_id)
+                # Reqstatsresult is an array of Set but we only want the first one (which contains the tasks)
+                for task in reqstatsresult_secondTeam_lastResults[0]:
+                    stats_of_match = task.result()
+                    for stat_match_id in task.result():
+                        if stat_match_id == api_match_id:                            
+                            if  self.__check_array_is_in_other_array(lib.constants.STATISTICS_TO_GET, stats_of_match[stat_match_id]["statistics"], "type"):
+                                self.__insert_stats_in_array_for_api(match, stats_second_team, stats_of_match[stat_match_id]["statistics"], lib.constants.STATISTICS_TO_GET)
                 
-                if self.__check_array_is_in_other_array(lib.constants.STATISTICS_TO_GET, reqstatsresult[api_match_id]["statistics"], "type"):
-                    self.__insert_stats_in_array_for_api(match, stats_second_team, reqstatsresult[api_match_id]["statistics"], lib.constants.STATISTICS_TO_GET)
                 
             result["firstTeam_VS_secondTeam"]=stats_matches_two_team
             result["firstTeam_lastResults"]=stats_first_team
@@ -196,31 +211,40 @@ class Provider:
         now = datetime.now().date()
         return self.__db_manager.get_api_call(first_team_name, second_team_name, now)
         
-    async def get_previous_matches_predictions(self, from_date, to_date, league_id=""):
+    async def get_previous_matches_predictions(self, from_date, to_date, league_id, league_name, out_dict):
         """
         Get the predictions of the previous matches with their result
         """
         response = self.get_predictions_in_interval_from_db(from_date, to_date, league_id)
-        
         result = []
+        
+        resp_async = await asyncio.wait([self.__api_facade.get_match_infos(prediction["api_match_id"]) for prediction in response])
+        array_of_matchs = []
+        for item in resp_async[0]:
+            array_of_matchs.append(item.result())
+        
         for prediction in response:
-            match_info = await self.__api_facade.get_match_infos(prediction["api_match_id"])
-            
-            if len(match_info)>0: # Check if we got some data from the API
-                
-                
-                date_match = datetime.strptime(match_info[0]["match_date"], "%Y-%m-%d").date()
-                if date_match < to_date:
-                    match = {
-                        "Home" : prediction["home_team_name"],
-                        "Away" : prediction["away_team_name"],
-                        "Prediction winner" : prediction["prediction"],
-                        "Real home score" : match_info[0]["match_hometeam_score"],
-                        "Real away score" : match_info[0]["match_awayteam_score"],
-                        "League" : prediction["league_name"],
-                        "Date" : date_match
-                    }
-                    result.append(match)
+            for list_of_match in array_of_matchs:
+                match_info = list_of_match[0]
+                print(match_info["match_id"], "==", prediction["api_match_id"])
+                if len(match_info)>0 and int(match_info["match_id"]) == int(prediction["api_match_id"]): # Check if we got some data from the API
+                    date_match = datetime.strptime(match_info["match_date"], "%Y-%m-%d").date()
+                    print(date_match)
+                    if date_match < to_date:
+                        match = {
+                            "Home" : prediction["home_team_name"],
+                            "Away" : prediction["away_team_name"],
+                            "Prediction winner" : prediction["prediction"],
+                            "Real home score" : match_info["match_hometeam_score"],
+                            "Real away score" : match_info["match_awayteam_score"],
+                            "League" : prediction["league_name"],
+                            "Date" : date_match
+                        }
+                        print(match)
+                        result.append(match)
+                    
+                        
+        out_dict[league_name] = result
         return result
     
     def get_predictions_in_interval_from_db(self, from_date, to_date, league_id=""):

@@ -1,4 +1,5 @@
-from flask import Flask, redirect, url_for, request, render_template
+from flask import Flask, redirect, url_for, request, render_template, jsonify
+from flask.wrappers import Response
 
 from lib.prediction_class import Prediction
 from lib.provider_class import Provider
@@ -8,6 +9,7 @@ import lib.constants
 from dateutil.relativedelta import relativedelta
 from datetime import datetime
 import os
+import asyncio
 
 dir = "./log"
 log_path = os.path.join(dir, "app.log")
@@ -21,40 +23,48 @@ app = Flask(__name__)
 prov = Provider()
 cache = {}
 
+@app.route("/tests")
+async def test():
+    response = await get_previous_matches_multiple_leagues( "2021-05-25", 
+                                                            "2021-05-28", 
+                                                            lib.constants.MULTIPLE_LEAGUES)
+    return jsonify(response)
+    
+
 """
 INDEX ROUTE
 """
 @app.route('/')
 @app.route('/index')
 @app.route('/home')
-def index():
+async def index():
     """
     Home route
     """
     now = datetime.now()
     three_days_before = now - relativedelta(days=lib.constants.DELTA_DAY)
     three_days_after = now + relativedelta(days=lib.constants.DELTA_DAY)
-
+    
     if "previous_matches" not in cache:
-            
-        cache["previous_matches"] = get_previous_matches_multiple_leagues(three_days_before.date(), 
+        cache["previous_matches"] = await get_previous_matches_multiple_leagues(three_days_before.date(), 
                                                                           now.date(), 
                                                                           lib.constants.MULTIPLE_LEAGUES)
+        print(cache)
         #Check if all the keys in the dict are empty
         if not any(cache["previous_matches"].values()):
             cache["previous_matches"]=[]
             
-    if "upcoming_matches" not in cache:
-        cache["upcoming_matches"] = get_upcoming_matches_multiple_leagues(now.date(), 
-                                                                          three_days_after.date(), 
-                                                                          lib.constants.MULTIPLE_LEAGUES)
-        #Check if all the keys in the dict are empty
-        if not any(cache["upcoming_matches"].values()):
-            cache["upcoming_matches"]=[]
+    # if "upcoming_matches" not in cache:
+    #     cache["upcoming_matches"] = get_upcoming_matches_multiple_leagues(now.date(), 
+    #                                                                       three_days_after.date(), 
+    #                                                                       lib.constants.MULTIPLE_LEAGUES)
+    #     #Check if all the keys in the dict are empty
+    #     if not any(cache["upcoming_matches"].values()):
+    #         cache["upcoming_matches"]=[]
     
     return render_template("index.html", 
-                           previous_matches=cache["previous_matches"], 
-                           upcoming_matches=cache["upcoming_matches"])
+                           previous_matches=cache["previous_matches"])#,
+                        #    upcoming_matches=cache["upcoming_matches"])
 
 
 
@@ -356,14 +366,12 @@ def get_upcoming_matches_multiple_leagues(from_date, to_date, multiple_leagues_a
         pass
     return result 
         
-def get_previous_matches_multiple_leagues(from_date, to_date, multiple_leagues_array):
+async def get_previous_matches_multiple_leagues(from_date, to_date, multiple_leagues_array):
     """
     Get the previous matches for multiple leagues give in param
     """
     result = {}
-    for key in multiple_leagues_array:
-        result[key] = prov.get_previous_matches_predictions(from_date, to_date, multiple_leagues_array[key])            
-        pass
+    await asyncio.wait([prov.get_previous_matches_predictions(from_date, to_date, multiple_leagues_array[key], key, result) for key in multiple_leagues_array])
     return result
 
 def sort_by_team_name(team):
