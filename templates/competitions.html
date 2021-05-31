@@ -5,7 +5,11 @@
 {% block description %}Make an hypothetic prediction on a whole competition.{% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="text-center" id="loading_div" style="display:none;">
+  <img src="{{ url_for("static", filename="assets/loading.gif")}}" width="150px">
+</div>
+
+<div class="container" id="content">
   {% if standings %}
   <div class="text-center">
     <table class="table table-striped">
@@ -22,53 +26,169 @@
       </thead>
       {% for team in range(standings_count) %}
       <tr>
+      
       <td>{{team+1}}</td>
-      <td class="text-left"><img style="width: 25px;" src="{{standings[team]["Badge"]}}" alt="{{standings[team]["Name"]}}_logo"> {{ standings[team]["Name"] }}</td>
+      <td class="text-left"><a href="{{ url_for("competitions_history", league_id=league_id, team_id=standings[team]["Key"]) }}"><img style="width: 25px;" src="{{standings[team]["Badge"]}}" alt="{{standings[team]["Name"]}}_logo">&nbsp;{{ standings[team]["Name"] }}</a></td>
       <td>{{ standings[team]["Games"] }}</td>
       <td>{{ standings[team]["Wins"] }}</td>
       <td>{{ standings[team]["Draws"] }}</td>
       <td>{{ standings[team]["Losses"] }}</td>
       <td>{{ standings[team]["Points"] }}</td>
       </tr>
+      
       {% endfor %}
     </table>
   </div>
   {% endif %}
-</div>
+  <!-- League Modal -->
+  <div id="leagueModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md">
 
-{% if leagues %}
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">League Picker</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form action="{{ url_for("competitions_select") }}" method="post">
+              <p>
+                  <label for="leagueId">League</label>
+                  <select class="form-control" name="leagueId" id="leagueId">
+                  {% for league_name in leagues %}
 
-<div class="col-sm text-center">
-  <h1>League</h1>
-  <button type="button" class="btn btn-primary btn-xlg-2" data-toggle="modal" data-target="#leagueModal">+</button>
-</div>
-
-<!-- League Modal -->
-<div id="leagueModal" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-md">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">League Picker</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <form action="{{ url_for("competitions_select") }}" method="post">
-            <p>
-                <label for="leagueId">League</label>
-                <select class="form-control" name="leagueId" id="leagueId">
-                {% for league_name in leagues %}
-
-                  <option value="{{ leagues[league_name]}}">{{ league_name }}</option>
-                {% endfor %}
-                </select>
-            </p>
-            <p class="text-center"><input class="btn btn-secondary" type="submit" value="Select League"></p>
-        </form>
+                    <option value="{{ leagues[league_name]}}">{{ league_name }}</option>
+                  {% endfor %}
+                  </select>
+              </p>
+              <p class="text-center"><input class="btn btn-secondary" type="submit" value="Select League" onclick="loading()"></p>
+          </form>
+        </div>
       </div>
     </div>
   </div>
+  {% if leagues %}
+  <div class="col-sm text-center">
+    <h1>League</h1>
+    <button type="button" class="btn btn-primary btn-xlg-2" data-toggle="modal" data-target="#leagueModal">+</button>
+  </div>
+  {% endif %}
+</div>
+
+{% if history %}
+<div class="container">
+  
+  <div class="text-right">
+    <a href="{{ url_for("competitions_make_prediction", league_id=league_id) }}"><button type="button" class="btn btn-secondary"> < Back to the competition</button></a>
+  </div>
+  <div class="text-center">
+  <h2> History of {{team_name}} </h2>
+  <p><img src="{{ team_badge }}" alt="{{team_name}}_logo"></p>
+  </div>
+  <div class="text-center"> 
+    <div class="row">
+        <div class="col-sm-4">
+            <button type="button" class="btn btn-success"></button> The prediction's winner
+        </div>
+        <div class="col-sm-4">
+            <button type="button" class="btn btn-danger"></button> The prediction's loser
+        </div>
+        <div class="col-sm-4">
+            <buttonn type="button" class="btn btn-warning"></buttonn> Draw game
+        </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+  {% for i in range(history_count) %}
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body">
+          <p class="card-text">
+          {% if history[i]["Home Name"] == history[i]["Prediction"] %}
+          <div class="row">
+            <div class="col-sm-8">
+            <a href="{{  url_for("competitions_history", league_id=league_id, team_id=history[i]["Home Key"]) }}"><img style="width:25px" src="{{ history[i]["Home Badge"] }}" alt="{{history[i]["Home Name"]}}_logo">&nbsp;{{history[i]["Home Name"]}}</a>
+            </div>
+            <div class="col-sm-4">
+              <button type="button" class="btn btn-success text-right"></button>
+            </div>
+            <div class="col-sm-8">
+            <a href="{{ url_for("competitions_history", league_id=league_id, team_id=history[i]["Away Key"]) }}"><img style="width:25px" src="{{ history[i]["Away Badge"] }}" alt="{{history[i]["Away Name"]}}_logo">&nbsp;{{history[i]["Away Name"]}}</a>
+            </div>
+            <div class="col-sm-4">
+              <button type="button" class="btn btn-danger text-right"></button>
+            </div>
+          </div>
+          {% elif history[i]["Away Name"] == history[i]["Prediction"] %}
+          <div class="row">
+            <div class="col-sm-8">
+            <a href="{{  url_for("competitions_history", league_id=league_id, team_id=history[i]["Home Key"]) }}"><img style="width:25px" src="{{ history[i]["Home Badge"] }}" alt="{{history[i]["Home Name"]}}_logo">&nbsp;{{history[i]["Home Name"]}}</a>
+            </div>
+            <div class="col-sm-4">
+              <button type="button" class="btn btn-danger text-right"></button>
+            </div>
+            <div class="col-sm-8">
+            <a href="{{ url_for("competitions_history", league_id=league_id, team_id=history[i]["Away Key"]) }}"><img style="width:25px" src="{{ history[i]["Away Badge"] }}" alt="{{history[i]["Away Name"]}}_logo">&nbsp;{{history[i]["Away Name"]}}</a>
+            </div>
+            <div class="col-sm-4">
+              <button type="button" class="btn btn-success text-right"></button>
+            </div>
+          </div>
+          {% else %}
+          <div class="row">
+            <div class="col-sm-8">
+            <a href="{{  url_for("competitions_history", league_id=league_id, team_id=history[i]["Home Key"]) }}"><img style="width:25px" src="{{ history[i]["Home Badge"] }}" alt="{{history[i]["Home Name"]}}_logo">&nbsp;{{history[i]["Home Name"]}}</a>
+            </div>
+            <div class="col-sm-4">
+              <button type="button" class="btn btn-warning text-right"></button>
+            </div>
+            <div class="col-sm-8">
+            <a href="{{ url_for("competitions_history", league_id=league_id, team_id=history[i]["Away Key"]) }}"><img style="width:25px" src="{{ history[i]["Away Badge"] }}" alt="{{history[i]["Away Name"]}}_logo">&nbsp;{{history[i]["Away Name"]}}</a>
+            </div>
+            <div class="col-sm-4">
+              <button type="button" class="btn btn-warning text-right"></button>
+            </div>
+          </div>
+          {% endif %}
+          </p>
+        </div>
+      </div>
+      <br>  
+    </div>    
+  {% endfor %}
+  <div>
 </div>
 {% endif %}
+
+{% if error %}
+<div class="alert fixed-bottom alert-danger alert-dismissible fade show" role="alert">
+  <strong>Error</strong> {{error}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endif %}
+
+{% if missed_some_predictions == 1 %}
+<div class="alert fixed-bottom alert-warning alert-dismissible fade show" role="alert">
+  <strong>Warning</strong> All the games couldn't be computed. Retry to make the prediction on the whole competition.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endif %}
+
+{% if not league_id %}
+<script src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script>
+function loading() {
+  $("#leagueModal").modal("toggle");
+  $("#loading_div").show()
+
+  $("#content").hide()
+}
+</script>
+{% endif %}
+
 {% endblock %}

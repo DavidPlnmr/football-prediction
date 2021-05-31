@@ -1874,3 +1874,36 @@ J'ai essayé et ça a pas marché parce qu'il faut mettre flask 2.0
 * Changement de tout le principe de l'app en asynchrone
 * Vue home pour les previous matches fait en asynchrone
   * Il manque plus que le upcoming matches à faire
+
+### 31.05.2021
+
+9h40 Changement de la vue home finie complètement (à noter qu'il y'a pas de prochains matchs dans les prochains jours donc l'API me retourne aucun event)
+
+J'ai changé les erreurs dans la vue et j'ai mis le tout dans les cookies (ils expirent après une seconde pour éviter de répéter l'erreur)
+
+D'ailleurs y'a une impossibilité de faire des prédictions sur les matchs de la ligue allemande je vais donc la supprimer des ligues utilisables
+
+Evaluation intérmédiaire n°3 :
+
+- commentaire sur le rapport
+- Partie test dans le rapport (parler que des tests ont été fait sur les méthodes pour valider le format de ces dernières)
+- Parler des cookies dans la vue pour la gestion d'erreur dans le rapport
+
+Ajout de loading sur le compute des compétitions
+
+On commence à documenter après avoir fini correctement la fonctionnalité des prédictions sur la vue.
+
+#### Recap de la journée
+
+* Fini totalement la vue
+  * Probablement quelques erreurs par ci par là mais on focus sur la doc là
+* Cookie sur la vue pour les erreurs
+
+Choses à faire demain :
+
+* Mettre à jour la doc après les commentaires de M. Schmid
+* Parler des test dans le rapport (parler que des tests ont été fait sur les méthodes pour valider le format de ces dernières)
+* Parler du fonctionnement des cookies
+* Documenter l'asynchrone
+* Repasser sur le rapport et mettre à jour les `src` (A LA FIN)
+

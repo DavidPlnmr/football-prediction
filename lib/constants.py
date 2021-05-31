@@ -16,11 +16,10 @@ MULTIPLE_LEAGUES = {
     "Premier League" : 148,
     "Liga NOS" : 391,
     "Ligue 1" : 176,
-    "Bundesliga" : 195,
     "LaLiga" : 468,
     "Serie A" : 262
                     }
-DELTA_DAY = 3
+DELTA_DAY = 10
 
 MIN_OF_GAMES_TO_MAKE_PREDICTION=5
 

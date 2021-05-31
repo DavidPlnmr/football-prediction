@@ -226,10 +226,8 @@ class Provider:
         for prediction in response:
             for list_of_match in array_of_matchs:
                 match_info = list_of_match[0]
-                print(match_info["match_id"], "==", prediction["api_match_id"])
                 if len(match_info)>0 and int(match_info["match_id"]) == int(prediction["api_match_id"]): # Check if we got some data from the API
                     date_match = datetime.strptime(match_info["match_date"], "%Y-%m-%d").date()
-                    print(date_match)
                     if date_match < to_date:
                         match = {
                             "Home" : prediction["home_team_name"],
@@ -240,7 +238,6 @@ class Provider:
                             "League" : prediction["league_name"],
                             "Date" : date_match
                         }
-                        print(match)
                         result.append(match)
                     
                         
