@@ -19,7 +19,9 @@ MULTIPLE_LEAGUES = {
     "LaLiga" : 468,
     "Serie A" : 262
                     }
-DELTA_DAY = 10
+DELTA_DAY = 3
+
+DELTA_MONTHS_TO_GET_GAMES=6
 
 MIN_OF_GAMES_TO_MAKE_PREDICTION=5
 

@@ -1901,9 +1901,49 @@ On commence à documenter après avoir fini correctement la fonctionnalité des 
 
 Choses à faire demain :
 
-* Mettre à jour la doc après les commentaires de M. Schmid
-* Parler des test dans le rapport (parler que des tests ont été fait sur les méthodes pour valider le format de ces dernières)
+* Mettre à jour la doc après les commentaires de M. Schmid **[DONE]**
+* Parler des test dans le rapport (parler que des tests ont été fait sur les méthodes pour valider le format de ces dernières) 
 * Parler du fonctionnement des cookies
 * Documenter l'asynchrone
 * Repasser sur le rapport et mettre à jour les `src` (A LA FIN)
 
+### 01.06.2021
+
+On continue dans la documentation en corrigeant après les commentaires de M. Schmid.
+
+Je viens de me rappeler d'une amélioration possible mais qui n'a pas (encore) été faite :
+
+* Ajouter un graphique radar pour comparer les statistiques après avoir fait un match Head To Head. Un peu comme PES6 à l'époque (je sais pas si c'est encore d'actualité ce genre de graph) 
+
+![Graphique Radar](./img/graphRadar.png)
+
+Voilà comment j'aurais vu la chose. Ca permettrait d'avoir une aperçu plus efficace de pourquoi une équipe est meilleure qu'une autre. Sachant qu'on a une structure "TeamResult" qui possède toutes les données ça doit pas être très compliqué à mettre en place.
+
+J'ai pas encore cherché de solution pour ça mais Gawen m'avait parlé de mathplotlib et qu'il y avait un graphique qui faisait les radars comme ça dans cette librairie. Mais j'aurais voulu un truc en js potentiellement pour avoir un truc plus user-friendly qu'un png.
+
+Bref on continue dans la doc.
+
+Aperçu de l'avancement de la doc
+
+* Mettre à jour la doc après les commentaires de M. Schmid **[DONE]**
+* Parler des test dans le rapport (parler que des tests ont été fait sur les méthodes pour valider le format de ces dernières et test sur la vue. Ptit protocole de test pour la vue?) 
+* Parler du fonctionnement des cookies (Parler que les erreurs étaient en cache serveur et que c'est pas une bonne idée parce qu'un autre user qui arrive sur la page aura une erreur)
+* Documenter l'asynchrone (Dans `Développement Python` faire une partie `From Multiprocessing to Asynchrone`)
+* Repasser sur le rapport et mettre à jour les `src` (A LA FIN)
+
+
+
+#### Recap de la journée 
+
+* Doc, doc et doc
+  * Changement après commentaires de M. Schmid
+  * Début du blabla sur les tests
+  * Documentation du cache des appels à l'API
+
+Notes pour demain :
+
+* ABSOLUMENT METTRE TES ECOUTEURS SINON TU BOSSERAS JAMAIS
+* Parler des test dans le rapport (parler que des tests ont été fait sur les méthodes pour valider le format de ces dernières et test sur la vue. Ptit protocole de test pour la vue?) 
+* Parler du fonctionnement des cookies (Parler que les erreurs étaient en cache serveur et que c'est pas une bonne idée parce qu'un autre user qui arrive sur la page aura une erreur)
+* Documenter l'asynchrone (Dans `Développement Python` faire une partie `From Multiprocessing to Asynchrone` et expliquer comment fonctionne l'asynchrone et dire pourquoi on est passé de multiprocessing à asynchrone à cause du soucis des prédictions et des process qui bloquent)
+* Repasser sur le rapport et mettre à jour les `src` (A LA FIN)

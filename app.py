@@ -37,7 +37,7 @@ async def index():
     """
     Home route
     """
-    now = datetime.now()
+    now = datetime(2021, 5, 15)
     three_days_before = now - relativedelta(days=lib.constants.DELTA_DAY)
     three_days_after = now + relativedelta(days=lib.constants.DELTA_DAY)
     

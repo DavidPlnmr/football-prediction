@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from .provider_class import Provider
-from .prediction_class import Prediction, TeamResult
+from .prediction_class import Prediction
 import lib.constants
 
 import asyncio

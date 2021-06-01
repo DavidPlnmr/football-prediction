@@ -170,9 +170,9 @@
 </div>
 {% endif %}
 
-{% if missed_some_predictions == 1 %}
+{% if missed_some_predictions %}
 <div class="alert fixed-bottom alert-warning alert-dismissible fade show" role="alert">
-  <strong>Warning</strong> All the games couldn't be computed. Retry to make the prediction on the whole competition.
+  <strong>Warning</strong> All the games couldn't be computed. Retry to make the prediction on the whole competition. Go back to <a href="{{ url_for("competitions") }}">Competitions</a>.
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>

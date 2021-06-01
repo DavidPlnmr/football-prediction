@@ -159,38 +159,45 @@ Les statistiques choisies pour le score défensif sont :
 \end{itemize}
 De plus, elle utilise la forme du moment pour pouvoir effectuer son calcul. On entend par "forme du moment" si l'équipe est en série de victoires ou de défaites.
 \subsection{Base de données}
+\textbf{Initialement prévu :}
 
 La base de données est là pour stocker les prédictions et avoir un historique sur ces dernières. Elle permet de montrer les prédictions précédentes faites par l'application à un instant T.
+
+\textbf{Ajouté durant le projet :}
+
+Cette dernière contient les matchs avec leurs statistiques\footnote{On stocke les matchs en base pour diminuer le nombre d'appels faits à l'API.}, ainsi que l'historique des appels faits à l'API (pour la fonctionnalité Head To Head)
 
 \newpage
 
 \subsection{API}
 
+L'API possède plusieurs plans. J'ai réussi à avoir le plan "European" pour la durée de ce travail en expliquant la situation aux développeurs de l'API et ils m'ont permis d'avoir plus d'accès aux données dans l'API.
+
 L'API que j'utilise pour avoir des données sur les matchs de football est APIFootball\footnote{\url{https://apifootball.com/}}. Les endpoints que j'utilise sont : 
 \begin{itemize}
     \item Countries
     \begin{itemize}
-        \item Cet endpoint permet de récupérer les pays disponibles selon l'élevation de notre plan
+        \item Permet de récupérer les pays. 
     \end{itemize}
     \item Competitions
     \begin{itemize}
-        \item Il permet de récupérer toutes les compétitions d'un pays en particulier ou toutes les compétitions disponibles avec notre plan
+        \item Permet de récupérer toutes les compétitions d'un pays en particulier
     \end{itemize}
     \item Teams
     \begin{itemize}
-        \item Il permet de récupérer toutes les équipes d'un championnat (ou compétitions)
+        \item Permet de récupérer toutes les équipes d'un championnat (ou compétitions)
     \end{itemize}
     \item Events
     \begin{itemize}
-        \item Il va permettre de connaître les matchs d'une date X à une date Y
+        \item Permet de connaître les matchs d'une date X à une date Y
     \end{itemize}
     \item Statistics
     \begin{itemize}
-        \item Il permet de récupérer les statistiques selon l'identifiant d'un match. Très utile pour élaborer une prédiction.
+        \item Permet de récupérer les statistiques selon l'identifiant d'un match. Très utile pour élaborer une prédiction.
     \end{itemize}
     \item H2H 
     \begin{itemize}
-        \item Il permet de récupérer les derniers résultats entre une équipe A et une équipe B
+        \item Permet de récupérer les derniers résultats entre une équipe A et une équipe B
     \end{itemize}
 \end{itemize}
 
@@ -407,7 +414,11 @@ Pour planifier les tâches de mon projet, j'ai décidé d'utiliser Trello\footno
 
 \subsection{Format de la documentation}
 
-Étant à l'aise avec \LaTeX, j'ai décidé de créer ma documentation en utilisant cet outil. En effet, l'an dernier, j'ai découvert cet outil qui est très différent des outils de bureautiques classiques. \LaTeX{} permet de se focaliser sur le contenu de notre document plutôt que sur la forme. Cela permet de travailler efficacement et de ne pas perdre de temps sur la mise en page de notre documentation. L'outil permet aussi d'intégrer des paquets communautaires. Ces paquets peuvent nous permettre d'avoir du versionning automatique sur notre document, d'insérer du code source ou encore d'illustrer une arborescence de fichiers. J'utilise TexLive comme compilateur pour \LaTeX. J'aurais pu utiliser Overleaf\footnote{\url{https://www.overleaf.com/}} mais pour de très gros document, ce n'est pas conseillé car il y a un timeout d'une minute lors de la compilation.
+Étant à l'aise avec \LaTeX, j'ai décidé de créer ma documentation en utilisant cet outil. En effet, l'an dernier, j'ai découvert cet outil qui est très différent des outils de bureautiques classiques. \LaTeX{} permet de se focaliser sur le contenu de notre document plutôt que sur la forme. Cela permet de travailler efficacement et de ne pas perdre de temps sur la mise en page de notre documentation. L'outil permet aussi d'intégrer des paquets communautaires. Ces paquets peuvent nous permettre d'avoir du versionning automatique sur notre document ou encore d'insérer du code source. 
+
+J'avais commencé à rédiger la documentation avec Overleaf\footnote{\url{https://www.overleaf.com/}}, qui est un éditeur et compilateur \LaTeX{} en ligne. Cela facilite la transportabilité et cela évite d'installer un compilateur localement. Cependant, j'ai rencontré un soucis avec cet outil. Ce dernier intègre un timeout d'une minute\footnote{Le timeout est de 4 minutes si on upgrade notre compte.} lors de la compilation d'un projet \LaTeX{}. 
+
+C'est pourquoi, j'ai du utiliser un compilateur \LaTeX{} en local et ne plus profiter des avantages d'Overleaf. J'utilise l'extension VSCode "LaTeX Workshop" qui permet de compiler un fichier \LaTeX{} depuis Visual Studio Code. Il utilise le compilateur "latexmk" par défaut mais on a aussi la possibilité d'utiliser "pdflatex". Il permet ensuite d'afficher le PDF converti dans un tab de VSCode.
 
 \subsection{Système de sauvegarde et de versionning}
 
@@ -446,7 +457,13 @@ Cette librairie permet de sérialiser et désérialier des objets JSON.
 Multiprocessing permet de paralléliser des tâches pour réduire le temps d'exécution d'algorithmes qui prennent du temps.
 
 \textbf{Python Flask}\footnote{\url{https://flask.palletsprojects.com/en/1.1.x/}}
-Flask est un framework web écrit en Python. C'est le framework web le plus populaire, ce qui fait qu'il est mis à jour régulièrement. Flask me sert de vue pour mon application. Le framework permet de créer des routes de manière très simpliste.
+Flask est un framework web écrit en Python. C'est le framework web le plus populaire, ce qui fait qu'il est mis à jour régulièrement. Flask me sert de vue pour mon application. Le framework permet de créer des routes de manière très efficace.
+
+\textbf{Asyncio}\footnote{\url{https://pypi.org/project/asyncio/}}
+Asyncio est une librairie qui permet de faire de l'asynchrone en Python en utilisant les mots clés \texttt{async} et \texttt{await}.
+
+\textbf{Aiohttp}\footnote{\url{https://docs.aiohttp.org/en/stable/}}
+Aiohttp est une librairie qui, contrairement à \textbf{Requests}, permet de faire de l'asynchrone sur des requêtes HTTP. Ces requêtes sont moins élégantes que la librairie \textbf{Requests}.
 
 \subsubsection{Architecture}
 \begin{figure}[htp]
@@ -460,12 +477,7 @@ Sur la figure \ref{fig:architectureClasse}, le \texttt{Provider} sert d'intermé
 
 \subsubsection{Arborescence de fichiers}
 
-\begin{figure}[htp]
-    \centering
-    \includegraphics{../img/arborescenceFichier.png}
-    \caption{Arborescence de fichier du projet}
-    \label{fig:arborescenceFichier}
-\end{figure}
+Une capture d'écran de l'arborescence de fichiers est disponible (voir fig. \ref{fig:schemaDB}). 
 
 \begin{itemize}
     \item \textbf{Dossier /doc} Ce repértoire contient les fichiers et les outils nécessaire à l'élaboration de la documentation du projet.
@@ -479,21 +491,25 @@ Sur la figure \ref{fig:architectureClasse}, le \texttt{Provider} sert d'intermé
     \item \textbf{Fichier requirements.txt} Contient toutes les dépendances de l'application avec leurs versions. Ce fichier permet d'installer de manière efficace les dépendances de l'application en utilisant \texttt{pip3}.
 \end{itemize}
 
+\begin{figure}[htp]
+    \centering
+    \includegraphics{../img/arborescenceFichier.png}
+    \caption{Arborescence de fichier du projet}
+    \label{fig:arborescenceFichier}
+\end{figure}
+
 \subsection{MySQL}
 
 MySQL\footnote{\url{https://www.mysql.com/}} est un SGBD (système de gestion de base de données) relationnelles. Il permet de stocker des données dans une base et de pouvoir les manipuler. Sa première version date de 1994 et il a été mis à jour le 20 avril 2021 sous la version 8.0.24. 
 
-
 \subsubsection{Utilisation}
 J'ai choisi ce système car c'est celui avec lequel j'ai le plus d'expérience. Sa popularité est un atout. Cela permet de faciliter la résolution de certains problèmes que l'on peut rencontrer lors de requêtes.
-
-\newpage
 
 \subsubsection{Architecture}
 
 \begin{figure}[htp]
     \centering
-    \includegraphics[width=30em]{../img/schemaBDD.png}
+    \includegraphics[width=21.5em]{../img/schemaBDDv2.png}
     \caption{Schéma de la base de données du projet}
     \label{fig:schemaDB}
 \end{figure}
@@ -533,7 +549,7 @@ Une autre solution qui est plus envisageable mais qui a toujours un problème : 
     \label{fig:coeffClubsAssoc}
 \end{figure}
 
-Tout d'abord, au premier abord, on peut se dire que c'est la solution miracle, mais il faut analyser un peu plus en profondeur cette solution.
+Tout d'abord, on peut se dire que c'est la solution miracle, mais il faut analyser un peu plus en profondeur cette solution.
 %On va comparer la figure \ref{fig:coeffClubsAssoc} avec le coefficient des clubs qui est un autre indice de l'UEFA\footnote{\url{https://fr.uefa.com/memberassociations/uefarankings/club/#/yr/2021}}.
 
 \begin{figure}[htp]
@@ -584,15 +600,14 @@ En effet, si je choisissais de faire une prédiction avec des données en moins,
 
 Cependant, il y a tout de même un risque sur la fiabilité de la prédiction en "jetant" les matchs qui manquent de statistiques. Effectivement, si sur 80\% des matchs d'une équipe manquent de statistiques, cela peut influencer drastiquement le pronostic fait par l'application. (voir fig \ref{fig:explicationStatsManquante}) Comme je n'ai pas trouvé de solution pour palier ce potentiel risque, j'ai décidé d'accepter cette éventualité qui créera un manque de fiabilité sur certaine prédiction.
 
+Dans l'exemple de la figure \ref{fig:explicationStatsManquante}, disons que nous avons 4 victoires et 1 défaite pour le Sporting Portugal, ce qui est une forme très correcte pour une équipe. Son adversaire est le FC Porto et ces derniers ont 3 égalités, 1 victoire et 1 défaite. L'application a de grandes chances de dire que le Sporting sera le grand vainqueur de cette prédiction. Cependant, toutes les statistiques requises pour établir cette prédiction sont présentes dans les matchs récents du FC Porto mais malheureusement ce n'est pas le cas pour le Sporting Portugal, où les 4 victoires ont des statistiques qui manquent (donc les matchs ne seront pas pris en compte pour la prédiction). Dans ce cas là, l'application prédira potentiellement une victoire du FC Porto. Alors que par rapport aux résultats précédents de chacune des équipes, le Sporting Portugal se serait imposer dans cette prédiction.
+
 \begin{figure}[H]
     \centering
     \includegraphics[height=10cm]{../img/explicationStatsManquante.png}
     \caption{Explication sur le manque de fiabilité probable sur les prédictions}
     \label{fig:explicationStatsManquante}
 \end{figure}
-
-
-\newpage
 
 \begin{lstlisting}[language=json, firstnumber=1, caption=Aperçu du JSON de l'endpoint H2H, captionpos=b, label=apercuJSON]
 [
@@ -638,6 +653,70 @@ Cependant, il y a tout de même un risque sur la fiabilité de la prédiction en
 ]
 \end{lstlisting}
 
+\begin{lstlisting}[language=json, firstnumber=1, caption=Aperçu du JSON de l'endpoint Statistics, captionpos=b, label=apercuJSON]
+{
+    "24562": {
+        "statistics": [
+        {
+            "type": "Ball Possession",
+            "home": "60%",
+            "away": "40%"
+        },
+        {
+            "type": "Goal Attempts",
+            "home": "18",
+            "away": "10"
+        },
+        {
+            "type": "Shots on Goal",
+            "home": "6",
+            "away": "5"
+        },
+        {
+            "type": "Shots off Goal",
+            "home": "5",
+            "away": "1"
+        },
+        {
+            "type": "Blocked Shots",
+            "home": "7",
+            "away": "4"
+        },
+        {
+            "type": "Free Kicks",
+            "home": "15",
+            "away": "11"
+        },
+        {
+            "type": "Corner Kicks",
+            "home": "4",
+            "away": "2"
+        },
+        {
+            "type": "Offsides",
+            "home": "2",
+            "away": "1"
+        },
+        {
+            "type": "Goalkeeper Saves",
+            "home": "3",
+            "away": "5"
+        },
+        {
+            "type": "Fouls",
+            "home": "10",
+            "away": "14"
+        },
+        {
+            "type": "Yellow Cards",
+            "home": "2",
+            "away": "1"
+        }
+        ]
+    }
+}
+\end{lstlisting}
+
 \newpage
 
 \subsubsection{Choix de la pondération des statistiques}
@@ -646,6 +725,7 @@ Cependant, il y a tout de même un risque sur la fiabilité de la prédiction en
 Pour rappel, la liste des statistiques qui ont été utilisés pour faire un pronostic sur un match sont indiqués au point \ref{elaborationPredictionCDC}. J'ai choisi la suite de Fibonacci comme échelle de pondération, car il est tout de même difficile d'estimer avec précision la puissance d'une statistique par rapport à une autre si elles n'ont aucun lien entre elles. C'est pour cela que j'ai choisi de prendre cette suite de nombres.
 
 \noindent\textbf{Score offensif}
+
 Pour faire le choix du niveau de pondération de chaque statistique, j'ai établi un classement d'importance de chaque statistique. Le classement est le suivant (du plus important au moins important) :
 \begin{enumerate}
     \item Nombre de buts marqués (8)
@@ -658,6 +738,7 @@ Pour faire le choix du niveau de pondération de chaque statistique, j'ai établ
 Je fais ensuite une moyenne par match de chacune de ces statistiques, car le nombre de match que l'on reçoit peut être différent d'une équipe à une autre.
 
 \noindent\textbf{Score défensif}
+
 Maintenant pour le score défensif, cela s'est passé différement. Tout d'abord, j'ai analysé chacune des statistiques et l'impact qu'elles ont sur le score défensif.
 
 \begin{figure}[H]
@@ -685,6 +766,8 @@ Comme on peut le comprendre sur la figure \ref{fig:correlationTacleFaute}, il fa
 J'ai choisi une pondération de 3 pour les tacles et donc pour les fautes et une pondération de 2 sur les cartons jaunes. La pondération des cartons ne doit pas être plus grande que celle des fautes, car les fautes annulent déjà complètement les points des tacles. 
 
 À noter qu'il y aura théoriquement systématiquement plus de tacles que de fautes et plus de fautes que de cartons jaunes (ou égal mais jamais moins).
+
+$n_{Tacles} >= n_{Fautes} >= n_{Cartons}  $
 
 Quelques calculs pour mieux comprendre :
 Une équipe a 117 tacles, 50 fautes et 17 cartons jaunes de moyenne par match\footnote{Ces chiffres ont été pris de manière aléatoire}. Il y a 3 de pondération pour les tacles et les fautes et 2 pour les cartons jaunes.
@@ -724,7 +807,7 @@ Pour finir, je vais montrer le classement que j'ai pu établir pour les statisti
 En ce qui concerne la forme du moment des équipes, les 5 derniers matchs sont sélectionnés (si il y en a moins que 5 on prend le plus possible) et on fait une moyenne des points obtenus par match.\footnote{3 pts pour une victoire, 1 pt pour une égalité et 0 pts pour une défaite. Addition des points sur chaque match puis on fait une moyenne.} 
 Au niveau du choix de la pondération sur la statistique des points obtenus par match, une victoire a plus d'impact sur le niveau de l'équipe qu'un nombre de buts conséquents. Une équipe peut gagner tous ces derniers matchs "1-0" en jouant efficacement sans chercher à marquer plein de buts tandis qu'une autre peut avoir 2 buts par match en moyenne mais elle ne gagne pas un seul match.
 
-J'ai mis la pondération à 13 pour le nombre de points obtenus par match.
+J'ai mis la pondération à 13 pour le nombre de points obtenus par match. La forme du moment est limité aux 5 derniers matchs donc un maximum de 15 points * 13.
 
 \subsection{Réussite sur les prédictions}
 \label{test_pourcent_reussite}
@@ -739,8 +822,6 @@ Ensuite, j'ai du insérer les données en base avec un script en prenant les don
 
 Enfin pour tester, il m'a fallu faire un script qui récupère les matchs de la saison 2019-20 dans les 5 championnats majeurs et qui fait une prédiction sur chacun d'eux. Ce script m'a permis aussi de pouvoir choisir le bon delta pour la détermination d'une égalité sur un match (voir fig. \ref{fig:pourcentReussite}). 
 
-
-
 \begin{figure}[htp]
     \centering
     \includegraphics{../img/pourcentReussitePredictionV3.png}
@@ -754,8 +835,6 @@ Pour ce qui concerne les compétitions, je me suis dit qu'il fallait faire un co
 Ensuite, une méthode qui fait une prédiction pour chacun des matchs de la compétition. Pour diminuer le temps de calcul, j'ai pensé faire du multiprocessing pour faire des prédictions en parallèles les une des autres. Il n'y a pas d'intérêt de faire du séquentielle puisque une prédiction n'est pas du tout dépendante d'une autre.
 
 Donc dans cette classe, je prévois de stocker une variable qui contient le classement de la compétition et une autre qui contient l'historique de tout les matchs de la compétition.
-
-
 
 \newpage
 
@@ -782,7 +861,7 @@ Comme expliqué dans le point \ref{recupMatchStats}, il m'a été conseillé d'u
 \lstinputPython{getAction}
 
 Cette fonction est généraliste pour permettre d'être appelé par tout les endpoints. Elle retourne une liste ou un dictionnaire selon l'endpoint appelé. À la ligne 8, il faut décoder la réponse en UTF-8 car en Python ce qui transite sur le réseau et du texte encodé en byte (\texttt{b''}). 
-Elle vérifie aussi que le retour de l'API ne contient pas d'erreur. Pour expliciter la chose, quand l'API retourne une erreur 404 (exemple sur le listing \ref{erreurAPI}), la librairie \texttt{requests} comprend que c'est un \texttt{status\_code} 200. C'est pour cela que je vérifie que le contenu contient la clé nommée "error" pour savoir si la requête est bonne ou non. Si elle n'est pas bonne, je lance une exception. Je fais la même vérification pour un code obtenu de la part de la librairie.
+Elle vérifie aussi que le retour de l'API ne contient pas d'erreur. Pour expliciter la chose, quand l'API retourne une erreur 404 (exemple sur le listing \ref{erreurAPI}\footnote{À noter que l'erreur 404 n'est pas une "Authentification failed" mais une erreur "Not Found". C'est une erreur des développeurs de l'API. }), la librairie \texttt{requests} comprend que c'est un \texttt{status\_code} 200. C'est pour cela que je vérifie que le contenu contient la clé nommée "error" pour savoir si la requête est bonne ou non. Si elle n'est pas bonne, je lance une exception. Je fais la même vérification pour un code obtenu de la part de la librairie.
 De plus, je fais des logs pour pouvoir avoir une traçabilité sur les requêtes faites à l'API et les potentielles erreurs qui peuvent apparaître.
 
 \begin{lstlisting}[language=json, firstnumber=1, caption=Retour d'une erreur de l'API, captionpos=b, label=erreurAPI]
@@ -847,6 +926,16 @@ Finalement, le \texttt{Provider} utilise le design pattern Singleton\footnote{\u
 
 Contrairement, à toutes mes autres classes, ici, je dois appliquer un singleton avec l'instruction \texttt{\_\_new\_\_()}. La différence entre \texttt{\_\_new\_\_()} et \texttt{\_\_init\_\_()} est que \texttt{\_\_new\_\_()} crée l'instance et la retourne, tandis que \texttt{\_\_init\_\_()} est appelé après le \texttt{\_\_new\_\_()}, ce qui veut dire que l'instance existe déjà et on ne retourne pas l'instance de l'objet. L'instruction \texttt{super()} appelle le constructeur de la classe parent (dans notre cas, on hérite d'\texttt{object})
 
+\subsubsection{Cache des appels faits à l'API}
+
+La méthode du \texttt{Provider} qui intègre du cache lors d'appels à l'API est \texttt{get\_all\_stats\_from\_teams()}. Cette méthode a été implémenté pour éviter de surcharger l'API d'appels inutiles qui ont déjà été effectués dans la journée.
+
+\lstinputPython{get-all-stats-from-teams}
+
+Dans cette méthode, on regarde d'abord si un appel avec les deux équipes sélectionnées a été fait aujourd'hui, si c'est le cas, on va récupérer ces données dans la base (on verra dans la partie suivante qu'après chaque appel à l'API, on stocke les données de l'appel en base). À noter qu'on fait un \texttt{try except} car la méthode pour récupérer toutes les données en base peut retourner une Exception s'il manque des statistiques ou des matchs. Dernière chose, on fait un \texttt{await asyncio.sleep(0)} car on est obligé d'effectuer au minimum un await dans une méthode \texttt{async} (autrement, cela ne sert à rien de faire une méthode async). Dans le cas ou nous avons les données en base, aucun \texttt{await} n'a été fait.
+
+Maintenant, passons au cas ou aucun appel a été fait aujourd'hui. On attend la réponse de la méthode asynchrone qui récupère les données depuis l'API. Une fois, cela fait, on va stocker en base le fait qu'on ait appelé l'API et on va stocker les matchs récupérées en base.
+
 \subsection{Création d'une prédiction}
 
 La création de la prédiction nécessite le nom des deux équipes et facultativement une date de début et une date de fin. Ce deux derniers paramètres permettent de spécifier à partir de quand doit on récupérer les données des derniers matchs. Ils sont utilisés pour tester la réussite des prédictions.
@@ -910,7 +999,7 @@ Enfin, je vérifie que tous les process soient bien finis pour retourner l'histo
 
 \subsubsection{Retour du classement du championnat}
 
-Le retour du classement se fait après avoir appelé la méthode \texttt{compute\_competition()}.
+Le retour du classement se fait après avoir appelé la méthode \newline \texttt{compute\_competition()}.
 
 Pour le retour du classement de la compétition, je dois parcourir le classement des équipes et chercher dans l'historique des matchs pour compter les victoires, égalités, défaites et ainsi compter les points pour les équipes dans le classement. Pour finir, le classement est trié par nombre de points de chaque équipe de manière décroissante. Pour ce qui concerne la méthode \texttt{sorted()}, la clé est là pour spécifier avec quoi on doit trier.
 
@@ -1001,7 +1090,7 @@ On peut voir que l'id de l'équipe est le même mais que le nom est différent e
 
 Pour régler ce soucis, je n'ai pas trouvé d'autre solution que d'avertir tout d'abord les développeurs de l'API de ce soucis de données et de gérer ce cas de bord spécifique dans le code avec une condition.
 
-À noter que la version 3 de l'API est sortie et le soucis a été réglé. Cependant, les statistiques que j'utilise ont "disparu"\footnote{Elles n'ont pas réellement disparu mais elles sont liée à un joueur en particulier. Donc pour les avoir je vais devoir parcouris les statistiques de chacun des joueurs d'un match.} ce qui fait que je dois changer la manière de récupérer les statistiques dans le code. La version 3 de l'API est sortie le 20 mai 2021. 
+À noter que la version 3 de l'API est sortie et le soucis a été réglé. Cependant, les statistiques que j'utilise ont "disparu"\footnote{Elles n'ont pas réellement disparu mais elles sont liée à un joueur en particulier. Donc pour les avoir je vais devoir parcourir les statistiques de chacun des joueurs d'un match.} ce qui fait que je dois changer la manière de récupérer les statistiques dans le code. La version 3 de l'API est sortie le 20 mai 2021. De plus, la sortie de la V3 a été faite vers la fin de mon travail de diplôme et les délais sont trop courts pour pouvoir changer de version et modifier tout ce qui a déjà été développé. 
 
 \section{Développement Python Flask}
 
@@ -1218,6 +1307,16 @@ On pourrait réduire le nombre d'appels faits à l'API. Par exemple dans le list
 \end{figure}
 
 \newpage
+
+\section{Tests}
+
+\subsection{Tests des méthodes du code}
+
+J'ai créé différents scripts qui testent les méthodes de chacune des classes. Ces scripts servent à vérifier que le format des données retournées par les méthodes est bon et que les méthodes asynchrones sont efficaces.
+
+\lstinputPython{test-provider}
+
+Ici, je veux tester que la méthode \texttt{get\_all\_stats\_from\_teams()} retourne bien les données dans le bon format. Cette dernière est asynchrone, c'est pourquoi je la mets dans une méthode async car le mot clé \texttt{await} ne peut pas être utilisé s'il n'est pas dans une méthode \texttt{async}. Autrement, j'aurais pu mettre la méthode directement dans le \texttt{asyncio.run()} mais ce n'est pas possible si je souhaite appeler plusieurs méthodes asynchrones à la suite.
 
 \subsection{Compétitions}
 
