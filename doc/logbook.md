@@ -1946,4 +1946,16 @@ Notes pour demain :
 * Parler des test dans le rapport (parler que des tests ont été fait sur les méthodes pour valider le format de ces dernières et test sur la vue. Ptit protocole de test pour la vue?) 
 * Parler du fonctionnement des cookies (Parler que les erreurs étaient en cache serveur et que c'est pas une bonne idée parce qu'un autre user qui arrive sur la page aura une erreur)
 * Documenter l'asynchrone (Dans `Développement Python` faire une partie `From Multiprocessing to Asynchrone` et expliquer comment fonctionne l'asynchrone et dire pourquoi on est passé de multiprocessing à asynchrone à cause du soucis des prédictions et des process qui bloquent)
+  * Aussi parler du passage de Flask 1.0 à Flask 2.0 pour la vue en async
+* Documenter la vue pour les compétitions
 * Repasser sur le rapport et mettre à jour les `src` (A LA FIN)
+
+### 02.06.2021
+
+Protocole de tests pour la vue avec Katalon Recorder
+
+Parler dans techno utilisées et environnement de dev de Katalon et de comment ça marche
+
+Création de répertoire "frontend" et "backend" dans `tests` et save des backup de tests du frontend avec katalon recorder
+
+Ne pas oublier de faire le manuel utilisateur

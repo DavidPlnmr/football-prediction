@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+	<title>Test Football Prediction Competitions Functionnality</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Test Competition League Unavailable</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1:5000/competitions/200<datalist><option>http://10.5.50.47:5000/competitions/200</option><option>http://127.0.0.1/competitions/200</option><option>http://127.0.0.1:5000/competitions/200</option></datalist></td><td></td>
+</tr>
+<tr><td>assertTextPresent</td><td><datalist><option></option></datalist></td><td>Unknown league.</td>
+</tr>
+<tr><td>assertVisible</td><td>xpath=(//button[@type='button'])[3]<datalist><option>xpath=(//button[@type='button'])[3]</option><option>//div[@id='content']/div[2]/button</option><option>//div[2]/button</option><option>css=button.btn.btn-primary.btn-xlg-2</option></datalist></td><td></td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Test Competition League OK</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1:5000/competitions<datalist><option>http://10.5.50.47:5000/competitions</option><option>http://127.0.0.1:5000/competitions</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(//button[@type='button'])[3]<datalist><option>xpath=(//button[@type='button'])[3]</option><option>//div[@id='content']/div[2]/button</option><option>//div[2]/button</option><option>css=button.btn.btn-primary.btn-xlg-2</option></datalist></td><td></td>
+</tr>
+<tr><td>select</td><td>id=leagueId<datalist><option>id=leagueId</option><option>name=leagueId</option><option>//select[@id='leagueId']</option><option>//div[@id='leagueModal']/div/div/div[2]/form/p/select</option><option>//select</option><option>css=#leagueId</option></datalist></td><td>label=Premier League</td>
+</tr>
+<tr><td>click</td><td>//input[@value='Select League']<datalist><option>//input[@value='Select League']</option><option>//div[@id='leagueModal']/div/div/div[2]/form/p[2]/input</option><option>//input</option><option>css=input.btn.btn-secondary</option></datalist></td><td></td>
+</tr>
+<tr><td>assertTextPresent</td><td><datalist><option>//div[@id='content']/div/table/thead/tr/th[2]</option><option>//th[2]</option><option>css=th.text-left</option><option></option></datalist></td><td>N°</td>
+</tr>
+<tr><td>assertNotVisible</td><td>xpath=(//button[@type='button'])[3]<datalist><option>xpath=(//button[@type='button'])[3]</option><option>//div[@id='content']/div[2]/button</option><option>//div[2]/button</option><option>css=button.btn.btn-primary.btn-xlg-2</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Manchester City<datalist><option>link=Manchester City</option><option>//a[contains(text(),'Manchester City')]</option><option>//div[@id='content']/div/table/tbody/tr/td[2]/a</option><option>//a[contains(@href, '/competitions/148/2626')]</option><option>//td[2]/a</option><option>css=td.text-left &gt; a</option></datalist></td><td></td>
+</tr>
+<tr><td>assertTextPresent</td><td><datalist><option></option><option>//div[@id='content']/div/table/thead/tr/th[2]</option><option>//th[2]</option><option>css=th.text-left</option></datalist></td><td>History of Manchester City</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Test Competition League OK Team Id Not</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1:5000/competitions<datalist><option>http://127.0.0.1:5000/competitions</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(//button[@type='button'])[3]<datalist><option>xpath=(//button[@type='button'])[3]</option><option>//div[@id='content']/div[2]/button</option><option>//div[2]/button</option><option>css=button.btn.btn-primary.btn-xlg-2</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//input[@value='Select League']<datalist><option>//input[@value='Select League']</option><option>//div[@id='leagueModal']/div/div/div[2]/form/p[2]/input</option><option>//input</option><option>css=input.btn.btn-secondary</option></datalist></td><td></td>
+</tr>
+<tr><td>open</td><td>http://127.0.0.1:5000/competitions/148/3000<datalist><option>link=Liverpool</option><option>//a[contains(text(),'Liverpool')]</option><option>//div[@id='content']/div/table/tbody/tr/td[2]/a</option><option>//a[contains(@href, '/competitions/148/2621')]</option><option>//td[2]/a</option><option>css=td.text-left &gt; a</option><option>http://127.0.0.1:5000/competitions/148/3000</option></datalist></td><td></td>
+</tr>
+<tr><td>assertTextPresent</td><td><datalist><option></option></datalist></td><td>N°</td>
+</tr>
+<tr><td>assertTextPresent</td><td><datalist><option></option></datalist></td><td>This team is not in the league.</td>
+</tr>
+</tbody></table>
+</body>
+</html>

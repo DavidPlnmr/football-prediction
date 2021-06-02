@@ -37,7 +37,7 @@ async def index():
     """
     Home route
     """
-    now = datetime(2021, 5, 15)
+    now = datetime(2021, 5, 13)
     three_days_before = now - relativedelta(days=lib.constants.DELTA_DAY)
     three_days_after = now + relativedelta(days=lib.constants.DELTA_DAY)
     
@@ -197,9 +197,10 @@ async def h2h_make_prediction():
         second_team = await prov.get_teams_with_team_id(second_team)
         
         count = 0
+        # Check that both of the teams are in the same league
         for team in teams_from_league:
             
-            if team["team_name"] == first_team[0]["team_name"] or team["team_name"] == second_team[0]["team_name"]:
+            if team["team_key"] == first_team[0]["team_key"] or team["team_key"] == second_team[0]["team_key"]:
                 count+=1
         
         # Obviously it's an head to head game so we need 2 teams and we check if they are in the league selected
@@ -276,7 +277,6 @@ async def h2h_make_prediction():
         return response
 
 
-
 """
 COMPETITIONS ROUTE
 """
@@ -313,7 +313,11 @@ async def competitions_make_prediction(league_id):
             cache["history"] = await competition.compute_competition()
             standings = await competition.get_standing()
             missed_some_predictions = competition.missed_some_predictions
-            return render_template("competitions.html", league_id=league_id, standings=standings, standings_count=len(standings), missed_some_predictions=missed_some_predictions)
+            try:
+                error_message = request.cookies.get("error")
+                return render_template("competitions.html", league_id=league_id, standings=standings, standings_count=len(standings), missed_some_predictions=missed_some_predictions, error=error_message)
+            except Exception:
+                return render_template("competitions.html", league_id=league_id, standings=standings, standings_count=len(standings), missed_some_predictions=missed_some_predictions)
         except Exception as e:
             print(e)
             logging.error(e)
@@ -328,14 +332,27 @@ async def competitions_make_prediction(league_id):
 @app.route('/competitions/<int:league_id>/<int:team_id>')
 async def competitions_history(league_id, team_id):
     history_of_selected_team = []
+    teams_from_league = await prov.get_teams_from_league(league_id)
     team_info = await prov.get_teams_with_team_id(team_id)
     team_name = team_info[0]["team_name"]
     team_badge = team_info[0]["team_badge"]
-    for match in cache["history"]:
-        if match["Home Name"] == team_name or match["Away Name"] == team_name :
-            history_of_selected_team.append(match)
     
-    return render_template("competitions.html", team_badge=team_badge, team_name=team_name, league_id=league_id, history=history_of_selected_team, history_count=len(history_of_selected_team))
+    team_is_in_league = False
+    # Check that both of the teams are in the same league
+    for team in teams_from_league:
+        if team["team_key"] == team_info[0]["team_key"]:
+            team_is_in_league = True
+    
+    if team_is_in_league:
+        for match in cache["history"]:
+            if match["Home Name"] == team_name or match["Away Name"] == team_name :
+                history_of_selected_team.append(match)
+        
+        return render_template("competitions.html", team_badge=team_badge, team_name=team_name, league_id=league_id, history=history_of_selected_team, history_count=len(history_of_selected_team))
+    else:
+        response = make_response(redirect(url_for("competitions_make_prediction", league_id=league_id)))
+        response.set_cookie("error", "This team is not in the league.", max_age=1)
+        return response
 
 """
 USEFUL METHODS
@@ -405,8 +422,8 @@ async def get_upcoming_matches_predictions(from_date, to_date, league_id, key, o
         for match in next_matches:  
             # Make a prediction for this match
             result.append(await make_prediction(match["match_hometeam_name"], match["match_awayteam_name"], int(match["league_id"]), match["league_name"], int(match["match_id"]), match["match_date"]))
-    
-    out_dict[key] = result
+    if len(result)>0:
+        out_dict[key] = result
     return result
 
 async def get_upcoming_matches_multiple_leagues(from_date, to_date, multiple_leagues_array):

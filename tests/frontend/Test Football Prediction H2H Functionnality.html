@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+	<title>Test Football Prediction H2H Functionnality</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Test H2H Same Teams</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1:5000/home<datalist><option>http://10.5.50.47:5000/home</option><option>http://127.0.0.1:5000/home</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Head To Head<datalist><option>link=Head To Head</option><option>//a[contains(text(),'Head To Head')]</option><option>//div[@id='navbarResponsive']/ul/li[2]/a</option><option>//a[contains(@href, '/h2h')]</option><option>//li[2]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(//button[@type='button'])[2]<datalist><option>xpath=(//button[@type='button'])[2]</option><option>//div[@id='content']/div/div/button</option><option>//div/div/button</option><option>css=button.btn.btn-primary.btn-xlg-2</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//input[@value='Select League']<datalist><option>//input[@value='Select Team']</option><option>//div[@id='leagueModal']/div/div/div[2]/form/p[2]/input</option><option>//div[4]/div/div/div[2]/form/p[2]/input</option><option>css=#leagueModal &gt; div.modal-dialog.modal-md &gt; div.modal-content &gt; div.modal-body &gt; form &gt; p.text-center &gt; input.btn.btn-secondary</option><option>//input[@value='Select League']</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(//button[@type='button'])[2]<datalist><option>xpath=(//button[@type='button'])[2]</option><option>//div[@id='content']/div/div/button</option><option>//div/div/button</option><option>css=button.btn.btn-primary.btn-xlg-2</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//input[@value='Select Team']<datalist><option>//input[@value='Select League']</option><option>//div[@id='firstTeamModal']/div/div/div[2]/form/p[2]/input</option><option>//p[2]/input</option><option>css=input.btn.btn-secondary</option><option>//input[@value='Select Team']</option></datalist></td><td></td>
+</tr>
+<tr><td>assertText</td><td>//div[@id='content']/div/div/p<datalist><option>//div[@id='content']/div/div/p</option><option>//div/div/p</option><option>css=div.col-sm &gt; p</option></datalist></td><td>Arsenal</td>
+</tr>
+<tr><td>click</td><td>xpath=(//button[@type='button'])[2]<datalist><option>xpath=(//button[@type='button'])[2]</option><option>//div[@id='content']/div/div[3]/button</option><option>//div[3]/button</option><option>css=button.btn.btn-primary.btn-xlg-2</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//input[@value='Select Team']<datalist><option>//input[@value='Select Team']</option><option>//div[@id='secondTeamModal']/div/div/div[2]/form/p[2]/input</option><option>//p[2]/input</option><option>css=input.btn.btn-secondary</option></datalist></td><td></td>
+</tr>
+<tr><td>assertText</td><td>//div[@id='content']/div/div[3]/p<datalist><option>//div[@id='content']/div/div[3]/p</option><option>//div[3]/p</option></datalist></td><td>Arsenal</td>
+</tr>
+<tr><td>click</td><td>//input[@value='Make the prediction']<datalist><option>//input[@value='Make the prediction']</option><option>//div[@id='content']/div/div[2]/form/p/input</option><option>//p/input</option><option>css=input.btn.btn-secondary</option></datalist></td><td></td>
+</tr>
+<tr><td>assertTextPresent</td><td><datalist><option>//body[@id='page-top']/section/div[5]</option><option>//div[5]</option><option>css=div.alert.fixed-bottom.alert-danger.alert-dismissible.fade.show</option><option></option></datalist></td><td>You cannot pick the same teams to make a prediction.</td>
+</tr>
+<tr><td>assertVisible</td><td>xpath=(//button[@type='button'])[2]<datalist><option>xpath=(//button[@type='button'])[2]</option><option>//div[@id='content']/div/div/button</option><option>//div/div/button</option><option>css=button.btn.btn-primary.btn-xlg-2</option></datalist></td><td></td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Test H2H Unknown League</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1:5000/h2h/200<datalist><option>http://10.5.50.47:5000/h2h</option><option>http://10.5.50.47:5000/h2h/200</option><option>http://127.0.0.1:5000/h2h/200</option></datalist></td><td></td>
+</tr>
+<tr><td>assertTextPresent</td><td><datalist><option></option></datalist></td><td>Unknown league.</td>
+</tr>
+<tr><td>assertVisible</td><td>xpath=(//button[@type='button'])[2]<datalist><option>xpath=(//button[@type='button'])[2]</option><option>//div[@id='content']/div/div/button</option><option>//div/div/button</option><option>css=button.btn.btn-primary.btn-xlg-2</option></datalist></td><td></td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Test H2H Team Not In Same League</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1:5000/h2h/148/2616/3000<datalist><option>http://10.5.50.47:5000/h2h/148/2616/3000</option><option>http://127.0.0.1:5000/h2h/148/2616/3000</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//input[@value='Make the prediction']<datalist><option>//input[@value='Make the prediction']</option><option>//div[@id='content']/div/div[2]/form/p/input</option><option>//p/input</option><option>css=input.btn.btn-secondary</option></datalist></td><td></td>
+</tr>
+<tr><td>assertTextPresent</td><td><datalist><option>//body[@id='page-top']/section/div[5]</option><option>//div[5]</option><option>css=div.alert.fixed-bottom.alert-danger.alert-dismissible.fade.show</option><option></option></datalist></td><td>Teams not found in this league.</td>
+</tr>
+<tr><td>assertVisible</td><td>xpath=(//button[@type='button'])[2]<datalist><option>xpath=(//button[@type='button'])[2]</option><option>//div[@id='content']/div/div/button</option><option>//div/div/button</option><option>css=button.btn.btn-primary.btn-xlg-2</option></datalist></td><td></td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Test H2H Teams OK</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://127.0.0.1:5000/h2h<datalist><option>http://10.5.50.47:5000/h2h</option><option>http://127.0.0.1:5000/h2h</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(//button[@type='button'])[2]<datalist><option>xpath=(//button[@type='button'])[2]</option><option>//div[@id='content']/div/div/button</option><option>//div/div/button</option><option>css=button.btn.btn-primary.btn-xlg-2</option></datalist></td><td></td>
+</tr>
+<tr><td>select</td><td>id=leagueId<datalist><option>id=leagueId</option><option>name=leagueId</option><option>//select[@id='leagueId']</option><option>//div[@id='leagueModal']/div/div/div[2]/form/p/select</option><option>//select</option><option>css=#leagueId</option></datalist></td><td>label=Serie A</td>
+</tr>
+<tr><td>click</td><td>//input[@value='Select League']<datalist><option>//input[@value='Select Team']</option><option>//div[@id='leagueModal']/div/div/div[2]/form/p[2]/input</option><option>//div[4]/div/div/div[2]/form/p[2]/input</option><option>css=#leagueModal &gt; div.modal-dialog.modal-md &gt; div.modal-content &gt; div.modal-body &gt; form &gt; p.text-center &gt; input.btn.btn-secondary</option><option>//input[@value='Select League']</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(//button[@type='button'])[2]<datalist><option>xpath=(//button[@type='button'])[2]</option><option>//div[@id='content']/div/div/button</option><option>//div/div/button</option><option>css=button.btn.btn-primary.btn-xlg-2</option></datalist></td><td></td>
+</tr>
+<tr><td>select</td><td>id=teamIdHome<datalist><option>id=teamIdHome</option><option>name=teamIdHome</option><option>//select[@id='teamIdHome']</option><option>//div[@id='firstTeamModal']/div/div/div[2]/form/p/select</option><option>//select</option><option>css=#teamIdHome</option></datalist></td><td>label=Napoli</td>
+</tr>
+<tr><td>click</td><td>//input[@value='Select Team']<datalist><option>//input[@value='Select League']</option><option>//div[@id='firstTeamModal']/div/div/div[2]/form/p[2]/input</option><option>//p[2]/input</option><option>css=input.btn.btn-secondary</option><option>//input[@value='Select Team']</option></datalist></td><td></td>
+</tr>
+<tr><td>assertText</td><td>//div[@id='content']/div/div/p<datalist><option>//div[@id='content']/div/div/p</option><option>//div/div/p</option><option>css=div.col-sm &gt; p</option></datalist></td><td>Napoli</td>
+</tr>
+<tr><td>select</td><td>id=teamIdAway<datalist><option>id=teamIdHome</option><option>name=teamIdHome</option><option>//select[@id='teamIdHome']</option><option>//div[@id='firstTeamModal']/div/div/div[2]/form/p/select</option><option>//select</option><option>css=#teamIdHome</option><option>id=teamIdAway</option></datalist></td><td>label=AS Roma</td>
+</tr>
+<tr><td>click</td><td>//input[@value='Select Team']<datalist><option>//input[@value='Select Team']</option><option>//div[@id='secondTeamModal']/div/div/div[2]/form/p[2]/input</option><option>//p[2]/input</option><option>css=input.btn.btn-secondary</option></datalist></td><td></td>
+</tr>
+<tr><td>assertText</td><td>//div[@id='content']/div/div[3]/p<datalist><option>//div[@id='content']/div/div[3]/p</option><option>//div[3]/p</option></datalist></td><td>AS Roma</td>
+</tr>
+<tr><td>click</td><td>//input[@value='Make the prediction']<datalist><option>//input[@value='Make the prediction']</option><option>//div[@id='content']/div/div[2]/form/p/input</option><option>//p/input</option><option>css=input.btn.btn-secondary</option></datalist></td><td></td>
+</tr>
+<tr><td>assertTextPresent</td><td><datalist><option></option></datalist></td><td>Prediction :</td>
+</tr>
+<tr><td>assertNotVisible</td><td>xpath=(//button[@type='button'])[2]<datalist><option>xpath=(//button[@type='button'])[2]</option><option>//div[@id='content']/div/div/button</option><option>//div/div/button</option><option>css=button.btn.btn-primary.btn-xlg-2</option></datalist></td><td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

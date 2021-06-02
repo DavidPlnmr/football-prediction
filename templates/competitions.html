@@ -75,16 +75,19 @@
   {% endif %}
 </div>
 
-{% if history %}
 <div class="container">
-  
-  <div class="text-right">
+{% if team_badge %}
+
+<div class="text-right">
     <a href="{{ url_for("competitions_make_prediction", league_id=league_id) }}"><button type="button" class="btn btn-secondary"> < Back to the competition</button></a>
   </div>
   <div class="text-center">
   <h2> History of {{team_name}} </h2>
   <p><img src="{{ team_badge }}" alt="{{team_name}}_logo"></p>
   </div>
+
+{% endif %}
+{% if history %}
   <div class="text-center"> 
     <div class="row">
         <div class="col-sm-4">
@@ -158,8 +161,12 @@
     </div>    
   {% endfor %}
   <div>
-</div>
+{% elif team_badge and not history%}
+  <div class="text-center">
+    <p class="lead">No games for this team.</p>
+  </div>
 {% endif %}
+</div>
 
 {% if error %}
 <div class="alert fixed-bottom alert-danger alert-dismissible fade show" role="alert">

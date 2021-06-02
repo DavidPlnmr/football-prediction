@@ -480,11 +480,12 @@ Sur la figure \ref{fig:architectureClasse}, le \texttt{Provider} sert d'intermé
 Une capture d'écran de l'arborescence de fichiers est disponible (voir fig. \ref{fig:schemaDB}). 
 
 \begin{itemize}
-    \item \textbf{Dossier /doc} Ce repértoire contient les fichiers et les outils nécessaire à l'élaboration de la documentation du projet.
+    \item \textbf{Dossier /doc} Ce repértoire contient les fichiers et les outils nécessaire à l'élaboration de la documentation du projet (notamment le source \LaTeX{}).
     \item \textbf{Dossier /lib} Ce dossier contient la façade, la classe pour la communication avec la base de données, le provider et la classe pour établir une prédiciton
     \item \textbf{Dossier /log} Contient les logs de l'application. Ce répertoire et le fichier qui est dedans sont créé lors du premier lancement de l'application. Ils sont aussi inclus dans le \texttt{.gitignore} pour éviter de potentiels conflits git.
     \item \textbf{Dossier /static} Contient les fichiers statiques de l'application (CSS, JS et différentes images\footnote{Mis à part les images des équipes qui sont stockés sur le serveur de l'API} et favicons).
     \item \textbf{Dossier /templates} Contient les fichiers de templating pour l'affichage de la vue (HTML avec le templating de Jinja2).
+    \item \textbf{Dossier /tests} Contient les fichiers de tests pour le backend et le frontend de l'application.
     \item \textbf{Dossier /venv} Contient tous les fichiers liés à l'environnement virtuel Python. Ce répertoire est inclu dans le \texttt{.gitignore} car il contient toutes les dépendances de l'application et qu'il est très volumineux.
     \item \textbf{Fichier .env} Contient les variables d'environnement locale du projet
     \item \textbf{Fichier app.py} Contient les routes de l'application web et toutes le code pour formatter les données pour l'affichage.
@@ -493,7 +494,7 @@ Une capture d'écran de l'arborescence de fichiers est disponible (voir fig. \re
 
 \begin{figure}[htp]
     \centering
-    \includegraphics{../img/arborescenceFichier.png}
+    \includegraphics[height=18em]{../img/arborescenceFichier.png}
     \caption{Arborescence de fichier du projet}
     \label{fig:arborescenceFichier}
 \end{figure}
@@ -526,6 +527,37 @@ Ce paquet permet d'insérer des codes sources dans notre PDF. Il y a la possibil
 \noindent\textbf{VHistory}
 Ce paquet apporte du versioning automatique à \LaTeX. Il gère automatiquement le numéro de version et les auteurs des versions.
 
+\subsection{Outil d'automatisation de tests}
+\label{outilAutomatisationTest}
+
+Katalon Recorder\footnote{\url{https://chrome.google.com/webstore/detail/katalon-recorder-selenium/ljdobmomdgdljniojadhoplhkpialdid}} est l'extension de navigateur de Katalon Studio. Katalon Studio est un outil d'automatisation de tests. Il peut automatiser les tests pour des interfaces webs, des APIs, des applications mobiles ou encore des applications de bureau.
+
+\subsubsection{Utilisation}
+
+Dans ce projet, j'ai utilisé Katalon Recorder\footnote{Le tutoriel officiel pour utiliser Katalon Recorder : \url{https://www.youtube.com/watch?v=sgzFkQ-0Ta8&t=151s}} pour pouvoir tester l'interface web de mon application. Cela me permet d'automatiser un jeu de tests qui vérifie que les erreurs apparaissent bien lorsque des données incorrectes sont transmises et aussi lorsque les données sont correctes et que l'application retourne un bon résultat.
+
+\subsubsection{Katalon TestOps}
+
+En utilisant Katalon Recorder, on peut créer un projet de visualisation sur la réussites des tests. C'est ce que permet de faire Katalon TestOps. Cette interface web est liée à notre compte Katalon et lorsque l'on clique sur \textbf{Report} dans Katalon Recorder (voir fig. \ref{fig:reportKatalonRecorder}), nous avons la possibilité d'upload les résultats des tests que l'on a joué sur le visualiseur.
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=5em]{../img/reportKatalonRecorder.png}
+    \caption{Bouton Report Katalon Recorder}
+    \label{fig:reportKatalonRecorder}
+\end{figure}
+
+Le visualiseur permet de savoir si les tests se sont bien passés, s'ils ont eu des erreurs (voir fig. \ref{fig:dashboardTestOps}). On voit aussi combien de temps ont pris les tests à être utilisé. Cet outil est très intéressant lorsque l'on travaille à plusieurs sur un projet.
+Le graphique sur la figure \ref{fig:dashboardTestOps} est le graphique qui montre le temps écoulé lors du lancement des tests.
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=30em]{../img/dashboardTestOps.png}
+    \caption{Dashboard Katalon TestOps}
+    \label{fig:dashboardTestOps}
+\end{figure}
+
+\newpage
+
 \section{Recherche de solutions}
 
 \subsection{Élaboration de prédictions}
@@ -540,7 +572,7 @@ Au niveau des restrictions de l'application, cette dernière ne peut qu'établir
 Prenons un cas concret avec comme exemple, un match entre Anderlecht (BEL) et le FC Bayern (ALL). Dans le cas ou le Bayern est dans une série de défaites et que l'Anderlecht dans une série de victoires, l'application sortira probablement l'équipe d'Anderlecht comme vainqueur de cet affrontement, ce qui a très peu de chance d'arriver. 
 On pourrait envisager de prendre le classement du championnat national de l'Allemagne et de la Belgique et de dire que le premier du classement de Belgique a le même niveau que le premier allemand, mais ce n'est pas envisageable car ces équipes n'ont pas le même niveau.  
 
-Une autre solution qui est plus envisageable mais qui a toujours un problème : le coefficient de clubs des associations de l'UEFA\footnote{\url{https://fr.uefa.com/memberassociations/uefarankings/country/\#/yr/2021}}. Ce coefficient est utilisé pour déterminer le nombre de places disponibles dans un championnat pour accéder aux compétitions de clubs de l'UEFA. Par exemple, le championnat d'Angleterre est celui qui a le plus de places disponibles.
+Une autre solution qui est plus envisageable mais qui a toujours un problème : le coefficient de clubs des associations de l'UEFA\footnote{\url{https://fr.uefa.com/memberassociations/uefarankings/country/\#/yr/2021}}. Ce coefficient est utilisé pour déterminer le nombre de places disponibles dans un championnat pour accéder aux compétitions de clubs de l'UEFA. Par exemple, le championnat d'Angleterre est celui qui a le plus de places disponibles (voir fig. \ref{fig:coeffClubsAssoc}).
 
 \begin{figure}[htp]
     \centering
@@ -577,11 +609,7 @@ En clair, ces classements ne peuvent pas être utilisé pour déterminer le nive
     \label{fig:classementSerieA}
 \end{figure}
 
-
-
 Le choix que j'ai donc fait est d'uniquement prédire un match entre deux équipes du même championnat car ces deux équipes joueront forcément contre les mêmes équipes et c'est ce qui nous permet de déterminer qu'une équipe est meilleure qu'une autre.
-
-\newpage
 
 \subsubsection{Récupération des matchs et de leurs statistiques}
 \label{recupMatchStats}
@@ -717,8 +745,6 @@ Dans l'exemple de la figure \ref{fig:explicationStatsManquante}, disons que nous
 }
 \end{lstlisting}
 
-\newpage
-
 \subsubsection{Choix de la pondération des statistiques}
 \label{choixPondStat}
 
@@ -799,8 +825,6 @@ Pour finir, je vais montrer le classement que j'ai pu établir pour les statisti
         \item Cartons jaunes (2)
     \end{enumerate}
 \end{itemize}
-
-\newpage
 
 \noindent\textbf{Score sur la forme du moment}
 
@@ -1318,7 +1342,148 @@ J'ai créé différents scripts qui testent les méthodes de chacune des classes
 
 Ici, je veux tester que la méthode \texttt{get\_all\_stats\_from\_teams()} retourne bien les données dans le bon format. Cette dernière est asynchrone, c'est pourquoi je la mets dans une méthode async car le mot clé \texttt{await} ne peut pas être utilisé s'il n'est pas dans une méthode \texttt{async}. Autrement, j'aurais pu mettre la méthode directement dans le \texttt{asyncio.run()} mais ce n'est pas possible si je souhaite appeler plusieurs méthodes asynchrones à la suite.
 
-\subsection{Compétitions}
+\subsection{Tests sur la vue}
+
+Comme indiqué dans le point \ref{outilAutomatisationTest}, j'ai utilisé Katalon Recorder pour tester ma vue.
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=15em]{../img/katalonTestsSurVue.png}
+    \caption{Liste des tests sur la vue}
+    \label{fig:predictionMadeH2H}
+\end{figure}
+
+On peut apercevoir que je n'ai pas testé l'accueil de la vue. En effet, la vue ne nécessite aucune manipulation de la part de l'utilisateur, donc il n'y aucun risque vis-à-vis d'une mauvaise intention ou manipulation de l'utilisateur.
+
+J'ai donc testé uniquement la fonctionnalité "Head To Head" et la fonctionnalité "Competitions". 
+
+\subsubsection{Test H2H : Même équipes}
+
+\begin{table}[htp]
+    \centering
+    \begin{tabular}{|m{4cm}|m{4cm}|m{6cm}|}
+    \hline
+    \textbf{Commande} & \textbf{Valeur}                                      & \textbf{Description}                                                                    \\ \hline
+    open              &                                                      & Ouverture du site                                                                       \\ \hline
+    click             &                                                      & Ouverture de la fonctionnalité "Head To Head"                                           \\ \hline
+    click             &                                                      & Ouverture de la fenêtre modale de la ligue                                              \\ \hline
+    click             &                                                      & Sélection de la ligue (par défaut : "Premier League")                                   \\ \hline
+    click             &                                                      & Ouverture de la première fenêtre modale d'équipe                                        \\ \hline
+    click             &                                                      & Sélection de la première équipe (par défaut : "Arsenal")                                \\ \hline
+    assertText        & Arsenal                                              & Vérification que le texte "Arsenal" apparaisse sur la vue                               \\ \hline
+    click             &                                                      & Ouverture de la deuxième modal d'équipe                                                 \\ \hline
+    click             &                                                      & Sélection de la deuxième équipe (par défaut : "Arsenal")                                \\ \hline
+    assertText        & Arsenal                                              & Vérification que le texte "Arsenal" apparaisse sur la vue                               \\ \hline
+    click             &                                                      & Validation du choix des équipes                                                         \\ \hline
+    assertTextPresent & You cannot pick the same teams to make a prediction. & On vérifie que l'erreur apparaisse bien sur la vue                                      \\ \hline
+    assertVisible     &                                                      & On vérifie qu'on ait le bouton pour choisir la ligue. (Retour à la page H2H principale) \\ \hline
+    \end{tabular}
+\end{table}
+
+\newpage
+
+\subsubsection{Test H2H : Ligue inconnue}
+
+\begin{table}[htp]
+    \centering
+    \begin{tabular}{|m{4cm}|m{4cm}|m{6cm}|}
+    \hline
+    \textbf{Commande} & \textbf{Valeur} & \textbf{Description}                                                                                                                              \\ \hline
+    open              &                 & Injection d'un mauvais ID de ligue dans l'url \\ \hline
+    assertTextPresent & Unknown league. & Vérification que l'erreur apparaisse sur la vue                                                                                                   \\ \hline
+    assertVisible     &                 & On vérifie qu'on ait le bouton pour choisir la ligue. (Retour à la page H2H principale)                                                           \\ \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{Test H2H : Équipes pas dans la ligue sélectionnée}
+
+\begin{table}[htp]
+    \centering
+    \begin{tabular}{|m{4cm}|m{4cm}|m{6cm}|}
+    \hline
+    \textbf{Commande} & \textbf{Valeur} & \textbf{Description}                                                                                                                              \\ \hline
+    open              &                 & Injection d'un mauvais ID d'équipe dans l'url \\ \hline
+    click             &                 & Validation du choix des deux équipes                                                                                                   \\ \hline
+    assertTextPresent & Teams not found in this league. & On vérifie que l'erreur apparaisse bien sur la vue.                                                           \\ \hline
+    assertVisible     &                 & On vérifie qu'on ait le bouton pour choisir la ligue. (Retour à la page H2H principale)                                                           \\ \hline
+    \end{tabular}
+\end{table}
+
+\newpage
+
+\subsubsection{Test H2H : Succès}
+
+\begin{table}[htp]
+    \centering
+    \begin{tabular}{|m{4cm}|m{4cm}|m{6cm}|}
+    \hline
+    \textbf{Commande} & \textbf{Valeur}                                      & \textbf{Description}                                                                    \\ \hline
+    open              &                 & Ouverture de la route "Head To Head"                                          \\ \hline
+    click             &                 & Ouverture de la fenêtre modale de la sélection de ligue                       \\ \hline
+    select            & label=Serie A   & Sélection de la "Serie A" comme ligue                                         \\ \hline
+    click             &                 & Validation                                                                    \\ \hline
+    select            & label=Napoli    & Sélection de "Napoli"                                                         \\ \hline
+    click             &                 & Validation                                                                    \\ \hline
+    assertText        & Napoli          & Vérification que "Napoli" apparaisse sur la vue                               \\ \hline
+    select            & label=AS Roma   & Sélection de "AS Roma"                                                        \\ \hline
+    click             &                 & Validation                                                                    \\ \hline
+    assertText        & AS Roma         & Vérification que "AS Roma" apparaisse sur la vue                              \\ \hline
+    click             &                 & Validation de la prédiction.                                                  \\ \hline
+    assertTextPresent & Prediction :    & Vérification que le résultat de la prédiction soit retourné par l'application \\ \hline
+    assertNotVisible  &                 & On s'assure que le bouton pour choisir la ligue soit pas visible              \\ \hline
+    \end{tabular}
+\end{table}
+
+\newpage
+
+\subsubsection{Test Competition : Ligue inconnue}
+
+\begin{table}[htp]
+    \centering
+    \begin{tabular}{|m{4cm}|m{4cm}|m{6cm}|}
+    \hline
+    \textbf{Commande} & \textbf{Valeur}                                      & \textbf{Description}                                                                    \\ \hline
+    open              &                 & Injection d'un ID de ligue invalide depuis l'url \\ \hline
+    assertTextPresent & Unknown league. & Vérification que l'erreur apparaisse sur la vue                                                                                                   \\ \hline
+    assertVisible     &                 & On vérifie qu'on ait le bouton pour choisir la ligue. (Retour à la page Competitions principale)     \\ \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{Test Competition : Identifiant de l'équipe incorrect}
+
+\begin{table}[htp]
+    \centering
+    \begin{tabular}{|m{4cm}|m{4cm}|m{6cm}|}
+    \hline
+    \textbf{Commande} & \textbf{Valeur}                                      & \textbf{Description}                                                                    \\ \hline
+    open              &                 & Ouverture de la route "Competitions" \\ \hline
+    click             &                 & Ouverture de la fenêtre modale pour la sélection de ligue                                                                                                   \\ \hline
+    click             &                 & Validation du choix de la ligue (par défaut : "Premier League")     \\ \hline
+    open              &                 & Injection d'un ID invalide depuis l'url   \\ \hline
+    assertTextPresent & N°              & Vérification que le tableau soit affiché ("N°" est le nom d'une colonne dans le classement de la compétition)     \\ \hline
+    assertTextPresent & This team is not in the league. & Vérification que l'erreur apparaisse bien sur la vue.     \\ \hline
+    \end{tabular}
+\end{table}
+
+\newpage
+
+\subsubsection{Test Competition : Succès}
+
+\begin{table}[htp]
+    \centering
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Commande} & \textbf{Valeur}            & \textbf{Description}                                                                                          \\ \hline
+    open              &                            & Ouverture de la route "Competitions"                                                                          \\ \hline
+    click             &                            & Ouverture de la fenêtre modale pour la sélection de ligue                                                     \\ \hline
+    select            & label=Premier League       & Choix de la ligue "Premier League"                                                                            \\ \hline
+    click             &                            & Validation                                                                                                    \\ \hline
+    assertTextPresent & N°                         & Vérification que le tableau soit affiché ("N°" est le nom d'une colonne dans le classement de la compétition) \\ \hline
+    assertNotVisible  &                            & Vérification que le bouton qui affiche la fenêtre modale de sélection de ligue ait disparu.                   \\ \hline
+    click             &                            & Clic sur "Manchester City" afin d'avoir accès à l'historique de l'équipe.                                     \\ \hline
+    assertTextPresent & History of Manchester City & On s'assure qu'on arrive sur la page de l'historique de l'équipe choisie auparavant.                          \\ \hline
+    \end{tabular}
+\end{table}
 
 \section{Retour d'expérience}
 
