@@ -15,7 +15,10 @@ class Competition:
         self.prov = Provider(log_path)
         self.missed_some_predictions = False
     
-    async def create(self):
+    async def create_standing(self):
+        """
+        Async call to create the standing
+        """
         teams = await self.prov.get_teams_from_league(int(self.league_id))
         self.__history = []
         self.standing_computed = False
@@ -78,7 +81,6 @@ class Competition:
         """
         Wait for all the predictions to be completed
         """
-        
         await asyncio.wait([self.make_prediction(match[0], match[1], match[2], match[3], match[4], match[5], out_list) for match in matches])
     
     async def make_prediction(self, first_team_key, second_team_key, first_team_name, second_team_name, first_team_badge, second_team_badge, out_list):
@@ -87,7 +89,7 @@ class Competition:
         """
         try:
             pred = Prediction(first_team_name, second_team_name)
-            await pred.call_data()
+            await pred.create_prediction()
 
             winner = pred.define_winner()
             game = {

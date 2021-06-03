@@ -19,7 +19,7 @@ out_list = []
 
 async def main():
     comp = Competition(176, "../log/app.log")
-    await comp.create()
+    await comp.create_standing()
     #await asyncio.wait([comp.make_prediction("Arsenal", "Tottenham", out_list), comp.make_prediction("Chelsea", "Leeds", out_list)])
     start = time.perf_counter()
     await asyncio.wait([comp.compute_competition()])

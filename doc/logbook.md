@@ -1959,3 +1959,35 @@ Parler dans techno utilisées et environnement de dev de Katalon et de comment �
 Création de répertoire "frontend" et "backend" dans `tests` et save des backup de tests du frontend avec katalon recorder
 
 Ne pas oublier de faire le manuel utilisateur
+
+#### Recap de la journée
+
+* Tests avec Katalon Recorder + doc de ces derniers
+
+### 03.06.2021
+
+* Parler des test dans le rapport (parler que des tests ont été fait sur les méthodes pour valider le format de ces dernières et test sur la vue. Ptit protocole de test pour la vue?)  **[DONE]**
+* Parler du fonctionnement des cookies (Parler que les erreurs étaient en cache serveur et que c'est pas une bonne idée parce qu'un autre user qui arrive sur la page aura une erreur) **[DONE]**
+* Documenter l'asynchrone (Dans `Développement Python` faire une partie `From Multiprocessing to Asynchrone` et expliquer comment fonctionne l'asynchrone et dire pourquoi on est passé de multiprocessing à asynchrone à cause du soucis des prédictions et des process qui bloquent) **[DONE]**
+  * Aussi parler du passage de Flask 1.0 à Flask 2.0 pour la vue en async
+* Documenter la vue pour les compétitions
+* Repasser sur le rapport et mettre à jour les `src` (A LA FIN)
+  * ça se trouve, même pas besoin. on verra
+
+Ajout de la charte graphique dans le rapport
+
+Documentation de l'asynchrone
+
+#### Recap de la journée 
+
+* Doc, doc et doc
+  * Tests fait
+  * Cookies fait
+  * Async backend fait
+
+Choses à faire demain :
+
+* Doc vue compét'
+* Expliquer passage Flask 1.0 à 2.0 car async
+  * Expliquer l'async dans la vue en corrélation avec l'async dans le backend
+* Manuel utilisateur

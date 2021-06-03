@@ -309,7 +309,7 @@ async def competitions_make_prediction(league_id):
         try:
             
             competition = Competition(league_id)
-            await competition.create()
+            await competition.create_standing()
             cache["history"] = await competition.compute_competition()
             standings = await competition.get_standing()
             missed_some_predictions = competition.missed_some_predictions

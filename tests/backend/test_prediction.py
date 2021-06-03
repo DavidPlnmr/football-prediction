@@ -15,7 +15,7 @@ second_team = "Tottenham"
 
 async def main():
     pred = Prediction(first_team, second_team, "../log/app.log")
-    await pred.call_data()
+    await pred.create_prediction()
     print(pred.define_winner())
     
 if __name__ == '__main__':

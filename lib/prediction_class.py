@@ -13,7 +13,10 @@ class Prediction:
         self.winner=""
         self.provider = Provider(log_path)
         
-    async def call_data(self):
+    async def create_prediction(self):
+        """
+        Async call the data for the class
+        """
         try:
             self.results = await self.provider.get_all_stats_from_teams(self.get_home_team_name(), self.get_away_team_name())
 
@@ -27,7 +30,6 @@ class Prediction:
             self.__insert_data_team_result(self.away_team_result, self.results["firstTeam_VS_secondTeam"])
         except Exception:
             raise UnmakeablePrediction("Prediction unmakeable. Not enough stats.")
-        
         
     
     def define_winner(self):

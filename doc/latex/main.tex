@@ -84,9 +84,11 @@
 \newpage
 %Versionning du document
 \makeatletter
+
 \begin{versionhistory}
-\vhEntry{1.0}{\today}{DP}{Version initiale}
+    \vhEntry{1.0}{\today}{DP}{Version initiale}
 \end{versionhistory}
+
 \makeatother
 
 \section{Résumé}
@@ -290,16 +292,16 @@ En tant que développeur, je ne veux pas que l’utilisateur choisisse une équi
 \subsection{Analyse SWOT}
 
 \begin{table}[H]
-\centering
-\begin{tabular}{|l|l|}
-\hline
-\textbf{Forces}                                                                                                                                                        & \textbf{Faiblesses}                                                               \\ \hline
-\begin{tabular}[c]{@{}l@{}}Permet de simplifier le travail\\ d’analyse des pronostiqueurs\\ \\ Utilise plusieurs technologies\end{tabular}                             & \begin{tabular}[c]{@{}l@{}}Fiabilité et précision\\  des prédictions\end{tabular} \\ \hline
-\textbf{Opportunités}                                                                                                                                                  & \textbf{Menaces}                                                                  \\ \hline
-\begin{tabular}[c]{@{}l@{}}Peut s’améliorer au niveau des prédictions \\ (analyse de joueurs blessés, match important, \\ domicile, extérieur, huis clos)\end{tabular} & Dépendance à l’API                                                                \\ \hline
-\end{tabular}
-\caption{Analyse SWOT}
-\label{tab:SWOT}
+    \centering
+    \begin{tabular}{|l|l|}
+    \hline
+    \textbf{Forces}                                                                                                                                                        & \textbf{Faiblesses}                                                               \\ \hline
+    \begin{tabular}[c]{@{}l@{}}Permet de simplifier le travail\\ d’analyse des pronostiqueurs\\ \\ Utilise plusieurs technologies\end{tabular}                             & \begin{tabular}[c]{@{}l@{}}Fiabilité et précision\\  des prédictions\end{tabular} \\ \hline
+    \textbf{Opportunités}                                                                                                                                                  & \textbf{Menaces}                                                                  \\ \hline
+    \begin{tabular}[c]{@{}l@{}}Peut s’améliorer au niveau des prédictions \\ (analyse de joueurs blessés, match important, \\ domicile, extérieur, huis clos)\end{tabular} & Dépendance à l’API                                                                \\ \hline
+    \end{tabular}
+    \caption{Analyse SWOT}
+    \label{tab:SWOT}
 \end{table}
 
 
@@ -344,6 +346,33 @@ En termes de livrables pour ce projet, je dois rendre :
 \begin{itemize}
     \item Antoine Schmid, \textbf{antoine.schmid@edu.ge.ch}
 \end{itemize}
+
+\newpage
+
+\section{Charte graphique du projet}
+
+Cette charte graphique sera utile pour avoir un respect des couleurs et des polices entre le poster et l'application.
+
+Les couleurs sont très importantes dans une application. Chaque couleur a sa signification inconsciente. La couleur bleu est la plus populaire et elle symbolise la confiance et la fiabilité\footnote{\url{https://smart-origin.com/2018/03/08/choix-couleurs/} \url{https://99designs.fr/blog/conseils-design/signification-couleurs/}}.
+
+J'ai utilisé Adobe Color\footnote{\url{https://color.adobe.com/fr/create}} pour trouver une nuance de bleu qui me convenait.
+
+\definecolor{primary}{RGB}{76,97,237}
+\definecolor{secondary}{RGB}{31,40,97}
+
+\subsection{Couleur principale}
+La couleur principale du projet et le \#4c61ed \fcolorbox{black}{primary}{\rule{0pt}{6pt}\rule{6pt}{0pt}}.
+
+\subsection{Couleur secondaire}
+La couleur secondaire du projet et le \#1f2861 \fcolorbox{black}{secondary}{\rule{0pt}{6pt}\rule{6pt}{0pt}}.
+
+\subsection{Police de caractère principale}
+La police principale du projet est \textbf{Poppins}.
+
+\subsection{Police de caractère secondaire}
+La police secondaire du projet est \textbf{Aleo}.
+
+\newpage
 
 \section{Football et son imprévisibilité}
 
@@ -558,6 +587,16 @@ Le graphique sur la figure \ref{fig:dashboardTestOps} est le graphique qui montr
 
 \newpage
 
+\subsection{Bootstrap}
+
+Bootstrap\footnote{\url{https://getbootstrap.com/}} est une collection d'outils qui permet de simplifier la création du design de sites et d'applications web. Des templates d'application sont aussi disponibles pour une structure déjà fait. Bootstrap permet de gagner du temps sur le design de son site.
+
+\subsubsection{Utilisation}
+
+J'ai cherché un template Bootstrap pour avoir une structure déjà faite et j'ai trouvé un template qui me plaisait qui se nomme Freelancer\footnote{\url{https://startbootstrap.com/theme/freelancer}}. J'ai ensuite changé les couleurs pour ne pas garder les couleurs par défaut et utiliser les couleurs de ma charte graphique. 
+
+\newpage
+
 \section{Recherche de solutions}
 
 \subsection{Élaboration de prédictions}
@@ -620,7 +659,7 @@ Pour la communication avec l'API que j'utilise, M. Schmid m'a conseillé d'appli
 
 Le travail principal du Provider (voir fig. \ref{fig:architectureClasse}) est de mettre les données de l'API ou de la base de données dans le bon format pour la classe \texttt{Prediction}.
 Pour récupérer les matchs et les statistiques précédentes de chaque équipe, j'utilise l'endpoint \texttt{H2H} (Head To Head). On donne le nom de deux équipes en paramètre et l'API nous retourne les matchs récents de chacune des deux équipes \textbf{ainsi} que les dernières confrontations entre les équipes. 
-Comme on peut l'apercevoir sur le listing \ref{apercuJSON}, nous avons donné "Chelsea" et "Arsenal" comme paramètre de l'endpoint et on reçoit trois tableaux.
+Comme on peut l'apercevoir sur le listing \ref{apercuJSONH2H}, nous avons donné "Chelsea" et "Arsenal" comme paramètre de l'endpoint et on reçoit trois tableaux.
 
 Ensuite, grâce au endpoint \texttt{Statistics}, je récupère les statistiques de chacun des matchs. Cependant, j'ai remarqué que tout les matchs de l'API n'ont pas toutes les statistiques dont j'ai besoin pour élaborer une prédiction . (voir point \ref{elaborationPredictionCDC}) J'ai du vérifié que chacun des matchs aient toutes les statistiques et si le match n'a pas toutes ces statistiques, je ne le prendrais pas en compte pour établir ma prédiction.
 
@@ -637,7 +676,7 @@ Dans l'exemple de la figure \ref{fig:explicationStatsManquante}, disons que nous
     \label{fig:explicationStatsManquante}
 \end{figure}
 
-\begin{lstlisting}[language=json, firstnumber=1, caption=Aperçu du JSON de l'endpoint H2H, captionpos=b, label=apercuJSON]
+\begin{lstlisting}[language=json, firstnumber=1, caption=Aperçu du JSON de l'endpoint H2H, captionpos=b, label=apercuJSONH2H]
 [
  {
    "firstTeam_VS_secondTeam": [
@@ -681,7 +720,7 @@ Dans l'exemple de la figure \ref{fig:explicationStatsManquante}, disons que nous
 ]
 \end{lstlisting}
 
-\begin{lstlisting}[language=json, firstnumber=1, caption=Aperçu du JSON de l'endpoint Statistics, captionpos=b, label=apercuJSON]
+\begin{lstlisting}[language=json, firstnumber=1, caption=Aperçu du JSON de l'endpoint Statistics, captionpos=b, label=apercuJSONStats]
 {
     "24562": {
         "statistics": [
@@ -882,7 +921,7 @@ Pour faire l'installation complète du projet, suivez les instructions contenues
 
 Comme expliqué dans le point \ref{recupMatchStats}, il m'a été conseillé d'utiliser le design pattern \texttt{Façade}. Le principe de ce design pattern est de simplifier l'accès à un système complexe (l'API ici).
 
-\lstinputPython{getAction}
+\lstinputPython{requests-getAction}
 
 Cette fonction est généraliste pour permettre d'être appelé par tout les endpoints. Elle retourne une liste ou un dictionnaire selon l'endpoint appelé. À la ligne 8, il faut décoder la réponse en UTF-8 car en Python ce qui transite sur le réseau et du texte encodé en byte (\texttt{b''}). 
 Elle vérifie aussi que le retour de l'API ne contient pas d'erreur. Pour expliciter la chose, quand l'API retourne une erreur 404 (exemple sur le listing \ref{erreurAPI}\footnote{À noter que l'erreur 404 n'est pas une "Authentification failed" mais une erreur "Not Found". C'est une erreur des développeurs de l'API. }), la librairie \texttt{requests} comprend que c'est un \texttt{status\_code} 200. C'est pour cela que je vérifie que le contenu contient la clé nommée "error" pour savoir si la requête est bonne ou non. Si elle n'est pas bonne, je lance une exception. Je fais la même vérification pour un code obtenu de la part de la librairie.
@@ -951,6 +990,7 @@ Finalement, le \texttt{Provider} utilise le design pattern Singleton\footnote{\u
 Contrairement, à toutes mes autres classes, ici, je dois appliquer un singleton avec l'instruction \texttt{\_\_new\_\_()}. La différence entre \texttt{\_\_new\_\_()} et \texttt{\_\_init\_\_()} est que \texttt{\_\_new\_\_()} crée l'instance et la retourne, tandis que \texttt{\_\_init\_\_()} est appelé après le \texttt{\_\_new\_\_()}, ce qui veut dire que l'instance existe déjà et on ne retourne pas l'instance de l'objet. L'instruction \texttt{super()} appelle le constructeur de la classe parent (dans notre cas, on hérite d'\texttt{object})
 
 \subsubsection{Cache des appels faits à l'API}
+\label{cacheAppelsAPI}
 
 La méthode du \texttt{Provider} qui intègre du cache lors d'appels à l'API est \texttt{get\_all\_stats\_from\_teams()}. Cette méthode a été implémenté pour éviter de surcharger l'API d'appels inutiles qui ont déjà été effectués dans la journée.
 
@@ -991,12 +1031,12 @@ Pour tester la réussite des prédictions (comme expliqué au point \ref{test_po
 
 \lstinputPython{load-data-in-db}
 
-Dans ce code, je récupère chaque donnée qui me sont importantes pour un match et j'appelle la méthode du \texttt{save\_match\_with\_stats()} du Provider. Cette méthode fait la relation entre le Provider et la méthode du listing \ref{list-insert-match-with-stats}. Je vérifie tout de même que le match ait un score et des statistiques avant de l'ajouter.
+Dans ce code, je récupère chaque donnée qui me sont importantes pour un match et j'appelle la méthode \texttt{save\_match\_with\_stats()} du Provider. Cette méthode fait le lien entre le Provider et la méthode du listing \ref{list-insert-match-with-stats}. Je vérifie quand même que le match ait un score et des statistiques avant l'ajout en base.
 
 \subsubsection{Script de test}
 Pour pouvoir utiliser ce script, il faut d'abord changer la manière de récupérer les données dans la classe \texttt{Prediction}. Au lieu de récupérer les statistiques depuis l'API, il faut les récupérer dans la base de données. Évidemment, il faut aussi avoir des données en base autrement, les prédictions ne fonctionneront tout simplement pas.
 
-Le script suivant permet de tester le taux de réussite des prédictions en prenant entre le 9 août 2019 et le 28 juillet 2020. Il permet aussi de trouver le meilleur delta de détermination d'égalité. On récupère les matchs de entre ces deux dates. Pour chacun de ces matchs, on crée une prédiction qui récupérera les données des matchs d'il y a 6 mois et on compare le résultat de la prédiction avec le vrai résultat du match.
+Le script suivant permet de tester le taux de réussite des prédictions en prenant entre, par exemple, le 9 août 2019 et le 28 juillet 2020. Il permet aussi de trouver le meilleur delta de détermination d'égalité. On récupère les matchs de entre ces deux dates. Pour chacun de ces matchs, on crée une prédiction qui récupérera les données des matchs d'il y a 6 mois et on compare le résultat de la prédiction avec le vrai résultat du match.
 \lstinputPython{test-success-prediction}
 
 
@@ -1011,6 +1051,7 @@ Pour cette classe, le constructeur contient la récupération des équipes d'une
 \lstinputPython{competition-ctor}
 
 \subsubsection{Multiprocessing de tous les matchs}
+\label{multiprocessing}
 
 Dans la méthode \texttt{compute\_competition()}, comme expliqué dans le point \ref{predictionCompetition}, je trouvais important de faire du multiprocessing pour calculer parallèlement le vainqueur de tous les matchs d'un championnat. J'ai choisi d'utiliser la librairie \texttt{multiprocessing} et d'utiliser la classe \texttt{Process}.
 Pour commencer, je crée toutes les possibilités de matchs\footnote{Il y en a 190 car mon application ne prend pas en compte le fait que le match soit joué à domicile donc il n'y a pas besoin de faire les matchs aller-retour}. Ensuite, je crée un \texttt{Process} par match. Chaque process appelle la méthode \texttt{make\_prediction()} qui crée la prédiction et insère le résultat dans la liste de sortie\footnote{Cette liste doit être crée avec la classe \texttt{Manager} de la librairie multiprocessing car la liste de cette classe est partagée par tous les process. Autrement, le stockage des données ne se fera pas correctement.}. Je cherchais une manière rapide de créer toutes ces prédictions et le multiprocessing est la chose qui me fallait. Le multithreading aurait faciliter le partage des données entre les process mais lorsque je l'ai testé, il prenait le même temps que la manière séquentielle.\footnote{\url{https://datanoon.com/blog/multiprocessing_in_python/}}
@@ -1034,7 +1075,7 @@ Il y a eu un soucis rencontré lors du développement de cette fonctionnalité\f
 Dans le code du constructeur, je récupère toutes les équipes de la compétition sélectionnée. Ces équipes seront ensuite utilisées pour créer les compétitions\footnote{Pour rappel, je récupère les derniers résultats de chaque équipe via l'endpoint H2H de l'API et ce dernier fonctionne \textbf{uniquement} avec le nom des équipes}. Cependant, le soucis que j'ai pu rencontré est le fait que l'API me donne comme donnée "Manchester United" à la récupération des équipes d'une compétition. Et pour l'endpoint H2H, en passant en paramètre "Manchester United", on reçoit des matchs de 2018, ce qui est inutile pour faire nos prédictions. Cependant, on reçoit des résultats, quand on met le nom "Manchester Utd", datant de 2021.
 
 
-\begin{lstlisting}[language=json, firstnumber=1, caption=Aperçu du JSON avec "Manchester United", captionpos=b, label=apercuJSON]
+\begin{lstlisting}[language=json, firstnumber=1, caption=Aperçu du JSON avec "Manchester United", captionpos=b, label=apercuJSONUnited1]
 // 20210525104030
 // https://apiv2.apifootball.com/?action=get_H2H&
 firstTeam=Manchester%20United&secondTeam=Newcastle&
@@ -1072,7 +1113,7 @@ APIkey=[...]
     [...]
 \end{lstlisting}
 
-\begin{lstlisting}[language=json, firstnumber=1, caption=Aperçu du JSON avec "Manchester United", captionpos=b, label=apercuJSON]
+\begin{lstlisting}[language=json, firstnumber=1, caption=Aperçu du JSON avec "Manchester United", captionpos=b, label=apercuJSONUnited2]
 // 20210525104515
 // https://apiv2.apifootball.com/?action=get_H2H&
 firstTeam=Manchester%20Utd&secondTeam=Newcastle&
@@ -1116,9 +1157,49 @@ Pour régler ce soucis, je n'ai pas trouvé d'autre solution que d'avertir tout 
 
 À noter que la version 3 de l'API est sortie et le soucis a été réglé. Cependant, les statistiques que j'utilise ont "disparu"\footnote{Elles n'ont pas réellement disparu mais elles sont liée à un joueur en particulier. Donc pour les avoir je vais devoir parcourir les statistiques de chacun des joueurs d'un match.} ce qui fait que je dois changer la manière de récupérer les statistiques dans le code. La version 3 de l'API est sortie le 20 mai 2021. De plus, la sortie de la V3 a été faite vers la fin de mon travail de diplôme et les délais sont trop courts pour pouvoir changer de version et modifier tout ce qui a déjà été développé. 
 
+\subsection{De Multiprocessing à Asynchrone}
+Dans le point \ref{multiprocessing}, j'explique que j'avais besoin de paralléliser les prédictions pour augmenter les performances\footnote{Pour rappel, une prédiction met plus ou moins environ 8 secondes à se faire (appels à l'API inclus) }. J'ai donc pensé que la solution était de faire du multiprocessing (ayant fait des appels à l'API de manière synchrone, je ne voulais pas modifier tout le travail que j'avais déjà fait). J'ai donc développé le multiprocessing dans mon projet mais j'ai remarqué que lorsque c'était la première fois que je faisais une prédiction sur une compétition entière, les subprocess se bloquaient vers la fin du calcul de la prédiction. J'ai essayé de comprendre la raison mais débugger du multiprocessing est assez complexe. J'ai donc posé la question sur un groupe communautaire, s'il y avait une possibilité quelconque de débugger du multiprocessing, en expliquant le projet et ce que je cherche à faire avec le multiprocessing. Et des personnes de la communauté m'ont répondu que dans mon cas, la meilleure chose était de passer à de l'asynchrone. L'approche asynchrone était bien plus adapté à ce dont j'avais besoin. En effet, en réalité ce que je cherchais à faire avec le multiprocessing était d'éviter qu'on attende que les prédictions se fassent les unes après les autres (que le code se \textbf{bloque} sachant que le code prenait beaucoup de temps sur les appels de l'API) et donc de les faire toutes en parallèles. C'est clairement le but de l'asynchrone. De plus, le multiprocessing a un coût en ressources car il crée plusieurs interpréteurs indépendants.
+
+Pour régler le soucis qui faisait bloquer les subprocess du multiprocessing, j'ai commencé par essayer de rendre asynchrone mes méthodes de haut niveau (les méthodes du Provider). J'ai commencé à le faire et je me suis vite rendu compte que l'asynchrone est nécessaire partout, car les appels à l'API étaient bloquant. J'ai donc du rendre tout mon code asynchrone. 
+
+\textbf{Notez que tout le code aperçu plus haut qui contiennent des appels à l'API sont passés en asynchrone.}
+
+\textbf{De plus, certaines méthodes ont été ajoutés suite à l'implémentation de l'asynchrone dans le projet.}
+
+\subsubsection{Comment fonctionne l'asynchrone ?}
+
+On a pu le voir brièvement dans le point \ref{cacheAppelsAPI} mais je vais l'expliquer plus clairement
+
+\lstinputPython{async-get-match-infos}
+
+Voici un exemple très court de l'utilisation de l'asynchrone en Python. Tout d'abord, la méthode doit avoir le mot-clé \texttt{async} et une méthode doit forcément passer par une instruction \texttt{await}. Si une méthode asynchrone ne passe pas par une instruction \texttt{await}, une Exception est déclenchée. L'instruction \texttt{await} attend la réponse de la méthode avant de passer à la suite. Lorsque l'on utilise l'instruction \texttt{await}, l'objet est un \texttt{awaitable}.
+La plus grosse utilité est de le combiner avec la librairie \texttt{asyncio} et sa méthode \texttt{wait()}.
+
+\lstinputPython{asyncio-wait}
+
+Cette méthode permet de lancer plusieurs objects \texttt{awaitable}, qu'on appelle \texttt{Tasks}, simultanément. La méthode est finie lorsque toutes les \texttt{Tasks} sont finies\footnote{Un paramètre \texttt{return\_when} est présent et la valeur par défaut est \texttt{ALL\_COMPLETED}}. Le retour de cette méthode est deux sets de \texttt{Tasks}, un set avec les \texttt{Tasks} finies et l'autre avec les \texttt{Tasks} qui sont en attente ou en cours.
+
+\subsubsection{\texttt{Requests} à \texttt{Aiohttp}}
+
+Après avoir compris que je devais changer tout le système d'appel à l'API en asynchrone, j'ai remarqué que la librairie que j'utilisais initialement ne permet pas de faire des appels HTTP asynchrones. J'ai donc trouvé \texttt{aiohttp} qui permet de faire ces appels en asynchrone.
+
+\lstinputPython{aiohttp-getAction}
+
+En comparaison avec le listing \ref{list-requests-getAction}, le listing \ref{list-aiohttp-getAction} appelle l'API de manière asynchrone grâce à la librairie \texttt{aiohttp}\footnote{\url{https://docs.aiohttp.org/en/stable/\#getting-started}}. Le statement \texttt{with} permet de gérer plus efficacement les Exceptions.
+
+\subsubsection{Transfert des méthodes await dans une nouvelle méthode}
+
+Auparavant, lorsque je devais créer une prédiction, j'appelais uniquement le constructeur de \texttt{Prediction} qui faisait l'appel au Provider. Cependant, maintenant que je suis passé sur de l'asynchrone, il faut utiliser l'instruction \texttt{await} qui fonctionne uniquement sur des méthodes \texttt{async}. Selon moi, ce n'est pas une bonne pratique de faire un constructeur qui est asynchrone. C'est pourquoi j'ai créé une fonction qui est asynchrone et qui appelle le Provider après avoir instancié l'objet de la classe.
+
+\lstinputPython{async-make-prediction}
+
+On peut voir qu'après avoir créé l'objet \texttt{Prediction}, j'appelle la méthode asynchrone \texttt{create\_prediction()} qui fait donc l'appel au Provider de manière asynchrone.
+
+\newpage
+
 \section{Développement Python Flask}
 
-Python Flask est un framework web Python très simple d'utilisation et très puissant. Il utilise Jinja2 pour le templating et Werkzeug pour faire la communication avec entre un serveur web et une application web. 
+Python Flask est un framework web Python très rapide à prendre en main et très puissant. Il utilise Jinja2 pour le templating et Werkzeug pour faire la communication avec entre un serveur web et une application web. 
 
 \subsection{Templating}
 
@@ -1332,6 +1413,22 @@ On pourrait réduire le nombre d'appels faits à l'API. Par exemple dans le list
 
 \newpage
 
+\subsection{Cookies}
+
+Comme vous pouvez l'apercevoir dans la fonctionnalité "Head To Head" ou encore dans l'accueil , j'avais initialement fait un cache (stocké côté serveur) pour les erreurs venant de l'utilisateur, mais je me suis rendu compte que c'est problématique si plusieurs utilisateurs utilisent le site en simultané. Par exemple, un nouvel utilisateur verrait une erreur en arrivant pour la première fois sur la page H2H, tout ça car un autre utilisateur aurait généré une erreur de son côté.
+
+C'est pourquoi, j'ai décidé d'utiliser les cookies. Ils permettent de stocker des données chez le client. Pour afficher des erreurs qui sont propre à chaque utilisateur, c'est une bien meilleure solution que de les stocker du côté du serveur.
+
+\lstinputPython{cookies-exemple}
+
+Dans le code du listing \ref{list-cookies-exemple}, on doit d'abord créer un objet \texttt{Response}, car c'est cet objet qui nous permet de créer un cookie. Comme paramètre, on donne le lien vers la première page de la fonctionnalité "Head To Head" et on retourne l'objet à \texttt{Response} à la fin. Pour créer un cookie, on appelle la méthode \texttt{set\_cookie}, avec comme premier paramètre la "clé" du cookie, le deuxième est le contenu du cookie et enfin le dernier est son temps de vie en seconde. Ici, son temps de vie est d'une seconde car on l'utilise pour afficher une erreur (L'erreur est affiché qu'une seule fois). 
+
+\lstinputPython{cookies-route}
+
+On peut apercevoir sur la route du listing \ref{list-cookies-route} que cette fois, on fait un \texttt{try except}, car la méthode \texttt{get()} de \texttt{request.cookies} retourne une Exception si la clé n'existe pas. Si on a bien récupéré le cookie, on le transmet à la vue. Autrement, on ne transmet pas l'erreur.
+
+\newpage
+
 \section{Tests}
 
 \subsection{Tests des méthodes du code}
@@ -1341,6 +1438,7 @@ J'ai créé différents scripts qui testent les méthodes de chacune des classes
 \lstinputPython{test-provider}
 
 Ici, je veux tester que la méthode \texttt{get\_all\_stats\_from\_teams()} retourne bien les données dans le bon format. Cette dernière est asynchrone, c'est pourquoi je la mets dans une méthode async car le mot clé \texttt{await} ne peut pas être utilisé s'il n'est pas dans une méthode \texttt{async}. Autrement, j'aurais pu mettre la méthode directement dans le \texttt{asyncio.run()} mais ce n'est pas possible si je souhaite appeler plusieurs méthodes asynchrones à la suite.
+Tous les autres tests des méthodes font globalement la même chose (test sur le format du retour de la méthode).
 
 \subsection{Tests sur la vue}
 
@@ -1364,8 +1462,7 @@ J'ai donc testé uniquement la fonctionnalité "Head To Head" et la fonctionnali
     \begin{tabular}{|m{4cm}|m{4cm}|m{6cm}|}
     \hline
     \textbf{Commande} & \textbf{Valeur}                                      & \textbf{Description}                                                                    \\ \hline
-    open              &                                                      & Ouverture du site                                                                       \\ \hline
-    click             &                                                      & Ouverture de la fonctionnalité "Head To Head"                                           \\ \hline
+    open              &                                                      & Ouverture de la route "Head To Head"                                           \\ \hline
     click             &                                                      & Ouverture de la fenêtre modale de la ligue                                              \\ \hline
     click             &                                                      & Sélection de la ligue (par défaut : "Premier League")                                   \\ \hline
     click             &                                                      & Ouverture de la première fenêtre modale d'équipe                                        \\ \hline
@@ -1378,6 +1475,8 @@ J'ai donc testé uniquement la fonctionnalité "Head To Head" et la fonctionnali
     assertTextPresent & You cannot pick the same teams to make a prediction. & On vérifie que l'erreur apparaisse bien sur la vue                                      \\ \hline
     assertVisible     &                                                      & On vérifie qu'on ait le bouton pour choisir la ligue. (Retour à la page H2H principale) \\ \hline
     \end{tabular}
+    \label{tab:H2HMemeEquipes}
+    \caption{H2H - Erreur même équipe sélectionnée}
 \end{table}
 
 \newpage
@@ -1393,6 +1492,8 @@ J'ai donc testé uniquement la fonctionnalité "Head To Head" et la fonctionnali
     assertTextPresent & Unknown league. & Vérification que l'erreur apparaisse sur la vue                                                                                                   \\ \hline
     assertVisible     &                 & On vérifie qu'on ait le bouton pour choisir la ligue. (Retour à la page H2H principale)                                                           \\ \hline
     \end{tabular}
+    \label{tab:H2HLigueInconnue}
+    \caption{H2H - Ligue inconnue}
 \end{table}
 
 \subsubsection{Test H2H : Équipes pas dans la ligue sélectionnée}
@@ -1407,6 +1508,8 @@ J'ai donc testé uniquement la fonctionnalité "Head To Head" et la fonctionnali
     assertTextPresent & Teams not found in this league. & On vérifie que l'erreur apparaisse bien sur la vue.                                                           \\ \hline
     assertVisible     &                 & On vérifie qu'on ait le bouton pour choisir la ligue. (Retour à la page H2H principale)                                                           \\ \hline
     \end{tabular}
+    \label{tab:H2HEquipePasDansLigue}
+    \caption{H2H - Équipes pas dans la ligue sélectionnée}
 \end{table}
 
 \newpage
@@ -1432,6 +1535,8 @@ J'ai donc testé uniquement la fonctionnalité "Head To Head" et la fonctionnali
     assertTextPresent & Prediction :    & Vérification que le résultat de la prédiction soit retourné par l'application \\ \hline
     assertNotVisible  &                 & On s'assure que le bouton pour choisir la ligue soit pas visible              \\ \hline
     \end{tabular}
+    \label{tab:H2HSucces}
+    \caption{H2H - Succès}
 \end{table}
 
 \newpage
@@ -1447,6 +1552,8 @@ J'ai donc testé uniquement la fonctionnalité "Head To Head" et la fonctionnali
     assertTextPresent & Unknown league. & Vérification que l'erreur apparaisse sur la vue                                                                                                   \\ \hline
     assertVisible     &                 & On vérifie qu'on ait le bouton pour choisir la ligue. (Retour à la page Competitions principale)     \\ \hline
     \end{tabular}
+    \label{tab:CompLigueInconnue}
+    \caption{Competition - Ligue inconnue}
 \end{table}
 
 \subsubsection{Test Competition : Identifiant de l'équipe incorrect}
@@ -1455,14 +1562,16 @@ J'ai donc testé uniquement la fonctionnalité "Head To Head" et la fonctionnali
     \centering
     \begin{tabular}{|m{4cm}|m{4cm}|m{6cm}|}
     \hline
-    \textbf{Commande} & \textbf{Valeur}                                      & \textbf{Description}                                                                    \\ \hline
+    \textbf{Commande} & \textbf{Valeur} & \textbf{Description} \\ \hline
     open              &                 & Ouverture de la route "Competitions" \\ \hline
-    click             &                 & Ouverture de la fenêtre modale pour la sélection de ligue                                                                                                   \\ \hline
-    click             &                 & Validation du choix de la ligue (par défaut : "Premier League")     \\ \hline
+    click             &                 & Ouverture de la fenêtre modale pour la sélection de ligue \\ \hline
+    click             &                 & Validation du choix de la ligue (par défaut : "Premier League") \\ \hline
     open              &                 & Injection d'un ID invalide depuis l'url   \\ \hline
-    assertTextPresent & N°              & Vérification que le tableau soit affiché ("N°" est le nom d'une colonne dans le classement de la compétition)     \\ \hline
+    assertTextPresent & N*              & Vérification que le tableau soit affiché ("N*" est le nom d'une colonne dans le classement de la compétition)     \\ \hline
     assertTextPresent & This team is not in the league. & Vérification que l'erreur apparaisse bien sur la vue.     \\ \hline
     \end{tabular}
+    \label{tab:CompIdIncorrect}
+    \caption{Competition - ID d'équipe incorrect pour l'historique des matchs}
 \end{table}
 
 \newpage
@@ -1471,21 +1580,35 @@ J'ai donc testé uniquement la fonctionnalité "Head To Head" et la fonctionnali
 
 \begin{table}[htp]
     \centering
-    \begin{tabular}{|l|l|l|}
+    \begin{tabular}{|m{4cm}|m{4cm}|m{6cm}|}
     \hline
     \textbf{Commande} & \textbf{Valeur}            & \textbf{Description}                                                                                          \\ \hline
     open              &                            & Ouverture de la route "Competitions"                                                                          \\ \hline
     click             &                            & Ouverture de la fenêtre modale pour la sélection de ligue                                                     \\ \hline
     select            & label=Premier League       & Choix de la ligue "Premier League"                                                                            \\ \hline
     click             &                            & Validation                                                                                                    \\ \hline
-    assertTextPresent & N°                         & Vérification que le tableau soit affiché ("N°" est le nom d'une colonne dans le classement de la compétition) \\ \hline
+    assertTextPresent & N*                         & Vérification que le tableau soit affiché ("N*" est le nom d'une colonne dans le classement de la compétition) \\ \hline
     assertNotVisible  &                            & Vérification que le bouton qui affiche la fenêtre modale de sélection de ligue ait disparu.                   \\ \hline
     click             &                            & Clic sur "Manchester City" afin d'avoir accès à l'historique de l'équipe.                                     \\ \hline
     assertTextPresent & History of Manchester City & On s'assure qu'on arrive sur la page de l'historique de l'équipe choisie auparavant.                          \\ \hline
     \end{tabular}
+    \label{tab:CompSucces}
+    \caption{Competition - Succès}
 \end{table}
 
+\newpage
+
+
+
+
+
+
+
+
+
 \section{Retour d'expérience}
+
+\newpage
 
 \section{Conclusion}
 
