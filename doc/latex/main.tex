@@ -784,6 +784,22 @@ Dans l'exemple de la figure \ref{fig:explicationStatsManquante}, disons que nous
 }
 \end{lstlisting}
 
+\subsubsection{Choix des championnats disponibles}
+
+On a vu que d'évaluer le niveau des différents championnats est très complexe. Maintenant, on va parler du choix des championnats qui seront disponibles dans l'application.
+
+Tout d'abord, le choix de ne pas prendre les championnats des équipes nationales (Euro, Coupe du monde, Coupe d'Afrique des Nations, etc.) est important à argumenter selon moi.
+Pourquoi ai-je choisi de prendre uniquement prendre les championnats spécifiques à chaque pays ? 
+Il y a deux explications  :
+\begin{itemize}
+    \item Le fréquence des matchs annuels
+    \item Le renouvellement des joueurs de l'équipe nationale (sélectionneur)
+\end{itemize}
+
+La fréquence de matchs annuels pour les équipes nationales est très bas. Le Portugal a joué 6 matchs en 2020, 8 matchs en 2019. La France en a joué 6 en 2020 et 11 en 2019. L'Allemagne en a joué 6 en 2020 et 10 en 2019. On voit bien que le nombre de matchs par année est très faible. De plus, ces matchs sont des matchs contre des équipes de niveau totalement différents. De plus, des matchs amicaux peuvent être joués dans cette période et les équipes nationales peuvent expérimenter des tactiques ou ne pas jouer le match à 100\% .
+
+Ensuite, le renouvellement des joueurs de l'équipe nationale est fortement lié au fait qu'il y a peu matchs qui sont joués annuellement par une équipe nationale. En 2 ans, la France a joué un total de 17 matchs et l'effectif de l'équipe 2 ans plus tard peut être \textbf{très différent}. C'est donc très compliqué d'établir une prédiction entre deux équipes avec des résultats datant d'il y a 2 ans.
+
 \subsubsection{Choix de la pondération des statistiques}
 \label{choixPondStat}
 
@@ -1432,7 +1448,11 @@ La sélection de la ligue est la même que la sélection de la ligue pour la fon
 
 Pareil que pour la fonctionnalité "Head To Head", j'affiche un gif de loading avec du JS (JQuery) après le choix de la ligue.
 
+Pour ce qui concerne la prédiction sur le championnat, voici comment je m'y suis pris. Tout d'abord, je vérifie que l'ID de la ligue est dans la liste des ligues disponible dans l'application. Si c'est le cas, on crée la compétition et on lance l'élaboration de la prédiction globale puis on récupère le résultat final. Après avoir fait cela, on récupère le contenu de la variable \texttt{missed\_some\_predictions} de \texttt{Competition} qui permet de savoir si tout les matchs ont eu une prédiction (donc qu'il y a eu aucune erreur lors du traitement). Après ça, je récupère une erreur qui est potentiellement stocké dans les cookies (on comprendra)
+
 \lstinputPython{competition-make-prediction}
+
+\subsubsection{Historique des matchs}
 
 \subsection{Cookies}
 
