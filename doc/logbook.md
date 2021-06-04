@@ -2004,9 +2004,11 @@ On continue de documenter la vue compét
 
 * Doxygen du code + commentaire
 * Documentation de la vue compétition
+  * Il manque l'aperçu du rendu des vues
 
 Choses à faire demain :
 
+* Screenshot de la vue compét à mettre dans le rapport
 * Retour d'expérience
 * Conclusion
   * Remerciements
