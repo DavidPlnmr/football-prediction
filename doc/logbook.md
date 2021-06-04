@@ -1997,3 +1997,18 @@ Choses à faire demain :
 Début doc de la vue compétition
 
 Documentation du code correctement pour exportation avec Doxygen.
+
+On continue de documenter la vue compét
+
+#### Recap de la journée
+
+* Doxygen du code + commentaire
+* Documentation de la vue compétition
+
+Choses à faire demain :
+
+* Retour d'expérience
+* Conclusion
+  * Remerciements
+  * etc...
+* S'inspirer de Perrin pour le squelette

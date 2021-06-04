@@ -1,0 +1,57 @@
+{% for i in range(history_count) %}
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body">
+          <p class="card-text">
+          {% if history[i]["Home Name"] == history[i]["Prediction"] %}
+          <div class="row">
+            <div class="col-sm-8">
+            <a href="{{  url_for("competitions_history", league_id=league_id, team_id=history[i]["Home Key"]) }}"><img style="width:25px" src="{{ history[i]["Home Badge"] }}" alt="{{history[i]["Home Name"]}}_logo">&nbsp;{{history[i]["Home Name"]}}</a>
+            </div>
+            <div class="col-sm-4">
+              <button type="button" class="btn btn-success text-right"></button>
+            </div>
+            <div class="col-sm-8">
+            <a href="{{ url_for("competitions_history", league_id=league_id, team_id=history[i]["Away Key"]) }}"><img style="width:25px" src="{{ history[i]["Away Badge"] }}" alt="{{history[i]["Away Name"]}}_logo">&nbsp;{{history[i]["Away Name"]}}</a>
+            </div>
+            <div class="col-sm-4">
+              <button type="button" class="btn btn-danger text-right"></button>
+            </div>
+          </div>
+          {% elif history[i]["Away Name"] == history[i]["Prediction"] %}
+          <div class="row">
+            <div class="col-sm-8">
+            <a href="{{  url_for("competitions_history", league_id=league_id, team_id=history[i]["Home Key"]) }}"><img style="width:25px" src="{{ history[i]["Home Badge"] }}" alt="{{history[i]["Home Name"]}}_logo">&nbsp;{{history[i]["Home Name"]}}</a>
+            </div>
+            <div class="col-sm-4">
+              <button type="button" class="btn btn-danger text-right"></button>
+            </div>
+            <div class="col-sm-8">
+            <a href="{{ url_for("competitions_history", league_id=league_id, team_id=history[i]["Away Key"]) }}"><img style="width:25px" src="{{ history[i]["Away Badge"] }}" alt="{{history[i]["Away Name"]}}_logo">&nbsp;{{history[i]["Away Name"]}}</a>
+            </div>
+            <div class="col-sm-4">
+              <button type="button" class="btn btn-success text-right"></button>
+            </div>
+          </div>
+          {% else %}
+          <div class="row">
+            <div class="col-sm-8">
+            <a href="{{  url_for("competitions_history", league_id=league_id, team_id=history[i]["Home Key"]) }}"><img style="width:25px" src="{{ history[i]["Home Badge"] }}" alt="{{history[i]["Home Name"]}}_logo">&nbsp;{{history[i]["Home Name"]}}</a>
+            </div>
+            <div class="col-sm-4">
+              <button type="button" class="btn btn-warning text-right"></button>
+            </div>
+            <div class="col-sm-8">
+            <a href="{{ url_for("competitions_history", league_id=league_id, team_id=history[i]["Away Key"]) }}"><img style="width:25px" src="{{ history[i]["Away Badge"] }}" alt="{{history[i]["Away Name"]}}_logo">&nbsp;{{history[i]["Away Name"]}}</a>
+            </div>
+            <div class="col-sm-4">
+              <button type="button" class="btn btn-warning text-right"></button>
+            </div>
+          </div>
+          {% endif %}
+          </p>
+        </div>
+      </div>
+      <br>  
+    </div>    
+  {% endfor %}

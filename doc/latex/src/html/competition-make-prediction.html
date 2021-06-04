@@ -1,0 +1,30 @@
+{% if standings %}
+  <div class="text-center">
+    <table class="table table-striped">
+      <thead class="thead-dark">
+          <tr>
+          <th>N°</th>
+          <th class="text-left">Name</th>
+          <th>Games</th>
+          <th>W</th>
+          <th>D</th>
+          <th>L</th>
+          <th>Points</th>
+          </tr>
+      </thead>
+      {% for team in range(standings_count) %}
+      <tr>
+      
+      <td>{{team+1}}</td>
+      <td class="text-left"><a href="{{ url_for("competitions_history", league_id=league_id, team_id=standings[team]["Key"]) }}"><img style="width: 25px;" src="{{standings[team]["Badge"]}}" alt="{{standings[team]["Name"]}}_logo">&nbsp;{{ standings[team]["Name"] }}</a></td>
+      <td>{{ standings[team]["Games"] }}</td>
+      <td>{{ standings[team]["Wins"] }}</td>
+      <td>{{ standings[team]["Draws"] }}</td>
+      <td>{{ standings[team]["Losses"] }}</td>
+      <td>{{ standings[team]["Points"] }}</td>
+      </tr>
+      
+      {% endfor %}
+    </table>
+  </div>
+  {% endif %}
