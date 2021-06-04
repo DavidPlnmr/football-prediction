@@ -1,4 +1,10 @@
 #!/usr/bin/python3
+
+##
+# @author David Paulino
+# @brief Competition class
+# @date 04.06.2021
+# @version 1.0
 from .provider_class import Provider
 from .prediction_class import Prediction
 import lib.constants
@@ -10,21 +16,25 @@ class Competition:
     Class to make a prediction on a whole competition
     """
     def __init__(self, league_id, log_path=""):
-        self.standings =  []
-        self.league_id = league_id
-        self.prov = Provider(log_path)
+        """
+        Constructor of the class
+        """
+        self.__standings =  []
+        self.__league_id = league_id
+        self.__prov = Provider(log_path)
+        ## Public var to know if all the predictions has been made
         self.missed_some_predictions = False
     
     async def create_standing(self):
         """
         Async call to create the standing
         """
-        teams = await self.prov.get_teams_from_league(int(self.league_id))
+        teams = await self.__prov.get_teams_from_league(int(self.__league_id))
         self.__history = []
-        self.standing_computed = False
+        self.__standing_computed = False
         
         for i in range(len(teams)):
-            self.standings.append({
+            self.__standings.append({
                 "Key" : teams[i]["team_key"],
                 "Name" : teams[i]["team_name"],
                 "Badge" : teams[i]["team_badge"],
@@ -42,8 +52,8 @@ class Competition:
         matches = []
         if len(self.__history) <= 0:
             
-            for first_team in self.standings:
-                for second_team in self.standings:
+            for first_team in self.__standings:
+                for second_team in self.__standings:
                     exist = False
                     
                     if [first_team["Key"],
@@ -111,8 +121,8 @@ class Competition:
         """
         Get the standing with the self.__history var. It will return the standing of the competition sorted by points
         """
-        if not self.standing_computed:   
-            for team in self.standings:
+        if not self.__standing_computed:   
+            for team in self.__standings:
                 team_name = team["Name"]
                 for i in range(len(self.__history)):
                     game = self.__history[i]
@@ -127,9 +137,9 @@ class Competition:
                         else:
                             team["Losses"] += 1
                             team["Points"] += lib.constants.POINTS_FOR_A_LOSE
-            self.standings = sorted(self.standings, key=sort_by_team_points, reverse=True)
+            self.__standings = sorted(self.__standings, key=sort_by_team_points, reverse=True)
         
-        return self.standings
+        return self.__standings
     
     
 def sort_by_team_points(team):

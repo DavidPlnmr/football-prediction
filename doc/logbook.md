@@ -1991,3 +1991,9 @@ Choses à faire demain :
 * Expliquer passage Flask 1.0 à 2.0 car async
   * Expliquer l'async dans la vue en corrélation avec l'async dans le backend
 * Manuel utilisateur
+
+### 04.06.2021
+
+Début doc de la vue compétition
+
+Documentation du code correctement pour exportation avec Doxygen.

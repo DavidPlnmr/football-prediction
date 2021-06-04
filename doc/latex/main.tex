@@ -1448,7 +1448,7 @@ La sélection de la ligue est la même que la sélection de la ligue pour la fon
 
 Pareil que pour la fonctionnalité "Head To Head", j'affiche un gif de loading avec du JS (JQuery) après le choix de la ligue.
 
-Pour ce qui concerne la prédiction sur le championnat, voici comment je m'y suis pris. Tout d'abord, je vérifie que l'ID de la ligue est dans la liste des ligues disponible dans l'application. Si c'est le cas, on crée la compétition et on lance l'élaboration de la prédiction globale puis on récupère le résultat final. Après avoir fait cela, on récupère le contenu de la variable \texttt{missed\_some\_predictions} de \texttt{Competition} qui permet de savoir si tout les matchs ont eu une prédiction (donc qu'il y a eu aucune erreur lors du traitement). Après ça, je récupère une erreur qui est potentiellement stocké dans les cookies (on comprendra)
+Pour ce qui concerne la prédiction sur le championnat, voici comment je m'y suis pris. Tout d'abord, je vérifie que l'ID de la ligue est dans la liste des ligues disponible dans l'application. Si c'est le cas, on crée la compétition et on lance l'élaboration de la prédiction globale puis on récupère le résultat final. Après avoir fait cela, on récupère le contenu de la variable \texttt{missed\_some\_predictions} de \texttt{Competition} qui permet de savoir si tout les matchs ont eu une prédiction (donc qu'il y a eu aucune erreur lors du traitement). Après ça, je récupère une erreur qui est potentiellement stocké dans les cookies (on comprendra dans le prochain point pourquoi cette erreur).
 
 \lstinputPython{competition-make-prediction}
 

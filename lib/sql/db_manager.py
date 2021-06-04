@@ -1,4 +1,11 @@
 #!/usr/bin/python3
+
+##
+# @author David Paulino
+# @brief Manager of the database. All the statements are presents here. 
+# @date 04.06.2021
+# @version 1.0
+
 import mysql.connector
 import logging
 

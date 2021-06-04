@@ -1,4 +1,11 @@
 #!/usr/bin/python3
+
+##
+# @author David Paulino
+# @brief Provider class, StatsError, NoMatchError and APICallNotCound Exceptions
+# @date 04.06.2021
+# @version 1.0
+
 import os
 from dotenv import load_dotenv
 import logging
@@ -18,6 +25,11 @@ class Provider:
     """
     __instance = None
     def __new__(cls, log_path='./log/app.log'):
+        """
+        Constructor of the Provider. 
+        
+        It uses the singleton design pattern.
+        """
         if cls.__instance is None:
             cls.__instance = super(Provider, cls).__new__(cls)    
             load_dotenv()
@@ -266,9 +278,11 @@ class Provider:
         Save the prediction in the DB
         """
         return self.__db_manager.insert_prediction(prediction_winner, home_team_name, away_team_name, league_id, league_name, date_of_game, api_match_id)
-        pass
     
     def save_api_call(self, first_team_name, second_team_name):
+        """
+        Saves the API call in the DB.
+        """
         self.__db_manager.insert_api_call_in_history(first_team_name, second_team_name)
         pass
     
@@ -279,6 +293,9 @@ class Provider:
         return self.__db_manager.get_one_prediction_with_specific_teams_after_date(first_team_name, second_team_name, creation_date)
     
     def get_one_prediction_per_day_with_specific_teams(self, first_team_name, second_team_name):
+        """
+        Get one prediction per day using the two names of the teams given in param
+        """
         return self.__db_manager.get_one_prediction_per_day_with_specific_teams(first_team_name, second_team_name)
     
     def __insert_stats_in_array_for_api(self, match, array, stats_array, required_stats_array):
@@ -360,13 +377,25 @@ class Provider:
             return False
         
     def disconnect(self):
+        """
+        Disconnect the cursor of the DB.
+        """
         self.__db_manager.disconnect()
 
 class StatsError(Exception):
+    """
+    Class that inherit from Exception. It has no special methods. It is just here to have a more precise Exception.
+    """
     pass
 
 class NoMatchError(Exception):
+    """
+    Class that inherit from Exception. It has no special methods. It is just here to have a more precise Exception.
+    """
     pass
 
 class APICallNotFound(Exception):
+    """
+    Class that inherit from Exception. It has no special methods. It is just here to have a more precise Exception.
+    """
     pass

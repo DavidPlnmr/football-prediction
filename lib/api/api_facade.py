@@ -1,5 +1,11 @@
 #!/usr/bin/python3
+#
 
+##
+# @author David Paulino
+# @brief Design pattern : Facade to make calls to an API using asynchronous calls. Aiohttp is used to make the asynchronous HTTP calls.
+# @date 04.06.2021
+# @version 1.0
 import json
 from dotenv import load_dotenv
 import logging
@@ -7,12 +13,16 @@ import aiohttp
 import asyncio
 import time
 
+
 class ApiFacade:
     """
     Facade to call the endpoints of the API.
     """
     def __init__(self, api_key, log_path):
-        self.api_key = api_key
+        """
+        Constructor of the ApiFacade class.
+        """
+        self.__api_key = api_key
         logging.basicConfig(filename=log_path, filemode='a', format='%(asctime)s - %(levelname)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.INFO)
         
     async def __get_action(self, request_params):
@@ -20,7 +30,7 @@ class ApiFacade:
         Private method to call any endpoint of the API
         """
         async with aiohttp.ClientSession() as session:
-            async with session.get(f'https://apiv2.apifootball.com/?APIkey={self.api_key}&{request_params}') as response:
+            async with session.get(f'https://apiv2.apifootball.com/?APIkey={self.__api_key}&{request_params}') as response:
                 
                 start = time.perf_counter()
                 result = await response.text()
