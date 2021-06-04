@@ -1158,6 +1158,8 @@ Pour régler ce soucis, je n'ai pas trouvé d'autre solution que d'avertir tout 
 À noter que la version 3 de l'API est sortie et le soucis a été réglé. Cependant, les statistiques que j'utilise ont "disparu"\footnote{Elles n'ont pas réellement disparu mais elles sont liée à un joueur en particulier. Donc pour les avoir je vais devoir parcourir les statistiques de chacun des joueurs d'un match.} ce qui fait que je dois changer la manière de récupérer les statistiques dans le code. La version 3 de l'API est sortie le 20 mai 2021. De plus, la sortie de la V3 a été faite vers la fin de mon travail de diplôme et les délais sont trop courts pour pouvoir changer de version et modifier tout ce qui a déjà été développé. 
 
 \subsection{De Multiprocessing à Asynchrone}
+\label{multiprocessingToAsync}
+
 Dans le point \ref{multiprocessing}, j'explique que j'avais besoin de paralléliser les prédictions pour augmenter les performances\footnote{Pour rappel, une prédiction met plus ou moins environ 8 secondes à se faire (appels à l'API inclus) }. J'ai donc pensé que la solution était de faire du multiprocessing (ayant fait des appels à l'API de manière synchrone, je ne voulais pas modifier tout le travail que j'avais déjà fait). J'ai donc développé le multiprocessing dans mon projet mais j'ai remarqué que lorsque c'était la première fois que je faisais une prédiction sur une compétition entière, les subprocess se bloquaient vers la fin du calcul de la prédiction. J'ai essayé de comprendre la raison mais débugger du multiprocessing est assez complexe. J'ai donc posé la question sur un groupe communautaire, s'il y avait une possibilité quelconque de débugger du multiprocessing, en expliquant le projet et ce que je cherche à faire avec le multiprocessing. Et des personnes de la communauté m'ont répondu que dans mon cas, la meilleure chose était de passer à de l'asynchrone. L'approche asynchrone était bien plus adapté à ce dont j'avais besoin. En effet, en réalité ce que je cherchais à faire avec le multiprocessing était d'éviter qu'on attende que les prédictions se fassent les unes après les autres (que le code se \textbf{bloque} sachant que le code prenait beaucoup de temps sur les appels de l'API) et donc de les faire toutes en parallèles. C'est clairement le but de l'asynchrone. De plus, le multiprocessing a un coût en ressources car il crée plusieurs interpréteurs indépendants.
 
 Pour régler le soucis qui faisait bloquer les subprocess du multiprocessing, j'ai commencé par essayer de rendre asynchrone mes méthodes de haut niveau (les méthodes du Provider). J'ai commencé à le faire et je me suis vite rendu compte que l'asynchrone est nécessaire partout, car les appels à l'API étaient bloquant. J'ai donc du rendre tout mon code asynchrone. 
@@ -1177,7 +1179,7 @@ La plus grosse utilité est de le combiner avec la librairie \texttt{asyncio} et
 
 \lstinputPython{asyncio-wait}
 
-Cette méthode permet de lancer plusieurs objects \texttt{awaitable}, qu'on appelle \texttt{Tasks}, simultanément. La méthode est finie lorsque toutes les \texttt{Tasks} sont finies\footnote{Un paramètre \texttt{return\_when} est présent et la valeur par défaut est \texttt{ALL\_COMPLETED}}. Le retour de cette méthode est deux sets de \texttt{Tasks}, un set avec les \texttt{Tasks} finies et l'autre avec les \texttt{Tasks} qui sont en attente ou en cours.
+Cette méthode permet de lancer plusieurs objects \texttt{awaitable}, qu'on appelle \texttt{Tasks}, simultanément. La méthode est finie lorsque toutes les \texttt{Tasks} sont finies\footnote{Un paramètre \texttt{return\_when} est présent et la valeur par défaut est \texttt{ALL\_COMPLETED}}. Le retour de cette méthode est deux sets de \texttt{Tasks}, un set avec les \texttt{Tasks} finies et l'autre avec les \texttt{Tasks} qui sont en attente ou en cours. Le paramètre est une liste utilisé grâce aux générateurs\footnote{\url{https://wiki.python.org/moin/Generators}}. 
 
 \subsubsection{\texttt{Requests} à \texttt{Aiohttp}}
 
@@ -1298,6 +1300,7 @@ Pour ce qui concerne le code de la vue, je vous invite à voir le listing \ref{l
 La fonctionnalité Head To Head permet de créer une prédiction hypothétique. L'utilisateur peut créer sa propre prédiction.
 
 \subsubsection{Sélection de la ligue}
+\label{selectionLigueH2H}
 
 Pour commencer, je tiens à rappeler une des spécifications que l'on a au tout départ qui est "on ne peut pas faire de prédiction entre deux équipes de championnat différent"\footnote{Revoir la partie \ref{niveauDifferentChampionnats}.}. Ceci est très important pour la sélection de la ligue. En effet, il nous faut absolument l'identifiant de la ligue pour pouvoir savoir si la prédiction est valable ou non.
 
@@ -1413,6 +1416,24 @@ On pourrait réduire le nombre d'appels faits à l'API. Par exemple dans le list
 
 \newpage
 
+\subsection{Asynchrone sur la vue}
+
+Dans le point \ref{multiprocessingToAsync}, j'ai expliqué que j'ai du passer sur de l'asynchrone. J'ai donc fait la modification de la vue pour qu'elle puisse utiliser de l'asynchrone. Il y a aucune spécificités liées au fait qu'on utilise Flask.
+
+À noter que l'asynchrone ne fonctionne qu'avec la version 2.X de Python Flask.
+
+\subsection{Competitions}
+
+\subsubsection{Sélection de la ligue}
+
+La sélection de la ligue est la même que la sélection de la ligue pour la fonctionnalité "Head To Head" (voir point \ref{selectionLigueH2H}).
+
+\subsubsection{Création de la prédiction sur toute la compétition}
+
+Pareil que pour la fonctionnalité "Head To Head", j'affiche un gif de loading avec du JS (JQuery) après le choix de la ligue.
+
+\lstinputPython{competition-make-prediction}
+
 \subsection{Cookies}
 
 Comme vous pouvez l'apercevoir dans la fonctionnalité "Head To Head" ou encore dans l'accueil , j'avais initialement fait un cache (stocké côté serveur) pour les erreurs venant de l'utilisateur, mais je me suis rendu compte que c'est problématique si plusieurs utilisateurs utilisent le site en simultané. Par exemple, un nouvel utilisateur verrait une erreur en arrivant pour la première fois sur la page H2H, tout ça car un autre utilisateur aurait généré une erreur de son côté.
@@ -1454,6 +1475,8 @@ Comme indiqué dans le point \ref{outilAutomatisationTest}, j'ai utilisé Katalo
 On peut apercevoir que je n'ai pas testé l'accueil de la vue. En effet, la vue ne nécessite aucune manipulation de la part de l'utilisateur, donc il n'y aucun risque vis-à-vis d'une mauvaise intention ou manipulation de l'utilisateur.
 
 J'ai donc testé uniquement la fonctionnalité "Head To Head" et la fonctionnalité "Competitions". 
+
+\newpage
 
 \subsubsection{Test H2H : Même équipes}
 

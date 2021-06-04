@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import logging
 import aiohttp
 import asyncio
+import time
 
 class ApiFacade:
     """
@@ -20,17 +21,19 @@ class ApiFacade:
         """
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://apiv2.apifootball.com/?APIkey={self.api_key}&{request_params}') as response:
-                    
+                
+                start = time.perf_counter()
                 result = await response.text()
+                end = time.perf_counter()
 
                 if response.status == 200: # Code 200 = OK. Healthy connection
                     obj = json.loads(result)
                     # Check if obj contains error so there is problem in the API side
                     if 'error' in obj:
-                        logging.error(f"Error {obj['error']} returned from the API with message : {obj['message']}. Request made : {request_params}")    
+                        logging.error(f"Error {obj['error']} returned from the API with message : {obj['message']}. Request made : {request_params}. Time elapsed : {end-start}")    
                         raise Exception(f"Error with the API : {obj['message']}. Request made : {request_params}")
                     else: # No error from the API we can return the result
-                        logging.info(f"Request to the API with the params: {request_params}.")
+                        logging.info(f"Request to the API with the params: {request_params}. Time elapsed : {end-start}")
                         return obj # decode to get the content in string
                 else:
                     # Error from the library
