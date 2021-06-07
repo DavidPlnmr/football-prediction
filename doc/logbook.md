@@ -2014,3 +2014,47 @@ Choses à faire demain :
   * Remerciements
   * etc...
 * S'inspirer de Perrin pour le squelette
+
+### 07.06.2021
+
+Doxygen dans "Technologies utilisées" dans la doc
+
+"Retour d'expérience"
+
+* Problèmes rencontrés
+  * Multiprocess
+  * Appel à l'api
+* Zone grise
+  * Tests
+  * Planification
+* Résultat
+* Amélio futures
+* Bilan personnel
+* Apports personnels
+
+Conclusion
+
+* Remerciements
+
+Choses à faire absolument :
+
+* régler le cache de la page d'accueil **[DONE]**
+* Ajout de point positifs avant les problèmes rencontrés **[DONE]**
+* Régénérer la doc doxygen **[DONE]**
+* Push le site sur le serveur mis a dispo par M. Maréchal et éventuellement le documenter
+* Manuel utilisateur
+
+J'ai du fix du code après avoir fait les tests de la vue et une ligne contenait "call_data" alors que j'avais renommé la méthode en "create_prediction"
+
+Bref du coup demain il faut reclone le projet sur le conteneur distant et installer tout ce qu'il faut etc.
+
+#### Recap de la journée
+
+* Doc finie
+* Il manque le manuel user
+
+Pour demain :
+
+* Recompiler la doc doxy
+* Push le site sur le conteneur proxmox
+* Manuel user

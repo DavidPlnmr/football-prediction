@@ -556,6 +556,12 @@ Ce paquet permet d'insérer des codes sources dans notre PDF. Il y a la possibil
 \noindent\textbf{VHistory}
 Ce paquet apporte du versioning automatique à \LaTeX. Il gère automatiquement le numéro de version et les auteurs des versions.
 
+\subsubsection{Doxygen}
+Doxygen\footnote{\url{https://www.doxygen.nl/index.html}} est un générateur de documentation libre de droit qui permet de produire une documentation à partir du code source d'un logiciel. Il peut exporter la documentation en HTML et/ou \LaTeX{}. Pour ce faire, il faut utiliser la syntaxe du langage dans lequel on écrit le code source. Doxygen va alors analyser tout le code pour produire une documentation générée automatiquement. Pour Python, la syntaxe est \newline 
+\texttt{"""} \newline
+\texttt{Comments. } \newline
+\texttt{"""} \newline
+
 \subsection{Outil d'automatisation de tests}
 \label{outilAutomatisationTest}
 
@@ -589,7 +595,7 @@ Le graphique sur la figure \ref{fig:dashboardTestOps} est le graphique qui montr
 
 \subsection{Bootstrap}
 
-Bootstrap\footnote{\url{https://getbootstrap.com/}} est une collection d'outils qui permet de simplifier la création du design de sites et d'applications web. Des templates d'application sont aussi disponibles pour une structure déjà fait. Bootstrap permet de gagner du temps sur le design de son site.
+Bootstrap\footnote{\url{https://getbootstrap.com/}} est une collection d'outils qui permet de simplifier la création du design de sites et d'applications web. Des templates d'application sont aussi disponibles pour une structure déjà faite. Bootstrap permet de gagner du temps sur le design de son site.
 
 \subsubsection{Utilisation}
 
@@ -1652,19 +1658,110 @@ J'ai donc testé uniquement la fonctionnalité "Head To Head" et la fonctionnali
 
 \newpage
 
-
-
-
-
-
-
-
-
 \section{Retour d'expérience}
+
+\subsection{Points positifs}
+
+Globalement, j'ai pu ressortir pas mal de points positifs concernant ce travail de diplôme. Tout d'abord, le fait de travailler sur un projet aussi conséquent et de cette ampleur. C'est une expérience que j'ai très rarement fait dans toute ma formation et j'en ressors toujours du positif.
+
+Ensuite, l'apprentissage de nouvelles technologies est quelque chose de positif. Cela m'a appris à comprendre de nouveaux principes de programmation (multiprocessing, asynchrone). 
+
+Enfin, je ressors de positif une pratique que j'ai rarement effectué et que j'ai expérimenté réellement durant tout mon travail. Le fait de poser mes réflexions sur une feuille et de schématiser le fonctionnement des algorithmes sur une feuille. Cela a peut-être l'air d'être insignifiant mais j'ai vraiment ressenti un gain de productivité grâce à ça. Généralement, je commençais directement à coder mais ici, ça m'a permis de trouver plein de problèmes avant l'implémentation de certains algorithmes.
+
+\subsection{Problèmes rencontrés}
+
+\subsubsection{Multiprocessing}
+Ce point va sûrement se répéter avec le point \ref{multiprocessingToAsync}.
+
+Le problème que j'ai rencontré avec le multiprocessing était que les Process se bloquaient pour une raison inconnue que je n'ai pas réussi à trouver. Ce problème a été rencontré lors du développement de la classe \texttt{Competition}. Débugger un code qui utilise du multiprocessing est très complexe et je n'ai malheureusement pas trouvé la source du problème. Cependant, j'ai tout de même trouvé une solution. En effet, après avoir posé mon problème sur un forum communautaire, j'ai reçu des réponses rapides et pertinentes. Et la majorité des réponses me conseillait d'utiliser de l'asynchrone plutôt que du multiprocessing, car c'était beaucoup plus adapté à mon travail. Pour rappel, j'avais choisi de faire du multiprocessing, car si je voulais passer sur de l'asynchrone initialement, j'aurais du changer une bonne partie de mon code (au final, j'ai du le faire quand même).
+
+Après être passé sur de l'asynchrone et avoir changé mes méthodes de bas et de haut niveaux, je n'ai plus eu de problèmes.
+
+\subsubsection{Fréquence d'appel à l'API trop élevée}
+Ce problème a été présent lors de l'asynchrone et aussi du multiprocessing. Pour être au clair, pour prédire une compétition, des appels à l'API sont fait pour récupérer les résultats des derniers matchs de chacune des équipes. Cependant, la quantité d'appels qui sont faits était très élevée. Cela avait pour conséquence de rendre le serveur de l'API que j'utilise très lent et il arrivait parfois qu'il retourne des erreurs \texttt{500}. J'ai tout de même réussi à "résoudre" ce soucis en faisant un cache sur les appels faits dans la journée pour réduire le nombre d'appels fait à l'API de manière considérable. Cependant, le soucis va tout de même apparaître la première fois que l'on prédit une compétition dans la journée.
+
+\subsection{Zone grise}
+
+\subsubsection{Planification}
+
+La planification dans ce projet a été dans une "zone grise"\footnote{J'entends par "zone grise" le fait que ça ait été un point faible mais que j'en ai pas réellement souffert.}. Il y a eu un manque de planification dans mon projet. Je n'avais pas réellement idée du temps que j'allais prendre pour produire la classe \texttt{Prediction}, la classe \texttt{Competition} ou encore pour produire la vue. De plus, je ne me suis pas remis en question sur l'importance et la priorité des fonctionnalités.
+
+Tout cela aurait pu m'être très problématique si j'avais rencontré des points bloquants lors de mon travail. Cependant, je spécifie, je mets la planification dans le point "zone grise" car cela ne m'a pas porté préjudice.
+
+\subsubsection{Tests}
+
+Une autre zone grise sont les tests (plus particulièrement, les tests du "backend"). Effectivement, il aurait été plus judicieux de tester unitairement les méthodes du backend (par exemple la classe \texttt{Prediction}). Je n'ai pas fait d'analyse complète sur toutes mes méthodes pour savoir lesquelles est-ce que je devrais tester. En effet, il y a tout de même quelques problèmes si je veux tester la classe \texttt{Prediction}, le soucis est que cette dernière peut avoir un résultat totalement différent d'un jour à l'autre selon la forme de l'équipe. Autrement, j'aurais pu tester unitairement en utilisant des matchs antérieurs, mais j'ai négligé les tests du "backend" et je suis resté sur un test sur le bon format de retour des méthodes.
+
+Comme pour la planification, la manque de tests du backend aurait pu me porter préjudice, mais j'ai tout de même tester le frontend qui interagit avec le backend.
+
+\subsection{Résultat}
+
+Malgré les problèmes rencontrés, j'ai tout de même réussi à produire l'ensemble du travail visé. Le cahier des charges a été respecté et les fonctionnalités demandées sont présents. L'interface web a été faite et elle communique avec le backend grâce à Python Flask.
+
+\subsection{Améliorations futures}
+Comme améliorations futures, je souhaiterais premièrement ajouter un graphique "radar" dans la fonctionnalité "Head To Head". Cette amélioration m'a été inspiré par Pro Evolution Soccer. L'ajout de ce graphique permettrait à l'utilisateur de montrer à quelle point l'équipe qui a été prédit vainqueur est devant son adversaire (voir fig. \ref{fig:graphRadar}).
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=20em]{../img/graphRadar.png}
+    \caption{Graphique Radar}
+    \label{fig:graphRadar}
+\end{figure}
+
+Ensuite, une autre amélioration serait de perfectionner l'élaboration des prédictions. Pour l'instant, l'élaboration des prédictions se fait via les statistiques des derniers matchs et ne prend pas en compte les matchs à domicile ou l'importance du match. L'amélioration serait de permettre de choisir l'importance du match et de prendre en compte le fait que le match est joué à domicile ou non.
+
+La troisième amélioration serait de faire un compteur pour montrer le pourcentage de réussite de l'application. L'utilisateur viendrait sur la page d'accueil et il aurait un aperçu de la fiabilité de l'application. 
+
+La dernière amélioration serait de passer à la version 3.0 de l'API. Cependant, cela nécessiterait une nouvelle analyse sur l'importance des statistiques et un changement dans le code de la classe \texttt{Prediction} et du \texttt{Provider}
+
+\subsection{Bilan personnel}
+Je suis satisfait du travail rendu après ces 9 semaines. Un travail de cet ampleur implique forcément des problèmes surtout à la rencontre de nouvelles technologies. J'ai eu des soucis avec le multiprocessing mais ça ne m'a pas empêché de finir la fonctionnalité \texttt{Competition}. J'ai pu prendre en main de nouvelles technologies comme Python Flask, l'asynchrone en Python ou encore le multiprocessing. 
+
+\newpage
+
+\subsection{Apports personnels}
+
+Le tableau ci-dessous présente mon apport personnel dans ce projet. 
+
+\begin{table}[htp]
+    \centering
+    \begin{tabular}{|m{4cm}|m{4cm}|m{6cm}|}
+    \hline
+    \textbf{Nom}                                    & \textbf{Pourcentage} & \textbf{Commentaire}                                                                                                    \\ \hline
+        Style du site                                   & 5\%                  & Le style provient d'un template Bootstrap                                                                               \\ \hline
+        Interface Web                                   & 95\%                 &                                                                                                                         \\ \hline
+        Base de données                                 & 100\%                &                                                                                                                         \\ \hline
+        Poster                                          & 50\%                 & Gawen Ackermann m'a aidé pour faire le poster                                                                           \\ \hline
+        Documentation                                   & 100\%                &                                                                                                                         \\ \hline
+        Maquettes                                       & 100\%                &                                                                                                                         \\ \hline
+        Requêtes SQL                                    & 95\%                 & M. Schmid m'a aidé sur une requête sur laquelle j'avais de la difficulté                                                \\ \hline
+        Communication avec l'API                        & 75\%                 & J'ai utilisé la librairie aiohttp (requests au départ) pour faire les appels HTTP à l'API.                              \\ \hline
+        Élaboration des prédictions et des compétitions & 99.9\%               & M. Schmid m'a aidé lors de mes réflexions. Cela m'a permis d'avoir un point de vue différent lors de certaines analyses \\ \hline
+    \end{tabular}
+    \caption{Apports personnels}
+    \label{tab:apportsPersonnels}
+\end{table}
 
 \newpage
 
 \section{Conclusion}
+
+Lors de ces 9 semaines de travail, j'ai pu créer une application web qui permet de visualiser les résultats de prédictions sur des matchs de football\footnote{Prédiction que j'ai élaboré moi-même}, en utilisant des technologies avec lesquelles je n'avais aucune expérience auparavant, comme Python Flask, le multiprocessing, etc.
+
+Je reconnais avoir fait une erreur quand au départ j'ai directement démarré le projet en faisant des appels synchrones à l'API. Ce choix a eu un impact sur la suite de mon travail puisqu'il m'a bloqué lors de la conception de la classe de \texttt{Competition}. J'ai du modifier mon code pour qu'il fonctionne avec des appels asynchrones pour permettre à cette classe de fonctionner comme prévu.
+
+Ce projet de grande envergure m'a appris l'importance de prendre du temps pour analyser les fonctionnalités voulues et schématiser leur fonctionnement pour faciliter l'implémentation. Il m'a aussi permis de me rendre compte de l'importance de la planification et de l'importance de l'analyse complète de technologies existantes pour la conception de fonctionnalités
+
+\subsection{Remerciements}
+
+Mes remerciements à :
+\begin{itemize}
+    \item Antoine Schmid pour son aide, ses conseils, sa réactivité aux communications et son suivi tout au long du projet.
+    \item Francisco Garcia pour ses conseils
+    \item L'équipe de développeurs d'APIFootball pour l'élevation de plan offerte durant la période du diplôme
+    \item Jonathan Borel-Jaquet, Fabian Huber, Lorenzo Bauduccio et Gawen Ackermann pour avoir apporter leur avis lors de certaines réflexions
+    \item Gawen Ackermann pour l'aide lors de la réalisation du poster.
+\end{itemize}
 
 \newpage
 
@@ -1680,6 +1777,6 @@ Dans le rapport, les listings sont des bouts de codes et les noms de fichiers ne
 
 \lstlistoflistings
 
-
+\listoftables
 
 \end{document}

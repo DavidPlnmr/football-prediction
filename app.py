@@ -37,10 +37,23 @@ async def index():
     """
     Home route
     """
-    now = datetime(2021, 5, 13)
-    three_days_before = now - relativedelta(days=lib.constants.DELTA_DAY)
-    three_days_after = now + relativedelta(days=lib.constants.DELTA_DAY)
+    now = datetime(2021, 5, 20, 16, 45, 0)
+    three_days_before = now - relativedelta(days=lib.constants.DELTA_DAY_PREVIOUS)
+    three_days_after = now + relativedelta(days=lib.constants.DELTA_DAY_UPCOMING)
     
+    #Cache refresh
+    if "last_cache_datetime" not in cache :
+        cache["last_cache_datetime"] = now
+    else:
+        # We check if there is 12 hours passed after the last cache storage
+        delta = cache["last_cache_datetime"] + relativedelta(hours=lib.constants.DELTA_HOUR_FOR_CACHE_REFRESH)
+        if delta < now:
+            cache.pop("previous_matches")
+            cache.pop("upcoming_matches")
+            cache["last_cache_datetime"] = now
+            pass
+            
+            
     if "previous_matches" not in cache:
         cache["previous_matches"] = await get_previous_matches_multiple_leagues(three_days_before.date(), 
                                                                           now.date(), 
@@ -205,10 +218,6 @@ async def h2h_make_prediction():
         
         # Obviously it's an head to head game so we need 2 teams and we check if they are in the league selected
         if count==2:
-            # Clear the error in the cache
-            if "error" in cache:        
-                cache.pop("error")
-                
             first_team_infos={
                 "key" : first_team[0]["team_key"],
                 "name" : first_team[0]["team_name"],
@@ -222,10 +231,13 @@ async def h2h_make_prediction():
             }
             
             now = datetime.now()
-            three_days_before = now - relativedelta(days=lib.constants.DELTA_DAY)
+            three_days_before = now - relativedelta(days=lib.constants.DELTA_DAY_UPCOMING)
             
             last_predictions = prov.get_one_prediction_per_day_with_specific_teams(first_team_infos["name"], 
                                                                                    second_team_infos["name"])
+            
+            
+            
             predictions = []
             #Reformat the predictions
             if len(last_predictions)>0:
@@ -249,12 +261,14 @@ async def h2h_make_prediction():
             if len(prediction_already_made) == 0:
                 #Try to make the prediction                
                 try:
+                    
                     pred = Prediction(first_team_infos["name"], second_team_infos["name"])
-                    await pred.call_data()
+                    
+                    await pred.create_prediction()
+                    
                     winner = pred.define_winner()
                     pred.save_prediction()
-                
-                
+                    
                 except Exception:
                     cache["error"]="Sorry, we had a problem to process your prediction."
                     return redirect(url_for("h2h"))

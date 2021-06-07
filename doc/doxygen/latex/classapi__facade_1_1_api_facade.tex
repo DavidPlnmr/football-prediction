@@ -1,0 +1,111 @@
+\hypertarget{classapi__facade_1_1_api_facade}{}\doxysection{Api\+Facade Class Reference}
+\label{classapi__facade_1_1_api_facade}\index{ApiFacade@{ApiFacade}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classapi__facade_1_1_api_facade_aea16a4432811e109474b50742774d97c}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, api\+\_\+key, log\+\_\+path)
+\item 
+def \mbox{\hyperlink{classapi__facade_1_1_api_facade_af5812ad183fb50b50544667e42954e08}{get\+\_\+competitions}} (self, country\+\_\+id=\char`\"{}\char`\"{})
+\item 
+def \mbox{\hyperlink{classapi__facade_1_1_api_facade_a317384dca80db3a185fdabdbedabb186}{get\+\_\+countries}} (self)
+\item 
+def \mbox{\hyperlink{classapi__facade_1_1_api_facade_a6c3f7e6e39c9657d739ea6d7a77fe89a}{get\+\_\+\+H2H}} (self, first\+\_\+team\+\_\+name, second\+\_\+team\+\_\+name)
+\item 
+def \mbox{\hyperlink{classapi__facade_1_1_api_facade_ae434f6f02cd45c37cde970cf7777ff3c}{get\+\_\+match\+\_\+infos}} (self, match\+\_\+id)
+\item 
+def \mbox{\hyperlink{classapi__facade_1_1_api_facade_aa4fdf4cbc653013204a516d12bb2b8cf}{get\+\_\+matches\+\_\+in\+\_\+interval}} (self, from\+\_\+date, to\+\_\+date, league\+\_\+id=\char`\"{}\char`\"{})
+\item 
+def \mbox{\hyperlink{classapi__facade_1_1_api_facade_af77dd3b639e690874dbc799e81200446}{get\+\_\+stats\+\_\+from\+\_\+match}} (self, match\+\_\+id)
+\item 
+def \mbox{\hyperlink{classapi__facade_1_1_api_facade_a3ff40d9b2ba1294dcf6c265103da4c76}{get\+\_\+teams\+\_\+from\+\_\+league}} (self, league\+\_\+id)
+\item 
+def \mbox{\hyperlink{classapi__facade_1_1_api_facade_a90078243fbc5bcc4871903df9750d706}{get\+\_\+teams\+\_\+with\+\_\+team\+\_\+id}} (self, team\+\_\+id)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Facade to call the endpoints of the API.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classapi__facade_1_1_api_facade_aea16a4432811e109474b50742774d97c}\label{classapi__facade_1_1_api_facade_aea16a4432811e109474b50742774d97c}} 
+\index{ApiFacade@{ApiFacade}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!ApiFacade@{ApiFacade}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def \+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{api\+\_\+key,  }\item[{}]{log\+\_\+path }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Constructor of the ApiFacade class.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classapi__facade_1_1_api_facade_af5812ad183fb50b50544667e42954e08}\label{classapi__facade_1_1_api_facade_af5812ad183fb50b50544667e42954e08}} 
+\index{ApiFacade@{ApiFacade}!get\_competitions@{get\_competitions}}
+\index{get\_competitions@{get\_competitions}!ApiFacade@{ApiFacade}}
+\doxysubsubsection{\texorpdfstring{get\_competitions()}{get\_competitions()}}
+{\footnotesize\ttfamily def get\+\_\+competitions (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{country\+\_\+id = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get competitions in a specific country
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classapi__facade_1_1_api_facade_a317384dca80db3a185fdabdbedabb186}\label{classapi__facade_1_1_api_facade_a317384dca80db3a185fdabdbedabb186}} 
+\index{ApiFacade@{ApiFacade}!get\_countries@{get\_countries}}
+\index{get\_countries@{get\_countries}!ApiFacade@{ApiFacade}}
+\doxysubsubsection{\texorpdfstring{get\_countries()}{get\_countries()}}
+{\footnotesize\ttfamily def get\+\_\+countries (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get countries available in the API
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classapi__facade_1_1_api_facade_a6c3f7e6e39c9657d739ea6d7a77fe89a}\label{classapi__facade_1_1_api_facade_a6c3f7e6e39c9657d739ea6d7a77fe89a}} 
+\index{ApiFacade@{ApiFacade}!get\_H2H@{get\_H2H}}
+\index{get\_H2H@{get\_H2H}!ApiFacade@{ApiFacade}}
+\doxysubsubsection{\texorpdfstring{get\_H2H()}{get\_H2H()}}
+{\footnotesize\ttfamily def get\+\_\+\+H2H (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{first\+\_\+team\+\_\+name,  }\item[{}]{second\+\_\+team\+\_\+name }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get the last results of each teams and the last results of each matchs between them both
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classapi__facade_1_1_api_facade_ae434f6f02cd45c37cde970cf7777ff3c}\label{classapi__facade_1_1_api_facade_ae434f6f02cd45c37cde970cf7777ff3c}} 
+\index{ApiFacade@{ApiFacade}!get\_match\_infos@{get\_match\_infos}}
+\index{get\_match\_infos@{get\_match\_infos}!ApiFacade@{ApiFacade}}
+\doxysubsubsection{\texorpdfstring{get\_match\_infos()}{get\_match\_infos()}}
+{\footnotesize\ttfamily def get\+\_\+match\+\_\+infos (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{match\+\_\+id }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get the last results of each teams and the last results of each matchs between them both
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classapi__facade_1_1_api_facade_aa4fdf4cbc653013204a516d12bb2b8cf}\label{classapi__facade_1_1_api_facade_aa4fdf4cbc653013204a516d12bb2b8cf}} 
+\index{ApiFacade@{ApiFacade}!get\_matches\_in\_interval@{get\_matches\_in\_interval}}
+\index{get\_matches\_in\_interval@{get\_matches\_in\_interval}!ApiFacade@{ApiFacade}}
+\doxysubsubsection{\texorpdfstring{get\_matches\_in\_interval()}{get\_matches\_in\_interval()}}
+{\footnotesize\ttfamily def get\+\_\+matches\+\_\+in\+\_\+interval (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{from\+\_\+date,  }\item[{}]{to\+\_\+date,  }\item[{}]{league\+\_\+id = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get the matches in an interval of two dates
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classapi__facade_1_1_api_facade_af77dd3b639e690874dbc799e81200446}\label{classapi__facade_1_1_api_facade_af77dd3b639e690874dbc799e81200446}} 
+\index{ApiFacade@{ApiFacade}!get\_stats\_from\_match@{get\_stats\_from\_match}}
+\index{get\_stats\_from\_match@{get\_stats\_from\_match}!ApiFacade@{ApiFacade}}
+\doxysubsubsection{\texorpdfstring{get\_stats\_from\_match()}{get\_stats\_from\_match()}}
+{\footnotesize\ttfamily def get\+\_\+stats\+\_\+from\+\_\+match (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{match\+\_\+id }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get the statistics of a specific match
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classapi__facade_1_1_api_facade_a3ff40d9b2ba1294dcf6c265103da4c76}\label{classapi__facade_1_1_api_facade_a3ff40d9b2ba1294dcf6c265103da4c76}} 
+\index{ApiFacade@{ApiFacade}!get\_teams\_from\_league@{get\_teams\_from\_league}}
+\index{get\_teams\_from\_league@{get\_teams\_from\_league}!ApiFacade@{ApiFacade}}
+\doxysubsubsection{\texorpdfstring{get\_teams\_from\_league()}{get\_teams\_from\_league()}}
+{\footnotesize\ttfamily def get\+\_\+teams\+\_\+from\+\_\+league (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{league\+\_\+id }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get all the teams in the specified league_id
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classapi__facade_1_1_api_facade_a90078243fbc5bcc4871903df9750d706}\label{classapi__facade_1_1_api_facade_a90078243fbc5bcc4871903df9750d706}} 
+\index{ApiFacade@{ApiFacade}!get\_teams\_with\_team\_id@{get\_teams\_with\_team\_id}}
+\index{get\_teams\_with\_team\_id@{get\_teams\_with\_team\_id}!ApiFacade@{ApiFacade}}
+\doxysubsubsection{\texorpdfstring{get\_teams\_with\_team\_id()}{get\_teams\_with\_team\_id()}}
+{\footnotesize\ttfamily def get\+\_\+teams\+\_\+with\+\_\+team\+\_\+id (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{team\+\_\+id }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get all the teams in the specified league_id
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+//wsl\$/\+Debian/home/davidplnmr/football-\/prediction/lib/api/\mbox{\hyperlink{api__facade_8py}{api\+\_\+facade.\+py}}\end{DoxyCompactItemize}

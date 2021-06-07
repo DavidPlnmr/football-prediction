@@ -1,0 +1,190 @@
+\hypertarget{classlib_1_1provider__class_1_1_provider}{}\doxysection{Provider Class Reference}
+\label{classlib_1_1provider__class_1_1_provider}\index{Provider@{Provider}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classlib_1_1provider__class_1_1_provider_a2e61d8105a25a1719cdc6b879143d8d8}{\+\_\+\+\_\+new\+\_\+\+\_\+}} (cls, log\+\_\+path=\textquotesingle{}./log/app.\+log\textquotesingle{})
+\item 
+def \mbox{\hyperlink{classlib_1_1provider__class_1_1_provider_afe00fd94add5c82aa6cab53e81ef3489}{disconnect}} (self)
+\item 
+def \mbox{\hyperlink{classlib_1_1provider__class_1_1_provider_a7ac449c717c06c3278ce135b76e53262}{get\+\_\+all\+\_\+stats\+\_\+from\+\_\+teams}} (self, first\+\_\+team\+\_\+name, second\+\_\+team\+\_\+name)
+\item 
+def \mbox{\hyperlink{classlib_1_1provider__class_1_1_provider_a828e7bce1265fb3376fce82cf0124800}{get\+\_\+all\+\_\+stats\+\_\+from\+\_\+teams\+\_\+api}} (self, first\+\_\+team\+\_\+name, second\+\_\+team\+\_\+name)
+\item 
+def \mbox{\hyperlink{classlib_1_1provider__class_1_1_provider_a84cfa498aaa35464486a44eb31893fa9}{get\+\_\+all\+\_\+stats\+\_\+from\+\_\+teams\+\_\+db}} (self, first\+\_\+team\+\_\+name, second\+\_\+team\+\_\+name, from\+\_\+date=\char`\"{}\char`\"{}, to\+\_\+date=\char`\"{}\char`\"{})
+\item 
+def \mbox{\hyperlink{classlib_1_1provider__class_1_1_provider_adb2c8b76e2e8f755886b8372bb8a0a91}{get\+\_\+api\+\_\+call\+\_\+from\+\_\+today}} (self, first\+\_\+team\+\_\+name, second\+\_\+team\+\_\+name)
+\item 
+def \mbox{\hyperlink{classlib_1_1provider__class_1_1_provider_a2d61b948a51f2d7748e01649930f9fab}{get\+\_\+matches\+\_\+from\+\_\+to\+\_\+db}} (self, from\+\_\+date, to\+\_\+date, league\+\_\+id=\char`\"{}\char`\"{})
+\item 
+def \mbox{\hyperlink{classlib_1_1provider__class_1_1_provider_aa4fdf4cbc653013204a516d12bb2b8cf}{get\+\_\+matches\+\_\+in\+\_\+interval}} (self, from\+\_\+date, to\+\_\+date, league\+\_\+id=\char`\"{}\char`\"{})
+\item 
+def \mbox{\hyperlink{classlib_1_1provider__class_1_1_provider_abb482cad0c73caf44fb5103fe2775b6c}{get\+\_\+one\+\_\+prediction\+\_\+per\+\_\+day\+\_\+with\+\_\+specific\+\_\+teams}} (self, first\+\_\+team\+\_\+name, second\+\_\+team\+\_\+name)
+\item 
+def \mbox{\hyperlink{classlib_1_1provider__class_1_1_provider_a267efcf3684caf17178551427ba5c6b4}{get\+\_\+prediction\+\_\+with\+\_\+specific\+\_\+teams\+\_\+after\+\_\+date}} (self, first\+\_\+team\+\_\+name, second\+\_\+team\+\_\+name, creation\+\_\+date)
+\item 
+def \mbox{\hyperlink{classlib_1_1provider__class_1_1_provider_ad3c6f366d917ae7c37270bd76712ef22}{get\+\_\+predictions\+\_\+in\+\_\+interval\+\_\+from\+\_\+db}} (self, from\+\_\+date, to\+\_\+date, league\+\_\+id=\char`\"{}\char`\"{})
+\item 
+def \mbox{\hyperlink{classlib_1_1provider__class_1_1_provider_adab0b2a2f6c05773bb512afb5d211803}{get\+\_\+previous\+\_\+matches\+\_\+predictions}} (self, from\+\_\+date, to\+\_\+date, league\+\_\+id, league\+\_\+name, out\+\_\+dict)
+\item 
+def \mbox{\hyperlink{classlib_1_1provider__class_1_1_provider_a3ff40d9b2ba1294dcf6c265103da4c76}{get\+\_\+teams\+\_\+from\+\_\+league}} (self, league\+\_\+id)
+\item 
+def \mbox{\hyperlink{classlib_1_1provider__class_1_1_provider_a90078243fbc5bcc4871903df9750d706}{get\+\_\+teams\+\_\+with\+\_\+team\+\_\+id}} (self, team\+\_\+id)
+\item 
+def \mbox{\hyperlink{classlib_1_1provider__class_1_1_provider_aaacaad768be2cb059ed3cc738e83a00b}{save\+\_\+api\+\_\+call}} (self, first\+\_\+team\+\_\+name, second\+\_\+team\+\_\+name)
+\item 
+def \mbox{\hyperlink{classlib_1_1provider__class_1_1_provider_ae9ae06286648060f0ae617cb45334c9c}{save\+\_\+match\+\_\+with\+\_\+stats}} (self, match\+\_\+id, match\+\_\+date, match\+\_\+time, league\+\_\+id, league\+\_\+name, hometeam\+\_\+name, awayteam\+\_\+name, hometeam\+\_\+score, awayteam\+\_\+score, stats\+\_\+array)
+\item 
+def \mbox{\hyperlink{classlib_1_1provider__class_1_1_provider_a3028065819e9193fe70e16013b425cba}{save\+\_\+prediction}} (self, prediction\+\_\+winner, home\+\_\+team\+\_\+name, away\+\_\+team\+\_\+name, league\+\_\+id=\char`\"{}NULL\char`\"{}, league\+\_\+name=\char`\"{}NULL\char`\"{}, date\+\_\+of\+\_\+game=\char`\"{}NULL\char`\"{}, api\+\_\+match\+\_\+id=\char`\"{}NULL\char`\"{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}This provider is used in the app.py file and in the prediction_class.py
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classlib_1_1provider__class_1_1_provider_a2e61d8105a25a1719cdc6b879143d8d8}\label{classlib_1_1provider__class_1_1_provider_a2e61d8105a25a1719cdc6b879143d8d8}} 
+\index{Provider@{Provider}!\_\_new\_\_@{\_\_new\_\_}}
+\index{\_\_new\_\_@{\_\_new\_\_}!Provider@{Provider}}
+\doxysubsubsection{\texorpdfstring{\_\_new\_\_()}{\_\_new\_\_()}}
+{\footnotesize\ttfamily def \+\_\+\+\_\+new\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{cls,  }\item[{}]{log\+\_\+path = {\ttfamily \textquotesingle{}./log/app.log\textquotesingle{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Constructor of the Provider. 
+
+It uses the singleton design pattern.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classlib_1_1provider__class_1_1_provider_afe00fd94add5c82aa6cab53e81ef3489}\label{classlib_1_1provider__class_1_1_provider_afe00fd94add5c82aa6cab53e81ef3489}} 
+\index{Provider@{Provider}!disconnect@{disconnect}}
+\index{disconnect@{disconnect}!Provider@{Provider}}
+\doxysubsubsection{\texorpdfstring{disconnect()}{disconnect()}}
+{\footnotesize\ttfamily def disconnect (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Disconnect the cursor of the DB.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classlib_1_1provider__class_1_1_provider_a7ac449c717c06c3278ce135b76e53262}\label{classlib_1_1provider__class_1_1_provider_a7ac449c717c06c3278ce135b76e53262}} 
+\index{Provider@{Provider}!get\_all\_stats\_from\_teams@{get\_all\_stats\_from\_teams}}
+\index{get\_all\_stats\_from\_teams@{get\_all\_stats\_from\_teams}!Provider@{Provider}}
+\doxysubsubsection{\texorpdfstring{get\_all\_stats\_from\_teams()}{get\_all\_stats\_from\_teams()}}
+{\footnotesize\ttfamily def get\+\_\+all\+\_\+stats\+\_\+from\+\_\+teams (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{first\+\_\+team\+\_\+name,  }\item[{}]{second\+\_\+team\+\_\+name }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This method try to get games from the two teams in the DB. If there is no data in the DB, it will get data from the API and then save it in the DB.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classlib_1_1provider__class_1_1_provider_a828e7bce1265fb3376fce82cf0124800}\label{classlib_1_1provider__class_1_1_provider_a828e7bce1265fb3376fce82cf0124800}} 
+\index{Provider@{Provider}!get\_all\_stats\_from\_teams\_api@{get\_all\_stats\_from\_teams\_api}}
+\index{get\_all\_stats\_from\_teams\_api@{get\_all\_stats\_from\_teams\_api}!Provider@{Provider}}
+\doxysubsubsection{\texorpdfstring{get\_all\_stats\_from\_teams\_api()}{get\_all\_stats\_from\_teams\_api()}}
+{\footnotesize\ttfamily def get\+\_\+all\+\_\+stats\+\_\+from\+\_\+teams\+\_\+api (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{first\+\_\+team\+\_\+name,  }\item[{}]{second\+\_\+team\+\_\+name }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Make a call to the API using getH2H and make a treatment to have the stats for each match of the two different teams
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classlib_1_1provider__class_1_1_provider_a84cfa498aaa35464486a44eb31893fa9}\label{classlib_1_1provider__class_1_1_provider_a84cfa498aaa35464486a44eb31893fa9}} 
+\index{Provider@{Provider}!get\_all\_stats\_from\_teams\_db@{get\_all\_stats\_from\_teams\_db}}
+\index{get\_all\_stats\_from\_teams\_db@{get\_all\_stats\_from\_teams\_db}!Provider@{Provider}}
+\doxysubsubsection{\texorpdfstring{get\_all\_stats\_from\_teams\_db()}{get\_all\_stats\_from\_teams\_db()}}
+{\footnotesize\ttfamily def get\+\_\+all\+\_\+stats\+\_\+from\+\_\+teams\+\_\+db (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{first\+\_\+team\+\_\+name,  }\item[{}]{second\+\_\+team\+\_\+name,  }\item[{}]{from\+\_\+date = {\ttfamily \char`\"{}\char`\"{}},  }\item[{}]{to\+\_\+date = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get all the matches between the two teams in params with the stats of each matches
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classlib_1_1provider__class_1_1_provider_adb2c8b76e2e8f755886b8372bb8a0a91}\label{classlib_1_1provider__class_1_1_provider_adb2c8b76e2e8f755886b8372bb8a0a91}} 
+\index{Provider@{Provider}!get\_api\_call\_from\_today@{get\_api\_call\_from\_today}}
+\index{get\_api\_call\_from\_today@{get\_api\_call\_from\_today}!Provider@{Provider}}
+\doxysubsubsection{\texorpdfstring{get\_api\_call\_from\_today()}{get\_api\_call\_from\_today()}}
+{\footnotesize\ttfamily def get\+\_\+api\+\_\+call\+\_\+from\+\_\+today (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{first\+\_\+team\+\_\+name,  }\item[{}]{second\+\_\+team\+\_\+name }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get the API call from today
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classlib_1_1provider__class_1_1_provider_a2d61b948a51f2d7748e01649930f9fab}\label{classlib_1_1provider__class_1_1_provider_a2d61b948a51f2d7748e01649930f9fab}} 
+\index{Provider@{Provider}!get\_matches\_from\_to\_db@{get\_matches\_from\_to\_db}}
+\index{get\_matches\_from\_to\_db@{get\_matches\_from\_to\_db}!Provider@{Provider}}
+\doxysubsubsection{\texorpdfstring{get\_matches\_from\_to\_db()}{get\_matches\_from\_to\_db()}}
+{\footnotesize\ttfamily def get\+\_\+matches\+\_\+from\+\_\+to\+\_\+db (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{from\+\_\+date,  }\item[{}]{to\+\_\+date,  }\item[{}]{league\+\_\+id = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get matches from date to date from the db
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classlib_1_1provider__class_1_1_provider_aa4fdf4cbc653013204a516d12bb2b8cf}\label{classlib_1_1provider__class_1_1_provider_aa4fdf4cbc653013204a516d12bb2b8cf}} 
+\index{Provider@{Provider}!get\_matches\_in\_interval@{get\_matches\_in\_interval}}
+\index{get\_matches\_in\_interval@{get\_matches\_in\_interval}!Provider@{Provider}}
+\doxysubsubsection{\texorpdfstring{get\_matches\_in\_interval()}{get\_matches\_in\_interval()}}
+{\footnotesize\ttfamily def get\+\_\+matches\+\_\+in\+\_\+interval (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{from\+\_\+date,  }\item[{}]{to\+\_\+date,  }\item[{}]{league\+\_\+id = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get the matches from a date to an other [in a specific a league]
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classlib_1_1provider__class_1_1_provider_abb482cad0c73caf44fb5103fe2775b6c}\label{classlib_1_1provider__class_1_1_provider_abb482cad0c73caf44fb5103fe2775b6c}} 
+\index{Provider@{Provider}!get\_one\_prediction\_per\_day\_with\_specific\_teams@{get\_one\_prediction\_per\_day\_with\_specific\_teams}}
+\index{get\_one\_prediction\_per\_day\_with\_specific\_teams@{get\_one\_prediction\_per\_day\_with\_specific\_teams}!Provider@{Provider}}
+\doxysubsubsection{\texorpdfstring{get\_one\_prediction\_per\_day\_with\_specific\_teams()}{get\_one\_prediction\_per\_day\_with\_specific\_teams()}}
+{\footnotesize\ttfamily def get\+\_\+one\+\_\+prediction\+\_\+per\+\_\+day\+\_\+with\+\_\+specific\+\_\+teams (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{first\+\_\+team\+\_\+name,  }\item[{}]{second\+\_\+team\+\_\+name }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get one prediction per day using the two names of the teams given in param
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classlib_1_1provider__class_1_1_provider_a267efcf3684caf17178551427ba5c6b4}\label{classlib_1_1provider__class_1_1_provider_a267efcf3684caf17178551427ba5c6b4}} 
+\index{Provider@{Provider}!get\_prediction\_with\_specific\_teams\_after\_date@{get\_prediction\_with\_specific\_teams\_after\_date}}
+\index{get\_prediction\_with\_specific\_teams\_after\_date@{get\_prediction\_with\_specific\_teams\_after\_date}!Provider@{Provider}}
+\doxysubsubsection{\texorpdfstring{get\_prediction\_with\_specific\_teams\_after\_date()}{get\_prediction\_with\_specific\_teams\_after\_date()}}
+{\footnotesize\ttfamily def get\+\_\+prediction\+\_\+with\+\_\+specific\+\_\+teams\+\_\+after\+\_\+date (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{first\+\_\+team\+\_\+name,  }\item[{}]{second\+\_\+team\+\_\+name,  }\item[{}]{creation\+\_\+date }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns one prediction made at a specific date
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classlib_1_1provider__class_1_1_provider_ad3c6f366d917ae7c37270bd76712ef22}\label{classlib_1_1provider__class_1_1_provider_ad3c6f366d917ae7c37270bd76712ef22}} 
+\index{Provider@{Provider}!get\_predictions\_in\_interval\_from\_db@{get\_predictions\_in\_interval\_from\_db}}
+\index{get\_predictions\_in\_interval\_from\_db@{get\_predictions\_in\_interval\_from\_db}!Provider@{Provider}}
+\doxysubsubsection{\texorpdfstring{get\_predictions\_in\_interval\_from\_db()}{get\_predictions\_in\_interval\_from\_db()}}
+{\footnotesize\ttfamily def get\+\_\+predictions\+\_\+in\+\_\+interval\+\_\+from\+\_\+db (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{from\+\_\+date,  }\item[{}]{to\+\_\+date,  }\item[{}]{league\+\_\+id = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get the predictions from a date to an other [only with an api_match_id]
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classlib_1_1provider__class_1_1_provider_adab0b2a2f6c05773bb512afb5d211803}\label{classlib_1_1provider__class_1_1_provider_adab0b2a2f6c05773bb512afb5d211803}} 
+\index{Provider@{Provider}!get\_previous\_matches\_predictions@{get\_previous\_matches\_predictions}}
+\index{get\_previous\_matches\_predictions@{get\_previous\_matches\_predictions}!Provider@{Provider}}
+\doxysubsubsection{\texorpdfstring{get\_previous\_matches\_predictions()}{get\_previous\_matches\_predictions()}}
+{\footnotesize\ttfamily def get\+\_\+previous\+\_\+matches\+\_\+predictions (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{from\+\_\+date,  }\item[{}]{to\+\_\+date,  }\item[{}]{league\+\_\+id,  }\item[{}]{league\+\_\+name,  }\item[{}]{out\+\_\+dict }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get the predictions of the previous matches with their result
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classlib_1_1provider__class_1_1_provider_a3ff40d9b2ba1294dcf6c265103da4c76}\label{classlib_1_1provider__class_1_1_provider_a3ff40d9b2ba1294dcf6c265103da4c76}} 
+\index{Provider@{Provider}!get\_teams\_from\_league@{get\_teams\_from\_league}}
+\index{get\_teams\_from\_league@{get\_teams\_from\_league}!Provider@{Provider}}
+\doxysubsubsection{\texorpdfstring{get\_teams\_from\_league()}{get\_teams\_from\_league()}}
+{\footnotesize\ttfamily def get\+\_\+teams\+\_\+from\+\_\+league (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{league\+\_\+id }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get the team list from a league
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classlib_1_1provider__class_1_1_provider_a90078243fbc5bcc4871903df9750d706}\label{classlib_1_1provider__class_1_1_provider_a90078243fbc5bcc4871903df9750d706}} 
+\index{Provider@{Provider}!get\_teams\_with\_team\_id@{get\_teams\_with\_team\_id}}
+\index{get\_teams\_with\_team\_id@{get\_teams\_with\_team\_id}!Provider@{Provider}}
+\doxysubsubsection{\texorpdfstring{get\_teams\_with\_team\_id()}{get\_teams\_with\_team\_id()}}
+{\footnotesize\ttfamily def get\+\_\+teams\+\_\+with\+\_\+team\+\_\+id (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{team\+\_\+id }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get the team list from a league
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classlib_1_1provider__class_1_1_provider_aaacaad768be2cb059ed3cc738e83a00b}\label{classlib_1_1provider__class_1_1_provider_aaacaad768be2cb059ed3cc738e83a00b}} 
+\index{Provider@{Provider}!save\_api\_call@{save\_api\_call}}
+\index{save\_api\_call@{save\_api\_call}!Provider@{Provider}}
+\doxysubsubsection{\texorpdfstring{save\_api\_call()}{save\_api\_call()}}
+{\footnotesize\ttfamily def save\+\_\+api\+\_\+call (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{first\+\_\+team\+\_\+name,  }\item[{}]{second\+\_\+team\+\_\+name }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Saves the API call in the DB.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classlib_1_1provider__class_1_1_provider_ae9ae06286648060f0ae617cb45334c9c}\label{classlib_1_1provider__class_1_1_provider_ae9ae06286648060f0ae617cb45334c9c}} 
+\index{Provider@{Provider}!save\_match\_with\_stats@{save\_match\_with\_stats}}
+\index{save\_match\_with\_stats@{save\_match\_with\_stats}!Provider@{Provider}}
+\doxysubsubsection{\texorpdfstring{save\_match\_with\_stats()}{save\_match\_with\_stats()}}
+{\footnotesize\ttfamily def save\+\_\+match\+\_\+with\+\_\+stats (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{match\+\_\+id,  }\item[{}]{match\+\_\+date,  }\item[{}]{match\+\_\+time,  }\item[{}]{league\+\_\+id,  }\item[{}]{league\+\_\+name,  }\item[{}]{hometeam\+\_\+name,  }\item[{}]{awayteam\+\_\+name,  }\item[{}]{hometeam\+\_\+score,  }\item[{}]{awayteam\+\_\+score,  }\item[{}]{stats\+\_\+array }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Save the match in the DB with its stats
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classlib_1_1provider__class_1_1_provider_a3028065819e9193fe70e16013b425cba}\label{classlib_1_1provider__class_1_1_provider_a3028065819e9193fe70e16013b425cba}} 
+\index{Provider@{Provider}!save\_prediction@{save\_prediction}}
+\index{save\_prediction@{save\_prediction}!Provider@{Provider}}
+\doxysubsubsection{\texorpdfstring{save\_prediction()}{save\_prediction()}}
+{\footnotesize\ttfamily def save\+\_\+prediction (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{prediction\+\_\+winner,  }\item[{}]{home\+\_\+team\+\_\+name,  }\item[{}]{away\+\_\+team\+\_\+name,  }\item[{}]{league\+\_\+id = {\ttfamily \char`\"{}NULL\char`\"{}},  }\item[{}]{league\+\_\+name = {\ttfamily \char`\"{}NULL\char`\"{}},  }\item[{}]{date\+\_\+of\+\_\+game = {\ttfamily \char`\"{}NULL\char`\"{}},  }\item[{}]{api\+\_\+match\+\_\+id = {\ttfamily \char`\"{}NULL\char`\"{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Save the prediction in the DB
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+//wsl\$/\+Debian/home/davidplnmr/football-\/prediction/lib/\mbox{\hyperlink{provider__class_8py}{provider\+\_\+class.\+py}}\end{DoxyCompactItemize}

@@ -6,15 +6,16 @@ import os
 import sys
 
 # insert the "football-prediction" directory into the sys.path
-sys.path.insert(1, os.path.abspath(".."))
+path = os.path.abspath(".")
+sys.path.insert(1, path)
 
 from lib.prediction_class import *
 
-first_team = "Chelsea"
-second_team = "Tottenham"
+first_team = "Napoli"
+second_team = "AS Roma"
 
 async def main():
-    pred = Prediction(first_team, second_team, "../log/app.log")
+    pred = Prediction(first_team, second_team, "./log/app.log")
     await pred.create_prediction()
     print(pred.define_winner())
     

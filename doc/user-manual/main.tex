@@ -1,0 +1,105 @@
+\documentclass[a4paper,14pt]{extarticle}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+%Modification des marges de la feuille
+\usepackage[left=3.0cm, right=2.3cm, top=3cm, bottom=2.5cm]{geometry}
+\usepackage{hyperref}
+%Permet d'accéder à la dernière page
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{float}
+
+% Permet de changer l'orientation de la page
+\usepackage{pdflscape}
+
+%afficher le code source
+\usepackage{listings}
+\usepackage{xcolor}
+
+\usepackage{vhistory}
+
+% Permet de changer la page de garde
+\usepackage{fancyhdr, lastpage}
+
+\newcommand{\DP}{David Paulino}
+
+%Permet d'afficher le nombre de pages totale sur le document
+
+\title{Football Prediction}
+\author{\vhListAllAuthorsLongWithAbbrev}
+\date{\today}
+
+\makeatletter
+
+
+\pagestyle{fancy}
+%Entete + pied de page
+\lhead{\DP}
+\chead{\@title}
+\rhead{\@date}
+\lfoot{Version \vhCurrentVersion}
+\cfoot{Page \textbf{{\thepage}} sur \textbf{\pageref{LastPage}}}
+\rfoot{Rapport}
+
+\begin{document}
+
+%page de garde
+  \begin{titlepage}
+  \centering
+      {\large \textsc{Centre de formation professionnelle technique}}\\
+    \vspace{2cm}
+    
+    \vfill
+       {\LARGE \textbf{\@title}} \\
+    \vspace{1cm}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=7cm]{../img/logo_blackborder.png}
+    \end{figure}
+    \vspace{1cm}
+        { \LARGE Manuel utilisateur}\\
+    \vspace{2em}
+        {\large \textbf{\@author}} \\
+    \vspace{6em}
+        {\large \@date}\\
+    \vspace{1cm}
+        {\large \textsc{Version \vhCurrentVersion}} \\
+    \vfill
+  \end{titlepage}
+\makeatother
+
+\newpage
+
+\tableofcontents
+
+{\setlength{\parindent}{0cm} % Remove indent on paragraph
+\setlength{\parskip}{1em} % Add jump after paragraph
+
+\newpage
+%Versionning du document
+\makeatletter
+
+\begin{versionhistory}
+    \vhEntry{1.0}{\today}{DP}{Version initiale}
+\end{versionhistory}
+
+\makeatother
+
+\section{Introduction}
+
+Ce document est destiné aux utilisateur de l'application web "Football Prediction". L'application a été réalisé dans le cadre du travail de diplôme de technicien pour l'obtention du diplôme de Technicien ES. Il s'agit d'une application qui permet de visualiser le résultat d'une prédiction sur un match entre 2 équipes de football. Cela permet à des pronostiqueurs de se baser sur ce travail pour avoir une source supplémentaire pour choisir leur mise lors d'un pari sportif.
+
+Cette documentation est la pour montrer l'interface utilisateur et le détail des actions possibles par l'utilisateur.
+
+\section{Utilisation de l'application web}
+
+\subsection{Menu de navigation}
+
+\subsection{Page d'accueil}
+
+\subsection{Page "Head To Head"}
+
+\subsection{Page "Competitions"}
+
+\end{document}

@@ -1,0 +1,95 @@
+\hypertarget{classlib_1_1prediction__class_1_1_prediction}{}\doxysection{Prediction Class Reference}
+\label{classlib_1_1prediction__class_1_1_prediction}\index{Prediction@{Prediction}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classlib_1_1prediction__class_1_1_prediction_a793a0a282be4fdf10445468a918fff7f}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, home\+\_\+team, away\+\_\+team, log\+\_\+path=\char`\"{}\char`\"{})
+\item 
+def \mbox{\hyperlink{classlib_1_1prediction__class_1_1_prediction_a4e03ccb0fc1f8b7f7ec8c7982ee7c792}{create\+\_\+prediction}} (self)
+\item 
+def \mbox{\hyperlink{classlib_1_1prediction__class_1_1_prediction_a2582a3c3e815bd91e05885d25e71f324}{define\+\_\+winner}} (self)
+\item 
+def \mbox{\hyperlink{classlib_1_1prediction__class_1_1_prediction_a656703aff94e8f1d297adc75028e3d03}{get\+\_\+away\+\_\+team\+\_\+name}} (self)
+\item 
+def \mbox{\hyperlink{classlib_1_1prediction__class_1_1_prediction_a357e5f45edca5354108942b964dd395a}{get\+\_\+home\+\_\+team\+\_\+name}} (self)
+\item 
+def \mbox{\hyperlink{classlib_1_1prediction__class_1_1_prediction_ac84dd2281df0c2f7d1ff714eecccdcc7}{save\+\_\+prediction}} (self, league\+\_\+id=\char`\"{}NULL\char`\"{}, league\+\_\+name=\char`\"{}NULL\char`\"{}, date\+\_\+of\+\_\+game=\char`\"{}NULL\char`\"{}, api\+\_\+match\+\_\+id=\char`\"{}NULL\char`\"{})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classlib_1_1prediction__class_1_1_prediction_a7de7ae15cfa7d49adc28e64a859a2d45}{provider}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Class to make a prediction on a match between two football teams
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classlib_1_1prediction__class_1_1_prediction_a793a0a282be4fdf10445468a918fff7f}\label{classlib_1_1prediction__class_1_1_prediction_a793a0a282be4fdf10445468a918fff7f}} 
+\index{Prediction@{Prediction}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!Prediction@{Prediction}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def \+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{home\+\_\+team,  }\item[{}]{away\+\_\+team,  }\item[{}]{log\+\_\+path = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Constructor of the Prediction class.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classlib_1_1prediction__class_1_1_prediction_a4e03ccb0fc1f8b7f7ec8c7982ee7c792}\label{classlib_1_1prediction__class_1_1_prediction_a4e03ccb0fc1f8b7f7ec8c7982ee7c792}} 
+\index{Prediction@{Prediction}!create\_prediction@{create\_prediction}}
+\index{create\_prediction@{create\_prediction}!Prediction@{Prediction}}
+\doxysubsubsection{\texorpdfstring{create\_prediction()}{create\_prediction()}}
+{\footnotesize\ttfamily def create\+\_\+prediction (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Async call the data for the class. It calls the get_all_stats_from_teams() method from the Provider class.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classlib_1_1prediction__class_1_1_prediction_a2582a3c3e815bd91e05885d25e71f324}\label{classlib_1_1prediction__class_1_1_prediction_a2582a3c3e815bd91e05885d25e71f324}} 
+\index{Prediction@{Prediction}!define\_winner@{define\_winner}}
+\index{define\_winner@{define\_winner}!Prediction@{Prediction}}
+\doxysubsubsection{\texorpdfstring{define\_winner()}{define\_winner()}}
+{\footnotesize\ttfamily def define\+\_\+winner (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns the winner of the prediction by computing the offensive score, defensive score and the heat of moment.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classlib_1_1prediction__class_1_1_prediction_a656703aff94e8f1d297adc75028e3d03}\label{classlib_1_1prediction__class_1_1_prediction_a656703aff94e8f1d297adc75028e3d03}} 
+\index{Prediction@{Prediction}!get\_away\_team\_name@{get\_away\_team\_name}}
+\index{get\_away\_team\_name@{get\_away\_team\_name}!Prediction@{Prediction}}
+\doxysubsubsection{\texorpdfstring{get\_away\_team\_name()}{get\_away\_team\_name()}}
+{\footnotesize\ttfamily def get\+\_\+away\+\_\+team\+\_\+name (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get the away team name.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classlib_1_1prediction__class_1_1_prediction_a357e5f45edca5354108942b964dd395a}\label{classlib_1_1prediction__class_1_1_prediction_a357e5f45edca5354108942b964dd395a}} 
+\index{Prediction@{Prediction}!get\_home\_team\_name@{get\_home\_team\_name}}
+\index{get\_home\_team\_name@{get\_home\_team\_name}!Prediction@{Prediction}}
+\doxysubsubsection{\texorpdfstring{get\_home\_team\_name()}{get\_home\_team\_name()}}
+{\footnotesize\ttfamily def get\+\_\+home\+\_\+team\+\_\+name (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get the home team name.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classlib_1_1prediction__class_1_1_prediction_ac84dd2281df0c2f7d1ff714eecccdcc7}\label{classlib_1_1prediction__class_1_1_prediction_ac84dd2281df0c2f7d1ff714eecccdcc7}} 
+\index{Prediction@{Prediction}!save\_prediction@{save\_prediction}}
+\index{save\_prediction@{save\_prediction}!Prediction@{Prediction}}
+\doxysubsubsection{\texorpdfstring{save\_prediction()}{save\_prediction()}}
+{\footnotesize\ttfamily def save\+\_\+prediction (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{league\+\_\+id = {\ttfamily \char`\"{}NULL\char`\"{}},  }\item[{}]{league\+\_\+name = {\ttfamily \char`\"{}NULL\char`\"{}},  }\item[{}]{date\+\_\+of\+\_\+game = {\ttfamily \char`\"{}NULL\char`\"{}},  }\item[{}]{api\+\_\+match\+\_\+id = {\ttfamily \char`\"{}NULL\char`\"{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Save the prediction in the DB
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classlib_1_1prediction__class_1_1_prediction_a7de7ae15cfa7d49adc28e64a859a2d45}\label{classlib_1_1prediction__class_1_1_prediction_a7de7ae15cfa7d49adc28e64a859a2d45}} 
+\index{Prediction@{Prediction}!provider@{provider}}
+\index{provider@{provider}!Prediction@{Prediction}}
+\doxysubsubsection{\texorpdfstring{provider}{provider}}
+{\footnotesize\ttfamily provider}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+//wsl\$/\+Debian/home/davidplnmr/football-\/prediction/lib/\mbox{\hyperlink{prediction__class_8py}{prediction\+\_\+class.\+py}}\end{DoxyCompactItemize}

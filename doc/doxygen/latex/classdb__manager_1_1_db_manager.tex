@@ -1,0 +1,181 @@
+\hypertarget{classdb__manager_1_1_db_manager}{}\doxysection{Db\+Manager Class Reference}
+\label{classdb__manager_1_1_db_manager}\index{DbManager@{DbManager}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classdb__manager_1_1_db_manager_ab31dbf8609c7990a196969cb917f2862}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, hostname, username, pwd, log\+\_\+path)
+\item 
+def \mbox{\hyperlink{classdb__manager_1_1_db_manager_ab46886088477480d8f060aaacb0bab5a}{delete\+\_\+at}} (self, id)
+\item 
+def \mbox{\hyperlink{classdb__manager_1_1_db_manager_afe00fd94add5c82aa6cab53e81ef3489}{disconnect}} (self)
+\item 
+def \mbox{\hyperlink{classdb__manager_1_1_db_manager_ab4379f35a19d778c9e76a9b3fcee2732}{get\+\_\+all\+\_\+predictions}} (self)
+\item 
+def \mbox{\hyperlink{classdb__manager_1_1_db_manager_ac6f82a88a18c832b90e1dbaea173ea7e}{get\+\_\+api\+\_\+call}} (self, home\+\_\+team\+\_\+name, away\+\_\+team\+\_\+name, date)
+\item 
+def \mbox{\hyperlink{classdb__manager_1_1_db_manager_a837d0508b45df6c27438a02b1f1f8a2f}{get\+\_\+matches\+\_\+from\+\_\+to}} (self, from\+\_\+date, to\+\_\+date, league\+\_\+id=\char`\"{}\char`\"{})
+\item 
+def \mbox{\hyperlink{classdb__manager_1_1_db_manager_a94f6f4d7101c39b82bb3b91034310d5e}{get\+\_\+matches\+\_\+with\+\_\+specific\+\_\+teams}} (self, first\+\_\+team\+\_\+name, second\+\_\+team\+\_\+name, from\+\_\+date=\char`\"{}\char`\"{}, to\+\_\+date=\char`\"{}\char`\"{})
+\item 
+def \mbox{\hyperlink{classdb__manager_1_1_db_manager_abb482cad0c73caf44fb5103fe2775b6c}{get\+\_\+one\+\_\+prediction\+\_\+per\+\_\+day\+\_\+with\+\_\+specific\+\_\+teams}} (self, first\+\_\+team\+\_\+name, second\+\_\+team\+\_\+name)
+\item 
+def \mbox{\hyperlink{classdb__manager_1_1_db_manager_ae2ed1632eb0958777cfa13370c694938}{get\+\_\+one\+\_\+prediction\+\_\+with\+\_\+specific\+\_\+teams\+\_\+after\+\_\+date}} (self, first\+\_\+team\+\_\+name, second\+\_\+team\+\_\+name, creation\+\_\+date)
+\item 
+def \mbox{\hyperlink{classdb__manager_1_1_db_manager_add6fe45e459e4531fdd73dfe3a04eec2}{get\+\_\+prediction\+\_\+with\+\_\+api\+\_\+id}} (self, api\+\_\+match\+\_\+id)
+\item 
+def \mbox{\hyperlink{classdb__manager_1_1_db_manager_af8f6c2d25958df2207269d4cdd72b347}{get\+\_\+prediction\+\_\+with\+\_\+specific\+\_\+teams}} (self, first\+\_\+team\+\_\+name, second\+\_\+team\+\_\+name)
+\item 
+def \mbox{\hyperlink{classdb__manager_1_1_db_manager_a2f1c7dca01220cb03253d750c4f9c0df}{get\+\_\+predictions\+\_\+in\+\_\+interval}} (self, from\+\_\+date, to\+\_\+date, league\+\_\+id)
+\item 
+def \mbox{\hyperlink{classdb__manager_1_1_db_manager_a2081da75dd3dc0a1a99ea590adea6011}{get\+\_\+stats\+\_\+of\+\_\+matches\+\_\+with\+\_\+specific\+\_\+teams}} (self, first\+\_\+team\+\_\+name, second\+\_\+team\+\_\+name, from\+\_\+date=\char`\"{}\char`\"{}, to\+\_\+date=\char`\"{}\char`\"{})
+\item 
+def \mbox{\hyperlink{classdb__manager_1_1_db_manager_a10f96463ac005b96300cdf231f7a4bd1}{insert\+\_\+api\+\_\+call\+\_\+in\+\_\+history}} (self, home\+\_\+team\+\_\+name, away\+\_\+team\+\_\+name)
+\item 
+def \mbox{\hyperlink{classdb__manager_1_1_db_manager_acc18f066d4a72570725b5352243075f7}{insert\+\_\+match\+\_\+with\+\_\+stats}} (self, match\+\_\+id, match\+\_\+date, match\+\_\+time, league\+\_\+id, league\+\_\+name, home\+\_\+team\+\_\+name, away\+\_\+team\+\_\+name, home\+\_\+team\+\_\+score, away\+\_\+team\+\_\+score, stats\+\_\+array)
+\item 
+def \mbox{\hyperlink{classdb__manager_1_1_db_manager_aa4fc3297024a2696fe1bf81320ec7975}{insert\+\_\+prediction}} (self, prediction, home\+\_\+team\+\_\+name, away\+\_\+team\+\_\+name, league\+\_\+id=\char`\"{}NULL\char`\"{}, league\+\_\+name=\char`\"{}NULL\char`\"{}, date\+\_\+of\+\_\+game=\char`\"{}NULL\char`\"{}, api\+\_\+match\+\_\+id=\char`\"{}NULL\char`\"{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}This class only works with the structure set in the db.sql file
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdb__manager_1_1_db_manager_ab31dbf8609c7990a196969cb917f2862}\label{classdb__manager_1_1_db_manager_ab31dbf8609c7990a196969cb917f2862}} 
+\index{DbManager@{DbManager}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!DbManager@{DbManager}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def \+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{hostname,  }\item[{}]{username,  }\item[{}]{pwd,  }\item[{}]{log\+\_\+path }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Method to initialize the class
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classdb__manager_1_1_db_manager_ab46886088477480d8f060aaacb0bab5a}\label{classdb__manager_1_1_db_manager_ab46886088477480d8f060aaacb0bab5a}} 
+\index{DbManager@{DbManager}!delete\_at@{delete\_at}}
+\index{delete\_at@{delete\_at}!DbManager@{DbManager}}
+\doxysubsubsection{\texorpdfstring{delete\_at()}{delete\_at()}}
+{\footnotesize\ttfamily def delete\+\_\+at (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{id }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Delete the row with the id in parameter
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classdb__manager_1_1_db_manager_afe00fd94add5c82aa6cab53e81ef3489}\label{classdb__manager_1_1_db_manager_afe00fd94add5c82aa6cab53e81ef3489}} 
+\index{DbManager@{DbManager}!disconnect@{disconnect}}
+\index{disconnect@{disconnect}!DbManager@{DbManager}}
+\doxysubsubsection{\texorpdfstring{disconnect()}{disconnect()}}
+{\footnotesize\ttfamily def disconnect (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Close the connection to the db
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classdb__manager_1_1_db_manager_ab4379f35a19d778c9e76a9b3fcee2732}\label{classdb__manager_1_1_db_manager_ab4379f35a19d778c9e76a9b3fcee2732}} 
+\index{DbManager@{DbManager}!get\_all\_predictions@{get\_all\_predictions}}
+\index{get\_all\_predictions@{get\_all\_predictions}!DbManager@{DbManager}}
+\doxysubsubsection{\texorpdfstring{get\_all\_predictions()}{get\_all\_predictions()}}
+{\footnotesize\ttfamily def get\+\_\+all\+\_\+predictions (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get all the rows in the table
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classdb__manager_1_1_db_manager_ac6f82a88a18c832b90e1dbaea173ea7e}\label{classdb__manager_1_1_db_manager_ac6f82a88a18c832b90e1dbaea173ea7e}} 
+\index{DbManager@{DbManager}!get\_api\_call@{get\_api\_call}}
+\index{get\_api\_call@{get\_api\_call}!DbManager@{DbManager}}
+\doxysubsubsection{\texorpdfstring{get\_api\_call()}{get\_api\_call()}}
+{\footnotesize\ttfamily def get\+\_\+api\+\_\+call (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{home\+\_\+team\+\_\+name,  }\item[{}]{away\+\_\+team\+\_\+name,  }\item[{}]{date }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get the API call from a specific date with specific teams
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classdb__manager_1_1_db_manager_a837d0508b45df6c27438a02b1f1f8a2f}\label{classdb__manager_1_1_db_manager_a837d0508b45df6c27438a02b1f1f8a2f}} 
+\index{DbManager@{DbManager}!get\_matches\_from\_to@{get\_matches\_from\_to}}
+\index{get\_matches\_from\_to@{get\_matches\_from\_to}!DbManager@{DbManager}}
+\doxysubsubsection{\texorpdfstring{get\_matches\_from\_to()}{get\_matches\_from\_to()}}
+{\footnotesize\ttfamily def get\+\_\+matches\+\_\+from\+\_\+to (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{from\+\_\+date,  }\item[{}]{to\+\_\+date,  }\item[{}]{league\+\_\+id = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get matches from a date to an other
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classdb__manager_1_1_db_manager_a94f6f4d7101c39b82bb3b91034310d5e}\label{classdb__manager_1_1_db_manager_a94f6f4d7101c39b82bb3b91034310d5e}} 
+\index{DbManager@{DbManager}!get\_matches\_with\_specific\_teams@{get\_matches\_with\_specific\_teams}}
+\index{get\_matches\_with\_specific\_teams@{get\_matches\_with\_specific\_teams}!DbManager@{DbManager}}
+\doxysubsubsection{\texorpdfstring{get\_matches\_with\_specific\_teams()}{get\_matches\_with\_specific\_teams()}}
+{\footnotesize\ttfamily def get\+\_\+matches\+\_\+with\+\_\+specific\+\_\+teams (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{first\+\_\+team\+\_\+name,  }\item[{}]{second\+\_\+team\+\_\+name,  }\item[{}]{from\+\_\+date = {\ttfamily \char`\"{}\char`\"{}},  }\item[{}]{to\+\_\+date = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get matches with specific teams [before the date specified in params if it is specified]
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classdb__manager_1_1_db_manager_abb482cad0c73caf44fb5103fe2775b6c}\label{classdb__manager_1_1_db_manager_abb482cad0c73caf44fb5103fe2775b6c}} 
+\index{DbManager@{DbManager}!get\_one\_prediction\_per\_day\_with\_specific\_teams@{get\_one\_prediction\_per\_day\_with\_specific\_teams}}
+\index{get\_one\_prediction\_per\_day\_with\_specific\_teams@{get\_one\_prediction\_per\_day\_with\_specific\_teams}!DbManager@{DbManager}}
+\doxysubsubsection{\texorpdfstring{get\_one\_prediction\_per\_day\_with\_specific\_teams()}{get\_one\_prediction\_per\_day\_with\_specific\_teams()}}
+{\footnotesize\ttfamily def get\+\_\+one\+\_\+prediction\+\_\+per\+\_\+day\+\_\+with\+\_\+specific\+\_\+teams (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{first\+\_\+team\+\_\+name,  }\item[{}]{second\+\_\+team\+\_\+name }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get a prediction per day with specific teams
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classdb__manager_1_1_db_manager_ae2ed1632eb0958777cfa13370c694938}\label{classdb__manager_1_1_db_manager_ae2ed1632eb0958777cfa13370c694938}} 
+\index{DbManager@{DbManager}!get\_one\_prediction\_with\_specific\_teams\_after\_date@{get\_one\_prediction\_with\_specific\_teams\_after\_date}}
+\index{get\_one\_prediction\_with\_specific\_teams\_after\_date@{get\_one\_prediction\_with\_specific\_teams\_after\_date}!DbManager@{DbManager}}
+\doxysubsubsection{\texorpdfstring{get\_one\_prediction\_with\_specific\_teams\_after\_date()}{get\_one\_prediction\_with\_specific\_teams\_after\_date()}}
+{\footnotesize\ttfamily def get\+\_\+one\+\_\+prediction\+\_\+with\+\_\+specific\+\_\+teams\+\_\+after\+\_\+date (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{first\+\_\+team\+\_\+name,  }\item[{}]{second\+\_\+team\+\_\+name,  }\item[{}]{creation\+\_\+date }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get the prediction with specific teams at date (only one row selected)
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classdb__manager_1_1_db_manager_add6fe45e459e4531fdd73dfe3a04eec2}\label{classdb__manager_1_1_db_manager_add6fe45e459e4531fdd73dfe3a04eec2}} 
+\index{DbManager@{DbManager}!get\_prediction\_with\_api\_id@{get\_prediction\_with\_api\_id}}
+\index{get\_prediction\_with\_api\_id@{get\_prediction\_with\_api\_id}!DbManager@{DbManager}}
+\doxysubsubsection{\texorpdfstring{get\_prediction\_with\_api\_id()}{get\_prediction\_with\_api\_id()}}
+{\footnotesize\ttfamily def get\+\_\+prediction\+\_\+with\+\_\+api\+\_\+id (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{api\+\_\+match\+\_\+id }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get predictions with a specifi api_match_id
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classdb__manager_1_1_db_manager_af8f6c2d25958df2207269d4cdd72b347}\label{classdb__manager_1_1_db_manager_af8f6c2d25958df2207269d4cdd72b347}} 
+\index{DbManager@{DbManager}!get\_prediction\_with\_specific\_teams@{get\_prediction\_with\_specific\_teams}}
+\index{get\_prediction\_with\_specific\_teams@{get\_prediction\_with\_specific\_teams}!DbManager@{DbManager}}
+\doxysubsubsection{\texorpdfstring{get\_prediction\_with\_specific\_teams()}{get\_prediction\_with\_specific\_teams()}}
+{\footnotesize\ttfamily def get\+\_\+prediction\+\_\+with\+\_\+specific\+\_\+teams (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{first\+\_\+team\+\_\+name,  }\item[{}]{second\+\_\+team\+\_\+name }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get the prediction with specific teams
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classdb__manager_1_1_db_manager_a2f1c7dca01220cb03253d750c4f9c0df}\label{classdb__manager_1_1_db_manager_a2f1c7dca01220cb03253d750c4f9c0df}} 
+\index{DbManager@{DbManager}!get\_predictions\_in\_interval@{get\_predictions\_in\_interval}}
+\index{get\_predictions\_in\_interval@{get\_predictions\_in\_interval}!DbManager@{DbManager}}
+\doxysubsubsection{\texorpdfstring{get\_predictions\_in\_interval()}{get\_predictions\_in\_interval()}}
+{\footnotesize\ttfamily def get\+\_\+predictions\+\_\+in\+\_\+interval (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{from\+\_\+date,  }\item[{}]{to\+\_\+date,  }\item[{}]{league\+\_\+id }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get all the rows in the table
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classdb__manager_1_1_db_manager_a2081da75dd3dc0a1a99ea590adea6011}\label{classdb__manager_1_1_db_manager_a2081da75dd3dc0a1a99ea590adea6011}} 
+\index{DbManager@{DbManager}!get\_stats\_of\_matches\_with\_specific\_teams@{get\_stats\_of\_matches\_with\_specific\_teams}}
+\index{get\_stats\_of\_matches\_with\_specific\_teams@{get\_stats\_of\_matches\_with\_specific\_teams}!DbManager@{DbManager}}
+\doxysubsubsection{\texorpdfstring{get\_stats\_of\_matches\_with\_specific\_teams()}{get\_stats\_of\_matches\_with\_specific\_teams()}}
+{\footnotesize\ttfamily def get\+\_\+stats\+\_\+of\+\_\+matches\+\_\+with\+\_\+specific\+\_\+teams (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{first\+\_\+team\+\_\+name,  }\item[{}]{second\+\_\+team\+\_\+name,  }\item[{}]{from\+\_\+date = {\ttfamily \char`\"{}\char`\"{}},  }\item[{}]{to\+\_\+date = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This method search all the games of each of the teams and returns the statistics of each match [before the date specified in param if it specified]
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classdb__manager_1_1_db_manager_a10f96463ac005b96300cdf231f7a4bd1}\label{classdb__manager_1_1_db_manager_a10f96463ac005b96300cdf231f7a4bd1}} 
+\index{DbManager@{DbManager}!insert\_api\_call\_in\_history@{insert\_api\_call\_in\_history}}
+\index{insert\_api\_call\_in\_history@{insert\_api\_call\_in\_history}!DbManager@{DbManager}}
+\doxysubsubsection{\texorpdfstring{insert\_api\_call\_in\_history()}{insert\_api\_call\_in\_history()}}
+{\footnotesize\ttfamily def insert\+\_\+api\+\_\+call\+\_\+in\+\_\+history (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{home\+\_\+team\+\_\+name,  }\item[{}]{away\+\_\+team\+\_\+name }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Try to insert params of an api call in the history
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classdb__manager_1_1_db_manager_acc18f066d4a72570725b5352243075f7}\label{classdb__manager_1_1_db_manager_acc18f066d4a72570725b5352243075f7}} 
+\index{DbManager@{DbManager}!insert\_match\_with\_stats@{insert\_match\_with\_stats}}
+\index{insert\_match\_with\_stats@{insert\_match\_with\_stats}!DbManager@{DbManager}}
+\doxysubsubsection{\texorpdfstring{insert\_match\_with\_stats()}{insert\_match\_with\_stats()}}
+{\footnotesize\ttfamily def insert\+\_\+match\+\_\+with\+\_\+stats (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{match\+\_\+id,  }\item[{}]{match\+\_\+date,  }\item[{}]{match\+\_\+time,  }\item[{}]{league\+\_\+id,  }\item[{}]{league\+\_\+name,  }\item[{}]{home\+\_\+team\+\_\+name,  }\item[{}]{away\+\_\+team\+\_\+name,  }\item[{}]{home\+\_\+team\+\_\+score,  }\item[{}]{away\+\_\+team\+\_\+score,  }\item[{}]{stats\+\_\+array }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Insert a match with its stats in the database with the parameters given.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classdb__manager_1_1_db_manager_aa4fc3297024a2696fe1bf81320ec7975}\label{classdb__manager_1_1_db_manager_aa4fc3297024a2696fe1bf81320ec7975}} 
+\index{DbManager@{DbManager}!insert\_prediction@{insert\_prediction}}
+\index{insert\_prediction@{insert\_prediction}!DbManager@{DbManager}}
+\doxysubsubsection{\texorpdfstring{insert\_prediction()}{insert\_prediction()}}
+{\footnotesize\ttfamily def insert\+\_\+prediction (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{prediction,  }\item[{}]{home\+\_\+team\+\_\+name,  }\item[{}]{away\+\_\+team\+\_\+name,  }\item[{}]{league\+\_\+id = {\ttfamily \char`\"{}NULL\char`\"{}},  }\item[{}]{league\+\_\+name = {\ttfamily \char`\"{}NULL\char`\"{}},  }\item[{}]{date\+\_\+of\+\_\+game = {\ttfamily \char`\"{}NULL\char`\"{}},  }\item[{}]{api\+\_\+match\+\_\+id = {\ttfamily \char`\"{}NULL\char`\"{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Insert a prediction in the database with the parameters given.
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+//wsl\$/\+Debian/home/davidplnmr/football-\/prediction/lib/sql/\mbox{\hyperlink{db__manager_8py}{db\+\_\+manager.\+py}}\end{DoxyCompactItemize}

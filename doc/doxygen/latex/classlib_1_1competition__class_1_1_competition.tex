@@ -1,0 +1,89 @@
+\hypertarget{classlib_1_1competition__class_1_1_competition}{}\doxysection{Competition Class Reference}
+\label{classlib_1_1competition__class_1_1_competition}\index{Competition@{Competition}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classlib_1_1competition__class_1_1_competition_a0fa9437590bb44bfb51d1658a5a9231f}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, league\+\_\+id, log\+\_\+path=\char`\"{}\char`\"{})
+\item 
+def \mbox{\hyperlink{classlib_1_1competition__class_1_1_competition_ae55ccc1f34a51e902c766c424c198653}{compute\+\_\+competition}} (self)
+\item 
+def \mbox{\hyperlink{classlib_1_1competition__class_1_1_competition_aab09aa275e56cf4d91ae6c14debe5216}{create\+\_\+standing}} (self)
+\item 
+def \mbox{\hyperlink{classlib_1_1competition__class_1_1_competition_a666a055513ca94620c10757e6f5ba946}{get\+\_\+standing}} (self)
+\item 
+def \mbox{\hyperlink{classlib_1_1competition__class_1_1_competition_a6499ea59bd54cced139534dfa109d4a6}{make\+\_\+prediction}} (self, first\+\_\+team\+\_\+key, second\+\_\+team\+\_\+key, first\+\_\+team\+\_\+name, second\+\_\+team\+\_\+name, first\+\_\+team\+\_\+badge, second\+\_\+team\+\_\+badge, out\+\_\+list)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classlib_1_1competition__class_1_1_competition_a9b286ec4b8c4efb77d86f4ffc5a1aa47}{missed\+\_\+some\+\_\+predictions}}
+\begin{DoxyCompactList}\small\item\em Public var to know if all the predictions has been made. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Class to make a prediction on a whole competition
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classlib_1_1competition__class_1_1_competition_a0fa9437590bb44bfb51d1658a5a9231f}\label{classlib_1_1competition__class_1_1_competition_a0fa9437590bb44bfb51d1658a5a9231f}} 
+\index{Competition@{Competition}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!Competition@{Competition}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def \+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{league\+\_\+id,  }\item[{}]{log\+\_\+path = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Constructor of the class
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classlib_1_1competition__class_1_1_competition_ae55ccc1f34a51e902c766c424c198653}\label{classlib_1_1competition__class_1_1_competition_ae55ccc1f34a51e902c766c424c198653}} 
+\index{Competition@{Competition}!compute\_competition@{compute\_competition}}
+\index{compute\_competition@{compute\_competition}!Competition@{Competition}}
+\doxysubsubsection{\texorpdfstring{compute\_competition()}{compute\_competition()}}
+{\footnotesize\ttfamily def compute\+\_\+competition (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Compute the whole competitions using async
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classlib_1_1competition__class_1_1_competition_aab09aa275e56cf4d91ae6c14debe5216}\label{classlib_1_1competition__class_1_1_competition_aab09aa275e56cf4d91ae6c14debe5216}} 
+\index{Competition@{Competition}!create\_standing@{create\_standing}}
+\index{create\_standing@{create\_standing}!Competition@{Competition}}
+\doxysubsubsection{\texorpdfstring{create\_standing()}{create\_standing()}}
+{\footnotesize\ttfamily def create\+\_\+standing (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Async call to create the standing
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classlib_1_1competition__class_1_1_competition_a666a055513ca94620c10757e6f5ba946}\label{classlib_1_1competition__class_1_1_competition_a666a055513ca94620c10757e6f5ba946}} 
+\index{Competition@{Competition}!get\_standing@{get\_standing}}
+\index{get\_standing@{get\_standing}!Competition@{Competition}}
+\doxysubsubsection{\texorpdfstring{get\_standing()}{get\_standing()}}
+{\footnotesize\ttfamily def get\+\_\+standing (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get the standing with the self.__history var. It will return the standing of the competition sorted by points
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classlib_1_1competition__class_1_1_competition_a6499ea59bd54cced139534dfa109d4a6}\label{classlib_1_1competition__class_1_1_competition_a6499ea59bd54cced139534dfa109d4a6}} 
+\index{Competition@{Competition}!make\_prediction@{make\_prediction}}
+\index{make\_prediction@{make\_prediction}!Competition@{Competition}}
+\doxysubsubsection{\texorpdfstring{make\_prediction()}{make\_prediction()}}
+{\footnotesize\ttfamily def make\+\_\+prediction (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{first\+\_\+team\+\_\+key,  }\item[{}]{second\+\_\+team\+\_\+key,  }\item[{}]{first\+\_\+team\+\_\+name,  }\item[{}]{second\+\_\+team\+\_\+name,  }\item[{}]{first\+\_\+team\+\_\+badge,  }\item[{}]{second\+\_\+team\+\_\+badge,  }\item[{}]{out\+\_\+list }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Method called by each process. Out_list is simple list
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classlib_1_1competition__class_1_1_competition_a9b286ec4b8c4efb77d86f4ffc5a1aa47}\label{classlib_1_1competition__class_1_1_competition_a9b286ec4b8c4efb77d86f4ffc5a1aa47}} 
+\index{Competition@{Competition}!missed\_some\_predictions@{missed\_some\_predictions}}
+\index{missed\_some\_predictions@{missed\_some\_predictions}!Competition@{Competition}}
+\doxysubsubsection{\texorpdfstring{missed\_some\_predictions}{missed\_some\_predictions}}
+{\footnotesize\ttfamily missed\+\_\+some\+\_\+predictions}
+
+
+
+Public var to know if all the predictions has been made. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+//wsl\$/\+Debian/home/davidplnmr/football-\/prediction/lib/\mbox{\hyperlink{competition__class_8py}{competition\+\_\+class.\+py}}\end{DoxyCompactItemize}

@@ -23,13 +23,13 @@ class Prediction:
         self.__winner=""
         self.provider = Provider(log_path)
         
+        
     async def create_prediction(self):
         """
         Async call the data for the class. It calls the get_all_stats_from_teams() method from the Provider class.
         """
         try:
             self.__results = await self.provider.get_all_stats_from_teams(self.get_home_team_name(), self.get_away_team_name())
-
             self.__home_team_result.heat_of_moment = self.__compute_heat_moment(self.get_home_team_name(), self.__results["firstTeam_lastResults"])
             self.__away_team_result.heat_of_moment = self.__compute_heat_moment(self.get_away_team_name(), self.__results["secondTeam_lastResults"])
 
@@ -194,86 +194,86 @@ class TeamResult:
         """
         Constructor of the TeamResult class.
         """
-        self._team_name = team_name
-        self.__heat_of_moment = ""
-        self.__games_count = 0
-        self.__goals_scored_count = 0
-        self.__goals_conceded_count = 0
-        self.__ball_possession = 0
-        self.__goal_attempts = 0
-        self.__shots_on_goal = 0
-        self.__goalkeeper_saves = 0
-        self.__fouls = 0
-        self.__yellow_cards = 0
-        self.__tackles = 0
-        self.__attacks = 0
-        self.__dangerous_attacks = 0
+        self.team_name = team_name
+        self.heat_of_moment = ""
+        self.games_count = 0
+        self.goals_scored_count = 0
+        self.goals_conceded_count = 0
+        self.ball_possession = 0
+        self.goal_attempts = 0
+        self.shots_on_goal = 0
+        self.goalkeeper_saves = 0
+        self.fouls = 0
+        self.yellow_cards = 0
+        self.tackles = 0
+        self.attacks = 0
+        self.dangerous_attacks = 0
         
     def average_goal_scored_per_game(self):
         """
         Make an average of the goals scored per game
         """
-        return self.__goals_scored_count/self.__games_count
+        return self.goals_scored_count/self.games_count
     
     def average_goal_conceded_per_game(self):
         """
         Make an average of the goals conceded per game
         """
-        return self.__goals_conceded_count/self.__games_count
+        return self.goals_conceded_count/self.games_count
     
     def average_ball_possession_per_game(self):
         """
         Make an average of the ball possession per game
         """
-        return self.__ball_possession/self.__games_count
+        return self.ball_possession/self.games_count
     
     def average_goal_attempts_per_game(self):
         """
         Make an average of the goal attempts per game
         """
-        return self.__goal_attempts/self.__games_count
+        return self.goal_attempts/self.games_count
     
     def average_shots_on_goal_per_game(self):
         """
         Make an average of the shots on goal per game
         """
-        return self.__shots_on_goal/self.__games_count
+        return self.shots_on_goal/self.games_count
     
     def average_goalkeeper_saves_per_game(self):
         """
         Make an average of the saves per game
         """
-        return self.__goalkeeper_saves/self.__games_count
+        return self.goalkeeper_saves/self.games_count
     
     def average_fouls_per_game(self):
         """
         Make an average of the fouls per game
         """
-        return self.__fouls/self.__games_count
+        return self.fouls/self.games_count
     
     def average_yellow_cards_per_game(self):
         """
         Make an average of the yellow cards per game
         """
-        return self.__yellow_cards/self.__games_count
+        return self.yellow_cards/self.games_count
     
     def average_tackles_per_game(self):
         """
         Make an average of the tackles per game
         """
-        return self.__tackles/self.__games_count
+        return self.tackles/self.games_count
     
     def average_attacks_per_game(self):
         """
         Make an average of the attacks per game
         """
-        return self.__attacks/self.__games_count
+        return self.attacks/self.games_count
     
     def average_dangerous_attacks_per_game(self):
         """
         Make an average of the dangerous attacks per game
         """
-        return self.__dangerous_attacks/self.__games_count  
+        return self.dangerous_attacks/self.games_count  
     
     def average_points_per_game(self):
         """
@@ -284,14 +284,14 @@ class TeamResult:
         0 pts for a loss.
         """
         result = 0
-        for char in self.__heat_of_moment:
+        for char in self.heat_of_moment:
             if char=='W':
                 result+=lib.constants.POINTS_FOR_A_WIN
             elif char=='D':
                 result+=lib.constants.POINTS_FOR_A_DRAW
             elif char=='L':
                 result+=lib.constants.POINTS_FOR_A_LOSE
-        return result/self.__games_count
+        return result/self.games_count
     
 class UnmakeablePrediction(Exception):
     """

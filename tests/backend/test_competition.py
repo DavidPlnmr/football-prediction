@@ -8,7 +8,7 @@ import asyncio
 import time
 
 # insert the "football-prediction" directory into the sys.path
-sys.path.insert(1, os.path.abspath(".."))
+sys.path.insert(1, os.path.abspath("."))
 
 
 from lib.competition_class import Competition
@@ -18,7 +18,7 @@ from lib.competition_class import Competition
 out_list = []
 
 async def main():
-    comp = Competition(176, "../log/app.log")
+    comp = Competition(148, "./log/app.log")
     await comp.create_standing()
     #await asyncio.wait([comp.make_prediction("Arsenal", "Tottenham", out_list), comp.make_prediction("Chelsea", "Leeds", out_list)])
     start = time.perf_counter()
