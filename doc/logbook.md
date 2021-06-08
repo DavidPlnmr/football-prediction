@@ -2071,3 +2071,5 @@ Après discussion avec Florian Burgener, le soucis de l'emplacement du projet su
 On va maintenant essayer de faire le setup apache
 
 https://flask.palletsprojects.com/en/2.0.x/deploying/mod_wsgi/
+
+J'ai de nouveau le soucis avec les requirements parce que j'ai du recloner le repos
