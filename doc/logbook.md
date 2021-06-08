@@ -2073,3 +2073,15 @@ On va maintenant essayer de faire le setup apache
 https://flask.palletsprojects.com/en/2.0.x/deploying/mod_wsgi/
 
 J'ai de nouveau le soucis avec les requirements parce que j'ai du recloner le repos
+
+En tout cas j'ai trouvé une bonne explication pour set up tout correctement
+
+https://www.codementor.io/@abhishake/minimal-apache-configuration-for-deploying-a-flask-app-ubuntu-18-04-phu50a7ft
+
+https://flask.palletsprojects.com/en/2.0.x/deploying/mod_wsgi/
+
+Bon finalement, je me prends pas la tête avec le venv ça fonctionne bien sans venv. Surtout que le serveur aura pas d'autres applis en python
+
+J'ai un problème avec le serveur et apache. J'ai un soucis lors de la création d'un dossier (manque de permission). J'ai pourtant donné la propriété au `user` `www-data` qui est celui utilisé par apache mais ​​j'ai essayé des milliards de choses et rien ne fonctionne
+
+Je suis complètement perdu. La dernière solution serait de créer le dossier et le fichier qu'il faut à la main et qu'il soit pas généré par le code.

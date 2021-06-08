@@ -2,10 +2,14 @@ from asyncio.streams import start_server
 from flask import Flask, json, redirect, url_for, request, render_template, jsonify
 from flask.helpers import make_response
 
-from lib.prediction_class import Prediction
-from lib.provider_class import Provider
-from lib.competition_class import Competition
-import lib.constants
+import os
+import sys
+
+# insert the "football-prediction" directory into the sys.path
+path = os.path.abspath(".")
+sys.path.insert(1, path)
+
+from lib import *
 
 from dateutil.relativedelta import relativedelta
 from datetime import datetime
@@ -22,8 +26,9 @@ if not os.path.isfile(log_path):
     f = open(log_path, "w")
     f.close()
 
+
 app = Flask(__name__)
-prov = Provider()
+prov = provider_class.Provider()
 cache = {}
 logging.basicConfig(filename="./log/app.log", filemode='a', format='%(asctime)s - %(levelname)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.INFO)
 
@@ -38,15 +43,15 @@ async def index():
     Home route
     """
     now = datetime(2021, 5, 20, 16, 45, 0)
-    three_days_before = now - relativedelta(days=lib.constants.DELTA_DAY_PREVIOUS)
-    three_days_after = now + relativedelta(days=lib.constants.DELTA_DAY_UPCOMING)
+    three_days_before = now - relativedelta(days=DELTA_DAY_PREVIOUS)
+    three_days_after = now + relativedelta(days=DELTA_DAY_UPCOMING)
     
     #Cache refresh
     if "last_cache_datetime" not in cache :
         cache["last_cache_datetime"] = now
     else:
         # We check if there is 12 hours passed after the last cache storage
-        delta = cache["last_cache_datetime"] + relativedelta(hours=lib.constants.DELTA_HOUR_FOR_CACHE_REFRESH)
+        delta = cache["last_cache_datetime"] + relativedelta(hours=DELTA_HOUR_FOR_CACHE_REFRESH)
         if delta < now:
             cache.pop("previous_matches")
             cache.pop("upcoming_matches")
@@ -57,7 +62,7 @@ async def index():
     if "previous_matches" not in cache:
         cache["previous_matches"] = await get_previous_matches_multiple_leagues(three_days_before.date(), 
                                                                           now.date(), 
-                                                                          lib.constants.MULTIPLE_LEAGUES)
+                                                                          MULTIPLE_LEAGUES)
         #Check if all the keys in the dict are empty
         if not any(cache["previous_matches"].values()):
             cache["previous_matches"]=[]
@@ -65,7 +70,7 @@ async def index():
     if "upcoming_matches" not in cache:
         cache["upcoming_matches"] = await get_upcoming_matches_multiple_leagues(now.date(), 
                                                                           three_days_after.date(), 
-                                                                          lib.constants.MULTIPLE_LEAGUES)
+                                                                          MULTIPLE_LEAGUES)
         #Check if all the keys in the dict are empty
         if not any(cache["upcoming_matches"].values()):
             cache["upcoming_matches"]=[]
@@ -84,7 +89,7 @@ def h2h():
     """
     Route for the functionnality Head To Head
     """
-    leagues = lib.constants.MULTIPLE_LEAGUES
+    leagues = MULTIPLE_LEAGUES
     try:
         error_message = request.cookies.get("error")
         return render_template("h2h.html", leagues=leagues, error=error_message)
@@ -158,7 +163,7 @@ async def h2h_league_selected(league_id):
     """
     Route where the user has already selected the league
     """
-    if league_id in lib.constants.MULTIPLE_LEAGUES.values():
+    if league_id in MULTIPLE_LEAGUES.values():
         try:
             response = await prov.get_teams_from_league(league_id)
             teams = []
@@ -231,7 +236,7 @@ async def h2h_make_prediction():
             }
             
             now = datetime.now()
-            three_days_before = now - relativedelta(days=lib.constants.DELTA_DAY_UPCOMING)
+            three_days_before = now - relativedelta(days=DELTA_DAY_UPCOMING)
             
             last_predictions = prov.get_one_prediction_per_day_with_specific_teams(first_team_infos["name"], 
                                                                                    second_team_infos["name"])
@@ -302,7 +307,7 @@ def competitions():
     if "history" in cache:
         cache.pop("history")
         
-    leagues = lib.constants.MULTIPLE_LEAGUES
+    leagues = MULTIPLE_LEAGUES
     try:
         error_message = request.cookies.get("error")
         return render_template("competitions.html", leagues=leagues, error=error_message)
@@ -319,7 +324,7 @@ def competitions_select():
 
 @app.route('/competitions/<int:league_id>')
 async def competitions_make_prediction(league_id):
-    if league_id in lib.constants.MULTIPLE_LEAGUES.values():    
+    if league_id in MULTIPLE_LEAGUES.values():    
         try:
             
             competition = Competition(league_id)
