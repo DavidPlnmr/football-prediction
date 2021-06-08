@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['unmakeableprediction_147',['UnmakeablePrediction',['../classlib_1_1prediction__class_1_1_unmakeable_prediction.html',1,'lib::prediction_class']]]
+  ['unmakeableprediction_161',['UnmakeablePrediction',['../classlib_1_1prediction__class_1_1_unmakeable_prediction.html',1,'lib::prediction_class']]]
 ];

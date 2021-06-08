@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['points_5ffor_5fa_5fdraw_258',['POINTS_FOR_A_DRAW',['../namespacelib_1_1constants.html#aa30506489f1f208bc86772eb8a8e3de9',1,'lib::constants']]],
-  ['points_5ffor_5fa_5fwin_259',['POINTS_FOR_A_WIN',['../namespacelib_1_1constants.html#a786c9cf1ba45547599b5cd9218bb7ffc',1,'lib::constants']]],
-  ['port_260',['port',['../namespaceapp.html#af8fb0f45ee0195c7422a49e6a8d72369',1,'app']]],
-  ['prov_261',['prov',['../namespaceapp.html#a5e252064ed0d015719ccc62ec987c050',1,'app']]],
-  ['provider_262',['provider',['../classlib_1_1prediction__class_1_1_prediction.html#a7de7ae15cfa7d49adc28e64a859a2d45',1,'lib::prediction_class::Prediction']]]
+  ['min_5fof_5fgames_5fto_5fmake_5fprediction_278',['MIN_OF_GAMES_TO_MAKE_PREDICTION',['../namespacelib_1_1constants.html#aa4de8b27d1e8f211424d7c2778845a87',1,'lib::constants']]],
+  ['missed_5fsome_5fpredictions_279',['missed_some_predictions',['../classlib_1_1competition__class_1_1_competition.html#a9b286ec4b8c4efb77d86f4ffc5a1aa47',1,'lib::competition_class::Competition']]],
+  ['multiple_5fleagues_280',['MULTIPLE_LEAGUES',['../namespacelib_1_1constants.html#af88710d2e2e00a2091fc55f96bd20786',1,'lib::constants']]]
 ];

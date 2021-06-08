@@ -1690,9 +1690,9 @@ Tout cela aurait pu m'être très problématique si j'avais rencontré des point
 
 \subsubsection{Tests}
 
-Une autre zone grise sont les tests (plus particulièrement, les tests du "backend"). Effectivement, il aurait été plus judicieux de tester unitairement les méthodes du backend (par exemple la classe \texttt{Prediction}). Je n'ai pas fait d'analyse complète sur toutes mes méthodes pour savoir lesquelles est-ce que je devrais tester. En effet, il y a tout de même quelques problèmes si je veux tester la classe \texttt{Prediction}, le soucis est que cette dernière peut avoir un résultat totalement différent d'un jour à l'autre selon la forme de l'équipe. Autrement, j'aurais pu tester unitairement en utilisant des matchs antérieurs, mais j'ai négligé les tests du "backend" et je suis resté sur un test sur le bon format de retour des méthodes.
+Une autre zone grise sont les tests (plus particulièrement, les tests du "backend"). Effectivement, il aurait été plus judicieux de tester unitairement les méthodes du backend (par exemple la classe \texttt{Prediction}). Je n'ai pas fait d'analyse complète sur toutes mes méthodes pour savoir lesquelles est-ce que je devrais tester. J'aurais du tester unitairement les méthodes des classes en faisant des Mocks\footnote{Le but d'un Mock est d'hériter d'une classe dépendante à la classe que l'on veut tester. Le Mock sert ensuite à s'assurer que les données restent systématiquement les mêmes et on teste l'intéraction avec la classe et non les données.} mais j'ai négligé les tests du "backend" et je suis resté sur un test sur le bon format de retour des méthodes.
 
-Comme pour la planification, la manque de tests du backend aurait pu me porter préjudice, mais j'ai tout de même tester le frontend qui interagit avec le backend.
+Comme pour la planification, la manque de tests du backend aurait pu me porter préjudice, mais j'ai tout de même tester le frontend qui interagit avec le backend, ce qui me permet tout de même de d'avoir des tests unitaires.
 
 \subsection{Résultat}
 
@@ -1761,6 +1761,7 @@ Mes remerciements à :
     \item L'équipe de développeurs d'APIFootball pour l'élevation de plan offerte durant la période du diplôme
     \item Jonathan Borel-Jaquet, Fabian Huber, Lorenzo Bauduccio et Gawen Ackermann pour avoir apporter leur avis lors de certaines réflexions
     \item Gawen Ackermann pour l'aide lors de la réalisation du poster.
+    \item Le Discord Not A Name
 \end{itemize}
 
 \newpage

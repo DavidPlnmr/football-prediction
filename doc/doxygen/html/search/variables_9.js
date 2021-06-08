@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['statistics_5fto_5fget_263',['STATISTICS_TO_GET',['../namespacelib_1_1constants.html#a01d66608e19172576e6edf8e73d61df3',1,'lib::constants']]]
+  ['nb_5fgames_5fheat_5fof_5fthe_5fmoment_281',['NB_GAMES_HEAT_OF_THE_MOMENT',['../namespacelib_1_1constants.html#af11bc7ca61f0e10a0073e7b67e1e4383',1,'lib::constants']]]
 ];

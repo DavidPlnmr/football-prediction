@@ -2057,4 +2057,5 @@ Pour demain :
 
 * Recompiler la doc doxy
 * Push le site sur le conteneur proxmox
+  * Push la doc doxy aussi quand ça sera fait
 * Manuel user

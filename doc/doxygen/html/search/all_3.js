@@ -1,17 +1,14 @@
 var searchData=
 [
-  ['datefmt_32',['datefmt',['../namespaceapp.html#a97b77dfb3e75978c1394101661dcc563',1,'app']]],
-  ['db_5fmanager_33',['db_manager',['../namespacedb__manager.html',1,'']]],
-  ['db_5fmanager_2epy_34',['db_manager.py',['../db__manager_8py.html',1,'']]],
-  ['dbmanager_35',['DbManager',['../classdb__manager_1_1_db_manager.html',1,'db_manager']]],
-  ['debug_36',['debug',['../namespaceapp.html#a0514aabed091ee5e2f35766eb01eced6',1,'app']]],
-  ['define_5fwinner_37',['define_winner',['../classlib_1_1prediction__class_1_1_prediction.html#a2582a3c3e815bd91e05885d25e71f324',1,'lib::prediction_class::Prediction']]],
-  ['delete_5fat_38',['delete_at',['../classdb__manager_1_1_db_manager.html#ab46886088477480d8f060aaacb0bab5a',1,'db_manager::DbManager']]],
-  ['delta_5fday_5fprevious_39',['DELTA_DAY_PREVIOUS',['../namespacelib_1_1constants.html#ad82a942fcff54f25844aba7ec04f9889',1,'lib::constants']]],
-  ['delta_5fday_5fupcoming_40',['DELTA_DAY_UPCOMING',['../namespacelib_1_1constants.html#a5d6b10f4911f8c855c5da4dcb3c95d48',1,'lib::constants']]],
-  ['delta_5fhour_5ffor_5fcache_5frefresh_41',['DELTA_HOUR_FOR_CACHE_REFRESH',['../namespacelib_1_1constants.html#a8639c07e0420171fa6f5024060dced23',1,'lib::constants']]],
-  ['delta_5fmonths_5fto_5fget_5fgames_42',['DELTA_MONTHS_TO_GET_GAMES',['../namespacelib_1_1constants.html#a2edd756c5b5d4a61ad516e0a5832aff2',1,'lib::constants']]],
-  ['delta_5fto_5fdetermine_5fdraw_43',['DELTA_TO_DETERMINE_DRAW',['../namespacelib_1_1constants.html#a9a85225a22b8ccae7112a0ffe7d84803',1,'lib::constants']]],
-  ['dir_44',['dir',['../namespaceapp.html#a7f01c047eb310166e695d4232ebd1fae',1,'app']]],
-  ['disconnect_45',['disconnect',['../classlib_1_1provider__class_1_1_provider.html#afe00fd94add5c82aa6cab53e81ef3489',1,'lib.provider_class.Provider.disconnect()'],['../classdb__manager_1_1_db_manager.html#afe00fd94add5c82aa6cab53e81ef3489',1,'db_manager.DbManager.disconnect()']]]
+  ['cache_23',['cache',['../namespaceapp.html#a38a131269af2ec5935ee2cc6d3e3d247',1,'app']]],
+  ['competition_24',['Competition',['../classlib_1_1competition__class_1_1_competition.html',1,'lib::competition_class']]],
+  ['competition_5fclass_2epy_25',['competition_class.py',['../competition__class_8py.html',1,'']]],
+  ['competitions_26',['competitions',['../namespaceapp.html#a35b7a993cc3ad6b8725857111d7b387d',1,'app']]],
+  ['competitions_5fhistory_27',['competitions_history',['../namespaceapp.html#a23a849afb2d860fed36255307056d7c3',1,'app']]],
+  ['competitions_5fmake_5fprediction_28',['competitions_make_prediction',['../namespaceapp.html#a9a42d41867bc22b20ef18ce2c1ab0515',1,'app']]],
+  ['competitions_5fselect_29',['competitions_select',['../namespaceapp.html#a431e2b999c9821390d0119b2b754e628',1,'app']]],
+  ['compute_5fcompetition_30',['compute_competition',['../classlib_1_1competition__class_1_1_competition.html#ae55ccc1f34a51e902c766c424c198653',1,'lib::competition_class::Competition']]],
+  ['constants_2epy_31',['constants.py',['../constants_8py.html',1,'']]],
+  ['create_5fprediction_32',['create_prediction',['../classlib_1_1prediction__class_1_1_prediction.html#a4e03ccb0fc1f8b7f7ec8c7982ee7c792',1,'lib::prediction_class::Prediction']]],
+  ['create_5fstanding_33',['create_standing',['../classlib_1_1competition__class_1_1_competition.html#aab09aa275e56cf4d91ae6c14debe5216',1,'lib::competition_class::Competition']]]
 ];

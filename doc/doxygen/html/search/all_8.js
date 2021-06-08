@@ -1,10 +1,7 @@
 var searchData=
 [
-  ['competition_5fclass_94',['competition_class',['../namespacelib_1_1competition__class.html',1,'lib']]],
-  ['constants_95',['constants',['../namespacelib_1_1constants.html',1,'lib']]],
-  ['level_96',['level',['../namespaceapp.html#afde8e18a788ccc92fc61cab298bca7e3',1,'app']]],
-  ['lib_97',['lib',['../namespacelib.html',1,'']]],
-  ['log_5fpath_98',['log_path',['../namespaceapp.html#adc5db119bfad5e0486768006c6be2f4e',1,'app']]],
-  ['prediction_5fclass_99',['prediction_class',['../namespacelib_1_1prediction__class.html',1,'lib']]],
-  ['provider_5fclass_100',['provider_class',['../namespacelib_1_1provider__class.html',1,'lib']]]
+  ['index_100',['index',['../namespaceapp.html#a562146490ce954c1708a2f4a31e768e3',1,'app']]],
+  ['insert_5fapi_5fcall_5fin_5fhistory_101',['insert_api_call_in_history',['../classdb__manager_1_1_db_manager.html#a10f96463ac005b96300cdf231f7a4bd1',1,'db_manager::DbManager']]],
+  ['insert_5fmatch_5fwith_5fstats_102',['insert_match_with_stats',['../classdb__manager_1_1_db_manager.html#acc18f066d4a72570725b5352243075f7',1,'db_manager::DbManager']]],
+  ['insert_5fprediction_103',['insert_prediction',['../classdb__manager_1_1_db_manager.html#aa4fc3297024a2696fe1bf81320ec7975',1,'db_manager::DbManager']]]
 ];
