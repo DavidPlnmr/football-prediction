@@ -2059,3 +2059,15 @@ Pour demain :
 * Push le site sur le conteneur proxmox
   * Push la doc doxy aussi quand ça sera fait
 * Manuel user
+
+### 08.06.2021
+
+J'essaie d'installer les dépendances elles sont toutes installées mais rien ne se fait.
+
+Donc là je fais un `venv` et ça n'ajoutait pas les requirements dans le venv mais dans le python global
+
+Après discussion avec Florian Burgener, le soucis de l'emplacement du projet sur la machine (il était à la racine). Le projet est désormais dans `var/www/football-prediction`
+
+On va maintenant essayer de faire le setup apache
+
+https://flask.palletsprojects.com/en/2.0.x/deploying/mod_wsgi/
