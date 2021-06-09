@@ -1470,6 +1470,22 @@ Voilà à quoi ressemble le code de la vue qui gère l'affichage des matchs de l
 Je fais une boucle sur le nombre de matchs dans l'historique, j'affiche chaque match et pour chaque match, j'affiche deux puces de couleurs pour déterminer qui est le vainqueur de la prédiction. 
 \lstinputHTML{competition-history}
 
+\subsubsection{Aperçus}
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=27em]{../img/competitionStanding.png}
+    \caption{Aperçu de la page Compétition - Classement affiché}
+    \label{fig:competitionStanding}
+\end{figure}
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=27em]{../img/competitionHistory.png}
+    \caption{Aperçu de la page Compétition - Historique d'une équipe}
+    \label{fig:competitionHistory}
+\end{figure}
+
 \subsection{Cookies}
 \label{cookies}
 
@@ -1484,6 +1500,25 @@ Dans le code du listing \ref{list-cookies-exemple}, on doit d'abord créer un ob
 \lstinputPython{cookies-route}
 
 On peut apercevoir sur la route du listing \ref{list-cookies-route} que cette fois, on fait un \texttt{try except}, car la méthode \texttt{get()} de \texttt{request.cookies} retourne une Exception si la clé n'existe pas. Si on a bien récupéré le cookie, on le transmet à la vue. Autrement, on ne transmet pas l'erreur.
+
+\newpage
+
+\section{Host du site}
+
+Après avoir développé toutes les fonctionnalités, je me suis attelé à l'upload du site sur le serveur de l'école que M. Maréchal m'a mis à disposition pour le travail de diplôme.
+
+Je me suis d'abord connecté au serveur, j'ai cloné mon repository Git et j'ai installer toutes les dépendances contenues dans \texttt{requirements.txt}. J'ai rencontré des soucis lorsque j'ai voulu les installer dans un environnement virtuel mais je me suis dit que cela n'en valait pas la peine puisqu'aucune autre application Python n'allait être sur ce serveur.
+
+J'ai ensuite observé la documentation de Python Flask pour voir les différentes options de déploiement\footnote{\url{https://flask.palletsprojects.com/en/2.0.x/deploying/}}. J'ai du m'orienter sur les options "Self-hosted" puisque le serveur que j'ai à disposition est à l'école. J'ai observé les options et \texttt{mod\_wsgi}\footnote{WSGI est une spécification qui définit l'interface entre les serveurs et les applications webs pour le langage Python.} qui utilise Apache me paraissait être une bonne option. De plus, l'installation me paraissait pas très compliqué. \newline
+\texttt{from yourapplication import app as application}
+
+Et ensuite, j'ai du configurer Apache pour qu'il comprenne en indiquant les commandes \texttt{WSGI*} que c'est une application Flask. J'avais bien fait attention de tester avec une application Flask lambda (qu'une seule route voir si le retour était bon) et elle fonctionnait correctement. Cependant, lorsque j'ai ajouté mon application, les importations de modules avaient du mal à se faire. C'était initialement des problèmes venant des permissions sur les fichiers mais j'ai ensuite donné la propriété des fichiers à l'utilisateur et au groupe \texttt{www-data}. Mais, après avoir fait cela, il n'arrivait pas à importer les sous-paquets contenus dans \texttt{lib}. J'ai essayé de changer la manière d'importer les modules de beaucoup de façons mais j'ai finalement pris une autre option, car le délai était avant la réddition du travail.
+
+Je me suis donc tourné vers Gunicorn\footnote{\url{https://flask.palletsprojects.com/en/2.0.x/deploying/wsgi-standalone/}} qui est un paquet Python WSGI HTTP fait pour Unix. Son installation et sa mise en place m'ont paru parfait pour le temps que j'avais à disposition. Cependant, j'ai tout de même eu du mal initialement, puisqu'il fallait ouvrir les ports du serveur. Grâce à l'aide de M. Garcia, le problème a été résolu et on a enfin eu accès à l'application web.
+
+L'application est donc disponible à l'adresse suivante (accessible uniquement dans le réseau du CFPT) : \newline \url{http://soccer-pronostic.cfpt.info:8080/} 
+
+La documentation est disponible à l'adresse suivante (accessible uniquement dans le réseau du CFPT) : \newline \url{http://soccer-pronostic.cfpt.info/doc} 
 
 \newpage
 
@@ -1658,6 +1693,12 @@ J'ai donc testé uniquement la fonctionnalité "Head To Head" et la fonctionnali
 
 \newpage
 
+\section{Pré-mise en production}
+
+Avant de mettre le projet en production, il faut \texttt{absolument} rédiger des conditions générales d'utilisation. En effet, les CGU permettrait de protéger mes données ainsi que de me protéger du fait que les prédictions fournies par l'application ne sont pas une véritié absolue. Cela me protègerait si un utilisateur irait misé et qu'il aimerait se retourner contre moi pour X ou Y raisons. S'il viendrait se plaindre, je l'inviterais à lire les conditions générales d'utilisation.
+
+\newpage
+
 \section{Retour d'expérience}
 
 \subsection{Points positifs}
@@ -1712,7 +1753,7 @@ Ensuite, une autre amélioration serait de perfectionner l'élaboration des pré
 
 La troisième amélioration serait de faire un compteur pour montrer le pourcentage de réussite de l'application. L'utilisateur viendrait sur la page d'accueil et il aurait un aperçu de la fiabilité de l'application. 
 
-La dernière amélioration serait de passer à la version 3.0 de l'API. Cependant, cela nécessiterait une nouvelle analyse sur l'importance des statistiques et un changement dans le code de la classe \texttt{Prediction} et du \texttt{Provider}
+La dernier amélioration serait de passer à la version 3.0 de l'API. Cependant, cela nécessiterait une nouvelle analyse sur l'importance des statistiques et un changement dans le code de la classe \texttt{Prediction} et du \texttt{Provider}
 
 \subsection{Bilan personnel}
 Je suis satisfait du travail rendu après ces 9 semaines. Un travail de cet ampleur implique forcément des problèmes surtout à la rencontre de nouvelles technologies. J'ai eu des soucis avec le multiprocessing mais ça ne m'a pas empêché de finir la fonctionnalité \texttt{Competition}. J'ai pu prendre en main de nouvelles technologies comme Python Flask, l'asynchrone en Python ou encore le multiprocessing. 

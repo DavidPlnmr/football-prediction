@@ -9,6 +9,7 @@ import sys
 path = os.path.abspath(".")
 sys.path.insert(1, path)
 
+
 from lib import *
 
 from dateutil.relativedelta import relativedelta
@@ -42,16 +43,16 @@ async def index():
     """
     Home route
     """
-    now = datetime(2021, 5, 20, 16, 45, 0)
-    three_days_before = now - relativedelta(days=DELTA_DAY_PREVIOUS)
-    three_days_after = now + relativedelta(days=DELTA_DAY_UPCOMING)
+    now = datetime(2021, 5, 15)
+    three_days_before = now - relativedelta(days=constants.DELTA_DAY_PREVIOUS)
+    three_days_after = now + relativedelta(days=constants.DELTA_DAY_UPCOMING)
     
     #Cache refresh
     if "last_cache_datetime" not in cache :
         cache["last_cache_datetime"] = now
     else:
         # We check if there is 12 hours passed after the last cache storage
-        delta = cache["last_cache_datetime"] + relativedelta(hours=DELTA_HOUR_FOR_CACHE_REFRESH)
+        delta = cache["last_cache_datetime"] + relativedelta(hours=constants.DELTA_HOUR_FOR_CACHE_REFRESH)
         if delta < now:
             cache.pop("previous_matches")
             cache.pop("upcoming_matches")
@@ -62,7 +63,7 @@ async def index():
     if "previous_matches" not in cache:
         cache["previous_matches"] = await get_previous_matches_multiple_leagues(three_days_before.date(), 
                                                                           now.date(), 
-                                                                          MULTIPLE_LEAGUES)
+                                                                          constants.MULTIPLE_LEAGUES)
         #Check if all the keys in the dict are empty
         if not any(cache["previous_matches"].values()):
             cache["previous_matches"]=[]
@@ -70,7 +71,7 @@ async def index():
     if "upcoming_matches" not in cache:
         cache["upcoming_matches"] = await get_upcoming_matches_multiple_leagues(now.date(), 
                                                                           three_days_after.date(), 
-                                                                          MULTIPLE_LEAGUES)
+                                                                          constants.MULTIPLE_LEAGUES)
         #Check if all the keys in the dict are empty
         if not any(cache["upcoming_matches"].values()):
             cache["upcoming_matches"]=[]
@@ -89,7 +90,7 @@ def h2h():
     """
     Route for the functionnality Head To Head
     """
-    leagues = MULTIPLE_LEAGUES
+    leagues = constants.MULTIPLE_LEAGUES
     try:
         error_message = request.cookies.get("error")
         return render_template("h2h.html", leagues=leagues, error=error_message)
@@ -163,7 +164,7 @@ async def h2h_league_selected(league_id):
     """
     Route where the user has already selected the league
     """
-    if league_id in MULTIPLE_LEAGUES.values():
+    if league_id in constants.MULTIPLE_LEAGUES.values():
         try:
             response = await prov.get_teams_from_league(league_id)
             teams = []
@@ -236,7 +237,7 @@ async def h2h_make_prediction():
             }
             
             now = datetime.now()
-            three_days_before = now - relativedelta(days=DELTA_DAY_UPCOMING)
+            three_days_before = now - relativedelta(days=constants.DELTA_DAY_UPCOMING)
             
             last_predictions = prov.get_one_prediction_per_day_with_specific_teams(first_team_infos["name"], 
                                                                                    second_team_infos["name"])
@@ -267,7 +268,7 @@ async def h2h_make_prediction():
                 #Try to make the prediction                
                 try:
                     
-                    pred = Prediction(first_team_infos["name"], second_team_infos["name"])
+                    pred = prediction_class.Prediction(first_team_infos["name"], second_team_infos["name"])
                     
                     await pred.create_prediction()
                     
@@ -307,7 +308,7 @@ def competitions():
     if "history" in cache:
         cache.pop("history")
         
-    leagues = MULTIPLE_LEAGUES
+    leagues = constants.MULTIPLE_LEAGUES
     try:
         error_message = request.cookies.get("error")
         return render_template("competitions.html", leagues=leagues, error=error_message)
@@ -324,10 +325,10 @@ def competitions_select():
 
 @app.route('/competitions/<int:league_id>')
 async def competitions_make_prediction(league_id):
-    if league_id in MULTIPLE_LEAGUES.values():    
+    if league_id in constants.MULTIPLE_LEAGUES.values():    
         try:
             
-            competition = Competition(league_id)
+            competition = competition_class.Competition(league_id)
             await competition.create_standing()
             cache["history"] = await competition.compute_competition()
             standings = await competition.get_standing()
@@ -381,9 +382,9 @@ async def make_prediction(first_team_name, second_team_name, league_id, league_n
     Make a new prediction for the upcoming matches
     """
     
-    pred = Prediction(first_team_name, second_team_name)
+    pred = prediction_class.Prediction(first_team_name, second_team_name)
 
-    await pred.call_data()
+    await pred.create_prediction()
     pred.save_prediction(league_id, league_name, date_of_game, api_match_id)
     
     game = {

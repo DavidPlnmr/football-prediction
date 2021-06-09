@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2021.5.14)  7 JUN 2021 13:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2021.5.14)  9 JUN 2021 16:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -453,35 +453,130 @@ l.79 \newpage
 \vh@hstfile=\write6
 \openout6 = `main.hst'.
 
- (/home/davidplnmr/football-prediction/doc/user-manual/main.ver) (/home/davidplnmr/football-prediction/doc/user-manual/main.ver) (/home/davidplnmr/football-prediction/doc/user-manual/main.ver) 
+ (/home/davidplnmr/football-prediction/doc/user-manual/main.ver) (/home/davidplnmr/football-prediction/doc/user-manual/main.ver) (/home/davidplnmr/football-prediction/doc/user-manual/main.ver) [2]
+<./img/menu.png, id=63, 287.57437pt x 60.97781pt>
+File: ./img/menu.png Graphic file (type png)
+<use ./img/menu.png>
+Package pdftex.def Info: ./img/menu.png  used on input line 103.
+(pdftex.def)             Requested size: 274.14063pt x 58.13141pt.
+<./img/previousGamesHome.png, id=64, 901.11656pt x 627.84563pt>
+File: ./img/previousGamesHome.png Graphic file (type png)
+<use ./img/previousGamesHome.png>
+Package pdftex.def Info: ./img/previousGamesHome.png  used on input line 118.
+(pdftex.def)             Requested size: 411.21094pt x 286.51326pt.
+ [3pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.127     \item L
+                 iste des matchs pour la liguepdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.127     \item L
+                 iste des matchs pour la ligue <./img/menu.png> <./img/previousGamesHome.png>]
+<./img/buttonOpenModal.png, id=80, 36.88782pt x 42.91031pt>
+File: ./img/buttonOpenModal.png Graphic file (type png)
+<use ./img/buttonOpenModal.png>
+Package pdftex.def Info: ./img/buttonOpenModal.png  used on input line 138.
+(pdftex.def)             Requested size: 41.1211pt x 47.83592pt.
+<./img/leagueSelection.png, id=81, 371.88937pt x 251.43938pt>
+File: ./img/leagueSelection.png Graphic file (type png)
+<use ./img/leagueSelection.png>
+Package pdftex.def Info: ./img/leagueSelection.png  used on input line 145.
+(pdftex.def)             Requested size: 342.67578pt x 231.69534pt.
+<./img/teamSelection.png, id=82, 369.63094pt x 251.43938pt>
+File: ./img/teamSelection.png Graphic file (type png)
+<use ./img/teamSelection.png>
+Package pdftex.def Info: ./img/teamSelection.png  used on input line 154.
+(pdftex.def)             Requested size: 342.67578pt x 233.1034pt.
+ [4pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.158 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.158 
+       <./img/buttonOpenModal.png> <./img/leagueSelection.png>]
+<./img/teamsSelected.png, id=96, 688.07062pt x 188.95593pt>
+File: ./img/teamsSelected.png Graphic file (type png)
+<use ./img/teamsSelected.png>
+Package pdftex.def Info: ./img/teamsSelected.png  used on input line 164.
+(pdftex.def)             Requested size: 411.21094pt x 112.92464pt.
+<./img/predictionMade.png, id=97, 841.64438pt x 337.26pt>
+File: ./img/predictionMade.png Graphic file (type png)
+<use ./img/predictionMade.png>
+Package pdftex.def Info: ./img/predictionMade.png  used on input line 173.
+(pdftex.def)             Requested size: 411.21094pt x 164.78024pt.
+ [5pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.177 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.177 
+       <./img/teamSelection.png> <./img/teamsSelected.png>]
+<./img/competitionStanding.png, id=109, 833.36343pt x 587.19376pt>
+File: ./img/competitionStanding.png Graphic file (type png)
+<use ./img/competitionStanding.png>
+Package pdftex.def Info: ./img/competitionStanding.png  used on input line 189.
+(pdftex.def)             Requested size: 370.08984pt x 260.76729pt.
+ [6pdfTeX warning (ext4): destination with the same identifier (name{figure.7}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.195 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.8}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.195 
+       <./img/predictionMade.png> <./img/competitionStanding.png>]
+<./img/competitionHistory.png, id=122, 844.65562pt x 546.54187pt>
+File: ./img/competitionHistory.png Graphic file (type png)
+<use ./img/competitionHistory.png>
+Package pdftex.def Info: ./img/competitionHistory.png  used on input line 202.
+(pdftex.def)             Requested size: 370.08984pt x 239.47008pt.
+ 
 AED: lastpage setting LastPage
-[2]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 105.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 105.
+[7pdfTeX warning (ext4): destination with the same identifier (name{figure.9}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.209 \end{document}
+                     <./img/competitionHistory.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 209.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 209.
  (/home/davidplnmr/football-prediction/doc/user-manual/main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 105.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 105.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 209.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 209.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 02ECD9363A856576B21391D3B12E4BC5;370.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 105.
+(rerunfilecheck)             Checksum: 927E3D256F381822E6ECF4C08D7C3B32;380.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 209.
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 76 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 9330 strings out of 492615
- 136583 string characters out of 6131390
- 250352 words of memory out of 5000000
- 13103 multiletter control sequences out of 15000+600000
- 11862 words of font info for 28 fonts, out of 8000000 for 9000
+ 9418 strings out of 492615
+ 138263 string characters out of 6131390
+ 250950 words of memory out of 5000000
+ 13157 multiletter control sequences out of 15000+600000
+ 12538 words of font info for 29 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 31i,11n,43p,559b,431s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2074.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm2488.pfb>
-Output written on /home/davidplnmr/football-prediction/doc/user-manual/main.pdf (3 pages, 9230279 bytes).
+ 31i,11n,43p,559b,539s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2074.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm2488.pfb>
+Output written on /home/davidplnmr/football-prediction/doc/user-manual/main.pdf (8 pages, 9540105 bytes).
 PDF statistics:
- 94 PDF objects out of 1000 (max. 8388607)
- 78 compressed objects within 1 object stream
- 12 named destinations out of 1000 (max. 500000)
- 54 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 170 PDF objects out of 1000 (max. 8388607)
+ 129 compressed objects within 2 object streams
+ 35 named destinations out of 1000 (max. 500000)
+ 99 words of extra memory for PDF output out of 10000 (max. 10000000)
 

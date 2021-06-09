@@ -92,14 +92,118 @@ Ce document est destiné aux utilisateur de l'application web "Football Predicti
 
 Cette documentation est la pour montrer l'interface utilisateur et le détail des actions possibles par l'utilisateur.
 
+\newpage
+
 \section{Utilisation de l'application web}
 
 \subsection{Menu de navigation}
 
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=20em]{./img/menu.png}
+    \caption{Menu }
+    \label{fig:menu}
+\end{figure}
+
+\begin{enumerate}
+    \item Page d'accueil du site
+    \item Page pour la fonctionnalité "Head To Head"
+    \item Page pour la fonctionnalité "Competitions"
+\end{enumerate}
+
 \subsection{Page d'accueil}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=30em]{./img/previousGamesHome.png}
+    \caption{Page d'accueil - Matchs précédents}
+    \label{fig:previousGamesHome}
+\end{figure}
+
+\begin{enumerate}
+    \item Légendes pour expliquer le code couleur sur les matchs
+    \item Les matchs précédents
+    \item Nom de la ligue
+    \item Liste des matchs pour la ligue
+\end{enumerate}
+
+Si on scrolle plus bas dans la page, la disposition est la même. On trouvera "Upcoming matches" et il manquera les "Real home score" et "Real away score" dans la liste des matchs.
 
 \subsection{Page "Head To Head"}
 
+Pour ouvrir les modales, il suffit de cliquer sur le bouton suivant (voir fig. \ref{fig:buttonOpenModal}). 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=3em]{./img/buttonOpenModal.png}
+    \caption{Page Head To Head - Bouton ouverture modale}
+    \label{fig:buttonOpenModal}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=25em]{./img/leagueSelection.png}
+    \caption{Page Head To Head - Sélection de la ligue}
+    \label{fig:leagueSelection}
+\end{figure}
+
+La modale ci-dessus permet de sélectionner la ligue.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=25em]{./img/teamSelection.png}
+    \caption{Page Head To Head - Sélection de l'équipe}
+    \label{fig:teamSelection}
+\end{figure}
+
+Cette modale permet de sélectionner une équipe. Elle est la même pour la sélection des deux équipes.
+Après avoir sélectionner une équipe, le blason de l'équipe en question s'affiche sur la page (voir fig. \ref{fig:teamsSelected}). 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=30em]{./img/teamsSelected.png}
+    \caption{Page Head To Head - Équipes sélectionnées}
+    \label{fig:teamsSelected}
+\end{figure}
+
+Une fois les deux équipes sélectionnées, on a accès au bouton "Make the prediction". Après avoir cliqué dessus, un chargement apparaîtra à l'écran.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=30em]{./img/predictionMade.png}
+    \caption{Page Head To Head - Prédiction faite}
+    \label{fig:predictionMade}
+\end{figure}
+
+\begin{enumerate}
+    \item Résultat de la prédiction
+    \item Les prédictions précédentes faites entre les deux équipes
+\end{enumerate}
+
 \subsection{Page "Competitions"}
+
+La sélection de la ligue est la même que pour la fonctionnalité "Head To Head" (voir figs. \ref{fig:buttonOpenModal} et \ref{fig:leagueSelection})
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=27em]{./img/competitionStanding.png}
+    \caption{Page Competitions - Prédiction sur la compétition faite}
+    \label{fig:competitionPredictionMade}
+\end{figure}
+
+On voit bien le classement de la compétition, avec les points, les victoires, égalités et défaites. 
+
+Note : C'est une prédiction sur une compétition toute entière.
+
+On peut ensuite cliquer sur le nom de n'importe quelle équipe pour être rediriger vers l'historique des matchs de l'équipe en question dans la compétition.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=27em]{./img/competitionHistory.png}
+    \caption{Page Competitions - Historique des matchs d'une équipe dans la prédiction de la compétition}
+    \label{fig:competitionHistory}
+\end{figure}
+
+On peut voir ici que l'on a l'historique des matchs avec l'expliquation des codes couleurs utilisés. On peut être directement dirigé vers l'historique d'une équipe depuis cette page en cliquant dessus.
 
 \end{document}

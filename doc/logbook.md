@@ -2085,3 +2085,33 @@ Bon finalement, je me prends pas la tête avec le venv ça fonctionne bien sans 
 J'ai un problème avec le serveur et apache. J'ai un soucis lors de la création d'un dossier (manque de permission). J'ai pourtant donné la propriété au `user` `www-data` qui est celui utilisé par apache mais ​​j'ai essayé des milliards de choses et rien ne fonctionne
 
 Je suis complètement perdu. La dernière solution serait de créer le dossier et le fichier qu'il faut à la main et qu'il soit pas généré par le code.
+
+### 09.06.2021
+
+Bon je deviens vraiment fou, en local les fichiers s'importe correctement mais je sais pas si c'est des soucis quant à des permissions sur les fichiers ou quelque chose d'autre. J'ai pourtant donné la propriété à tout les dossiers à l'user `www-data` j'ai meme mis un chmod 755 sur tout ces dossiers. 
+
+On va essayer avec gunicorn
+
+Ok gunicorn a l'air d'un peu mieux fonctionner et monsieur garcia m'a aidé pour l'ouverture des ports qui causait problème.
+
+CA FONCTIONNE AVEC GUNICORN
+
+L'application est désormais disponible sur le réseau de l'école à l'adresse :
+
+http://soccer-pronostic.cfpt.info:8080/
+
+et la doc doxygen :
+
+http://soccer-pronostic.cfpt.info/doc/
+
+#### Recap de la journée
+
+* Serveur ON tout est bon.
+  * Doc sur le serveur aussi
+* Doc quasi fini
+  *  Il manque un coup d'antidote
+* Exportation du journal de bord
+  * Voir avec M. Schmid si je dois le mettre dans le rapport ou si je le rend en annexe
+* Exportation du code source en pdf
+* Exportation du manuel utilisateur
+
