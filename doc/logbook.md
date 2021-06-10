@@ -2114,4 +2114,29 @@ http://soccer-pronostic.cfpt.info/doc/
   * Voir avec M. Schmid si je dois le mettre dans le rapport ou si je le rend en annexe
 * Exportation du code source en pdf
 * Exportation du manuel utilisateur
+  * Peut être conclusion manquante?
+
+### 10.06.2021
+
+* Doc finie (antidote done)
+* Export du journal de bord
+
+Changement du nom de domaine to : [football-prediction.cfpt.info]()
+
+Pour la reddition :
+
+* Tout en pdf et voilà
+
+Cron job sur la page home car c'est celle qui prend le plus de temps à charger au début. Il y a aussi les compétitions mais c'est après une action de l'utilisateur et il faut indiquer toutes les compétitions plusieurs fois.
+
+Cron job documenté. 
+
+Bon maintenant, on va exporter correctement :
+
+* Faire un txt avec le lien du GitHub. [DONE]
+* Faire un zip du code source (donc clear correctement tout les fichiers sauf le code) [DONE]
+* Faire l'export en pdf du code [DONE]
+* Exporter la doc technique [DONE]
+* Exporter la manuel utilisateur [DONE]
+* Exporter le journal de bord [DONE]
 
